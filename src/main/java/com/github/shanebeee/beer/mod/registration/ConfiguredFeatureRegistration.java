@@ -36,6 +36,8 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.CocoaDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
@@ -48,6 +50,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 public class ConfiguredFeatureRegistration {
 
@@ -122,10 +125,33 @@ public class ConfiguredFeatureRegistration {
         return features;
     }
 
-    private static List<ConfiguredFeatureDefinition> tree(BootstrapContext<ConfiguredFeature<?, ?>> entries) {
+    private static List<ConfiguredFeatureDefinition> tree(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         List<ConfiguredFeatureDefinition> features = new ArrayList<>();
 
-        ConfiguredFeatureDefinition cold_swamp_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COLD_SWAMP_OAK, entries)
+        ConfiguredFeatureDefinition acacia_forest = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_ACACIA_FOREST, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.ACACIA_LOG),
+                new ForkingTrunkPlacer(5, 2, 3),
+                BlockStateProvider.simple(Blocks.ACACIA_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+
+                new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(List.of(
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState()
+                                    .setValue(BlockStateProperties.SNOWY, false), 4)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .build())))))
+                .build())
+            .build();
+        features.add(acacia_forest);
+
+        ConfiguredFeatureDefinition cold_swamp_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COLD_SWAMP_OAK, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),
                 new StraightTrunkPlacer(5, 3, 2),
@@ -139,7 +165,7 @@ public class ConfiguredFeatureRegistration {
             .build();
         features.add(cold_swamp_oak);
 
-        ConfiguredFeatureDefinition cold_swamp_pale = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COLD_SWAMP_PALE, entries)
+        ConfiguredFeatureDefinition cold_swamp_pale = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COLD_SWAMP_PALE, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.PALE_OAK_LOG),
                 new StraightTrunkPlacer(6, 4, 2),
@@ -153,7 +179,7 @@ public class ConfiguredFeatureRegistration {
             .build();
         features.add(cold_swamp_pale);
 
-        ConfiguredFeatureDefinition fallen_stripped_pale_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, entries)
+        ConfiguredFeatureDefinition fallen_stripped_pale_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG),
                 UniformInt.of(4, 7))
@@ -161,7 +187,7 @@ public class ConfiguredFeatureRegistration {
             .build();
         features.add(fallen_stripped_pale_oak);
 
-        ConfiguredFeatureDefinition fallen_warped_stem = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_WARPED_STEM, entries)
+        ConfiguredFeatureDefinition fallen_warped_stem = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_WARPED_STEM, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.WARPED_STEM),
                 UniformInt.of(4, 7))
@@ -169,7 +195,7 @@ public class ConfiguredFeatureRegistration {
             .build();
         features.add(fallen_warped_stem);
 
-        ConfiguredFeatureDefinition fallen_warped_stem_stripped = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_WARPED_STEM, entries)
+        ConfiguredFeatureDefinition fallen_warped_stem_stripped = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_WARPED_STEM, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STRIPPED_WARPED_STEM),
                 UniformInt.of(4, 7))
@@ -177,7 +203,7 @@ public class ConfiguredFeatureRegistration {
             .build();
         features.add(fallen_warped_stem_stripped);
 
-        ConfiguredFeatureDefinition fallen_tall_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_TALL_OAK, entries)
+        ConfiguredFeatureDefinition fallen_tall_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_TALL_OAK, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),
                 UniformInt.of(6, 8))
@@ -185,7 +211,61 @@ public class ConfiguredFeatureRegistration {
             .build();
         features.add(fallen_tall_oak);
 
-        ConfiguredFeatureDefinition palm_tree = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_PALM_TREE, entries)
+        ConfiguredFeatureDefinition marula = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_MARULA, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.OAK_LOG),
+                new ForkingTrunkPlacer(10, 6, 0),
+                BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+
+                new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(1)),
+                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
+                .decorators(List.of(
+                    new AttachedToLeavesDecorator(
+                        0.001f,
+                        0,
+                        0,
+                        BlockStateProvider.simple(Blocks.HONEY_BLOCK),
+                        2,
+                        List.of(Direction.DOWN)),
+                    new BeehiveDecorator(0.1f),
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState()
+                                    .setValue(BlockStateProperties.SNOWY, false), 4)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .build())))))
+                .build())
+            .build();
+        features.add(marula);
+
+        ConfiguredFeatureDefinition mpingo = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_MPINGO, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.DARK_OAK_LOG),
+                new ForkingTrunkPlacer(5, 3, 5),
+                BlockStateProvider.simple(Blocks.DARK_OAK_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+
+                new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(List.of(
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState()
+                                    .setValue(BlockStateProperties.SNOWY, false), 4)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .build())))))
+                .build())
+            .build();
+        features.add(mpingo);
+
+        ConfiguredFeatureDefinition palm_tree = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_PALM_TREE, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 SimpleStateProvider.simple(Blocks.JUNGLE_WOOD),
                 new ForkingTrunkPlacer(5, 2, 3),
@@ -201,6 +281,42 @@ public class ConfiguredFeatureRegistration {
                 .build())
             .build();
         features.add(palm_tree);
+
+        ConfiguredFeatureDefinition red_ivorywood = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_RED_IVORYWOOD, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.MANGROVE_LOG),
+                new ForkingTrunkPlacer(6, 2, 3),
+                BlockStateProvider.simple(Blocks.MANGROVE_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+                new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(List.of(
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState()
+                                    .setValue(BlockStateProperties.SNOWY, false), 4)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .build())))))
+                .build())
+            .build();
+        features.add(red_ivorywood);
+
+        ConfiguredFeatureDefinition stick_plant = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_STICK_PLANT, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.MANGROVE_ROOTS),
+                new StraightTrunkPlacer(3, 4, 0),
+                BlockStateProvider.simple(Blocks.MANGROVE_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+
+                new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(1), 2),
+                new TwoLayersFeatureSize(1, 0, 1))
+                .build())
+            .build();
+        features.add(stick_plant);
 
         Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
         WeightedList.Builder<BlockState> a1 = WeightedList.builder();
@@ -219,7 +335,7 @@ public class ConfiguredFeatureRegistration {
             }
         }
 
-        ConfiguredFeatureDefinition tall_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER, entries)
+        ConfiguredFeatureDefinition tall_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),
                 new StraightTrunkPlacer(9, 4, 0),
@@ -233,8 +349,46 @@ public class ConfiguredFeatureRegistration {
                         new WeightedStateProvider(a2.build()))))
                 .build())
             .build();
-
         features.add(tall_oak);
+
+        BlockPredicateFilter tropicalPredicate = BlockPredicateFilter.forPredicate(
+            BlockPredicate.wouldSurvive(Blocks.ACACIA_SAPLING.defaultBlockState()
+                    .setValue(BlockStateProperties.STAGE, 0),
+                BlockPos.ZERO));
+
+        ConfiguredFeatureDefinition tropical_forest = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_TROPICAL_FOREST, context)
+            .config(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(stick_plant.getHolder())
+                        .placementModifiers(tropicalPredicate)
+                        .build()
+                        .getFeatureHolder(),
+                        0.05f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(marula.getHolder())
+                        .placementModifiers(tropicalPredicate)
+                        .build()
+                        .getFeatureHolder(),
+                        0.1f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(red_ivorywood.getHolder())
+                        .placementModifiers(tropicalPredicate)
+                        .build()
+                        .getFeatureHolder(),
+                        0.1f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(mpingo.getHolder())
+                        .placementModifiers(tropicalPredicate)
+                        .build()
+                        .getFeatureHolder(),
+                        0.3f)),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(acacia_forest.getHolder())
+                    .placementModifiers(tropicalPredicate)
+                    .build().getFeatureHolder()))
+            .build();
+        features.add(tropical_forest);
 
         return features;
     }

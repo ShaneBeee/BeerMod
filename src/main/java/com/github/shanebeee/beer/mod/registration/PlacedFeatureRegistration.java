@@ -626,6 +626,17 @@ public class PlacedFeatureRegistration {
 
         features.add(tall_stripped_pale_oak);
 
+        PlacedFeatureDefinition tropical_forest = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TROPICAL_FOREST, context)
+            .configuredFeature(ConfiguredFeatures.TREE_TROPICAL_FOREST)
+            .placementModifiers(
+                NoiseBasedCountPlacement.of(30, 70, 0.75),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(250))),
+                BiomeFilter.biome(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING))
+            .build();
+        features.add(tropical_forest);
+
         return features;
     }
 
