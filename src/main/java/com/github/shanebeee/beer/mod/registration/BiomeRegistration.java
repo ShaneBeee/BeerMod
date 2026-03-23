@@ -6,8 +6,10 @@ import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
@@ -83,8 +85,8 @@ public class BiomeRegistration {
             // Features
             .addDefaultUndergroundOreFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface",
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE,
                     PlacedFeatures.DELTA_DRY_CAVE_DELTA,
                     PlacedFeatures.TERRAIN_BROWN_CONCRETE_DISK),
                 List.of(CavePlacements.AMETHYST_GEODE),
@@ -94,8 +96,8 @@ public class BiomeRegistration {
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water", "minecraft:spring_lava"),
-                List.of("minecraft:patch_tall_grass_2",
+                List.of(MiscOverworldPlacements.SPRING_WATER, MiscOverworldPlacements.SPRING_LAVA),
+                List.of(VegetationPlacements.PATCH_TALL_GRASS_2,
                     PlacedFeatures.DECOR_HANGING_FENCE),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
@@ -189,8 +191,8 @@ public class BiomeRegistration {
                 null,
                 null,
                 List.of(PlacedFeatures.TREE_BEACHY_PALM,
-                    "minecraft:patch_waterlily",
-                    "minecraft:patch_sugar_cane"),
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -236,8 +238,8 @@ public class BiomeRegistration {
                     "wythers:terrain/placed_random_patch/mossify_grass",
                     "wythers:vegetation/bushes_mediterranean",
                     "wythers:vegetation/placed_random_patch/mediterranean_lilacs",
-                    "minecraft:patch_grass_savanna",
-                    "minecraft:seagrass_normal"),
+                    VegetationPlacements.PATCH_GRASS_SAVANNA,
+                    AquaticPlacements.SEAGRASS_NORMAL),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -278,7 +280,7 @@ public class BiomeRegistration {
                 List.of(PlacedFeatures.TREE_PALM_BEACH_PALM,
                     "wythers:vegetation/placed_random_patch/dark_oak_roots",
                     "wythers:terrain/placed_random_patch/mossify_grass",
-                    "minecraft:patch_grass_savanna"),
+                    VegetationPlacements.PATCH_GRASS_SAVANNA),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -327,8 +329,8 @@ public class BiomeRegistration {
                 null,
                 null,
                 List.of(PlacedFeatures.TREE_PALM_BEACH_PALM,
-                    "minecraft:patch_waterlily",
-                    "minecraft:patch_sugar_cane"),
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -376,8 +378,8 @@ public class BiomeRegistration {
                     "wythers:vegetation/bushes_mediterranean",
                     "wythers:vegetation/placed_random_patch/mediterranean_lilacs",
                     "wythers:vegetation/placed_random_patch/dripleaves_bayou",
-                    "minecraft:patch_grass_savanna",
-                    "minecraft:seagrass_normal"),
+                    VegetationPlacements.PATCH_GRASS_SAVANNA,
+                    AquaticPlacements.SEAGRASS_NORMAL),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -417,7 +419,7 @@ public class BiomeRegistration {
                 null,
                 null,
                 List.of(PlacedFeatures.TREE_PALM_BEACH_PALM,
-                    "minecraft:patch_waterlily",
+                    VegetationPlacements.PATCH_WATERLILY,
                     PlacedFeatures.VEGETATION_PATCH_SMALL_DRIPLEAF),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
@@ -453,27 +455,27 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND),
-                List.of("minecraft:lake_lava_underground"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.FOSSIL_UPPER,
                     CavePlacements.FOSSIL_LOWER,
                     CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
-                List.of("minecraft:desert_well"),
+                List.of(MiscOverworldPlacements.DESERT_WELL),
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
-                List.of("minecraft:flower_default",
-                    "minecraft:patch_grass_badlands",
-                    "minecraft:patch_dry_grass_desert",
-                    "minecraft:patch_dead_bush_2",
-                    "minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:patch_sugar_cane_desert",
-                    "minecraft:patch_pumpkin",
-                    "minecraft:patch_cactus_desert"),
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(VegetationPlacements.FLOWER_DEFAULT,
+                    VegetationPlacements.PATCH_GRASS_BADLANDS,
+                    VegetationPlacements.PATCH_DRY_GRASS_DESERT,
+                    VegetationPlacements.PATCH_DEAD_BUSH_2,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_SUGAR_CANE_DESERT,
+                    VegetationPlacements.PATCH_PUMPKIN,
+                    VegetationPlacements.PATCH_CACTUS_DESERT),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -520,33 +522,33 @@ public class BiomeRegistration {
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND,
                     PlacedFeatures.DELTA_LUSH_DESERT_DELTA),
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.FOSSIL_UPPER,
                     CavePlacements.FOSSIL_LOWER,
                     CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
-                List.of("minecraft:desert_well"),
+                List.of(MiscOverworldPlacements.DESERT_WELL),
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
                 List.of(PlacedFeatures.TREE_LUSH_DESERT_PALM,
                     PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB,
                     PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
                     "wythers:vegetation/placed_random_patch/dark_oak_roots",
                     "wythers:terrain/placed_random_patch/mossify_grass",
-                    "minecraft:flower_default",
-                    "minecraft:patch_grass_badlands",
-                    "minecraft:patch_dry_grass_desert",
-                    "minecraft:patch_dead_bush_2",
-                    "minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:patch_sugar_cane_desert",
-                    "minecraft:patch_pumpkin",
-                    "minecraft:patch_cactus_desert"),
+                    VegetationPlacements.FLOWER_DEFAULT,
+                    VegetationPlacements.PATCH_GRASS_BADLANDS,
+                    VegetationPlacements.PATCH_DRY_GRASS_DESERT,
+                    VegetationPlacements.PATCH_DEAD_BUSH_2,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_SUGAR_CANE_DESERT,
+                    VegetationPlacements.PATCH_PUMPKIN,
+                    VegetationPlacements.PATCH_CACTUS_DESERT),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -595,25 +597,25 @@ public class BiomeRegistration {
             .addDefaultSpringsFeatures()
             .addDefaultSurfaceFreezingFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 null,
                 null,
                 null,
                 null,
                 null,
                 null,
-                List.of("minecraft:forest_flowers",
-                    "minecraft:trees_birch_and_oak_leaf_litter",
-                    "minecraft:patch_bush",
-                    "minecraft:flower_default",
-                    "minecraft:patch_grass_forest",
-                    "minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:patch_pumpkin",
-                    "minecraft:patch_sugar_cane",
-                    "minecraft:patch_firefly_bush_near_water"),
+                List.of(VegetationPlacements.FOREST_FLOWERS,
+                    VegetationPlacements.TREES_BIRCH_AND_OAK_LEAF_LITTER,
+                    VegetationPlacements.PATCH_BUSH,
+                    VegetationPlacements.FLOWER_DEFAULT,
+                    VegetationPlacements.PATCH_GRASS_FOREST,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_PUMPKIN,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
+                    VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER),
                 null
             )
 
@@ -644,21 +646,21 @@ public class BiomeRegistration {
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 5597568)
 
             .addDefaultUndergroundOreFeatures()
-            .features(null, List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+            .features(null, List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
                 null,
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
                 List.of(PlacedFeatures.TREE_MOSS_GARDEN,
                     PlacedFeatures.TREE_FALLEN_WARPED_STEM,
                     PlacedFeatures.VEGETATION_MOSS_PATCH,
-                    "minecraft:patch_grass_forest"),
+                    VegetationPlacements.PATCH_GRASS_FOREST),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -686,27 +688,27 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
                 null,
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
-                List.of("minecraft:forest_flowers",
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(VegetationPlacements.FOREST_FLOWERS,
                     PlacedFeatures.TREE_TALL_OAK_TREES,
-                    "minecraft:patch_bush",
-                    "minecraft:flower_default",
-                    "minecraft:patch_grass_forest",
-                    "minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:patch_pumpkin",
-                    "minecraft:patch_sugar_cane",
-                    "minecraft:patch_firefly_bush_near_water"),
+                    VegetationPlacements.PATCH_BUSH,
+                    VegetationPlacements.FLOWER_DEFAULT,
+                    VegetationPlacements.PATCH_GRASS_FOREST,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_PUMPKIN,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
+                    VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
             .addDefaultOverworldCarvers()
 
@@ -753,9 +755,9 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.FOSSIL_UPPER,
                     CavePlacements.FOSSIL_LOWER,
                     CavePlacements.MONSTER_ROOM,
@@ -764,17 +766,17 @@ public class BiomeRegistration {
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
                 List.of("wythers:vegetation/placed_random_patch/flooded_savanna_water_plants",
                     "wythers:vegetation/placed_random_patch/flowers_tropical_forest",
                     "wythers:vegetation/trees_tropical_forest",
-                    "minecraft:patch_tall_grass",
-                    "minecraft:patch_grass_savanna",
-                    "minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:patch_sugar_cane",
-                    "minecraft:seagrass_swamp"),
+                    VegetationPlacements.PATCH_TALL_GRASS,
+                    VegetationPlacements.PATCH_GRASS_SAVANNA,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
+                    AquaticPlacements.SEAGRASS_SWAMP),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -818,9 +820,9 @@ public class BiomeRegistration {
                 null,
                 List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
                     PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
-                    "minecraft:patch_grass_plain",
-                    "minecraft:patch_waterlily",
-                    "minecraft:patch_sugar_cane",
+                    VegetationPlacements.PATCH_GRASS_PLAIN,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
@@ -868,10 +870,10 @@ public class BiomeRegistration {
                 List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
                     PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
                     PlacedFeatures.TREE_TALL_STRIPPED_PALE_OAK,
-                    "minecraft:flower_plains",
-                    "minecraft:patch_grass_plain",
-                    "minecraft:patch_waterlily",
-                    "minecraft:patch_sugar_cane",
+                    VegetationPlacements.FLOWER_PLAINS,
+                    VegetationPlacements.PATCH_GRASS_PLAIN,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
                     PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
                     PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS,
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB,
@@ -921,10 +923,10 @@ public class BiomeRegistration {
                 null,
                 List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
                     PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
-                    "minecraft:flower_plains",
-                    "minecraft:patch_grass_plain",
-                    "minecraft:patch_waterlily",
-                    "minecraft:patch_sugar_cane",
+                    VegetationPlacements.FLOWER_PLAINS,
+                    VegetationPlacements.PATCH_GRASS_PLAIN,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
                     PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
                     PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS,
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
@@ -973,10 +975,10 @@ public class BiomeRegistration {
                 null,
                 List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
                     PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
-                    "minecraft:flower_plains",
-                    "minecraft:patch_grass_plain",
-                    "minecraft:patch_waterlily",
-                    "minecraft:patch_sugar_cane",
+                    VegetationPlacements.FLOWER_PLAINS,
+                    VegetationPlacements.PATCH_GRASS_PLAIN,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
                     PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
@@ -1021,27 +1023,27 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.FOSSIL_UPPER,
                     CavePlacements.FOSSIL_LOWER,
                     CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
-                List.of("minecraft:desert_well"),
+                List.of(MiscOverworldPlacements.DESERT_WELL),
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
                 List.of("wythers:vegetation/trees_desert_lakes",
-                    "minecraft:patch_grass_savanna",
-                    "minecraft:flower_default",
-                    "minecraft:patch_dead_bush_2",
-                    "minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:patch_sugar_cane_desert"),
-                List.of("minecraft:freeze_top_layer"))
+                    VegetationPlacements.PATCH_GRASS_SAVANNA,
+                    VegetationPlacements.FLOWER_DEFAULT,
+                    VegetationPlacements.PATCH_DEAD_BUSH_2,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_SUGAR_CANE_DESERT),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
 
@@ -1087,9 +1089,9 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.FOSSIL_UPPER,
                     CavePlacements.FOSSIL_LOWER,
                     CavePlacements.MONSTER_ROOM,
@@ -1098,18 +1100,18 @@ public class BiomeRegistration {
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
                 List.of("wythers:vegetation/placed_random_patch/flooded_savanna_water_plants",
                     "wythers:vegetation/placed_random_patch/flowers_tropical_forest",
                     "wythers:vegetation/trees_tropical_forest",
-                    "minecraft:patch_tall_grass",
-                    "minecraft:patch_grass_savanna",
-                    "minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:patch_sugar_cane",
-                    "minecraft:seagrass_swamp"),
-                List.of("minecraft:freeze_top_layer"))
+                    VegetationPlacements.PATCH_TALL_GRASS,
+                    VegetationPlacements.PATCH_GRASS_SAVANNA,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
+                    AquaticPlacements.SEAGRASS_SWAMP),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
 
@@ -1160,21 +1162,21 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
                 null,
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
-                List.of("minecraft:brown_mushroom_normal",
-                    "minecraft:red_mushroom_normal",
-                    "minecraft:seagrass_river"),
-                List.of("minecraft:freeze_top_layer"))
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    AquaticPlacements.SEAGRASS_RIVER),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
 
@@ -1217,30 +1219,30 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
-                List.of("minecraft:lake_lava_underground",
-                    "minecraft:lake_lava_surface"),
-                List.of("minecraft:amethyst_geode"),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
                 null,
                 null,
                 null,
                 null,
-                List.of("minecraft:spring_water",
-                    "minecraft:spring_lava"),
-                List.of("minecraft:patch_large_fern",
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(VegetationPlacements.PATCH_LARGE_FERN,
                     PlacedFeatures.TREE_COLD_SWAMP_TREE,
-                    "minecraft:flower_swamp",
-                    "minecraft:flower_default",
-                    "minecraft:patch_grass_normal",
-                    "minecraft:patch_grass_taiga_2",
-                    "minecraft:patch_dead_bush",
-                    "minecraft:patch_waterlily",
-                    "minecraft:brown_mushroom_taiga",
-                    "minecraft:red_mushroom_taiga",
-                    "minecraft:seagrass_swamp",
-                    "minecraft:patch_firefly_bush_near_water",
-                    "minecraft:patch_berry_rare"),
+                    VegetationPlacements.FLOWER_SWAMP,
+                    VegetationPlacements.FLOWER_DEFAULT,
+                    VegetationPlacements.PATCH_GRASS_NORMAL,
+                    VegetationPlacements.PATCH_GRASS_TAIGA_2,
+                    VegetationPlacements.PATCH_DEAD_BUSH,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.BROWN_MUSHROOM_TAIGA,
+                    VegetationPlacements.RED_MUSHROOM_TAIGA,
+                    AquaticPlacements.SEAGRASS_SWAMP,
+                    VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER,
+                    VegetationPlacements.PATCH_BERRY_RARE),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
@@ -1287,12 +1289,12 @@ public class BiomeRegistration {
                 null,
                 null,
                 null,
-                List.of("minecraft:trees_swamp",
-                    "minecraft:flower_swamp",
-                    "minecraft:patch_grass_normal",
-                    "minecraft:patch_dead_bush",
-                    "minecraft:patch_waterlily",
-                    "minecraft:seagrass_swamp"),
+                List.of(VegetationPlacements.TREES_SWAMP,
+                    VegetationPlacements.FLOWER_SWAMP,
+                    VegetationPlacements.PATCH_GRASS_NORMAL,
+                    VegetationPlacements.PATCH_DEAD_BUSH,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    AquaticPlacements.SEAGRASS_SWAMP),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addDefaultOverworldCarvers()
