@@ -1,5 +1,6 @@
-package com.github.shanebeee.beer.mod.registration;
+package com.github.shanebeee.beer.mod.registry;
 
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -45,7 +46,7 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> SWAMP_DRIPLEAF_SWAMP = register("swamp/dripleaf_swamp");
 
     private static ResourceKey<Biome> register(String key) {
-        return ResourceKey.create(Registries.BIOME, Identifier.parse("beer:" + key));
+        return Beer.getKey(Registries.BIOME, key);
     }
 
 }

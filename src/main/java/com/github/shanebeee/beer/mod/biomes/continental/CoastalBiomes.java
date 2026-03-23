@@ -5,7 +5,7 @@ import com.github.shanebeee.beer.mod.biomes.special.BeachBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.MiddleBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.RiverBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.ShatteredBiomes;
-import com.github.shanebeee.beer.mod.registration.BeerBiomes;
+import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;

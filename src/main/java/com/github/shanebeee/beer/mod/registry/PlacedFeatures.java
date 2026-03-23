@@ -1,7 +1,7 @@
-package com.github.shanebeee.beer.mod.registration;
+package com.github.shanebeee.beer.mod.registry;
 
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -53,7 +53,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> VEGETATION_ROOT_DIRT_BLOB = register("vegetation/rooted_dirt_blob");
 
     private static ResourceKey<PlacedFeature> register(String key) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.parse("beer:" + key));
+        return Beer.getKey(Registries.PLACED_FEATURE, key);
     }
 
 }

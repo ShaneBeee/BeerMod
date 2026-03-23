@@ -9,6 +9,7 @@ import com.github.shanebeee.beer.mod.biomes.continental.MidInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.NearInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.OceanBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.CaveBiomes;
+import com.github.shanebeee.beer.mod.registry.Dimensions;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;

@@ -1,10 +1,8 @@
 package com.github.shanebeee.beer.mod.registration;
 
 import com.github.shanebeee.beer.api.registration.TimelineDefinition;
-import net.minecraft.core.registries.Registries;
+import com.github.shanebeee.beer.mod.registry.Timelines;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TimelineTags;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.attribute.modifier.FloatModifier;
@@ -28,8 +26,7 @@ public class TimelineRegistration {
     private static List<TimelineDefinition> timelines(BootstrapContext<Timeline> context) {
         List<TimelineDefinition> timelines = new ArrayList<>();
 
-        ResourceKey<Timeline> moonlightKey = register("moonlight");
-        TimelineDefinition moonlight = TimelineDefinition.builder(moonlightKey, context)
+        TimelineDefinition moonlight = TimelineDefinition.builder(Timelines.MOONLIGHT, context)
             .periodTicks(192000)
             .addModifierTrack(EnvironmentAttributes.SKY_LIGHT_FACTOR,
                 FloatModifier.MULTIPLY,
@@ -68,15 +65,9 @@ public class TimelineRegistration {
                     .addKeyframe(190860, 0.75f))
             .addToTag(TimelineTags.IN_OVERWORLD)
             .build();
-
         timelines.add(moonlight);
 
         return timelines;
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private static ResourceKey<Timeline> register(String key) {
-        return ResourceKey.create(Registries.TIMELINE, Identifier.parse("beer:" + key));
     }
 
 }

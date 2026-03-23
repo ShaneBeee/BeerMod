@@ -3,6 +3,7 @@ package com.github.shanebeee.beer.mod.registration;
 import com.github.shanebeee.beer.api.registration.ConfiguredFeatureDefinition;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import com.github.shanebeee.beer.api.utils.RegistryUtils;
+import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;

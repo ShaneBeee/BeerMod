@@ -1,0 +1,36 @@
+package com.github.shanebeee.beer.mod.registry;
+
+import com.github.shanebeee.beer.mod.Beer;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+
+public class ConfiguredFeatures {
+
+    // DELTA
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MOSS_DELTA = register("delta/moss_delta");
+
+    // TERRAIN
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TERRAIN_SAND_SHORE_DISK = register("terrain/sand_shore_disk");
+
+    // TREE
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_COLD_SWAMP_OAK = register("tree/cold_swamp_oak");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_COLD_SWAMP_PALE = register("tree/cold_swamp_pale");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_STRIPPED_PALE_OAK = register("tree/fallen_stripped_pale_oak");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_STRIPPED_WARPED_STEM = register("tree/fallen_stripped_warped_stem");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_TALL_OAK = register("tree/fallen_tall_oak");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_WARPED_STEM = register("tree/fallen_warped_stem");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_PALM_TREE = register("tree/palm_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_TALL_OAK_WITH_LITTER = register("tree/tall_oak_with_litter");
+
+    // VEGETATION
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_AZALEA_BUSH_OR_SCRUB = register("vegetation/azalea_bush_or_scrub");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_AZALEA_SCRUB = register("vegetation/azalea_scrub");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_FLOWERING_AZALEA_SCRUB = register("vegetation/flowering_azalea_scrub");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_PATCH_CLIFF_GRASS = register("vegetation/patch_cliff_grass");
+
+    private static ResourceKey<ConfiguredFeature<?, ?>> register(String key) {
+        return Beer.getKey(Registries.CONFIGURED_FEATURE, key);
+    }
+
+}

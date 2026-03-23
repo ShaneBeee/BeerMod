@@ -1,6 +1,8 @@
 package com.github.shanebeee.beer.mod.registration;
 
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
+import com.github.shanebeee.beer.mod.registry.BeerBiomes;
+import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
