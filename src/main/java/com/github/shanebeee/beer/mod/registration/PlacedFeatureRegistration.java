@@ -427,8 +427,8 @@ public class PlacedFeatureRegistration {
         PlacedFeatureDefinition stone_to_ice = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_STONE_TO_ICE, context)
             .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
                 FeatureUtils.createBlobReplace(Blocks.STONE,
-                Blocks.BLUE_ICE, 256, 2, 2))
-            .placementModifiers(CountPlacement.of(256),
+                Blocks.BLUE_ICE, 5, 2, 2))
+            .placementModifiers(CountPlacement.of(100),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(70)),
                 BiomeFilter.biome())
@@ -438,10 +438,10 @@ public class PlacedFeatureRegistration {
         PlacedFeatureDefinition deepslate_to_ice = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_DEEPSLATE_TO_ICE, context)
             .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
                 FeatureUtils.createBlobReplace(Blocks.DEEPSLATE,
-                Blocks.BLUE_ICE, 256, 2, 2))
-            .placementModifiers(CountPlacement.of(256),
+                    Blocks.BLUE_ICE, 5, 2, 2))
+            .placementModifiers(CountPlacement.of(100),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(-20), VerticalAnchor.absolute(0)),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(-40), VerticalAnchor.absolute(0)),
                 BiomeFilter.biome())
             .build();
         features.add(deepslate_to_ice);
