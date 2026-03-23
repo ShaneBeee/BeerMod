@@ -34,6 +34,7 @@ public class DimensionRegistration {
 
         for (int tempIndex = 0; tempIndex < BiomeDefaults.TEMPERATURES.length; tempIndex++) {
             Climate.Parameter temp = BiomeDefaults.TEMPERATURES[tempIndex];
+
             for (int humidityIndex = 0; humidityIndex < BiomeDefaults.HUMIDITIES.length; humidityIndex++) {
                 Climate.Parameter humidity = BiomeDefaults.HUMIDITIES[humidityIndex];
 
@@ -41,7 +42,7 @@ public class DimensionRegistration {
                 if (biomeKey == null) continue;
 
                 builder.addPoint(biomeKey, BiomeDefaults.FULL_RANGE, temp, humidity, BiomeDefaults.FULL_RANGE,
-                    Climate.Parameter.span(0.078125f, 0.9f), BiomeDefaults.FULL_RANGE, 0);
+                    Climate.Parameter.span(0.078125f, 1.1f), BiomeDefaults.FULL_RANGE, 0);
             }
         }
 
