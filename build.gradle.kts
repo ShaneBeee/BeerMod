@@ -86,6 +86,6 @@ tasks {
             include("pack.mcmeta")
         }
         destinationDirectory =
-            file("/Users/ShaneBee/Desktop/Server/Minecraft/${serverLocation}/worlds/world/datapacks/")
+            file("/Users/ShaneBee/Desktop/Server/Minecraft/${serverLocation}/universe/world/datapacks/")
     }
 }
