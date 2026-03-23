@@ -3,17 +3,20 @@ package com.github.shanebeee.beer.mod;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registration.BiomeRegistration;
 import com.github.shanebeee.beer.mod.registration.ConfiguredFeatureRegistration;
+import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
 import com.github.shanebeee.beer.mod.registration.PlacedFeatureRegistration;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.dimension.LevelStem;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -33,12 +36,14 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureRegistration::registerFeatures);
         registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureRegistration::registerFeatures);
         registryBuilder.add(Registries.BIOME, BiomeRegistration::registerBiomes);
+        registryBuilder.add(Registries.LEVEL_STEM, DimensionRegistration::DimensionRegistration);
     }
 
     public static class DataRegistration extends FabricDynamicRegistryProvider {
 
         public DataRegistration(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
+            DynamicRegistries.register(Registries.LEVEL_STEM, LevelStem.CODEC);
         }
 
         @Override
@@ -46,6 +51,7 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
             entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
             entries.addAll(registries.lookupOrThrow(Registries.PLACED_FEATURE));
             entries.addAll(registries.lookupOrThrow(Registries.BIOME));
+            entries.addAll(registries.lookupOrThrow(Registries.LEVEL_STEM));
         }
 
         @Override
