@@ -40,7 +40,7 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureRegistration::registerFeatures);
         registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureRegistration::registerFeatures);
         registryBuilder.add(Registries.BIOME, BiomeRegistration::registerBiomes);
-        registryBuilder.add(Registries.LEVEL_STEM, DimensionRegistration::DimensionRegistration);
+        registryBuilder.add(Registries.LEVEL_STEM, DimensionRegistration::registerDimensions);
         registryBuilder.add(Registries.TIMELINE, TimelineRegistration::registerTimelines);
     }
 

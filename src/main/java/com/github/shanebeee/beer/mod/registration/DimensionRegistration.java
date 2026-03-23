@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class DimensionRegistration {
 
-    public static void DimensionRegistration(BootstrapContext<LevelStem> context) {
+    public static void registerDimensions(BootstrapContext<LevelStem> context) {
         DimensionDefinition.Builder builder = DimensionDefinition.overworldBuilder(Dimensions.BEER_WORLD, context);
 
         // CAVE BIOMES
