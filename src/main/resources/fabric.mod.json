@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "beer",
+  "version": "${version}",
+  "name": "Beer",
+  "description": "Nothing to do with beeerr!",
+  "authors": [
+    "ShaneBee"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/beer/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.shanebeee.beer.mod.Beer"
+    ],
+    "fabric-datagen": [
+      "com.github.shanebeee.beer.mod.BeerDataGenerator"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

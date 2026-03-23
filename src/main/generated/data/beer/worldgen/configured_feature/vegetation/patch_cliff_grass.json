@@ -1,0 +1,218 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "minecraft:grass_block",
+              "Properties": {
+                "snowy": "false"
+              }
+            }
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:air",
+                "offset": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:stone",
+                  "minecraft:granite",
+                  "minecraft:grass_block",
+                  "minecraft:deepslate",
+                  "minecraft:calcite"
+                ]
+              },
+              {
+                "type": "minecraft:not",
+                "predicate": {
+                  "type": "minecraft:any_of",
+                  "predicates": [
+                    {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air",
+                      "offset": [
+                        1,
+                        -1,
+                        0
+                      ]
+                    },
+                    {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air",
+                      "offset": [
+                        -1,
+                        -1,
+                        0
+                      ]
+                    },
+                    {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air",
+                      "offset": [
+                        0,
+                        -1,
+                        1
+                      ]
+                    },
+                    {
+                      "type": "minecraft:matching_blocks",
+                      "blocks": "minecraft:air",
+                      "offset": [
+                        0,
+                        -1,
+                        -1
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "minecraft:any_of",
+                "predicates": [
+                  {
+                    "type": "minecraft:all_of",
+                    "predicates": [
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": "minecraft:air",
+                        "offset": [
+                          1,
+                          1,
+                          0
+                        ]
+                      },
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": [
+                          "minecraft:stone",
+                          "minecraft:granite",
+                          "minecraft:grass_block",
+                          "minecraft:deepslate",
+                          "minecraft:calcite"
+                        ],
+                        "offset": [
+                          1,
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "minecraft:all_of",
+                    "predicates": [
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": "minecraft:air",
+                        "offset": [
+                          -1,
+                          1,
+                          0
+                        ]
+                      },
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": [
+                          "minecraft:stone",
+                          "minecraft:granite",
+                          "minecraft:grass_block",
+                          "minecraft:deepslate",
+                          "minecraft:calcite"
+                        ],
+                        "offset": [
+                          -1,
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "minecraft:all_of",
+                    "predicates": [
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": "minecraft:air",
+                        "offset": [
+                          0,
+                          1,
+                          1
+                        ]
+                      },
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": [
+                          "minecraft:stone",
+                          "minecraft:granite",
+                          "minecraft:grass_block",
+                          "minecraft:deepslate",
+                          "minecraft:calcite"
+                        ],
+                        "offset": [
+                          0,
+                          0,
+                          1
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "minecraft:all_of",
+                    "predicates": [
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": "minecraft:air",
+                        "offset": [
+                          0,
+                          1,
+                          -1
+                        ]
+                      },
+                      {
+                        "type": "minecraft:matching_blocks",
+                        "blocks": [
+                          "minecraft:stone",
+                          "minecraft:granite",
+                          "minecraft:grass_block",
+                          "minecraft:deepslate",
+                          "minecraft:calcite"
+                        ],
+                        "offset": [
+                          0,
+                          0,
+                          -1
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "tries": 256,
+    "xz_spread": 3,
+    "y_spread": 3
+  }
+}

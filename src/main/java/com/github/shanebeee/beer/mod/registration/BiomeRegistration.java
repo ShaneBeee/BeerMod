@@ -1,0 +1,1320 @@
+package com.github.shanebeee.beer.mod.registration;
+
+import com.github.shanebeee.beer.api.registration.BiomeDefinition;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.CavePlacements;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
+import net.minecraft.sounds.Music;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.attribute.AmbientAdditionsSettings;
+import net.minecraft.world.attribute.AmbientMoodSettings;
+import net.minecraft.world.attribute.AmbientParticle;
+import net.minecraft.world.attribute.AmbientSounds;
+import net.minecraft.world.attribute.BackgroundMusic;
+import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.block.Blocks;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class BiomeRegistration {
+
+    private static final List<BiomeDefinition> BIOMES = new ArrayList<>();
+
+    public static void registerBiomes(BootstrapContext<Biome> context) {
+        BIOMES.addAll(caveBiomes(context));
+        BIOMES.addAll(coastBiomes(context));
+        BIOMES.addAll(desertBiomes(context));
+        BIOMES.addAll(forestBiomes(context));
+        BIOMES.addAll(plainsBiomes(context));
+        BIOMES.addAll(riverBiomes(context));
+        BIOMES.addAll(swampBiomes(context));
+    }
+
+    public static List<BiomeDefinition> getBiomeDefinitions() {
+        return BIOMES;
+    }
+
+    private static List<BiomeDefinition> caveBiomes(BootstrapContext<Biome> context) {
+        List<BiomeDefinition> biomes = new ArrayList<>();
+
+        BiomeDefinition dry_cave = BiomeDefinition.builder(BeerBiomes.CAVE_DRY_CAVE, context)
+            .temperature(0.5f)
+            .downfall(0.5f)
+            .hasPrecipitation(true)
+
+            // Special Effects
+            .waterColor(4566514)
+
+            // Attributes
+            // Colors
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16244363)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -50.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 32.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 267827)
+
+            // Sounds
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 6000, 8, 2.0F)),
+                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 0.0011f))
+            ))
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
+                new Music(SoundEvents.MUSIC_BIOME_LUSH_CAVES, 12000, 24000, true)))
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.5f)
+
+            // Particles
+            .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SAND.defaultBlockState()), 0.005f)
+
+            // Carvers
+            .addDefaultOverworldCarvers()
+
+            // Features
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface",
+                    PlacedFeatures.DELTA_DRY_CAVE_DELTA,
+                    PlacedFeatures.TERRAIN_BROWN_CONCRETE_DISK),
+                List.of(CavePlacements.AMETHYST_GEODE),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water", "minecraft:spring_lava"),
+                List.of("minecraft:patch_tall_grass_2",
+                    PlacedFeatures.DECOR_HANGING_FENCE),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            // Spawners
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.AXOLOTLS, EntityType.AXOLOTL, 10, 4, 6)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.TROPICAL_FISH, 25, 8, 8)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(dry_cave);
+
+        BiomeDefinition ice_cave = BiomeDefinition.builder(BeerBiomes.CAVE_ICE_CAVE, context)
+            .hasPrecipitation(true)
+            .temperature(0.7f)
+            .downfall(0.8f)
+
+            .waterColor(6003155)
+            .foliageColorOverride(442658)
+            .grassColorOverride(6017902)
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(
+                new AmbientParticle(new DustParticleOptions(-1, 0.5f), 0.05f),
+                new AmbientParticle(new DustParticleOptions(-9766924, 0.5f), 0.05f)
+            ))
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_DEEPSLATE_TO_ICE,
+                    PlacedFeatures.TERRAIN_STONE_TO_ICE),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 10, 1, 2)
+
+            .addToTag(BiomeTags.SPAWNS_COLD_VARIANT_FROGS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(ice_cave);
+
+        return biomes;
+
+    }
+
+    private static List<BiomeDefinition> coastBiomes(BootstrapContext<Biome> context) {
+        List<BiomeDefinition> biomes = new ArrayList<>();
+
+        BiomeDefinition beachy_beach = BiomeDefinition.builder(BeerBiomes.COAST_BEACHY_COAST, context)
+            .hasPrecipitation(true)
+            .temperature(0.8f)
+            .downfall(0.4f)
+
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
+                    PlacedFeatures.TERRAIN_GRASS_TO_SAND),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.TREE_BEACHY_PALM,
+                    "minecraft:patch_waterlily",
+                    "minecraft:patch_sugar_cane"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 15, 2, 2)
+
+            .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        biomes.add(beachy_beach);
+
+        BiomeDefinition coast = BiomeDefinition.builder(BeerBiomes.COAST_COAST, context)
+            .hasPrecipitation(true)
+            .temperature(0.7f)
+            .downfall(0.5f)
+            .waterColor(6003155)
+            .foliageColorOverride(442658)
+            .grassColorOverride(11060330)
+
+            .particle(ParticleTypes.CHERRY_LEAVES, 0.0005f)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
+                    PlacedFeatures.DELTA_COASTAL_DELTA),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.VEGETATION_PATCH_WATER_LEAVES,
+                    PlacedFeatures.TREE_PALM_BEACH_PALM,
+                    "wythers:vegetation/placed_random_patch/large_ferns_dense_forests",
+                    PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
+                    "wythers:vegetation/placed_random_patch/dark_oak_roots",
+                    "wythers:terrain/placed_random_patch/mossify_grass",
+                    "wythers:vegetation/bushes_mediterranean",
+                    "wythers:vegetation/placed_random_patch/mediterranean_lilacs",
+                    "minecraft:patch_grass_savanna",
+                    "minecraft:seagrass_normal"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 10, 1, 2)
+
+            .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        biomes.add(coast);
+
+        BiomeDefinition dry_coast = BiomeDefinition.builder(BeerBiomes.COAST_DRY_COAST, context)
+            .hasPrecipitation(false)
+            .temperature(2.0f)
+            .downfall(0.05f)
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.TREE_PALM_BEACH_PALM,
+                    "wythers:vegetation/placed_random_patch/dark_oak_roots",
+                    "wythers:terrain/placed_random_patch/mossify_grass",
+                    "minecraft:patch_grass_savanna"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 10, 1, 2)
+
+            .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        biomes.add(dry_coast);
+
+        BiomeDefinition frozen_beach = BiomeDefinition.builder(BeerBiomes.COAST_FROZEN_BEACH, context)
+            .hasPrecipitation(true)
+            .temperature(0.1f)
+            .downfall(0.0f)
+            .waterColor(4020182)
+
+            .particle(ParticleTypes.WHITE_ASH, 0.2f)
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS,
+                new AmbientSounds(
+                    Optional.empty(),
+                    Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_CAVE,
+                        6000, 8, 2.0f)),
+                    List.of()))
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8364543)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
+                    PlacedFeatures.TERRAIN_GRASS_TO_SAND),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.TREE_PALM_BEACH_PALM,
+                    "minecraft:patch_waterlily",
+                    "minecraft:patch_sugar_cane"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 15, 2, 2)
+
+            .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_COLD_VARIANT_FROGS,
+                BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        biomes.add(frozen_beach);
+
+        BiomeDefinition lush_coast = BiomeDefinition.builder(BeerBiomes.COAST_LUSH_COAST, context)
+            .hasPrecipitation(true)
+            .temperature(0.7f)
+            .downfall(0.8f)
+            .waterColor(6003155)
+            .foliageColorOverride(442658)
+            .grassColorOverride(6017902)
+
+            .particle(ParticleTypes.CHERRY_LEAVES, 0.0005f)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
+                    PlacedFeatures.DELTA_COASTAL_DELTA),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.VEGETATION_PATCH_WATER_LEAVES,
+                    PlacedFeatures.TREE_PALM_BEACH_PALM,
+                    "wythers:vegetation/placed_random_patch/large_ferns_dense_forests",
+                    PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
+                    "wythers:vegetation/placed_random_patch/dark_oak_roots",
+                    "wythers:terrain/placed_random_patch/mossify_grass",
+                    "wythers:vegetation/bushes_mediterranean",
+                    "wythers:vegetation/placed_random_patch/mediterranean_lilacs",
+                    "wythers:vegetation/placed_random_patch/dripleaves_bayou",
+                    "minecraft:patch_grass_savanna",
+                    "minecraft:seagrass_normal"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
+
+            .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_WARM_VARIANT_FROGS, BiomeTags.IS_OVERWORLD)
+
+            .build();
+        biomes.add(lush_coast);
+
+        BiomeDefinition palm_beach = BiomeDefinition.builder(BeerBiomes.COAST_PALM_BEACH, context)
+            .hasPrecipitation(false)
+            .temperature(2.0f)
+            .downfall(0.0f)
+            .foliageColorOverride(442658)
+            .grassColorOverride(6017902)
+            .waterColor(6003155)
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
+                    PlacedFeatures.TERRAIN_GRASS_TO_SAND,
+                    PlacedFeatures.DELTA_BEACH_DELTA),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.TREE_PALM_BEACH_PALM,
+                    "minecraft:patch_waterlily",
+                    PlacedFeatures.VEGETATION_PATCH_SMALL_DRIPLEAF),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 15, 2, 2)
+
+            .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_WARM_VARIANT_FROGS, BiomeTags.IS_OVERWORLD)
+
+            .build();
+        biomes.add(palm_beach);
+
+        return biomes;
+    }
+
+    private static List<BiomeDefinition> desertBiomes(BootstrapContext<Biome> context) {
+        List<BiomeDefinition> biomes = new ArrayList<>();
+
+        BiomeDefinition dry_desert = BiomeDefinition.builder(BeerBiomes.DESERT_DRY_DESERT, context)
+            .hasPrecipitation(false)
+            .temperature(2.0f)
+            .downfall(0.0f)
+
+            .waterColor(4112789)
+            .foliageColorOverride(9285927)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
+            .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND),
+                List.of("minecraft:lake_lava_underground"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.FOSSIL_UPPER,
+                    CavePlacements.FOSSIL_LOWER,
+                    CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                List.of("minecraft:desert_well"),
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of("minecraft:flower_default",
+                    "minecraft:patch_grass_badlands",
+                    "minecraft:patch_dry_grass_desert",
+                    "minecraft:patch_dead_bush_2",
+                    "minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:patch_sugar_cane_desert",
+                    "minecraft:patch_pumpkin",
+                    "minecraft:patch_cactus_desert"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
+                BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.SPAWNS_GOLD_RABBITS,
+                BiomeTags.HAS_RUINED_PORTAL_DESERT, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
+                BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(dry_desert);
+
+        BiomeDefinition lush_desert = BiomeDefinition.builder(BeerBiomes.DESERT_LUSH_DESERT, context)
+            .hasPrecipitation(true)
+            .temperature(0.7f)
+            .downfall(0.8f)
+
+            .waterColor(6003155)
+            .foliageColorOverride(442658)
+            .grassColorOverride(6017902)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
+            .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND,
+                    PlacedFeatures.DELTA_LUSH_DESERT_DELTA),
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.FOSSIL_UPPER,
+                    CavePlacements.FOSSIL_LOWER,
+                    CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                List.of("minecraft:desert_well"),
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of(PlacedFeatures.TREE_LUSH_DESERT_PALM,
+                    PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB,
+                    PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
+                    "wythers:vegetation/placed_random_patch/dark_oak_roots",
+                    "wythers:terrain/placed_random_patch/mossify_grass",
+                    "minecraft:flower_default",
+                    "minecraft:patch_grass_badlands",
+                    "minecraft:patch_dry_grass_desert",
+                    "minecraft:patch_dead_bush_2",
+                    "minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:patch_sugar_cane_desert",
+                    "minecraft:patch_pumpkin",
+                    "minecraft:patch_cactus_desert"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
+                BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.SPAWNS_GOLD_RABBITS,
+                BiomeTags.HAS_RUINED_PORTAL_DESERT, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
+                BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(lush_desert);
+
+        return biomes;
+    }
+
+    private static List<BiomeDefinition> forestBiomes(BootstrapContext<Biome> context) {
+        List<BiomeDefinition> biomes = new ArrayList<>();
+
+        BiomeDefinition dry_forest = BiomeDefinition.builder(BeerBiomes.FOREST_DRY_FOREST, context)
+            .hasPrecipitation(false)
+            .temperature(0.7f)
+            .downfall(0.0f)
+            .waterColor(7768221)
+            .foliageColorOverride(-7250899)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.0f)
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, AmbientSounds.LEGACY_CAVE_SETTINGS)
+
+            .addDefaultUndergroundOreFeatures()
+            .addDefaultMonsterRoomFeatures()
+            .addDefaultSpringsFeatures()
+            .addDefaultSurfaceFreezingFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:forest_flowers",
+                    "minecraft:trees_birch_and_oak_leaf_litter",
+                    "minecraft:patch_bush",
+                    "minecraft:flower_default",
+                    "minecraft:patch_grass_forest",
+                    "minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:patch_pumpkin",
+                    "minecraft:patch_sugar_cane",
+                    "minecraft:patch_firefly_bush_near_water"),
+                null
+            )
+
+            .addDefaultOverworldCarvers()
+
+            .addDefaultPlainsSpawns()// TODO
+
+            .build();
+        biomes.add(dry_forest);
+
+        BiomeDefinition moss_garden = BiomeDefinition.builder(BeerBiomes.FOREST_MOSS_GARDEN, context)
+            .hasPrecipitation(true)
+            .temperature(0.7f)
+            .downfall(0.8f)
+            .foliageColorOverride(55551)
+            .grassColorOverride(6980207)
+            .waterColor(7768221)
+
+            .particle(ParticleTypes.FIREFLY, 0.01f)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.0f)
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_CAVE, 6000, 8, 2.0f)),
+                List.of()))
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 12171705)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 8484720)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 5597568)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null, List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of(PlacedFeatures.TREE_MOSS_GARDEN,
+                    PlacedFeatures.TREE_FALLEN_WARPED_STEM,
+                    PlacedFeatures.VEGETATION_MOSS_PATCH,
+                    "minecraft:patch_grass_forest"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+
+            .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(moss_garden);
+
+        BiomeDefinition tall_oak = BiomeDefinition.builder(BeerBiomes.FOREST_TALL_OAK, context)
+            .hasPrecipitation(true)
+            .temperature(0.7f)
+            .downfall(0.8f)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of("minecraft:forest_flowers",
+                    PlacedFeatures.TREE_TALL_OAK_TREES,
+                    "minecraft:patch_bush",
+                    "minecraft:flower_default",
+                    "minecraft:patch_grass_forest",
+                    "minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:patch_pumpkin",
+                    "minecraft:patch_sugar_cane",
+                    "minecraft:patch_firefly_bush_near_water"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 12, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.CHICKEN, 10, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 8, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.WOLF, 5, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+
+            .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(tall_oak);
+
+        BiomeDefinition lush_forest = BiomeDefinition.builder(BeerBiomes.FOREST_LUSH_FOREST, context)
+            .hasPrecipitation(true)
+            .temperature(0.8f)
+            .downfall(0.5f)
+            .waterColor(3832426)
+            .foliageColorOverride(9285927)
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.of(new AmbientMoodSettings(
+                    SoundEvents.AMBIENT_CAVE,
+                    6000,
+                    8,
+                    2.0)),
+                List.of()))
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7782102)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 5077600)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.FOSSIL_UPPER,
+                    CavePlacements.FOSSIL_LOWER,
+                    CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of("wythers:vegetation/placed_random_patch/flooded_savanna_water_plants",
+                    "wythers:vegetation/placed_random_patch/flowers_tropical_forest",
+                    "wythers:vegetation/trees_tropical_forest",
+                    "minecraft:patch_tall_grass",
+                    "minecraft:patch_grass_savanna",
+                    "minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:patch_sugar_cane",
+                    "minecraft:seagrass_swamp"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addDefaultMonsterSpawns(true)
+            .addDefaultFarmAnimalsSpawns()
+            .addDefaultCaveSpawns()
+            .addMobSpawn(MobCategory.MONSTER, EntityType.OCELOT, 2, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.WOLF, 10, 2, 5)
+
+            .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(lush_forest);
+
+        return biomes;
+    }
+
+    private static List<BiomeDefinition> plainsBiomes(BootstrapContext<Biome> context) {
+        List<BiomeDefinition> biomes = new ArrayList<>();
+
+        BiomeDefinition dry_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_DRY_PLAINS, context)
+            .hasPrecipitation(false)
+            .temperature(2.0f)
+            .downfall(0.05f)
+            .waterColor(5336976)
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16379351)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2171215)
+
+            .addDefaultOverworldCarvers()
+            .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
+                    PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
+                    "minecraft:patch_grass_plain",
+                    "minecraft:patch_waterlily",
+                    "minecraft:patch_sugar_cane",
+                    PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(dry_plains);
+
+        BiomeDefinition lush_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_LUSH_PLAINS, context)
+            .hasPrecipitation(true)
+            .temperature(0.95f)
+            .downfall(0.5f)
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
+                    PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
+                    PlacedFeatures.TREE_TALL_STRIPPED_PALE_OAK,
+                    "minecraft:flower_plains",
+                    "minecraft:patch_grass_plain",
+                    "minecraft:patch_waterlily",
+                    "minecraft:patch_sugar_cane",
+                    PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
+                    PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS,
+                    PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB,
+                    PlacedFeatures.TREE_FALLEN_STRIPPED_PALE_OAK),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(lush_plains);
+
+        BiomeDefinition temperate_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_TEMPERATE_PLAINS, context)
+            .hasPrecipitation(true)
+            .temperature(0.8f)
+            .downfall(0.2f)
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
+                    PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
+                    "minecraft:flower_plains",
+                    "minecraft:patch_grass_plain",
+                    "minecraft:patch_waterlily",
+                    "minecraft:patch_sugar_cane",
+                    PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
+                    PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS,
+                    PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(temperate_plains);
+
+        BiomeDefinition cold_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_COLD_PLAINS, context)
+            .hasPrecipitation(true)
+            .temperature(0.25f)
+            .downfall(0.8f)
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, -8543233)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
+                    PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
+                    "minecraft:flower_plains",
+                    "minecraft:patch_grass_plain",
+                    "minecraft:patch_waterlily",
+                    "minecraft:patch_sugar_cane",
+                    PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
+                    PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_COLD_VARIANT_FARM_ANIMALS,
+                BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(cold_plains);
+
+        return biomes;
+    }
+
+    private static List<BiomeDefinition> riverBiomes(BootstrapContext<Biome> context) {
+        List<BiomeDefinition> biomes = new ArrayList<>();
+
+        BiomeDefinition desert_river = BiomeDefinition.builder(BeerBiomes.RIVER_DESERT_RIVER, context)
+            .hasPrecipitation(false)
+            .temperature(2.0f)
+            .downfall(0.0f)
+            .waterColor(4112789)
+            .foliageColorOverride(9285927)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.FOSSIL_UPPER,
+                    CavePlacements.FOSSIL_LOWER,
+                    CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                List.of("minecraft:desert_well"),
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of("wythers:vegetation/trees_desert_lakes",
+                    "minecraft:patch_grass_savanna",
+                    "minecraft:flower_default",
+                    "minecraft:patch_dead_bush_2",
+                    "minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:patch_sugar_cane_desert"),
+                List.of("minecraft:freeze_top_layer"))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 4, 2, 3)
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+
+            .addToTag(BiomeTags.IS_RIVER, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS,
+                BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        biomes.add(desert_river);
+
+        BiomeDefinition lush_river = BiomeDefinition.builder(BeerBiomes.RIVER_LUSH_RIVER, context)
+            .hasPrecipitation(true)
+            .temperature(2f)
+            .downfall(0.2f)
+            .waterColor(3832426)
+            .foliageColorOverride(9285927)
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.of(new AmbientMoodSettings(
+                    SoundEvents.AMBIENT_CAVE,
+                    6000,
+                    8,
+                    2.0)),
+                List.of()
+            ))
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7782102)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 5077600)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.FOSSIL_UPPER,
+                    CavePlacements.FOSSIL_LOWER,
+                    CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of("wythers:vegetation/placed_random_patch/flooded_savanna_water_plants",
+                    "wythers:vegetation/placed_random_patch/flowers_tropical_forest",
+                    "wythers:vegetation/trees_tropical_forest",
+                    "minecraft:patch_tall_grass",
+                    "minecraft:patch_grass_savanna",
+                    "minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:patch_sugar_cane",
+                    "minecraft:seagrass_swamp"),
+                List.of("minecraft:freeze_top_layer"))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 1, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.OCELOT, 2, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.CHICKEN, 10, 4, 4)
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.PUFFERFISH, 15, 1, 3)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.COD, 25, 8, 8)
+
+            .addToTag(BiomeTags.IS_RIVER, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS,
+                BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        biomes.add(lush_river);
+
+        BiomeDefinition temperate_river = BiomeDefinition.builder(BeerBiomes.RIVER_TEMPERATE_RIVER, context)
+            .hasPrecipitation(true)
+            .temperature(0.5f)
+            .downfall(0.5f)
+            .waterColor(6388580)
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS,
+                new AmbientSounds(
+                    Optional.empty(),
+                    Optional.of(new AmbientMoodSettings(
+                        SoundEvents.AMBIENT_CAVE,
+                        6000,
+                        8,
+                        2.0
+                    )),
+                    List.of()
+                ))
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7391487)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2302743)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of("minecraft:brown_mushroom_normal",
+                    "minecraft:red_mushroom_normal",
+                    "minecraft:seagrass_river"),
+                List.of("minecraft:freeze_top_layer"))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 1, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.DROWNED, 100, 1, 1)
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.SALMON, 5, 1, 5)
+
+            .addToTag(BiomeTags.IS_RIVER, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        biomes.add(temperate_river);
+
+        return biomes;
+    }
+
+    private static List<BiomeDefinition> swampBiomes(BootstrapContext<Biome> context) {
+        List<BiomeDefinition> biomes = new ArrayList<>();
+
+        BiomeDefinition cold_swamp = BiomeDefinition.builder(BeerBiomes.SWAMP_COLD_SWAMP, context)
+            .hasPrecipitation(true)
+            .temperature(0.4f)
+            .downfall(0.4f)
+            .waterColor(-10388622)
+            .foliageColorOverride(6975545)
+            .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.SWAMP)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, -8151297)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, -4339216)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2302743)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of("minecraft:lake_lava_underground",
+                    "minecraft:lake_lava_surface"),
+                List.of("minecraft:amethyst_geode"),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:spring_water",
+                    "minecraft:spring_lava"),
+                List.of("minecraft:patch_large_fern",
+                    PlacedFeatures.TREE_COLD_SWAMP_TREE,
+                    "minecraft:flower_swamp",
+                    "minecraft:flower_default",
+                    "minecraft:patch_grass_normal",
+                    "minecraft:patch_grass_taiga_2",
+                    "minecraft:patch_dead_bush",
+                    "minecraft:patch_waterlily",
+                    "minecraft:brown_mushroom_taiga",
+                    "minecraft:red_mushroom_taiga",
+                    "minecraft:seagrass_swamp",
+                    "minecraft:patch_firefly_bush_near_water",
+                    "minecraft:patch_berry_rare"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 2, 5)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.WATER_CREATURE, EntityType.DROWNED, 2, 1, 2)
+
+            .addToTag(BiomeTags.HAS_SWAMP_HUT, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_COLD_VARIANT_FROGS,
+                BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.WATER_ON_MAP_OUTLINES,
+                BiomeTags.HAS_RUINED_PORTAL_SWAMP)
+
+            .build();
+        biomes.add(cold_swamp);
+
+        BiomeDefinition dripleaf_swamp = BiomeDefinition.builder(BeerBiomes.SWAMP_DRIPLEAF_SWAMP, context)
+            .hasPrecipitation(true)
+            .temperature(0.8f)
+            .downfall(0.2f)
+            .waterColor(6388580)
+            .foliageColorOverride(6975545)
+            .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.SWAMP)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2302743)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.DELTA_DRIPLEAF_SWAMP_DELTA,
+                    PlacedFeatures.DELTA_COASTAL_DELTA,
+                    PlacedFeatures.TERRAIN_WATER_BLOB),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of("minecraft:trees_swamp",
+                    "minecraft:flower_swamp",
+                    "minecraft:patch_grass_normal",
+                    "minecraft:patch_dead_bush",
+                    "minecraft:patch_waterlily",
+                    "minecraft:seagrass_swamp"),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 2, 5)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.WATER_CREATURE, EntityType.DROWNED, 2, 1, 2)
+
+            .addToTag(BiomeTags.HAS_SWAMP_HUT, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
+                BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.WATER_ON_MAP_OUTLINES,
+                BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
+
+            .build();
+        biomes.add(dripleaf_swamp);
+
+        return biomes;
+    }
+
+}
