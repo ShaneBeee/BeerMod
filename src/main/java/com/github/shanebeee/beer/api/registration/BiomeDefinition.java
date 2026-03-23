@@ -64,6 +64,7 @@ public class BiomeDefinition {
         private final BiomeGenerationSettings.Builder genSettings;
         private final MobSpawnSettings.Builder mobSpawnSettings = new MobSpawnSettings.Builder();
         private final List<TagKey<Biome>> tagKeys = new ArrayList<>();
+        private final List<AmbientParticle> ambientParticles = new ArrayList<>();
 
         private Builder(ResourceKey<Biome> resourceKey, BootstrapContext<Biome> context) {
             this.resourceKey = resourceKey;
@@ -142,12 +143,7 @@ public class BiomeDefinition {
         }
 
         public Builder particle(ParticleOptions particleOption, float probability) {
-            this.biomeBuilder.setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(particleOption, probability));
-            return this;
-        }
-
-        public Builder particles(AmbientParticle... particles) {
-            this.biomeBuilder.setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(particles));
+            this.ambientParticles.add(new AmbientParticle(particleOption, probability));
             return this;
         }
 
@@ -385,6 +381,9 @@ public class BiomeDefinition {
         }
 
         public BiomeDefinition build() {
+            if (!this.ambientParticles.isEmpty()) {
+                this.biomeBuilder.setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, this.ambientParticles);
+            }
             this.biomeBuilder
                 .specialEffects(Objects.requireNonNullElseGet(this.specialEffects, () ->
                         // Match from Plains if no special effects present
