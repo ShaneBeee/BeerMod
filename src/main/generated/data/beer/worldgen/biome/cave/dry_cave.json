@@ -30,6 +30,15 @@
           }
         },
         "probability": 0.005
+      },
+      {
+        "particle": {
+          "type": "minecraft:falling_dust",
+          "block_state": {
+            "Name": "minecraft:brown_concrete_powder"
+          }
+        },
+        "probability": 0.005
       }
     ],
     "minecraft:visual/fog_color": "#f7de8b",

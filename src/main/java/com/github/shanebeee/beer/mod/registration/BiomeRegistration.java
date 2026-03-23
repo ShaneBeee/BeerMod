@@ -77,6 +77,7 @@ public class BiomeRegistration {
 
             // Particles
             .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SAND.defaultBlockState()), 0.005f)
+            .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.BROWN_CONCRETE_POWDER.defaultBlockState()), 0.005f)
 
             // Carvers
             .addDefaultOverworldCarvers()
