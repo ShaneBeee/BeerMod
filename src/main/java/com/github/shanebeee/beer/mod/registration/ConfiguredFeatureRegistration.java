@@ -24,7 +24,6 @@ import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FallenTreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -34,7 +33,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePl
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
@@ -113,7 +112,7 @@ public class ConfiguredFeatureRegistration {
 
         ConfiguredFeatureDefinition sand_shore_disk = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TERRAIN_SAND_SHORE_DISK, entries)
             .config(Feature.DISK, new DiskConfiguration(
-                RuleBasedBlockStateProvider.simple(Blocks.SAND),
+                RuleBasedStateProvider.simple(Blocks.SAND),
                 BlockPredicate.matchesBlocks(Blocks.GRASS_BLOCK, Blocks.DIRT),
                 UniformInt.of(3, 5),
                 1))
@@ -136,7 +135,6 @@ public class ConfiguredFeatureRegistration {
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1))
                 .decorators(List.of(new LeaveVineDecorator(0.25f)))
-                .dirt(BlockStateProvider.simple(Blocks.OAK_LOG))
                 .build())
             .build();
         features.add(cold_swamp_oak);
@@ -151,7 +149,6 @@ public class ConfiguredFeatureRegistration {
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1))
                 .decorators(List.of(new LeaveVineDecorator(0.25f)))
-                .dirt(BlockStateProvider.simple(Blocks.PALE_OAK_LOG))
                 .build())
             .build();
         features.add(cold_swamp_pale);
@@ -198,11 +195,9 @@ public class ConfiguredFeatureRegistration {
                     .setValue(BlockStateProperties.DISTANCE, 7)),
                 new AcaciaFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2))
-                .dirt(SimpleStateProvider.simple(Blocks.JUNGLE_WOOD))
                 .decorators(List.of(
                     new CocoaDecorator(0.2f),
                     new BeehiveDecorator(0.03f)))
-                .forceDirt()
                 .build())
             .build();
         features.add(palm_tree);
@@ -231,7 +226,6 @@ public class ConfiguredFeatureRegistration {
                 BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState().setValue(BlockStateProperties.DISTANCE, 7)),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.ZERO, 3),
                 new TwoLayersFeatureSize(2, 0, 2))
-                .dirt(BlockStateProvider.simple(Blocks.OAK_LOG))
                 .ignoreVines()
                 .decorators(List.of(new PlaceOnGroundDecorator(96, 4, 2,
                         new WeightedStateProvider(a1.build())),
@@ -260,7 +254,6 @@ public class ConfiguredFeatureRegistration {
                     .setValue(BlockStateProperties.PERSISTENT, true)),
                 new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 2),
                 new TwoLayersFeatureSize(0, 0, 0))
-                .forceDirt()
                 .build())
             .build();
         features.add(azalea_scrub);
@@ -276,7 +269,6 @@ public class ConfiguredFeatureRegistration {
                     .build()),
                 new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 2),
                 new TwoLayersFeatureSize(0, 0, 0))
-                .forceDirt()
                 .build())
             .build();
         features.add(flowering_azalea_scrub);
@@ -309,55 +301,6 @@ public class ConfiguredFeatureRegistration {
                     .getFeatureHolder()))
             .build();
         features.add(azalea_bush);
-
-        ConfiguredFeatureDefinition patch_cliff_grass = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.VEGETATION_PATCH_CLIFF_GRASS, entries)
-            .config(Feature.RANDOM_PATCH, new RandomPatchConfiguration(
-                256,
-                3,
-                3,
-                PlacedFeatureDefinition.builder()
-                    .configuredFeature(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS_BLOCK)))
-                    .placementModifiers(BlockPredicateFilter.forPredicate(
-                        BlockPredicate.allOf(
-                            BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
-                            BlockPredicate.matchesBlocks(BlockPos.ZERO, Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE),
-                            BlockPredicate.not(
-                                BlockPredicate.anyOf(
-                                    BlockPredicate.matchesBlocks(new BlockPos(1, -1, 0), Blocks.AIR),
-                                    BlockPredicate.matchesBlocks(new BlockPos(-1, -1, 0), Blocks.AIR),
-                                    BlockPredicate.matchesBlocks(new BlockPos(0, -1, 1), Blocks.AIR),
-                                    BlockPredicate.matchesBlocks(new BlockPos(0, -1, -1), Blocks.AIR)
-                                )
-                            ),
-                            BlockPredicate.anyOf(
-                                BlockPredicate.allOf(
-                                    BlockPredicate.matchesBlocks(new BlockPos(1, 1, 0), Blocks.AIR),
-                                    BlockPredicate.matchesBlocks(new BlockPos(1, 0, 0), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
-                                ),
-                                BlockPredicate.allOf(
-                                    BlockPredicate.matchesBlocks(new BlockPos(-1, 1, 0), Blocks.AIR),
-                                    BlockPredicate.matchesBlocks(new BlockPos(-1, 0, 0), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
-
-                                ),
-                                BlockPredicate.allOf(
-                                    BlockPredicate.matchesBlocks(new BlockPos(0, 1, 1), Blocks.AIR),
-                                    BlockPredicate.matchesBlocks(new BlockPos(0, 0, 1), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
-                                ),
-                                BlockPredicate.allOf(
-                                    BlockPredicate.matchesBlocks(new BlockPos(0, 1, -1), Blocks.AIR),
-                                    BlockPredicate.matchesBlocks(new BlockPos(0, 0, -1), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
-                                )
-
-                            )
-
-                        )
-                    ))
-                    .build().getFeatureHolder()
-            ))
-            .build();
-
-        features.add(patch_cliff_grass);
 
         // RETURN
         return features;

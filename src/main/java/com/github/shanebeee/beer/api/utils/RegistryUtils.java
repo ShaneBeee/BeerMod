@@ -18,9 +18,9 @@ public class RegistryUtils {
         CONTEXT = context;
     }
 
-    public static @Nullable Holder<ConfiguredFeature<?, ?>> getConfiguredFeatureReference(ResourceKey<ConfiguredFeature<?, ?>> key) {
+    public static Holder<ConfiguredFeature<?, ?>> getConfiguredFeatureReference(ResourceKey<ConfiguredFeature<?, ?>> key) {
         Optional<Holder.Reference<ConfiguredFeature<?, ?>>> configuredFeatureReference = CONTEXT.lookup(Registries.CONFIGURED_FEATURE).get(key);
-        return configuredFeatureReference.orElse(null);
+        return configuredFeatureReference.orElseThrow();
     }
 
 }

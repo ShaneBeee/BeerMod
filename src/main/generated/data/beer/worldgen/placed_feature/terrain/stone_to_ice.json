@@ -1,8 +1,8 @@
 {
   "feature": {
-    "type": "minecraft:random_patch",
+    "type": "minecraft:simple_random_selector",
     "config": {
-      "feature": {
+      "features": {
         "feature": {
           "type": "minecraft:netherrack_replace_blobs",
           "config": {
@@ -21,75 +21,26 @@
         },
         "placement": [
           {
-            "type": "minecraft:block_predicate_filter",
-            "predicate": {
-              "type": "minecraft:all_of",
-              "predicates": [
-                {
-                  "type": "minecraft:any_of",
-                  "predicates": [
-                    {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air",
-                      "offset": [
-                        1,
-                        0,
-                        0
-                      ]
-                    },
-                    {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air",
-                      "offset": [
-                        -1,
-                        0,
-                        0
-                      ]
-                    },
-                    {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air",
-                      "offset": [
-                        0,
-                        0,
-                        1
-                      ]
-                    },
-                    {
-                      "type": "minecraft:matching_blocks",
-                      "blocks": "minecraft:air",
-                      "offset": [
-                        0,
-                        0,
-                        -1
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "minecraft:matching_block_tag",
-                  "tag": "minecraft:bats_spawnable_on"
-                },
-                {
-                  "type": "minecraft:not",
-                  "predicate": {
-                    "type": "minecraft:matching_blocks",
-                    "blocks": "minecraft:air",
-                    "offset": [
-                      0,
-                      1,
-                      0
-                    ]
-                  }
-                }
-              ]
+            "type": "minecraft:count",
+            "count": 256
+          },
+          {
+            "type": "minecraft:random_offset",
+            "xz_spread": {
+              "type": "minecraft:trapezoid",
+              "max": 2,
+              "min": -2,
+              "plateau": 0
+            },
+            "y_spread": {
+              "type": "minecraft:trapezoid",
+              "max": 2,
+              "min": -2,
+              "plateau": 0
             }
           }
         ]
-      },
-      "tries": 256,
-      "xz_spread": 2,
-      "y_spread": 2
+      }
     }
   },
   "placement": [

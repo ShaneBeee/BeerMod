@@ -4,8 +4,12 @@
     "config": {
       "default": {
         "feature": {
-          "type": "minecraft:forest_rock",
+          "type": "minecraft:block_blob",
           "config": {
+            "can_place_on": {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:grass_blocks"
+            },
             "state": {
               "Name": "minecraft:rooted_dirt"
             }
@@ -18,8 +22,12 @@
           "chance": 0.5,
           "feature": {
             "feature": {
-              "type": "minecraft:forest_rock",
+              "type": "minecraft:block_blob",
               "config": {
+                "can_place_on": {
+                  "type": "minecraft:matching_block_tag",
+                  "tag": "minecraft:grass_blocks"
+                },
                 "state": {
                   "Name": "minecraft:coarse_dirt"
                 }

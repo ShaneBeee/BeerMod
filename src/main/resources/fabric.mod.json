@@ -3,11 +3,11 @@
   "id": "beer",
   "version": "${version}",
   "name": "Beer",
-  "description": "Nothing to do with beeerr!",
+  "description": "Nothing to do with beer!",
   "authors": [
     "ShaneBee"
   ],
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/beer/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -20,8 +20,8 @@
   },
   "depends": {
     "fabricloader": ">=0.18.4",
-    "minecraft": "~1.21.11",
-    "java": ">=21",
+    "minecraft": "~26.1-",
+    "java": ">=25",
     "fabric-api": "*"
   }
 }

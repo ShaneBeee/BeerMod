@@ -9,9 +9,9 @@ import com.github.shanebeee.beer.mod.registration.PlacedFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.TimelineRegistration;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -46,7 +46,7 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
 
     public static class DataRegistration extends FabricDynamicRegistryProvider {
 
-        public DataRegistration(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public DataRegistration(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
             DynamicRegistries.register(Registries.LEVEL_STEM, LevelStem.CODEC);
         }
@@ -66,9 +66,9 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         }
     }
 
-    public static class BiomeTagRegistration extends FabricTagProvider<Biome> {
+    public static class BiomeTagRegistration extends FabricTagsProvider<Biome> {
 
-        public BiomeTagRegistration(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public BiomeTagRegistration(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, Registries.BIOME, registriesFuture);
         }
 
@@ -84,9 +84,9 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         }
     }
 
-    public static class TimelineTagRegistration extends FabricTagProvider<Timeline> {
+    public static class TimelineTagRegistration extends FabricTagsProvider<Timeline> {
 
-        public TimelineTagRegistration(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public TimelineTagRegistration(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, Registries.TIMELINE, registriesFuture);
         }
 
