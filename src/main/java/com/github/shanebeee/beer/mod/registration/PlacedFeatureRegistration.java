@@ -188,32 +188,32 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(lush_desert_delta);
 
         PlacedFeatureDefinition dry_cave_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRY_CAVE_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
                 BlockTags.LUSH_GROUND_REPLACEABLE,
-                BlockStateProvider.simple(Blocks.SANDSTONE),
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.SANDSTONE.defaultBlockState(), 10)
+                    .add(Blocks.COARSE_DIRT.defaultBlockState(), 3)
+                    .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState(), 1)
+                    .add(Blocks.GRAVEL.defaultBlockState(), 3)
+                    .build()),
                 vegetationFeature.getFeatureHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(3),
                 0.8f,
-                5,
-                0.1f,
+                4,
+                0.2f,
                 UniformInt.of(4, 7),
                 0.7f))
-
-            .placementModifiers(CountPlacement.of(62),
+            .placementModifiers(CountPlacement.of(5),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(256)),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(-20), VerticalAnchor.absolute(60)),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), MatchingBlockTagPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(1)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(dry_cave_delta);
 
         PlacedFeatureDefinition dripleaf_swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRIPLEAF_SWAMP_DELTA, context)
@@ -239,8 +239,6 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(dripleaf_swamp_delta);
 
         PlacedFeatureDefinition swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SWAMP_DELTA, context)

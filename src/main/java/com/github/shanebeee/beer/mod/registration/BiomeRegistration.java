@@ -55,15 +55,15 @@ public class BiomeRegistration {
             .hasPrecipitation(true)
 
             // Special Effects
-            .waterColor(4566514)
+            .waterColor(-6390206)
 
             // Attributes
             // Colors
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16244363)
-            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, -50.0f)
-            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 32.0f)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, -11058147)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
             .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 267827)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, -6390206)
 
             // Sounds
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(

@@ -6,14 +6,37 @@
       "extra_bottom_block_chance": 0.8,
       "extra_edge_column_chance": 0.7,
       "ground_state": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "minecraft:sandstone"
-        }
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "minecraft:sandstone"
+            },
+            "weight": 10
+          },
+          {
+            "data": {
+              "Name": "minecraft:coarse_dirt"
+            },
+            "weight": 3
+          },
+          {
+            "data": {
+              "Name": "minecraft:dead_brain_coral_block"
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "Name": "minecraft:gravel"
+            },
+            "weight": 3
+          }
+        ]
       },
       "replaceable": "#minecraft:lush_ground_replaceable",
       "surface": "floor",
-      "vegetation_chance": 0.1,
+      "vegetation_chance": 0.2,
       "vegetation_feature": {
         "feature": {
           "type": "minecraft:random_selector",
@@ -185,7 +208,7 @@
           }
         ]
       },
-      "vertical_range": 5,
+      "vertical_range": 4,
       "xz_radius": {
         "type": "minecraft:uniform",
         "max_inclusive": 7,
@@ -196,7 +219,7 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 62
+      "count": 5
     },
     {
       "type": "minecraft:in_square"
@@ -206,10 +229,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 256
+          "absolute": 60
         },
         "min_inclusive": {
-          "above_bottom": 0
+          "above_bottom": -20
         }
       }
     },

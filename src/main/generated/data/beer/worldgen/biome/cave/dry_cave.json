@@ -41,11 +41,11 @@
         "probability": 0.005
       }
     ],
-    "minecraft:visual/fog_color": "#f7de8b",
-    "minecraft:visual/fog_end_distance": 32.0,
-    "minecraft:visual/fog_start_distance": -50.0,
+    "minecraft:visual/fog_color": "#57441d",
+    "minecraft:visual/fog_end_distance": 50.0,
+    "minecraft:visual/fog_start_distance": 5.0,
     "minecraft:visual/sky_color": "#7ba4ff",
-    "minecraft:visual/water_fog_color": "#041633"
+    "minecraft:visual/water_fog_color": "#9e7e42"
   },
   "carvers": [
     "minecraft:cave",
@@ -54,7 +54,7 @@
   ],
   "downfall": 0.5,
   "effects": {
-    "water_color": "#45adf2"
+    "water_color": "#9e7e42"
   },
   "features": [
     [],
