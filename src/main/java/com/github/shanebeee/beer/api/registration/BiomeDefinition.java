@@ -146,6 +146,10 @@ public class BiomeDefinition {
             return this;
         }
 
+        public Builder particles(AmbientParticle... particles) {
+            this.biomeBuilder.setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(particles));
+            return this;
+        }
 
         /**
          * Add a list of Place Features per generation step
