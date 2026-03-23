@@ -4,7 +4,6 @@ import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.CavePlacements;
@@ -14,7 +13,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.attribute.AmbientAdditionsSettings;
 import net.minecraft.world.attribute.AmbientMoodSettings;
-import net.minecraft.world.attribute.AmbientParticle;
 import net.minecraft.world.attribute.AmbientSounds;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
@@ -129,10 +127,9 @@ public class BiomeRegistration {
             .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, List.of(
-                new AmbientParticle(new DustParticleOptions(-1, 0.5f), 0.05f),
-                new AmbientParticle(new DustParticleOptions(-9766924, 0.5f), 0.05f)
-            ))
+
+            .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.BLUE_ICE.defaultBlockState()), 0.005f)
+            .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SNOW_BLOCK.defaultBlockState()), 0.005f)
 
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_DEEPSLATE_TO_ICE,

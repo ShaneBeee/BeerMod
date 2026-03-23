@@ -4,19 +4,21 @@
     "minecraft:visual/ambient_particles": [
       {
         "particle": {
-          "type": "minecraft:dust",
-          "color": -1,
-          "scale": 0.5
+          "type": "minecraft:falling_dust",
+          "block_state": {
+            "Name": "minecraft:blue_ice"
+          }
         },
-        "probability": 0.05
+        "probability": 0.005
       },
       {
         "particle": {
-          "type": "minecraft:dust",
-          "color": -9766924,
-          "scale": 0.5
+          "type": "minecraft:falling_dust",
+          "block_state": {
+            "Name": "minecraft:snow_block"
+          }
         },
-        "probability": 0.05
+        "probability": 0.005
       }
     ],
     "minecraft:visual/fog_color": "#fcbf86",
