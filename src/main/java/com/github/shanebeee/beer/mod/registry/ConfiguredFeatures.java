@@ -33,7 +33,6 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_AZALEA_BUSH_OR_SCRUB = register("vegetation/azalea_bush_or_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_AZALEA_SCRUB = register("vegetation/azalea_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_FLOWERING_AZALEA_SCRUB = register("vegetation/flowering_azalea_scrub");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_PATCH_CLIFF_GRASS = register("vegetation/patch_cliff_grass");
 
     private static ResourceKey<ConfiguredFeature<?, ?>> register(String key) {
         return Beer.getKey(Registries.CONFIGURED_FEATURE, key);
