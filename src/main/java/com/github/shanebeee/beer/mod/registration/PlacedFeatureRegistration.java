@@ -82,7 +82,7 @@ public class PlacedFeatureRegistration {
         FEATURES.addAll(delta(context));
         FEATURES.addAll(terrain(context));
         FEATURES.addAll(tree(context));
-        FEATURES.addAll(context(context));
+        FEATURES.addAll(vegetation(context));
     }
 
     public static List<PlacedFeatureDefinition> getPlaceFeatureDefinitions() {
@@ -115,8 +115,6 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(hanging_fence);
 
         return features;
@@ -165,7 +163,6 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-
         features.add(beach_delta);
 
         PlacedFeatureDefinition coastal_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_COASTAL_DELTA, context)
@@ -176,8 +173,6 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(coastal_delta);
 
         PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, context)
@@ -253,8 +248,6 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(swamp_delta);
 
         return features;
@@ -339,8 +332,6 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(grass_to_sand);
 
         PlacedFeatureDefinition sand_shore_disk = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_SAND_SHORE_DISK, context)
@@ -351,8 +342,6 @@ public class PlacedFeatureRegistration {
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(sand_shore_disk);
 
         PlacedFeatureDefinition cliff_feature = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_STONE_CLIFF, context)
@@ -523,8 +512,6 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(fallen_warped_stem);
 
         PlacedFeatureDefinition moss_garden = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_MOSS_GARDEN, context)
@@ -546,8 +533,6 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
-
-
         features.add(moss_garden);
 
         PlacedFeatureDefinition palm_beach_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_PALM_BEACH_PALM, context)
@@ -558,8 +543,6 @@ public class PlacedFeatureRegistration {
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(palm_beach_palm);
 
         PlacedFeatureDefinition lush_desert_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_LUSH_DESERT_PALM, context)
@@ -570,22 +553,18 @@ public class PlacedFeatureRegistration {
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)),
                 BiomeFilter.biome())
             .build();
-
-
         features.add(lush_desert_palm);
 
         PlacedFeatureDefinition tall_oak_with_litter = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_OAK_WITH_LITTER, context)
             .configuredFeature(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER)
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
-
         features.add(tall_oak_with_litter);
 
         PlacedFeatureDefinition fallen_tall_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_FALLEN_TALL_OAK, context)
             .configuredFeature(ConfiguredFeatures.TREE_FALLEN_TALL_OAK)
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
-
         features.add(fallen_tall_oak);
 
         PlacedFeatureDefinition tall_oaks = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_OAK_TREES, context)
@@ -604,7 +583,6 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome()
             )
             .build();
-
         features.add(tall_oaks);
 
         PlacedFeatureDefinition tall_stripped_pale_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_STRIPPED_PALE_OAK, context)
@@ -623,7 +601,6 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome(),
                 PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING))
             .build();
-
         features.add(tall_stripped_pale_oak);
 
         PlacedFeatureDefinition tropical_forest = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TROPICAL_FOREST, context)
@@ -640,7 +617,7 @@ public class PlacedFeatureRegistration {
         return features;
     }
 
-    private static List<PlacedFeatureDefinition> context(BootstrapContext<PlacedFeature> context) {
+    private static List<PlacedFeatureDefinition> vegetation(BootstrapContext<PlacedFeature> context) {
         List<PlacedFeatureDefinition> features = new ArrayList<>();
 
         PlacedFeatureDefinition azalea_bush_or_scrub = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB, context)
@@ -655,7 +632,6 @@ public class PlacedFeatureRegistration {
                 )),
                 BiomeFilter.biome())
             .build();
-
         features.add(azalea_bush_or_scrub);
 
         PlacedFeatureDefinition desert_azalea_scrub = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB, context)
@@ -670,7 +646,6 @@ public class PlacedFeatureRegistration {
                 )),
                 BiomeFilter.biome())
             .build();
-
         features.add(desert_azalea_scrub);
 
         PlacedFeatureDefinition patch = PlacedFeatureDefinition.builder()
@@ -700,7 +675,6 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome())
             .build();
-
         features.add(moss_patch);
 
         PlacedFeatureDefinition cherry_petals = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS, context)
@@ -711,7 +685,6 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BiomeFilter.biome())
             .build();
-
         features.add(cherry_petals);
 
         PlacedFeatureDefinition cliff_grass = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS, context)
@@ -826,7 +799,6 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BiomeFilter.biome())
             .build();
-
         features.add(rooted_dirt_blob);
 
         return features;
