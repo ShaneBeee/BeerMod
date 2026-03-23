@@ -68,6 +68,7 @@ tasks.jar {
 
 tasks {
     register("datapack", Zip::class) {
+        dependsOn("runDatagen")
         archiveFileName = "Beer-DataPack-${version}-${minecraftVersion}.zip"
         from("src/main/generated") {
             exclude("**/.DS_Store", ".cache")
@@ -78,6 +79,7 @@ tasks {
         destinationDirectory = file("build/libs/")
     }
     register("datapack-server", Zip::class) {
+        dependsOn("runDatagen")
         archiveFileName = "Beer.zip"
         from("src/main/generated") {
             exclude("**/.DS_Store", ".cache")
