@@ -186,7 +186,7 @@ public class ConfiguredFeatureRegistration {
         ConfiguredFeatureDefinition fallen_stripped_pale_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG),
-                UniformInt.of(4, 7))
+                UniformInt.of(6, 9))
                 .build())
             .build();
         features.add(fallen_stripped_pale_oak);

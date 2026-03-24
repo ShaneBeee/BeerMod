@@ -42,8 +42,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
@@ -516,6 +516,10 @@ public class PlacedFeatureRegistration {
             .placementModifiers(RarityFilter.onAverageOnceEvery(3),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BlockPredicateFilter.forPredicate(BlockPredicate.anyOf(
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.DIRT),
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.GRASS_BLOCKS)
+                )),
                 BiomeFilter.biome())
             .build();
         features.add(fallen_stripped_pale_oak);
@@ -532,6 +536,10 @@ public class PlacedFeatureRegistration {
             .placementModifiers(CountPlacement.of(1),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BlockPredicateFilter.forPredicate(BlockPredicate.anyOf(
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.DIRT),
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.GRASS_BLOCKS)
+                )),
                 BiomeFilter.biome())
             .build();
         features.add(fallen_warped_stem);
@@ -610,9 +618,13 @@ public class PlacedFeatureRegistration {
         PlacedFeatureDefinition tall_stripped_pale_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_STRIPPED_PALE_OAK, context)
             .configuredFeature(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG),
-                new StraightTrunkPlacer(10, 3, 0),
+                new StraightTrunkPlacer(6, 3, 3),
                 SimpleStateProvider.simple(Blocks.FLOWERING_AZALEA_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.ZERO, 3),
+                new RandomSpreadFoliagePlacer(
+                    UniformInt.of(2, 3),
+                    ConstantInt.ZERO,
+                    UniformInt.of(4, 7),
+                    100),
                 new TwoLayersFeatureSize(1, 0, 1))
                 .decorators(List.of(new BeehiveDecorator(0.002f)))
                 .ignoreVines()
