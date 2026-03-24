@@ -73,6 +73,13 @@ public class TimelineRegistration {
                     .addKeyframe(117140, -16382458) // no moon
                     .addKeyframe(118730, -16119286)
                     .addKeyframe(131270, -16119286))
+            .addModifierTrack(EnvironmentAttributes.STAR_BRIGHTNESS,
+                FloatModifier.MULTIPLY,
+                builder -> builder
+                    .addKeyframe(109140, 1.0f)
+                    .addKeyframe(110140, 2.0f) // no moon
+                    .addKeyframe(117140, 2.0f) // no moon
+                    .addKeyframe(118730, 1.0f))
             .addToTag(TimelineTags.IN_OVERWORLD)
             .build();
         timelines.add(moonlight);

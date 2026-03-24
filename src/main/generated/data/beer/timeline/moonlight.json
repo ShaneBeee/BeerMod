@@ -162,6 +162,27 @@
         }
       ],
       "modifier": "multiply"
+    },
+    "minecraft:visual/star_brightness": {
+      "keyframes": [
+        {
+          "ticks": 109140,
+          "value": 1.0
+        },
+        {
+          "ticks": 110140,
+          "value": 2.0
+        },
+        {
+          "ticks": 117140,
+          "value": 2.0
+        },
+        {
+          "ticks": 118730,
+          "value": 1.0
+        }
+      ],
+      "modifier": "multiply"
     }
   }
 }
