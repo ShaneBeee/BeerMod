@@ -22,6 +22,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> TERRAIN_BROWN_CONCRETE_DISK = register("terrain/brown_concrete_disk");
     public static final ResourceKey<PlacedFeature> TERRAIN_DIORITE_CLIFFS = register("terrain/diorite_cliffs");
     public static final ResourceKey<PlacedFeature> TERRAIN_GRASS_TO_SAND = register("terrain/grass_to_sand");
+    public static final ResourceKey<PlacedFeature> TERRAIN_MOSSIFY_GRASS = register("terrain/mossify_grass");
     public static final ResourceKey<PlacedFeature> TERRAIN_SAND_SHORE_DISK = register("terrain/sand_shore_disk");
     public static final ResourceKey<PlacedFeature> TERRAIN_STONE_CLIFF = register("terrain/stone_cliff");
     public static final ResourceKey<PlacedFeature> TERRAIN_STONE_TO_ICE = register("terrain/stone_to_ice");

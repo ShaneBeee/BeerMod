@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.Vec3i;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
@@ -334,6 +335,27 @@ public class PlacedFeatureRegistration {
             .build();
         features.add(grass_to_sand);
 
+        //TERRAIN_MOSSIFY_GRASS
+        PlacedFeatureDefinition mossify_grass = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_MOSSIFY_GRASS, context)
+            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.MOSS_BLOCK)))
+            .placementModifiers(CountPlacement.of(128),
+                RandomOffsetPlacement.ofTriangle(3, 3),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.GRASS_BLOCK),
+                        BlockPredicate.anyOf(
+                            BlockPredicate.matchesBlocks(new Vec3i(1, 0, 0), Blocks.WATER),
+                            BlockPredicate.matchesBlocks(new Vec3i(-1, 0, 0), Blocks.WATER),
+                            BlockPredicate.matchesBlocks(new Vec3i(0, 0, 1), Blocks.WATER),
+                            BlockPredicate.matchesBlocks(new Vec3i(0, 0, -1), Blocks.WATER)
+                        ))),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome()
+            )
+            .build();
+        features.add(mossify_grass);
+
         PlacedFeatureDefinition sand_shore_disk = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_SAND_SHORE_DISK, context)
             .configuredFeature(ConfiguredFeatures.TERRAIN_SAND_SHORE_DISK)
             .placementModifiers(CountPlacement.of(50),
@@ -414,7 +436,7 @@ public class PlacedFeatureRegistration {
         PlacedFeatureDefinition stone_to_ice = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_STONE_TO_ICE, context)
             .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
                 FeatureUtils.createBlobReplace(Blocks.STONE,
-                Blocks.BLUE_ICE, 5, 2, 2))
+                    Blocks.BLUE_ICE, 5, 2, 2))
             .placementModifiers(CountPlacement.of(100),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(70)),
@@ -436,16 +458,16 @@ public class PlacedFeatureRegistration {
         PlacedFeatureDefinition water_blob = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_WATER_BLOB, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.WATER)))
             .placementModifiers(BlockPredicateFilter.forPredicate(
-                BlockPredicate.allOf(
-                    BlockPredicate.matchesTag(BlockTags.DIRT),
-                    BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR, Blocks.WATER),
-                    BlockPredicate.matchesBlocks(new BlockPos(0, 0, -1), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK),
-                    BlockPredicate.matchesBlocks(new BlockPos(0, 0, 1), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK),
-                    BlockPredicate.matchesBlocks(new BlockPos(1, 0, 0), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK),
-                    BlockPredicate.matchesBlocks(new BlockPos(-1, 0, 0), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK)
-                )),
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesTag(BlockTags.DIRT),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR, Blocks.WATER),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, 0, -1), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, 0, 1), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK),
+                        BlockPredicate.matchesBlocks(new BlockPos(1, 0, 0), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK),
+                        BlockPredicate.matchesBlocks(new BlockPos(-1, 0, 0), Blocks.DIRT, Blocks.WATER, Blocks.GRASS_BLOCK)
+                    )),
                 CountPlacement.of(100),
-                RandomOffsetPlacement.ofTriangle(3,2),
+                RandomOffsetPlacement.ofTriangle(3, 2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
@@ -737,10 +759,10 @@ public class PlacedFeatureRegistration {
         PlacedFeatureDefinition hay_bale_patch = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_HAY_BALE, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.HAY_BLOCK)))
             .placementModifiers(BlockPredicateFilter.forPredicate(
-                BlockPredicate.allOf(
-                    BlockPredicate.matchesBlocks(Blocks.AIR),
-                    BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
-                )),
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                    )),
                 CountPlacement.of(96),
                 RandomOffsetPlacement.ofTriangle(7, 3),
                 RarityFilter.onAverageOnceEvery(50),
