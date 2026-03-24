@@ -5,6 +5,7 @@ import com.github.shanebeee.beer.mod.registry.Timelines;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.tags.TimelineTags;
 import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.attribute.modifier.AttributeModifier;
 import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.timeline.Timeline;
 
@@ -63,6 +64,15 @@ public class TimelineRegistration {
                     .addKeyframe(179270, 1.0f)
                     .addKeyframe(181140, 0.75f)
                     .addKeyframe(190860, 0.75f))
+            .addModifierTrack(EnvironmentAttributes.AMBIENT_LIGHT_COLOR,
+                AttributeModifier.override(),
+                builder -> builder
+                    .addKeyframe(96730, -16119286)
+                    .addKeyframe(109140, -16119286)
+                    .addKeyframe(110140, -16382458) // no moon
+                    .addKeyframe(117140, -16382458) // no moon
+                    .addKeyframe(118730, -16119286)
+                    .addKeyframe(131270, -16119286))
             .addToTag(TimelineTags.IN_OVERWORLD)
             .build();
         timelines.add(moonlight);

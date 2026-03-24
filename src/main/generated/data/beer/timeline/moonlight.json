@@ -2,6 +2,34 @@
   "clock": "minecraft:overworld",
   "period_ticks": 192000,
   "tracks": {
+    "minecraft:visual/ambient_light_color": {
+      "keyframes": [
+        {
+          "ticks": 96730,
+          "value": "#0a0a0a"
+        },
+        {
+          "ticks": 109140,
+          "value": "#0a0a0a"
+        },
+        {
+          "ticks": 110140,
+          "value": "#060606"
+        },
+        {
+          "ticks": 117140,
+          "value": "#060606"
+        },
+        {
+          "ticks": 118730,
+          "value": "#0a0a0a"
+        },
+        {
+          "ticks": 131270,
+          "value": "#0a0a0a"
+        }
+      ]
+    },
     "minecraft:visual/sky_light_factor": {
       "keyframes": [
         {
