@@ -70,6 +70,7 @@
     [
       "minecraft:glow_lichen",
       "beer:vegetation/patch_water_leaves",
+      "beer:terrain/sand_shore_disk",
       "beer:tree/palm_beach_palm",
       "beer:vegetation/azalea_bush_or_scrub",
       "beer:terrain/mossify_grass",

@@ -161,7 +161,6 @@ public class BiomeRegistration {
         biomes.add(ice_cave);
 
         return biomes;
-
     }
 
     private static List<BiomeDefinition> coastBiomes(BootstrapContext<Biome> context) {
@@ -190,7 +189,8 @@ public class BiomeRegistration {
                 null,
                 null,
                 null,
-                List.of(PlacedFeatures.TREE_BEACHY_PALM,
+                List.of(PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
+                    PlacedFeatures.TREE_BEACHY_PALM,
                     VegetationPlacements.PATCH_WATERLILY,
                     VegetationPlacements.PATCH_SUGAR_CANE),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
@@ -231,6 +231,7 @@ public class BiomeRegistration {
                 null,
                 null,
                 List.of(PlacedFeatures.VEGETATION_PATCH_WATER_LEAVES,
+                    PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
                     PlacedFeatures.TREE_PALM_BEACH_PALM,
                     "wythers:vegetation/placed_random_patch/large_ferns_dense_forests",
                     PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
@@ -277,7 +278,8 @@ public class BiomeRegistration {
                 null,
                 null,
                 null,
-                List.of(PlacedFeatures.TREE_PALM_BEACH_PALM,
+                List.of(PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
+                    PlacedFeatures.TREE_PALM_BEACH_PALM,
                     "wythers:vegetation/placed_random_patch/dark_oak_roots",
                     PlacedFeatures.TERRAIN_MOSSIFY_GRASS,
                     VegetationPlacements.PATCH_GRASS_SAVANNA),

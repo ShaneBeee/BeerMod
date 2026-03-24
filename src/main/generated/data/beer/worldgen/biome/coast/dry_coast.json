@@ -58,6 +58,7 @@
     [],
     [
       "minecraft:glow_lichen",
+      "beer:terrain/sand_shore_disk",
       "beer:tree/palm_beach_palm",
       "beer:terrain/mossify_grass",
       "minecraft:patch_grass_savanna"
