@@ -2,8 +2,8 @@
   "feature": "beer:delta/moss_delta",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 2
+      "type": "minecraft:rarity_filter",
+      "chance": 5
     },
     {
       "type": "minecraft:in_square"

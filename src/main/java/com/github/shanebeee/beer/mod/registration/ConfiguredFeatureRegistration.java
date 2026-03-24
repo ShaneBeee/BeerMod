@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
@@ -83,14 +84,17 @@ public class ConfiguredFeatureRegistration {
 
         ConfiguredFeatureDefinition moss_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MOSS_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.DIRT,
-                BlockStateProvider.simple(Blocks.MOSS_BLOCK),
+                BlockTags.LUSH_GROUND_REPLACEABLE,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.MOSS_BLOCK.defaultBlockState(), 4)
+                    .add(Blocks.GRASS_BLOCK.defaultBlockState(), 1)
+                    .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 1)
+                    .build()),
                 PlacedFeatureDefinition.builder()
                     .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
                         HolderSet.direct(
                             PlacedFeatureDefinition.builder()
-                                .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                    BlockStateProvider.simple(Blocks.SMALL_DRIPLEAF)))
+                                .configuredFeature(CaveFeatures.DRIPLEAF)
                                 .build().getFeatureHolder(),
                             PlacedFeatureDefinition.builder()
                                 .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
@@ -99,11 +103,11 @@ public class ConfiguredFeatureRegistration {
                     .build().getFeatureHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(1),
-                0f,
+                0.01f,
                 1,
                 0.1f,
-                ConstantInt.of(5),
-                0.1f))
+                UniformInt.of(1, 3),
+                0.9f))
             .build();
         features.add(moss_delta);
 

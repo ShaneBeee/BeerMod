@@ -177,7 +177,7 @@ public class PlacedFeatureRegistration {
 
         PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_MOSS_DELTA)
-            .placementModifiers(CountPlacement.of(2),
+            .placementModifiers(RarityFilter.onAverageOnceEvery(5),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),

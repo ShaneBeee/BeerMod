@@ -510,7 +510,7 @@ public class BiomeRegistration {
 
             .waterColor(6003155)
             .foliageColorOverride(442658)
-            .grassColorOverride(6017902)
+            .grassColorOverride(-8213182)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
@@ -522,8 +522,7 @@ public class BiomeRegistration {
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND,
                     PlacedFeatures.DELTA_LUSH_DESERT_DELTA),
-                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
-                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
                 List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.FOSSIL_UPPER,
                     CavePlacements.FOSSIL_LOWER,

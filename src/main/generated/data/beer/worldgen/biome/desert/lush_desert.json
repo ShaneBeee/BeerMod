@@ -21,7 +21,7 @@
   "downfall": 0.8,
   "effects": {
     "foliage_color": "#06c122",
-    "grass_color": "#5bd36e",
+    "grass_color": "#82ad42",
     "water_color": "#5b99d3"
   },
   "features": [
@@ -30,8 +30,7 @@
       "beer:delta/lush_desert_delta"
     ],
     [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
+      "minecraft:lake_lava_underground"
     ],
     [
       "minecraft:amethyst_geode"
