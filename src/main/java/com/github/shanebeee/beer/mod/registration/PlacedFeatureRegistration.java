@@ -523,6 +523,25 @@ public class PlacedFeatureRegistration {
             .build();
         features.add(beachy_palm);
 
+        PlacedFeatureDefinition desert_river_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_DESERT_RIVER_PALM, context)
+            .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
+            .placementModifiers(CountPlacement.of(15),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(63)),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Vec3i.ZERO, Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), Blocks.SAND, Blocks.PODZOL, Blocks.ROOTED_DIRT, Blocks.PACKED_MUD),
+                        BlockPredicate.anyOf(
+                            BlockPredicate.matchesFluids(new Vec3i(0, -1, 1), Fluids.WATER),
+                            BlockPredicate.matchesFluids(new Vec3i(0, -1, -1), Fluids.WATER),
+                            BlockPredicate.matchesFluids(new Vec3i(1, -1, 0), Fluids.WATER),
+                            BlockPredicate.matchesFluids(new Vec3i(-1, -1, 0), Fluids.WATER)
+                        ))),
+                BiomeFilter.biome())
+            .build();
+        features.add(desert_river_palm);
+
         PlacedFeatureDefinition fallen_stripped_pale_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, context)
             .configuredFeature(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK)
             .placementModifiers(RarityFilter.onAverageOnceEvery(3),

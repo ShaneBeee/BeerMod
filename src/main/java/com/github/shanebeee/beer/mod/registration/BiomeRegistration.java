@@ -1023,7 +1023,7 @@ public class BiomeRegistration {
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
-            .features(null,
+            .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND),
                 List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
                     MiscOverworldPlacements.LAKE_LAVA_SURFACE),
                 List.of(CavePlacements.AMETHYST_GEODE),
@@ -1031,13 +1031,13 @@ public class BiomeRegistration {
                     CavePlacements.FOSSIL_LOWER,
                     CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
-                List.of(MiscOverworldPlacements.DESERT_WELL),
+                null,
                 null,
                 null,
                 null,
                 List.of(MiscOverworldPlacements.SPRING_WATER,
                     MiscOverworldPlacements.SPRING_LAVA),
-                List.of("wythers:vegetation/trees_desert_lakes",
+                List.of(PlacedFeatures.TREE_DESERT_RIVER_PALM,
                     VegetationPlacements.PATCH_GRASS_SAVANNA,
                     VegetationPlacements.FLOWER_DEFAULT,
                     VegetationPlacements.PATCH_DEAD_BUSH_2,
