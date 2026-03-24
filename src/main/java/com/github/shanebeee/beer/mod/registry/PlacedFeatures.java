@@ -20,14 +20,14 @@ public class PlacedFeatures {
 
     // TERRAIN
     public static final ResourceKey<PlacedFeature> TERRAIN_BROWN_CONCRETE_DISK = register("terrain/brown_concrete_disk");
+    public static final ResourceKey<PlacedFeature> TERRAIN_DEEPSLATE_TO_ICE = register("terrain/deepslate_to_ice");
     public static final ResourceKey<PlacedFeature> TERRAIN_DIORITE_CLIFFS = register("terrain/diorite_cliffs");
     public static final ResourceKey<PlacedFeature> TERRAIN_GRASS_TO_SAND = register("terrain/grass_to_sand");
-    public static final ResourceKey<PlacedFeature> TERRAIN_MOSSIFY_GRASS = register("terrain/mossify_grass");
     public static final ResourceKey<PlacedFeature> TERRAIN_LUSH_PLAINS_LAKE = register("terrain/lush_plains_lake");
+    public static final ResourceKey<PlacedFeature> TERRAIN_MOSSIFY_GRASS = register("terrain/mossify_grass");
     public static final ResourceKey<PlacedFeature> TERRAIN_SAND_SHORE_DISK = register("terrain/sand_shore_disk");
     public static final ResourceKey<PlacedFeature> TERRAIN_STONE_CLIFF = register("terrain/stone_cliff");
     public static final ResourceKey<PlacedFeature> TERRAIN_STONE_TO_ICE = register("terrain/stone_to_ice");
-    public static final ResourceKey<PlacedFeature> TERRAIN_DEEPSLATE_TO_ICE = register("terrain/deepslate_to_ice");
     public static final ResourceKey<PlacedFeature> TERRAIN_WATER_BLOB = register("terrain/water_blob");
 
     // TREE
@@ -35,11 +35,11 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREE_DESERT_RIVER_PALM = register("tree/desert_river_palm");
     public static final ResourceKey<PlacedFeature> TREE_COLD_SWAMP_TREE = register("tree/cold_swamp_tree");
     public static final ResourceKey<PlacedFeature> TREE_FALLEN_STRIPPED_PALE_OAK = register("tree/fallen_stripped_pale_oak");
-    public static final ResourceKey<PlacedFeature> TREE_TALL_FALLEN_TALL_OAK = register("tree/fallen_tall_oak");
     public static final ResourceKey<PlacedFeature> TREE_FALLEN_WARPED_STEM = register("tree/fallen_warped_stem");
+    public static final ResourceKey<PlacedFeature> TREE_LUSH_DESERT_PALM = register("tree/lush_desert_palm");
     public static final ResourceKey<PlacedFeature> TREE_MOSS_GARDEN = register("tree/moss_garden");
     public static final ResourceKey<PlacedFeature> TREE_PALM_BEACH_PALM = register("tree/palm_beach_palm");
-    public static final ResourceKey<PlacedFeature> TREE_LUSH_DESERT_PALM = register("tree/lush_desert_palm");
+    public static final ResourceKey<PlacedFeature> TREE_TALL_FALLEN_TALL_OAK = register("tree/fallen_tall_oak");
     public static final ResourceKey<PlacedFeature> TREE_TALL_OAK_TREES = register("tree/tall_oak_trees");
     public static final ResourceKey<PlacedFeature> TREE_TALL_OAK_WITH_LITTER = register("tree/tall_oak_with_litter");
     public static final ResourceKey<PlacedFeature> TREE_TALL_STRIPPED_PALE_OAK = register("tree/tall_stripped_pale_oak");
