@@ -157,9 +157,9 @@ public class PlacedFeatureRegistration {
             .configuredFeature(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
                 Blocks.WATER.defaultBlockState(),
                 Blocks.DIORITE.defaultBlockState(),
-                UniformInt.of(3, 7),
+                UniformInt.of(4, 8),
                 UniformInt.of(0, 2)))
-            .placementModifiers(CountPlacement.of(128),
+            .placementModifiers(CountPlacement.of(10),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
