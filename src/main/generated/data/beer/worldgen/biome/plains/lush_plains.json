@@ -16,7 +16,8 @@
   },
   "features": [
     [
-      "beer:terrain/stone_cliff"
+      "beer:terrain/stone_cliff",
+      "beer:terrain/lush_plains_lake"
     ],
     [],
     [],

@@ -30,6 +30,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.blockpredicates.MatchingBlockTagPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockBlobConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
@@ -335,7 +336,6 @@ public class PlacedFeatureRegistration {
             .build();
         features.add(grass_to_sand);
 
-        //TERRAIN_MOSSIFY_GRASS
         PlacedFeatureDefinition mossify_grass = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_MOSSIFY_GRASS, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.MOSS_BLOCK)))
             .placementModifiers(CountPlacement.of(128),
@@ -355,6 +355,18 @@ public class PlacedFeatureRegistration {
             )
             .build();
         features.add(mossify_grass);
+
+        @SuppressWarnings("deprecation")
+        PlacedFeatureDefinition lush_plains_lake = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_LUSH_PLAINS_LAKE, context)
+            .configuredFeature(Feature.LAKE, new LakeFeature.Configuration(
+                BlockStateProvider.simple(Blocks.WATER.defaultBlockState()),
+                BlockStateProvider.simple(Blocks.SAND.defaultBlockState())))
+            .placementModifiers(RarityFilter.onAverageOnceEvery(2),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome())
+            .build();
+        features.add(lush_plains_lake);
 
         PlacedFeatureDefinition sand_shore_disk = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_SAND_SHORE_DISK, context)
             .configuredFeature(ConfiguredFeatures.TERRAIN_SAND_SHORE_DISK)

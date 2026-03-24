@@ -856,7 +856,8 @@ public class BiomeRegistration {
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()
-            .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF),
+            .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF,
+                    PlacedFeatures.TERRAIN_LUSH_PLAINS_LAKE),
                 null,
                 null,
                 null,
