@@ -6,6 +6,7 @@ import com.github.shanebeee.beer.mod.registration.BiomeRegistration;
 import com.github.shanebeee.beer.mod.registration.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
 import com.github.shanebeee.beer.mod.registration.PlacedFeatureRegistration;
+import com.github.shanebeee.beer.mod.registration.TagRegistration;
 import com.github.shanebeee.beer.mod.registration.TimelineRegistration;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -33,6 +34,7 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(DataRegistration::new);
         pack.addProvider(BiomeTagRegistration::new);
         pack.addProvider(TimelineTagRegistration::new);
+        pack.addProvider(TagRegistration::new);
     }
 
     @Override

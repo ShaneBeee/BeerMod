@@ -7,6 +7,10 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class PlacedFeatures {
 
+    // BLOBS
+    public static final ResourceKey<PlacedFeature> BLOB_STONE = register("blob/stone");
+    public static final ResourceKey<PlacedFeature> BLOB_TUFF = register("blob/tuff");
+
     // DECOR
     public static final ResourceKey<PlacedFeature> DECOR_HANGING_FENCE = register("decor/hanging_fence");
 
@@ -17,6 +21,10 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> DELTA_DRY_CAVE_DELTA = register("delta/dry_cave_delta");
     public static final ResourceKey<PlacedFeature> DELTA_LUSH_DESERT_DELTA = register("delta/lush_desert_delta");
     public static final ResourceKey<PlacedFeature> DELTA_SWAMP_DELTA = register("delta/swamp_delta");
+
+    // REPLACE
+    public static final ResourceKey<PlacedFeature> REPLACE_DEEPSLATE_TO_DIORITE = register("replace/deepslate_to_diorite");
+    public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_DIORITE = register("replace/stone_to_diorite");
 
     // TERRAIN
     public static final ResourceKey<PlacedFeature> TERRAIN_BROWN_CONCRETE_DISK = register("terrain/brown_concrete_disk");

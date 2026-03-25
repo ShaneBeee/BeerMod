@@ -49,6 +49,60 @@ public class BiomeRegistration {
     private static List<BiomeDefinition> caveBiomes(BootstrapContext<Biome> context) {
         List<BiomeDefinition> biomes = new ArrayList<>();
 
+        BiomeDefinition diorite_cave = BiomeDefinition.builder(BeerBiomes.CAVE_DIORITE_CAVE, context)
+            .temperature(0.5f)
+            .downfall(0.5f)
+            .hasPrecipitation(true)
+
+            .waterColor(-14168075)
+
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, -16573926)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, -14168075)
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 6000, 8, 2.0F)),
+                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 0.0011f))
+            ))
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
+                new Music(SoundEvents.MUSIC_BIOME_LUSH_CAVES, 12000, 24000, true)))
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.5f)
+
+            .addDefaultOverworldCarvers()
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE,
+                    PlacedFeatures.REPLACE_STONE_TO_DIORITE,
+                    PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE),
+                List.of(CavePlacements.AMETHYST_GEODE),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                List.of(PlacedFeatures.BLOB_STONE, PlacedFeatures.BLOB_TUFF),
+                null,
+                List.of(MiscOverworldPlacements.SPRING_WATER, MiscOverworldPlacements.SPRING_LAVA),
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.BOGGED, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.SALMON, 25, 8, 8)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        biomes.add(diorite_cave);
+
         BiomeDefinition dry_cave = BiomeDefinition.builder(BeerBiomes.CAVE_DRY_CAVE, context)
             .temperature(0.5f)
             .downfall(0.5f)

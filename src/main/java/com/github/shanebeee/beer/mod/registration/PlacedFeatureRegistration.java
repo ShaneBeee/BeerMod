@@ -3,6 +3,7 @@ package com.github.shanebeee.beer.mod.registration;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import com.github.shanebeee.beer.api.utils.FeatureUtils;
 import com.github.shanebeee.beer.api.utils.RegistryUtils;
+import com.github.shanebeee.beer.mod.registry.BeerBlockTags;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.BlockPos;
@@ -14,6 +15,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
@@ -21,6 +23,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.util.valueproviders.WeightedListInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,7 +39,9 @@ import net.minecraft.world.level.levelgen.feature.configurations.BlockBlobConfig
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.ReplaceSphereConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -68,6 +73,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
@@ -80,15 +86,45 @@ public class PlacedFeatureRegistration {
 
     public static void registerFeatures(BootstrapContext<PlacedFeature> context) {
         RegistryUtils.init(context);
+        FEATURES.addAll(blobs(context));
         FEATURES.addAll(decor(context));
         FEATURES.addAll(delta(context));
+        FEATURES.addAll(replace(context));
         FEATURES.addAll(terrain(context));
         FEATURES.addAll(tree(context));
         FEATURES.addAll(vegetation(context));
     }
 
+    @SuppressWarnings("unused")
     public static List<PlacedFeatureDefinition> getPlaceFeatureDefinitions() {
         return FEATURES;
+    }
+
+    private static List<PlacedFeatureDefinition> blobs(BootstrapContext<PlacedFeature> context) {
+        List<PlacedFeatureDefinition> features = new ArrayList<>();
+
+        PlacedFeatureDefinition stone_blobs = createBlob(context, PlacedFeatures.BLOB_STONE, Blocks.STONE,
+            22, 0, 70, 10);
+        features.add(stone_blobs);
+
+        PlacedFeatureDefinition tuff_blobs = createBlob(context, PlacedFeatures.BLOB_TUFF, Blocks.TUFF,
+            24, -20, 40, 12);
+        features.add(tuff_blobs);
+
+        return features;
+    }
+
+    private static PlacedFeatureDefinition createBlob(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+                                                      Block replace, int size, int minHeight, int maxHeight, int chance) {
+        return PlacedFeatureDefinition.builder(key, context)
+            .configuredFeature(Feature.ORE, new OreConfiguration(
+                new TagMatchTest(BeerBlockTags.ALT_STONE),
+                replace.defaultBlockState(), size))
+            .placementModifiers(CountPlacement.of(chance),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(minHeight), VerticalAnchor.absolute(maxHeight)),
+                BiomeFilter.biome())
+            .build();
     }
 
     private static List<PlacedFeatureDefinition> decor(BootstrapContext<PlacedFeature> context) {
@@ -253,6 +289,40 @@ public class PlacedFeatureRegistration {
         features.add(swamp_delta);
 
         return features;
+    }
+
+    private static List<PlacedFeatureDefinition> replace(BootstrapContext<PlacedFeature> context) {
+        List<PlacedFeatureDefinition> features = new ArrayList<>();
+
+        // Replace
+        PlacedFeatureDefinition deepslate_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
+            Blocks.DEEPSLATE, Blocks.DIORITE,
+            -16, 8, 75, 3,5);
+        features.add(deepslate_to_diorite);
+
+        PlacedFeatureDefinition stone_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_STONE_TO_DIORITE,
+            Blocks.STONE, Blocks.DIORITE,
+            0, 70, 100, 5, 12);
+        features.add(stone_to_diorite);
+
+        return features;
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static PlacedFeatureDefinition createReplacement(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+                                                             Block target, Block replace, int minHeight, int maxHeight, int chance, int minRadius, int maxRadius) {
+        return PlacedFeatureDefinition.builder(key, context)
+            .configuredFeature(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(
+                target.defaultBlockState(),
+                replace.defaultBlockState(),
+                UniformInt.of(minRadius, maxRadius)))
+            .placementModifiers(CountPlacement.of(new WeightedListInt(WeightedList.<IntProvider>builder()
+                    .add(ConstantInt.of(chance), 100)
+                    .build())),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(minHeight), VerticalAnchor.absolute(maxHeight)),
+                BiomeFilter.biome())
+            .build();
     }
 
     private static List<PlacedFeatureDefinition> terrain(BootstrapContext<PlacedFeature> context) {

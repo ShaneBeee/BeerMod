@@ -2,13 +2,13 @@ package com.github.shanebeee.beer.mod.registry;
 
 import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 
 public class BeerBiomes {
 
     // CAVE
+    public static final ResourceKey<Biome> CAVE_DIORITE_CAVE = register("cave/diorite_cave");
     public static final ResourceKey<Biome> CAVE_DRY_CAVE = register("cave/dry_cave");
     public static final ResourceKey<Biome> CAVE_ICE_CAVE = register("cave/ice_cave");
 
