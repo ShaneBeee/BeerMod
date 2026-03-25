@@ -8,7 +8,7 @@
         "min_inclusive": 5
       },
       "state": {
-        "Name": "minecraft:diorite"
+        "Name": "minecraft:blue_ice"
       },
       "target": {
         "Name": "minecraft:stone"

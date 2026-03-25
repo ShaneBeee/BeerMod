@@ -17,7 +17,7 @@
   },
   "features": [
     [
-      "beer:terrain/grass_to_sand"
+      "beer:replace/grass_to_sand"
     ],
     [
       "minecraft:lake_lava_underground",

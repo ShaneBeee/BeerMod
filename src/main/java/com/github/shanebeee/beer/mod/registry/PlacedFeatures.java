@@ -24,18 +24,18 @@ public class PlacedFeatures {
 
     // REPLACE
     public static final ResourceKey<PlacedFeature> REPLACE_DEEPSLATE_TO_DIORITE = register("replace/deepslate_to_diorite");
+    public static final ResourceKey<PlacedFeature> REPLACE_DEEPSLATE_TO_ICE = register("replace/deepslate_to_ice");
+    public static final ResourceKey<PlacedFeature> REPLACE_GRASS_TO_SAND = register("replace/grass_to_sand");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_DIORITE = register("replace/stone_to_diorite");
+    public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_ICE = register("replace/stone_to_ice");
 
     // TERRAIN
     public static final ResourceKey<PlacedFeature> TERRAIN_BROWN_CONCRETE_DISK = register("terrain/brown_concrete_disk");
-    public static final ResourceKey<PlacedFeature> TERRAIN_DEEPSLATE_TO_ICE = register("terrain/deepslate_to_ice");
     public static final ResourceKey<PlacedFeature> TERRAIN_DIORITE_CLIFFS = register("terrain/diorite_cliffs");
-    public static final ResourceKey<PlacedFeature> TERRAIN_GRASS_TO_SAND = register("terrain/grass_to_sand");
     public static final ResourceKey<PlacedFeature> TERRAIN_LUSH_PLAINS_LAKE = register("terrain/lush_plains_lake");
     public static final ResourceKey<PlacedFeature> TERRAIN_MOSSIFY_GRASS = register("terrain/mossify_grass");
     public static final ResourceKey<PlacedFeature> TERRAIN_SAND_SHORE_DISK = register("terrain/sand_shore_disk");
     public static final ResourceKey<PlacedFeature> TERRAIN_STONE_CLIFF = register("terrain/stone_cliff");
-    public static final ResourceKey<PlacedFeature> TERRAIN_STONE_TO_ICE = register("terrain/stone_to_ice");
     public static final ResourceKey<PlacedFeature> TERRAIN_WATER_BLOB = register("terrain/water_blob");
 
     // TREE

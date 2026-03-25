@@ -8,10 +8,13 @@
         "min_inclusive": 5
       },
       "state": {
-        "Name": "minecraft:diorite"
+        "Name": "minecraft:blue_ice"
       },
       "target": {
-        "Name": "minecraft:stone"
+        "Name": "minecraft:deepslate",
+        "Properties": {
+          "axis": "y"
+        }
       }
     }
   },
@@ -36,10 +39,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 70
+          "absolute": 8
         },
         "min_inclusive": {
-          "absolute": -8
+          "absolute": -40
         }
       }
     },

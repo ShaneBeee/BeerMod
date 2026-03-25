@@ -26,7 +26,7 @@
   },
   "features": [
     [
-      "beer:terrain/grass_to_sand",
+      "beer:replace/grass_to_sand",
       "beer:delta/lush_desert_delta"
     ],
     [

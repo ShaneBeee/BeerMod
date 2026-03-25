@@ -188,8 +188,8 @@ public class BiomeRegistration {
             .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SNOW_BLOCK.defaultBlockState()), 0.005f)
 
             .addDefaultUndergroundOreFeatures()
-            .features(List.of(PlacedFeatures.TERRAIN_DEEPSLATE_TO_ICE,
-                    PlacedFeatures.TERRAIN_STONE_TO_ICE),
+            .features(List.of(PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
+                    PlacedFeatures.REPLACE_STONE_TO_ICE),
                 null,
                 null,
                 null,
@@ -234,7 +234,7 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
-                    PlacedFeatures.TERRAIN_GRASS_TO_SAND),
+                    PlacedFeatures.REPLACE_GRASS_TO_SAND),
                 null,
                 null,
                 null,
@@ -375,7 +375,7 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
-                    PlacedFeatures.TERRAIN_GRASS_TO_SAND),
+                    PlacedFeatures.REPLACE_GRASS_TO_SAND),
                 null,
                 null,
                 null,
@@ -464,7 +464,7 @@ public class BiomeRegistration {
 
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_DIORITE_CLIFFS,
-                    PlacedFeatures.TERRAIN_GRASS_TO_SAND,
+                    PlacedFeatures.REPLACE_GRASS_TO_SAND,
                     PlacedFeatures.DELTA_BEACH_DELTA),
                 null,
                 null,
@@ -510,7 +510,7 @@ public class BiomeRegistration {
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
-            .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND),
+            .features(List.of(PlacedFeatures.REPLACE_GRASS_TO_SAND),
                 List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
                 List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.FOSSIL_UPPER,
@@ -576,7 +576,7 @@ public class BiomeRegistration {
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
-            .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND,
+            .features(List.of(PlacedFeatures.REPLACE_GRASS_TO_SAND,
                     PlacedFeatures.DELTA_LUSH_DESERT_DELTA),
                 List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
                 List.of(CavePlacements.AMETHYST_GEODE),
@@ -1077,7 +1077,7 @@ public class BiomeRegistration {
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
-            .features(List.of(PlacedFeatures.TERRAIN_GRASS_TO_SAND),
+            .features(List.of(PlacedFeatures.REPLACE_GRASS_TO_SAND),
                 List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
                     MiscOverworldPlacements.LAKE_LAVA_SURFACE),
                 List.of(CavePlacements.AMETHYST_GEODE),

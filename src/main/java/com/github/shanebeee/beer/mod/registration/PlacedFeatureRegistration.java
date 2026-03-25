@@ -1,7 +1,6 @@
 package com.github.shanebeee.beer.mod.registration;
 
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
-import com.github.shanebeee.beer.api.utils.FeatureUtils;
 import com.github.shanebeee.beer.api.utils.RegistryUtils;
 import com.github.shanebeee.beer.mod.registry.BeerBlockTags;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
@@ -294,16 +293,42 @@ public class PlacedFeatureRegistration {
     private static List<PlacedFeatureDefinition> replace(BootstrapContext<PlacedFeature> context) {
         List<PlacedFeatureDefinition> features = new ArrayList<>();
 
-        // Replace
         PlacedFeatureDefinition deepslate_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
             Blocks.DEEPSLATE, Blocks.DIORITE,
             -16, 8, 75, 3,5);
         features.add(deepslate_to_diorite);
 
+        PlacedFeatureDefinition deepslate_to_ice = createReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
+            Blocks.DEEPSLATE, Blocks.BLUE_ICE,
+            -40, 8, 100, 5, 12);
+        features.add(deepslate_to_ice);
+
+        PlacedFeatureDefinition grass_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_TO_SAND, context)
+            .configuredFeature(Feature.DISK, new DiskConfiguration(
+                new RuleBasedStateProvider(
+                    BlockStateProvider.simple(Blocks.SAND),
+                    List.of(new RuleBasedStateProvider.Rule(
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.DIRT),
+                        BlockStateProvider.simple(Blocks.SAND)))),
+                BlockPredicate.matchesBlocks(Blocks.DIRT, Blocks.GRASS_BLOCK),
+                UniformInt.of(2, 6),
+                2))
+            .placementModifiers(CountPlacement.of(30),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome())
+            .build();
+        features.add(grass_to_sand);
+
         PlacedFeatureDefinition stone_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_STONE_TO_DIORITE,
             Blocks.STONE, Blocks.DIORITE,
-            0, 70, 100, 5, 12);
+            -8, 70, 100, 5, 12);
         features.add(stone_to_diorite);
+
+        PlacedFeatureDefinition stone_to_ice = createReplacement(context, PlacedFeatures.REPLACE_STONE_TO_ICE,
+            Blocks.STONE, Blocks.BLUE_ICE,
+            -8, 70, 100, 5, 12);
+        features.add(stone_to_ice);
 
         return features;
     }
@@ -388,23 +413,6 @@ public class PlacedFeatureRegistration {
             )
             .build();
         features.add(diorite_cliff);
-
-        PlacedFeatureDefinition grass_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_GRASS_TO_SAND, context)
-            .configuredFeature(Feature.DISK, new DiskConfiguration(
-                new RuleBasedStateProvider(
-                    BlockStateProvider.simple(Blocks.SAND),
-                    List.of(new RuleBasedStateProvider.Rule(
-                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.DIRT),
-                        BlockStateProvider.simple(Blocks.SAND)))),
-                BlockPredicate.matchesBlocks(Blocks.DIRT, Blocks.GRASS_BLOCK),
-                UniformInt.of(2, 6),
-                2))
-            .placementModifiers(CountPlacement.of(30),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                BiomeFilter.biome())
-            .build();
-        features.add(grass_to_sand);
 
         PlacedFeatureDefinition mossify_grass = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_MOSSIFY_GRASS, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.MOSS_BLOCK)))
@@ -514,28 +522,6 @@ public class PlacedFeatureRegistration {
             )
             .build();
         features.add(cliff_feature);
-
-        PlacedFeatureDefinition stone_to_ice = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_STONE_TO_ICE, context)
-            .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
-                FeatureUtils.createBlobReplace(Blocks.STONE,
-                    Blocks.BLUE_ICE, 5, 2, 2))
-            .placementModifiers(CountPlacement.of(100),
-                InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(70)),
-                BiomeFilter.biome())
-            .build();
-        features.add(stone_to_ice);
-
-        PlacedFeatureDefinition deepslate_to_ice = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_DEEPSLATE_TO_ICE, context)
-            .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
-                FeatureUtils.createBlobReplace(Blocks.DEEPSLATE,
-                    Blocks.BLUE_ICE, 5, 2, 2))
-            .placementModifiers(CountPlacement.of(100),
-                InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(-40), VerticalAnchor.absolute(0)),
-                BiomeFilter.biome())
-            .build();
-        features.add(deepslate_to_ice);
 
         PlacedFeatureDefinition water_blob = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_WATER_BLOB, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.WATER)))
