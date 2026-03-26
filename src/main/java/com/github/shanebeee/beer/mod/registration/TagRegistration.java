@@ -12,7 +12,6 @@ import java.util.concurrent.CompletableFuture;
 
 public class TagRegistration extends BlockTagsProvider {
 
-
     public TagRegistration(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookupFuture) {
         super(output, registryLookupFuture);
     }

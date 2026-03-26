@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.mod.registration;
 
+import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.DimensionDefinition;
 import com.github.shanebeee.beer.api.utils.BiomeDefaults;
 import com.github.shanebeee.beer.mod.biomes.continental.CoastalBiomes;
@@ -10,6 +11,7 @@ import com.github.shanebeee.beer.mod.biomes.continental.NearInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.OceanBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.CaveBiomes;
 import com.github.shanebeee.beer.mod.registry.Dimensions;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -18,9 +20,10 @@ import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.dimension.LevelStem;
 import org.jetbrains.annotations.NotNull;
 
-public class DimensionRegistration {
+public class DimensionRegistration extends BaseRegistration<LevelStem, DimensionDefinition> {
 
-    public static void registerDimensions(BootstrapContext<LevelStem> context) {
+    public DimensionRegistration(BootstrapContext<LevelStem> context) {
+        super(Registries.LEVEL_STEM, context);
         DimensionDefinition.Builder builder = DimensionDefinition.overworldBuilder(Dimensions.BEER_WORLD, context);
 
         // CAVE BIOMES
@@ -79,10 +82,10 @@ public class DimensionRegistration {
         }
 
         // REGISTER
-        builder.consolidate().build();
+        register(builder.consolidate().build());
     }
 
-    private static @NotNull ResourceKey<Biome> getBiome(int continent, int temp, int humidity, int weirdness, int pv, int erosion) {
+    private @NotNull ResourceKey<Biome> getBiome(int continent, int temp, int humidity, int weirdness, int pv, int erosion) {
         return switch (continent) {
             case 0 -> Biomes.MUSHROOM_FIELDS;
             case 1 -> DeepOceanBiomes.getBiome(temp, humidity, weirdness);

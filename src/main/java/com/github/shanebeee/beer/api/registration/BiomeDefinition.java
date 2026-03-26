@@ -32,22 +32,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class BiomeDefinition {
+public class BiomeDefinition extends Definable<Biome> {
 
-    private final ResourceKey<Biome> resourceKey;
-    private final List<TagKey<Biome>> tagKeys;
-
-    private BiomeDefinition(ResourceKey<Biome> resourceKey, List<TagKey<Biome>> tagKeys) {
-        this.resourceKey = resourceKey;
-        this.tagKeys = tagKeys;
-    }
-
-    public ResourceKey<Biome> getResourceKey() {
-        return this.resourceKey;
-    }
-
-    public List<TagKey<Biome>> getTagKeys() {
-        return this.tagKeys;
+    public BiomeDefinition(ResourceKey<Biome> resourceKey, Biome value, Holder.Reference<Biome> holder, List<TagKey<Biome>> tagKeys) {
+        super(resourceKey, value, holder, tagKeys);
     }
 
     public static Builder builder(ResourceKey<Biome> resourceKey, BootstrapContext<Biome> entries) {
@@ -392,8 +380,9 @@ public class BiomeDefinition {
                 .generationSettings(this.genSettings.build())
                 .mobSpawnSettings(this.mobSpawnSettings.build());
 
-            this.context.register(this.resourceKey, this.biomeBuilder.build());
-            return new BiomeDefinition(this.resourceKey, this.tagKeys);
+            Biome biome = this.biomeBuilder.build();
+            Holder.Reference<Biome> holder = this.context.register(this.resourceKey, this.biomeBuilder.build());
+            return new BiomeDefinition(this.resourceKey, biome, holder, this.tagKeys);
         }
     }
 

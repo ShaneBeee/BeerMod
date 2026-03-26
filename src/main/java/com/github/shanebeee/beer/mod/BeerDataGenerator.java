@@ -1,7 +1,7 @@
 package com.github.shanebeee.beer.mod;
 
-import com.github.shanebeee.beer.api.registration.BiomeDefinition;
-import com.github.shanebeee.beer.api.registration.TimelineDefinition;
+import com.github.shanebeee.beer.api.registration.BaseRegistration;
+import com.github.shanebeee.beer.api.registration.Definable;
 import com.github.shanebeee.beer.mod.registration.BiomeRegistration;
 import com.github.shanebeee.beer.mod.registration.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
@@ -20,6 +20,7 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.dimension.LevelStem;
@@ -41,15 +42,15 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
     }
 
     @Override
-    public void buildRegistry(RegistrySetBuilder registryBuilder) {
-        registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureRegistration::registerFeatures);
-        registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureRegistration::registerFeatures);
-        registryBuilder.add(Registries.BIOME, BiomeRegistration::registerBiomes);
-        registryBuilder.add(Registries.LEVEL_STEM, DimensionRegistration::registerDimensions);
-        registryBuilder.add(Registries.TIMELINE, TimelineRegistration::registerTimelines);
-        registryBuilder.add(Registries.TEMPLATE_POOL, TemplatePoolRegistration::registerPools);
-        registryBuilder.add(Registries.STRUCTURE, StructureRegistration::registerStructures);
-        registryBuilder.add(Registries.STRUCTURE_SET, StructureSetRegistration::registerStructureSets);
+    public void buildRegistry(RegistrySetBuilder builder) {
+        builder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureRegistration::new);
+        builder.add(Registries.PLACED_FEATURE, PlacedFeatureRegistration::new);
+        builder.add(Registries.BIOME, BiomeRegistration::new);
+        builder.add(Registries.LEVEL_STEM, DimensionRegistration::new);
+        builder.add(Registries.TIMELINE, TimelineRegistration::new);
+        builder.add(Registries.TEMPLATE_POOL, TemplatePoolRegistration::new);
+        builder.add(Registries.STRUCTURE, StructureRegistration::new);
+        builder.add(Registries.STRUCTURE_SET, StructureSetRegistration::new);
     }
 
     public static class DataRegistration extends FabricDynamicRegistryProvider {
@@ -61,14 +62,9 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void configure(HolderLookup.@NonNull Provider registries, @NonNull Entries entries) {
-            entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
-            entries.addAll(registries.lookupOrThrow(Registries.PLACED_FEATURE));
-            entries.addAll(registries.lookupOrThrow(Registries.BIOME));
-            entries.addAll(registries.lookupOrThrow(Registries.LEVEL_STEM));
-            entries.addAll(registries.lookupOrThrow(Registries.TIMELINE));
-            entries.addAll(registries.lookupOrThrow(Registries.TEMPLATE_POOL));
-            entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE));
-            entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE_SET));
+            for (BaseRegistration<?, ?> registration : BaseRegistration.getRegistrations()) {
+                registration.addToEntries(entries);
+            }
         }
 
         @Override
@@ -85,10 +81,14 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
-            for (BiomeDefinition biomeDefinition : BiomeRegistration.getBiomeDefinitions()) {
-                for (TagKey<Biome> tagKey : biomeDefinition.getTagKeys()) {
+            for (Definable<Biome> definition : BaseRegistration.getDefinables(Registries.BIOME)) {
+                for (TagKey<Biome> tagKey : definition.getTagKeys()) {
+                    ResourceKey<Biome> resourceKey = definition.getResourceKey();
+                    // Should never happen, but let's be safe
+                    if (resourceKey == null) continue;
+
                     getOrCreateRawBuilder(tagKey)
-                        .addElement(biomeDefinition.getResourceKey().identifier())
+                        .addElement(resourceKey.identifier())
                         .build();
                 }
             }
@@ -103,10 +103,14 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
-            for (TimelineDefinition biomeDefinition : TimelineRegistration.getTimelineDefinitions()) {
-                for (TagKey<Timeline> tagKey : biomeDefinition.getTagKeys()) {
+            for (Definable<Timeline> definition : BaseRegistration.getDefinables(Registries.TIMELINE)) {
+                for (TagKey<Timeline> tagKey : definition.getTagKeys()) {
+                    ResourceKey<Timeline> resourceKey = definition.getResourceKey();
+                    // Should never happen, but let's be safe
+                    if (resourceKey == null) continue;
+
                     getOrCreateRawBuilder(tagKey)
-                        .addElement(biomeDefinition.getResourceKey().identifier())
+                        .addElement(resourceKey.identifier())
                         .build();
                 }
             }

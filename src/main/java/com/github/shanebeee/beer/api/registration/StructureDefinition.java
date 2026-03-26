@@ -19,34 +19,18 @@ import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
+import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class StructureDefinition {
+public class StructureDefinition extends Definable<Structure> {
 
-    private final ResourceKey<Structure> resourceKey;
-    private final Structure structure;
-    private final List<TagKey<Structure>> tagKeys;
-
-    private StructureDefinition(ResourceKey<Structure> resourceKey, Structure structure, List<TagKey<Structure>> tagKeys) {
-        this.resourceKey = resourceKey;
-        this.structure = structure;
-        this.tagKeys = tagKeys;
-    }
-
-    public ResourceKey<Structure> getResourceKey() {
-        return this.resourceKey;
-    }
-
-    public Structure getValue() {
-        return this.structure;
-    }
-
-    public List<TagKey<Structure>> getTagKeys() {
-        return this.tagKeys;
+    public StructureDefinition(ResourceKey<Structure> resourceKey, @NonNull Structure value, Holder.@Nullable Reference<Structure> holder) {
+        super(resourceKey, value, holder);
     }
 
     public static JigsawBuilder jigsawBuilder(ResourceKey<Structure> resourceKey, BootstrapContext<Structure> context) {
@@ -170,9 +154,9 @@ public class StructureDefinition {
                 this.dimensionPadding,
                 this.liquidSettings);
 
-            this.context.register(this.resourceKey, jigsawStructure);
+            Holder.Reference<Structure> holder = this.context.register(this.resourceKey, jigsawStructure);
 
-            return new StructureDefinition(this.resourceKey, jigsawStructure, List.of());
+            return new StructureDefinition(this.resourceKey, jigsawStructure, holder);
         }
     }
 

@@ -1,50 +1,40 @@
 package com.github.shanebeee.beer.api.registration;
 
-import com.github.shanebeee.beer.api.utils.RegistryUtils;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PlacedFeatureDefinition {
+public class PlacedFeatureDefinition extends Definable<PlacedFeature> {
 
-    private final PlacedFeature placedFeature;
-    private final List<TagKey<PlacedFeature>> tagKeys;
-    private final ResourceKey<PlacedFeature> resourceKey;
+    private static BootstrapContext<ConfiguredFeature<?, ?>> CF_CONTEXT;
 
-    private PlacedFeatureDefinition(ResourceKey<PlacedFeature> resourceKey, PlacedFeature placedFeature, List<TagKey<PlacedFeature>> tagKeys) {
-        this.resourceKey = resourceKey;
-        this.placedFeature = placedFeature;
-        this.tagKeys = tagKeys;
+    public static void setupConfiguredFeatureContext(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        CF_CONTEXT = context;
     }
 
-    public ResourceKey<PlacedFeature> getResourceKey() {
-        return this.resourceKey;
-    }
-
-    public PlacedFeature getValue() {
-        return this.placedFeature;
-    }
-
-    public Holder<PlacedFeature> getFeatureHolder() {
-        return Holder.direct(this.placedFeature);
-    }
-
-    public List<TagKey<PlacedFeature>> getTagKeys() {
-        return this.tagKeys;
+    public PlacedFeatureDefinition(ResourceKey<PlacedFeature> resourceKey, @NonNull PlacedFeature value, Holder.@Nullable Reference<PlacedFeature> holder) {
+        super(resourceKey, value, holder);
     }
 
     public static Builder builder(ResourceKey<PlacedFeature> key, BootstrapContext<PlacedFeature> context) {
         return new Builder(key, context);
+    }
+
+    public static Builder builder(BootstrapContext<PlacedFeature> context) {
+        return new Builder(null, context);
     }
 
     public static Builder builder() {
@@ -69,7 +59,13 @@ public class PlacedFeatureDefinition {
         }
 
         public Builder configuredFeature(ResourceKey<ConfiguredFeature<?, ?>> key) {
-            this.configuredFeature = RegistryUtils.getConfiguredFeatureReference(key);
+            HolderGetter<ConfiguredFeature<?, ?>> registry;
+            if (this.context != null) {
+                registry = this.context.lookup(Registries.CONFIGURED_FEATURE);
+            } else {
+                registry = CF_CONTEXT.lookup(Registries.CONFIGURED_FEATURE);
+            }
+            this.configuredFeature = registry.getOrThrow(key);
             return this;
         }
 
@@ -84,12 +80,12 @@ public class PlacedFeatureDefinition {
         }
 
         public PlacedFeatureDefinition build() {
-
             PlacedFeature placedFeature = new PlacedFeature(this.configuredFeature, this.placementModifiers);
+            Holder.Reference<PlacedFeature> holder = null;
             if (this.context != null && this.resourceKey != null) {
-                this.context.register(this.resourceKey, placedFeature);
+                holder = this.context.register(this.resourceKey, placedFeature);
             }
-            return new PlacedFeatureDefinition(this.resourceKey, placedFeature, null);
+            return new PlacedFeatureDefinition(this.resourceKey, placedFeature, holder);
         }
 
     }

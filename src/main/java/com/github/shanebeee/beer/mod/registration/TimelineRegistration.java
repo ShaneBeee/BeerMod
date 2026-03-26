@@ -1,7 +1,9 @@
 package com.github.shanebeee.beer.mod.registration;
 
+import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.TimelineDefinition;
 import com.github.shanebeee.beer.mod.registry.Timelines;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.tags.TimelineTags;
 import net.minecraft.world.attribute.EnvironmentAttributes;
@@ -9,24 +11,14 @@ import net.minecraft.world.attribute.modifier.AttributeModifier;
 import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.timeline.Timeline;
 
-import java.util.ArrayList;
-import java.util.List;
+public class TimelineRegistration extends BaseRegistration<Timeline, TimelineDefinition> {
 
-public class TimelineRegistration {
-
-    private static final List<TimelineDefinition> TIMELINES = new ArrayList<>();
-
-    public static void registerTimelines(BootstrapContext<Timeline> context) {
-        TIMELINES.addAll(timelines(context));
+    public TimelineRegistration(BootstrapContext<Timeline> context) {
+        super(Registries.TIMELINE, context);
+        timelines(context);
     }
 
-    public static List<TimelineDefinition> getTimelineDefinitions() {
-        return TIMELINES;
-    }
-
-    private static List<TimelineDefinition> timelines(BootstrapContext<Timeline> context) {
-        List<TimelineDefinition> timelines = new ArrayList<>();
-
+    private void timelines(BootstrapContext<Timeline> context) {
         TimelineDefinition moonlight = TimelineDefinition.builder(Timelines.MOONLIGHT, context)
             .periodTicks(192000)
             .addModifierTrack(EnvironmentAttributes.SKY_LIGHT_FACTOR,
@@ -82,9 +74,7 @@ public class TimelineRegistration {
                     .addKeyframe(118730, 1.0f))
             .addToTag(TimelineTags.IN_OVERWORLD)
             .build();
-        timelines.add(moonlight);
-
-        return timelines;
+        register(moonlight);
     }
 
 }

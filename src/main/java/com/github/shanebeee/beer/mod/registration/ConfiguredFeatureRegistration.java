@@ -1,16 +1,15 @@
 package com.github.shanebeee.beer.mod.registration;
 
+import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.ConfiguredFeatureDefinition;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
-import com.github.shanebeee.beer.api.utils.RegistryUtils;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -47,41 +46,22 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlace
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
-public class ConfiguredFeatureRegistration {
+public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFeature<?, ?>, ConfiguredFeatureDefinition> {
 
-    private static final List<ConfiguredFeatureDefinition> FEATURES = new ArrayList<>();
-
-    public static void registerFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        RegistryUtils.init(context);
-        FEATURES.addAll(delta(context));
-        FEATURES.addAll(terrain(context));
-        FEATURES.addAll(tree(context));
-        FEATURES.addAll(vegetation(context));
+    public ConfiguredFeatureRegistration(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        super(Registries.CONFIGURED_FEATURE, context);
+        PlacedFeatureDefinition.setupConfiguredFeatureContext(context);
+        delta(context);
+        terrain(context);
+        tree(context);
+        vegetation(context);
     }
 
-    public static @Nullable Holder<ConfiguredFeature<?, ?>> getConfiguredFeature(ResourceKey<ConfiguredFeature<?, ?>> key) {
-        for (ConfiguredFeatureDefinition feature : FEATURES) {
-            if (feature.getResourceKey().equals(key)) {
-                return feature.getHolder();
-            }
-        }
-        return null;
-    }
-
-    @SuppressWarnings("unused")
-    public static List<ConfiguredFeatureDefinition> getConfiguredFeatureDefinitions() {
-        return FEATURES;
-    }
-
-    private static List<ConfiguredFeatureDefinition> delta(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        List<ConfiguredFeatureDefinition> features = new ArrayList<>();
-
+    private void delta(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         ConfiguredFeatureDefinition moss_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MOSS_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
                 BlockTags.LUSH_GROUND_REPLACEABLE,
@@ -95,12 +75,12 @@ public class ConfiguredFeatureRegistration {
                         HolderSet.direct(
                             PlacedFeatureDefinition.builder()
                                 .configuredFeature(CaveFeatures.DRIPLEAF)
-                                .build().getFeatureHolder(),
+                                .build().getHolder(),
                             PlacedFeatureDefinition.builder()
                                 .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                     BlockStateProvider.simple(Blocks.SEAGRASS)))
-                                .build().getFeatureHolder())))
-                    .build().getFeatureHolder(),
+                                .build().getHolder())))
+                    .build().getHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(1),
                 0.01f,
@@ -109,14 +89,10 @@ public class ConfiguredFeatureRegistration {
                 UniformInt.of(1, 3),
                 0.9f))
             .build();
-        features.add(moss_delta);
-
-        return features;
+        register(moss_delta);
     }
 
-    private static List<ConfiguredFeatureDefinition> terrain(BootstrapContext<ConfiguredFeature<?, ?>> entries) {
-        List<ConfiguredFeatureDefinition> features = new ArrayList<>();
-
+    private void terrain(BootstrapContext<ConfiguredFeature<?, ?>> entries) {
         ConfiguredFeatureDefinition sand_shore_disk = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TERRAIN_SAND_SHORE_DISK, entries)
             .config(Feature.DISK, new DiskConfiguration(
                 RuleBasedStateProvider.simple(Blocks.SAND),
@@ -124,14 +100,10 @@ public class ConfiguredFeatureRegistration {
                 UniformInt.of(3, 5),
                 1))
             .build();
-        features.add(sand_shore_disk);
-
-        return features;
+        register(sand_shore_disk);
     }
 
-    private static List<ConfiguredFeatureDefinition> tree(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        List<ConfiguredFeatureDefinition> features = new ArrayList<>();
-
+    private void tree(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         ConfiguredFeatureDefinition acacia_forest = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_ACACIA_FOREST, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.ACACIA_LOG),
@@ -153,7 +125,7 @@ public class ConfiguredFeatureRegistration {
                                 .build())))))
                 .build())
             .build();
-        features.add(acacia_forest);
+        register(acacia_forest);
 
         ConfiguredFeatureDefinition cold_swamp_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COLD_SWAMP_OAK, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -167,7 +139,7 @@ public class ConfiguredFeatureRegistration {
                 .decorators(List.of(new LeaveVineDecorator(0.25f)))
                 .build())
             .build();
-        features.add(cold_swamp_oak);
+        register(cold_swamp_oak);
 
         ConfiguredFeatureDefinition cold_swamp_pale = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COLD_SWAMP_PALE, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -181,7 +153,7 @@ public class ConfiguredFeatureRegistration {
                 .decorators(List.of(new LeaveVineDecorator(0.25f)))
                 .build())
             .build();
-        features.add(cold_swamp_pale);
+        register(cold_swamp_pale);
 
         ConfiguredFeatureDefinition fallen_stripped_pale_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
@@ -189,7 +161,7 @@ public class ConfiguredFeatureRegistration {
                 UniformInt.of(6, 9))
                 .build())
             .build();
-        features.add(fallen_stripped_pale_oak);
+        register(fallen_stripped_pale_oak);
 
         ConfiguredFeatureDefinition fallen_warped_stem = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_WARPED_STEM, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
@@ -197,7 +169,7 @@ public class ConfiguredFeatureRegistration {
                 UniformInt.of(4, 7))
                 .build())
             .build();
-        features.add(fallen_warped_stem);
+        register(fallen_warped_stem);
 
         ConfiguredFeatureDefinition fallen_warped_stem_stripped = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_WARPED_STEM, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
@@ -205,7 +177,7 @@ public class ConfiguredFeatureRegistration {
                 UniformInt.of(4, 7))
                 .build())
             .build();
-        features.add(fallen_warped_stem_stripped);
+        register(fallen_warped_stem_stripped);
 
         ConfiguredFeatureDefinition fallen_tall_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_TALL_OAK, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
@@ -213,7 +185,7 @@ public class ConfiguredFeatureRegistration {
                 UniformInt.of(6, 8))
                 .build())
             .build();
-        features.add(fallen_tall_oak);
+        register(fallen_tall_oak);
 
         ConfiguredFeatureDefinition marula = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_MARULA, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -244,7 +216,7 @@ public class ConfiguredFeatureRegistration {
                                 .build())))))
                 .build())
             .build();
-        features.add(marula);
+        register(marula);
 
         ConfiguredFeatureDefinition mpingo = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_MPINGO, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -267,7 +239,7 @@ public class ConfiguredFeatureRegistration {
                                 .build())))))
                 .build())
             .build();
-        features.add(mpingo);
+        register(mpingo);
 
         ConfiguredFeatureDefinition palm_tree = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_PALM_TREE, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -284,7 +256,7 @@ public class ConfiguredFeatureRegistration {
                     new BeehiveDecorator(0.03f)))
                 .build())
             .build();
-        features.add(palm_tree);
+        register(palm_tree);
 
         ConfiguredFeatureDefinition red_ivorywood = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_RED_IVORYWOOD, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -306,7 +278,7 @@ public class ConfiguredFeatureRegistration {
                                 .build())))))
                 .build())
             .build();
-        features.add(red_ivorywood);
+        register(red_ivorywood);
 
         ConfiguredFeatureDefinition stick_plant = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_STICK_PLANT, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -320,7 +292,7 @@ public class ConfiguredFeatureRegistration {
                 new TwoLayersFeatureSize(1, 0, 1))
                 .build())
             .build();
-        features.add(stick_plant);
+        register(stick_plant);
 
         Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
         WeightedList.Builder<BlockState> a1 = WeightedList.builder();
@@ -353,7 +325,7 @@ public class ConfiguredFeatureRegistration {
                         new WeightedStateProvider(a2.build()))))
                 .build())
             .build();
-        features.add(tall_oak);
+        register(tall_oak);
 
         BlockPredicateFilter tropicalPredicate = BlockPredicateFilter.forPredicate(
             BlockPredicate.wouldSurvive(Blocks.ACACIA_SAPLING.defaultBlockState()
@@ -367,39 +339,35 @@ public class ConfiguredFeatureRegistration {
                         .configuredFeature(stick_plant.getHolder())
                         .placementModifiers(tropicalPredicate)
                         .build()
-                        .getFeatureHolder(),
+                        .getHolder(),
                         0.05f),
                     new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
                         .configuredFeature(marula.getHolder())
                         .placementModifiers(tropicalPredicate)
                         .build()
-                        .getFeatureHolder(),
+                        .getHolder(),
                         0.1f),
                     new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
                         .configuredFeature(red_ivorywood.getHolder())
                         .placementModifiers(tropicalPredicate)
                         .build()
-                        .getFeatureHolder(),
+                        .getHolder(),
                         0.1f),
                     new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
                         .configuredFeature(mpingo.getHolder())
                         .placementModifiers(tropicalPredicate)
                         .build()
-                        .getFeatureHolder(),
+                        .getHolder(),
                         0.3f)),
                 PlacedFeatureDefinition.builder()
                     .configuredFeature(acacia_forest.getHolder())
                     .placementModifiers(tropicalPredicate)
-                    .build().getFeatureHolder()))
+                    .build().getHolder()))
             .build();
-        features.add(tropical_forest);
-
-        return features;
+        register(tropical_forest);
     }
 
-    private static List<ConfiguredFeatureDefinition> vegetation(BootstrapContext<ConfiguredFeature<?, ?>> entries) {
-        List<ConfiguredFeatureDefinition> features = new ArrayList<>();
-
+    private void vegetation(BootstrapContext<ConfiguredFeature<?, ?>> entries) {
         // PREDICATES
         BlockPredicateFilter fernPredicate = BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.FERN.defaultBlockState(), BlockPos.ZERO));
 
@@ -414,7 +382,7 @@ public class ConfiguredFeatureRegistration {
                 new TwoLayersFeatureSize(0, 0, 0))
                 .build())
             .build();
-        features.add(azalea_scrub);
+        register(azalea_scrub);
 
         // FLOWERING AZALEA SCRUB
         ConfiguredFeatureDefinition flowering_azalea_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.VEGETATION_FLOWERING_AZALEA_SCRUB, entries)
@@ -429,7 +397,7 @@ public class ConfiguredFeatureRegistration {
                 new TwoLayersFeatureSize(0, 0, 0))
                 .build())
             .build();
-        features.add(flowering_azalea_scrub);
+        register(flowering_azalea_scrub);
 
         // AZALEA BUSH
         ConfiguredFeatureDefinition azalea_bush = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB, entries)
@@ -438,30 +406,27 @@ public class ConfiguredFeatureRegistration {
                     .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.AZALEA)))
                     .placementModifiers(fernPredicate)
                     .build()
-                    .getFeatureHolder(),
+                    .getHolder(),
                     0.2f),
                 new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
                     .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.FLOWERING_AZALEA)))
                     .placementModifiers(fernPredicate)
                     .build()
-                    .getFeatureHolder(),
+                    .getHolder(),
                     0.1f),
                 new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
                     .configuredFeature(flowering_azalea_scrub.getHolder())
                     .placementModifiers(fernPredicate)
                     .build()
-                    .getFeatureHolder(),
+                    .getHolder(),
                     0.25f)),
                 PlacedFeatureDefinition.builder()
                     .configuredFeature(azalea_scrub.getHolder())
                     .placementModifiers(fernPredicate)
                     .build()
-                    .getFeatureHolder()))
+                    .getHolder()))
             .build();
-        features.add(azalea_bush);
-
-        // RETURN
-        return features;
+        register(azalea_bush);
     }
 
 }

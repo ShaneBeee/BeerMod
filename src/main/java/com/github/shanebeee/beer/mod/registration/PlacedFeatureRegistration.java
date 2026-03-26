@@ -1,15 +1,15 @@
 package com.github.shanebeee.beer.mod.registration;
 
+import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
-import com.github.shanebeee.beer.api.utils.RegistryUtils;
 import com.github.shanebeee.beer.mod.registry.BeerBlockTags;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
@@ -75,42 +75,30 @@ import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
-public class PlacedFeatureRegistration {
+public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, PlacedFeatureDefinition> {
 
-    private static final List<PlacedFeatureDefinition> FEATURES = new ArrayList<>();
-
-    public static void registerFeatures(BootstrapContext<PlacedFeature> context) {
-        RegistryUtils.init(context);
-        FEATURES.addAll(blobs(context));
-        FEATURES.addAll(decor(context));
-        FEATURES.addAll(delta(context));
-        FEATURES.addAll(replace(context));
-        FEATURES.addAll(terrain(context));
-        FEATURES.addAll(tree(context));
-        FEATURES.addAll(vegetation(context));
+    public PlacedFeatureRegistration(BootstrapContext<PlacedFeature> context) {
+        super(Registries.PLACED_FEATURE, context);
+        blobs(context);
+        decor(context);
+        delta(context);
+        replace(context);
+        terrain(context);
+        tree(context);
+        vegetation(context);
     }
 
-    @SuppressWarnings("unused")
-    public static List<PlacedFeatureDefinition> getPlaceFeatureDefinitions() {
-        return FEATURES;
-    }
-
-    private static List<PlacedFeatureDefinition> blobs(BootstrapContext<PlacedFeature> context) {
-        List<PlacedFeatureDefinition> features = new ArrayList<>();
-
+    private void blobs(BootstrapContext<PlacedFeature> context) {
         PlacedFeatureDefinition stone_blobs = createBlob(context, PlacedFeatures.BLOB_STONE, Blocks.STONE,
             22, 0, 70, 10);
-        features.add(stone_blobs);
+        register(stone_blobs);
 
         PlacedFeatureDefinition tuff_blobs = createBlob(context, PlacedFeatures.BLOB_TUFF, Blocks.TUFF,
             24, -20, 40, 12);
-        features.add(tuff_blobs);
-
-        return features;
+        register(tuff_blobs);
     }
 
     private static PlacedFeatureDefinition createBlob(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
@@ -126,8 +114,7 @@ public class PlacedFeatureRegistration {
             .build();
     }
 
-    private static List<PlacedFeatureDefinition> decor(BootstrapContext<PlacedFeature> context) {
-        List<PlacedFeatureDefinition> features = new ArrayList<>();
+    private void decor(BootstrapContext<PlacedFeature> context) {
         PlacedFeatureDefinition hanging_fence = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_FENCE, context)
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(BlockColumnConfiguration.layer(
@@ -152,20 +139,16 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
                 BiomeFilter.biome())
             .build();
-        features.add(hanging_fence);
-
-        return features;
+        register(hanging_fence);
     }
 
-    private static List<PlacedFeatureDefinition> delta(BootstrapContext<PlacedFeature> context) {
-        List<PlacedFeatureDefinition> features = new ArrayList<>();
-
-        PlacedFeatureDefinition seaPickle = PlacedFeatureDefinition.builder()
+    private void delta(BootstrapContext<PlacedFeature> context) {
+        PlacedFeatureDefinition seaPickle = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                 BlockStateProvider.simple(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 3))))
             .build();
 
-        PlacedFeatureDefinition sandstoneWall = PlacedFeatureDefinition.builder()
+        PlacedFeatureDefinition sandstoneWall = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(BlockColumnConfiguration.layer(
                     new WeightedListInt(WeightedList.<IntProvider>builder()
@@ -180,11 +163,11 @@ public class PlacedFeatureRegistration {
             .placementModifiers(CountPlacement.of(1))
             .build();
 
-        PlacedFeatureDefinition vegetationFeature = PlacedFeatureDefinition.builder()
+        PlacedFeatureDefinition vegetationFeature = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(seaPickle.getFeatureHolder(), 0.05f),
-                    new WeightedPlacedFeature(sandstoneWall.getFeatureHolder(), 0.8f)),
-                sandstoneWall.getFeatureHolder()))
+                List.of(new WeightedPlacedFeature(seaPickle.getHolder(), 0.05f),
+                    new WeightedPlacedFeature(sandstoneWall.getHolder(), 0.8f)),
+                sandstoneWall.getHolder()))
             .placementModifiers(CountPlacement.of(1))
             .build();
 
@@ -200,7 +183,7 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-        features.add(beach_delta);
+        register(beach_delta);
 
         PlacedFeatureDefinition coastal_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_COASTAL_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_MOSS_DELTA)
@@ -210,7 +193,7 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-        features.add(coastal_delta);
+        register(coastal_delta);
 
         PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_MOSS_DELTA)
@@ -220,7 +203,7 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-        features.add(lush_desert_delta);
+        register(lush_desert_delta);
 
         PlacedFeatureDefinition dry_cave_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRY_CAVE_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
@@ -231,7 +214,7 @@ public class PlacedFeatureRegistration {
                     .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState(), 1)
                     .add(Blocks.GRAVEL.defaultBlockState(), 3)
                     .build()),
-                vegetationFeature.getFeatureHolder(),
+                vegetationFeature.getHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(3),
                 0.8f,
@@ -246,7 +229,7 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(1)),
                 BiomeFilter.biome())
             .build();
-        features.add(dry_cave_delta);
+        register(dry_cave_delta);
 
         PlacedFeatureDefinition dripleaf_swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRIPLEAF_SWAMP_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
@@ -257,7 +240,7 @@ public class PlacedFeatureRegistration {
                     .add(Blocks.CLAY.defaultBlockState(), 1)
                     .add(Blocks.MOSS_BLOCK.defaultBlockState(), 3)
                     .build()),
-                Holder.direct(new PlacedFeature(RegistryUtils.getConfiguredFeatureReference(CaveFeatures.DRIPLEAF), List.of())),
+                PlacedFeatureDefinition.builder(context).configuredFeature(CaveFeatures.DRIPLEAF).build().getHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(3),
                 0.8f,
@@ -271,7 +254,7 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-        features.add(dripleaf_swamp_delta);
+        register(dripleaf_swamp_delta);
 
         PlacedFeatureDefinition swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SWAMP_DELTA, context)
             .configuredFeature(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
@@ -285,23 +268,19 @@ public class PlacedFeatureRegistration {
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome())
             .build();
-        features.add(swamp_delta);
-
-        return features;
+        register(swamp_delta);
     }
 
-    private static List<PlacedFeatureDefinition> replace(BootstrapContext<PlacedFeature> context) {
-        List<PlacedFeatureDefinition> features = new ArrayList<>();
-
+    private void replace(BootstrapContext<PlacedFeature> context) {
         PlacedFeatureDefinition deepslate_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
             Blocks.DEEPSLATE, Blocks.DIORITE,
-            -16, 8, 75, 3,5);
-        features.add(deepslate_to_diorite);
+            -16, 8, 75, 3, 5);
+        register(deepslate_to_diorite);
 
         PlacedFeatureDefinition deepslate_to_ice = createReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
             Blocks.DEEPSLATE, Blocks.BLUE_ICE,
             -40, 8, 100, 5, 12);
-        features.add(deepslate_to_ice);
+        register(deepslate_to_ice);
 
         PlacedFeatureDefinition grass_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_TO_SAND, context)
             .configuredFeature(Feature.DISK, new DiskConfiguration(
@@ -318,19 +297,17 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
-        features.add(grass_to_sand);
+        register(grass_to_sand);
 
         PlacedFeatureDefinition stone_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_STONE_TO_DIORITE,
             Blocks.STONE, Blocks.DIORITE,
             -8, 70, 100, 5, 12);
-        features.add(stone_to_diorite);
+        register(stone_to_diorite);
 
         PlacedFeatureDefinition stone_to_ice = createReplacement(context, PlacedFeatures.REPLACE_STONE_TO_ICE,
             Blocks.STONE, Blocks.BLUE_ICE,
             -8, 70, 100, 5, 12);
-        features.add(stone_to_ice);
-
-        return features;
+        register(stone_to_ice);
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -350,9 +327,7 @@ public class PlacedFeatureRegistration {
             .build();
     }
 
-    private static List<PlacedFeatureDefinition> terrain(BootstrapContext<PlacedFeature> context) {
-        List<PlacedFeatureDefinition> features = new ArrayList<>();
-
+    private void terrain(BootstrapContext<PlacedFeature> context) {
         PlacedFeatureDefinition brown_concrete_disk = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_BROWN_CONCRETE_DISK, context)
             .configuredFeature(Feature.DISK, new DiskConfiguration(
                 new RuleBasedStateProvider(
@@ -368,7 +343,7 @@ public class PlacedFeatureRegistration {
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(-10), VerticalAnchor.absolute(256)),
                 BiomeFilter.biome())
             .build();
-        features.add(brown_concrete_disk);
+        register(brown_concrete_disk);
 
         PlacedFeatureDefinition diorite_cliff = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_DIORITE_CLIFFS, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
@@ -412,7 +387,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome()
             )
             .build();
-        features.add(diorite_cliff);
+        register(diorite_cliff);
 
         PlacedFeatureDefinition mossify_grass = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_MOSSIFY_GRASS, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.MOSS_BLOCK)))
@@ -432,7 +407,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome()
             )
             .build();
-        features.add(mossify_grass);
+        register(mossify_grass);
 
         @SuppressWarnings("deprecation")
         PlacedFeatureDefinition lush_plains_lake = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_LUSH_PLAINS_LAKE, context)
@@ -444,7 +419,7 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
-        features.add(lush_plains_lake);
+        register(lush_plains_lake);
 
         PlacedFeatureDefinition sand_shore_disk = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_SAND_SHORE_DISK, context)
             .configuredFeature(ConfiguredFeatures.TERRAIN_SAND_SHORE_DISK)
@@ -454,7 +429,7 @@ public class PlacedFeatureRegistration {
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)),
                 BiomeFilter.biome())
             .build();
-        features.add(sand_shore_disk);
+        register(sand_shore_disk);
 
         PlacedFeatureDefinition cliff_feature = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_STONE_CLIFF, context)
             .configuredFeature(Feature.SIMPLE_BLOCK,
@@ -521,7 +496,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome()
             )
             .build();
-        features.add(cliff_feature);
+        register(cliff_feature);
 
         PlacedFeatureDefinition water_blob = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_WATER_BLOB, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.WATER)))
@@ -540,24 +515,20 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
-        features.add(water_blob);
-
-        return features;
+        register(water_blob);
     }
 
-    private static List<PlacedFeatureDefinition> tree(BootstrapContext<PlacedFeature> context) {
-        List<PlacedFeatureDefinition> features = new ArrayList<>();
-
+    private void tree(BootstrapContext<PlacedFeature> context) {
         PlacedFeatureDefinition cold_swamp_tree = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_COLD_SWAMP_TREE, context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                 List.of(
                     new WeightedPlacedFeature(
-                        PlacedFeatureDefinition.builder().configuredFeature(ConfiguredFeatures.TREE_COLD_SWAMP_OAK).build().getFeatureHolder(),
+                        PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_COLD_SWAMP_OAK).build().getHolder(),
                         0.5f),
                     new WeightedPlacedFeature(
-                        PlacedFeatureDefinition.builder().configuredFeature(ConfiguredFeatures.TREE_COLD_SWAMP_PALE).build().getFeatureHolder(),
+                        PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_COLD_SWAMP_PALE).build().getHolder(),
                         0.5f)),
-                PlacedFeatureDefinition.builder().configuredFeature(ConfiguredFeatures.TREE_COLD_SWAMP_OAK).build().getFeatureHolder()))
+                PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_COLD_SWAMP_OAK).build().getHolder()))
             .placementModifiers(CountPlacement.of(new WeightedListInt(
                     WeightedList.of(new Weighted<>(ConstantInt.of(2), 9),
                         new Weighted<>(ConstantInt.of(3), 1)))),
@@ -567,7 +538,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
-        features.add(cold_swamp_tree);
+        register(cold_swamp_tree);
 
         PlacedFeatureDefinition beachy_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_BEACHY_PALM, context)
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
@@ -577,7 +548,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)))
             .build();
-        features.add(beachy_palm);
+        register(beachy_palm);
 
         PlacedFeatureDefinition desert_river_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_DESERT_RIVER_PALM, context)
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
@@ -596,7 +567,7 @@ public class PlacedFeatureRegistration {
                         ))),
                 BiomeFilter.biome())
             .build();
-        features.add(desert_river_palm);
+        register(desert_river_palm);
 
         PlacedFeatureDefinition fallen_stripped_pale_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, context)
             .configuredFeature(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK)
@@ -609,17 +580,17 @@ public class PlacedFeatureRegistration {
                 )),
                 BiomeFilter.biome())
             .build();
-        features.add(fallen_stripped_pale_oak);
+        register(fallen_stripped_pale_oak);
 
         PlacedFeatureDefinition fallen_warped_stem = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_WARPED_STEM, context)
             .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
                 new SimpleRandomFeatureConfiguration(HolderSet.direct(
-                    PlacedFeatureDefinition.builder()
+                    PlacedFeatureDefinition.builder(context)
                         .configuredFeature(ConfiguredFeatures.TREE_FALLEN_WARPED_STEM)
-                        .build().getFeatureHolder(),
-                    PlacedFeatureDefinition.builder()
+                        .build().getHolder(),
+                    PlacedFeatureDefinition.builder(context)
                         .configuredFeature(ConfiguredFeatures.TREE_FALLEN_STRIPPED_WARPED_STEM)
-                        .build().getFeatureHolder())))
+                        .build().getHolder())))
             .placementModifiers(CountPlacement.of(1),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
@@ -629,7 +600,7 @@ public class PlacedFeatureRegistration {
                 )),
                 BiomeFilter.biome())
             .build();
-        features.add(fallen_warped_stem);
+        register(fallen_warped_stem);
 
         PlacedFeatureDefinition moss_garden = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_MOSS_GARDEN, context)
             .configuredFeature(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -650,7 +621,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
-        features.add(moss_garden);
+        register(moss_garden);
 
         PlacedFeatureDefinition palm_beach_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_PALM_BEACH_PALM, context)
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
@@ -660,7 +631,7 @@ public class PlacedFeatureRegistration {
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)),
                 BiomeFilter.biome())
             .build();
-        features.add(palm_beach_palm);
+        register(palm_beach_palm);
 
         PlacedFeatureDefinition lush_desert_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_LUSH_DESERT_PALM, context)
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
@@ -670,25 +641,25 @@ public class PlacedFeatureRegistration {
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)),
                 BiomeFilter.biome())
             .build();
-        features.add(lush_desert_palm);
+        register(lush_desert_palm);
 
         PlacedFeatureDefinition tall_oak_with_litter = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_OAK_WITH_LITTER, context)
             .configuredFeature(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER)
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
-        features.add(tall_oak_with_litter);
+        register(tall_oak_with_litter);
 
         PlacedFeatureDefinition fallen_tall_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_FALLEN_TALL_OAK, context)
             .configuredFeature(ConfiguredFeatures.TREE_FALLEN_TALL_OAK)
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
-        features.add(fallen_tall_oak);
+        register(fallen_tall_oak);
 
         PlacedFeatureDefinition tall_oaks = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_OAK_TREES, context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(tall_oak_with_litter.getFeatureHolder(), 0.5f),
-                    new WeightedPlacedFeature(fallen_tall_oak.getFeatureHolder(), 0.0125f)),
-                tall_oak_with_litter.getFeatureHolder()))
+                List.of(new WeightedPlacedFeature(tall_oak_with_litter.getHolder(), 0.5f),
+                    new WeightedPlacedFeature(fallen_tall_oak.getHolder(), 0.0125f)),
+                tall_oak_with_litter.getHolder()))
             .placementModifiers(CountPlacement.of(new WeightedListInt(
                     WeightedList.<IntProvider>builder()
                         .add(ConstantInt.of(10), 9)
@@ -700,7 +671,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome()
             )
             .build();
-        features.add(tall_oaks);
+        register(tall_oaks);
 
         PlacedFeatureDefinition tall_stripped_pale_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_STRIPPED_PALE_OAK, context)
             .configuredFeature(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -722,7 +693,7 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome(),
                 PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING))
             .build();
-        features.add(tall_stripped_pale_oak);
+        register(tall_stripped_pale_oak);
 
         PlacedFeatureDefinition tropical_forest = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TROPICAL_FOREST, context)
             .configuredFeature(ConfiguredFeatures.TREE_TROPICAL_FOREST)
@@ -733,14 +704,10 @@ public class PlacedFeatureRegistration {
                 BiomeFilter.biome(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING))
             .build();
-        features.add(tropical_forest);
-
-        return features;
+        register(tropical_forest);
     }
 
-    private static List<PlacedFeatureDefinition> vegetation(BootstrapContext<PlacedFeature> context) {
-        List<PlacedFeatureDefinition> features = new ArrayList<>();
-
+    private void vegetation(BootstrapContext<PlacedFeature> context) {
         PlacedFeatureDefinition azalea_bush_or_scrub = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB, context)
             .configuredFeature(ConfiguredFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB)
             .placementModifiers(NoiseBasedCountPlacement.of(25, 30, 0),
@@ -753,7 +720,7 @@ public class PlacedFeatureRegistration {
                 )),
                 BiomeFilter.biome())
             .build();
-        features.add(azalea_bush_or_scrub);
+        register(azalea_bush_or_scrub);
 
         PlacedFeatureDefinition desert_azalea_scrub = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB, context)
             .configuredFeature(ConfiguredFeatures.VEGETATION_AZALEA_SCRUB)
@@ -767,9 +734,9 @@ public class PlacedFeatureRegistration {
                 )),
                 BiomeFilter.biome())
             .build();
-        features.add(desert_azalea_scrub);
+        register(desert_azalea_scrub);
 
-        PlacedFeatureDefinition patch = PlacedFeatureDefinition.builder()
+        PlacedFeatureDefinition patch = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MOSS_CARPET.defaultBlockState(), 25)
@@ -783,7 +750,7 @@ public class PlacedFeatureRegistration {
             .configuredFeature(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
                 BlockTags.MOSS_REPLACEABLE,
                 BlockStateProvider.simple(Blocks.MOSS_BLOCK),
-                patch.getFeatureHolder(),
+                patch.getHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(1),
                 0.0f,
@@ -796,7 +763,7 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome())
             .build();
-        features.add(moss_patch);
+        register(moss_patch);
 
         PlacedFeatureDefinition cherry_petals = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS, context)
             .configuredFeature(VegetationFeatures.FLOWER_CHERRY)
@@ -806,7 +773,7 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BiomeFilter.biome())
             .build();
-        features.add(cherry_petals);
+        register(cherry_petals);
 
         PlacedFeatureDefinition cliff_grass = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS, context)
             .configuredFeature(Feature.SIMPLE_BLOCK,
@@ -853,7 +820,7 @@ public class PlacedFeatureRegistration {
                     )
                 ))
             .build();
-        features.add(cliff_grass);
+        register(cliff_grass);
 
         PlacedFeatureDefinition hay_bale_patch = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_HAY_BALE, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.HAY_BLOCK)))
@@ -869,7 +836,7 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BiomeFilter.biome())
             .build();
-        features.add(hay_bale_patch);
+        register(hay_bale_patch);
 
         PlacedFeatureDefinition small_dripleaf = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_SMALL_DRIPLEAF, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(SimpleStateProvider.simple(Blocks.SMALL_DRIPLEAF)))
@@ -880,7 +847,7 @@ public class PlacedFeatureRegistration {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
-        features.add(small_dripleaf);
+        register(small_dripleaf);
 
         PlacedFeatureDefinition water_leaves = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_WATER_LEAVES, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
@@ -905,24 +872,22 @@ public class PlacedFeatureRegistration {
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(BlockPos.ZERO, Fluids.WATER)),
                 BiomeFilter.biome())
             .build();
-        features.add(water_leaves);
+        register(water_leaves);
 
         PlacedFeatureDefinition rooted_dirt_blob = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB, context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
                     .configuredFeature(Feature.BLOCK_BLOB, new BlockBlobConfiguration(Blocks.COARSE_DIRT.defaultBlockState(), BlockPredicate.matchesTag(BlockTags.GRASS_BLOCKS)))
-                    .build().getFeatureHolder(), 0.5f)),
-                PlacedFeatureDefinition.builder()
+                    .build().getHolder(), 0.5f)),
+                PlacedFeatureDefinition.builder(context)
                     .configuredFeature(Feature.BLOCK_BLOB, new BlockBlobConfiguration(Blocks.ROOTED_DIRT.defaultBlockState(), BlockPredicate.matchesTag(BlockTags.GRASS_BLOCKS)))
-                    .build().getFeatureHolder()))
+                    .build().getHolder()))
             .placementModifiers(CountPlacement.of(UniformInt.of(0, 1)),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BiomeFilter.biome())
             .build();
-        features.add(rooted_dirt_blob);
-
-        return features;
+        register(rooted_dirt_blob);
     }
 
 }

@@ -1,10 +1,14 @@
 package com.github.shanebeee.beer.mod.registration;
 
+import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.StructureDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.Structures;
 import com.github.shanebeee.beer.mod.registry.TemplatePools;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
@@ -12,25 +16,14 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 
-import java.util.ArrayList;
-import java.util.List;
+public class StructureRegistration extends BaseRegistration<Structure, StructureDefinition> {
 
-public class StructureRegistration {
-
-    private static final List<StructureDefinition> STRUCTURES = new ArrayList<>();
-
-    public static void registerStructures(BootstrapContext<Structure> context) {
-        STRUCTURES.addAll(mineshafts(context));
+    public StructureRegistration(BootstrapContext<Structure> context) {
+        super(Registries.STRUCTURE, context);
+        mineshafts(context);
     }
 
-    @SuppressWarnings("unused")
-    public static List<StructureDefinition> getStructureDefinitions() {
-        return STRUCTURES;
-    }
-
-    private static List<StructureDefinition> mineshafts(BootstrapContext<Structure> context) {
-        List<StructureDefinition> structures = new ArrayList<>();
-
+    private void mineshafts(BootstrapContext<Structure> context) {
         StructureDefinition mineshaft_spruce = StructureDefinition.jigsawBuilder(Structures.MINESHAFT_SPRUCE, context)
             .biomeTag(BeerBiomeTags.HAS_MINESHAFT_SPRUCE)
             .liquidSettings(LiquidSettings.IGNORE_WATERLOGGING)
@@ -43,9 +36,7 @@ public class StructureRegistration {
             .step(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)
             .terrainAdjustment(TerrainAdjustment.ENCAPSULATE)
             .build();
-        structures.add(mineshaft_spruce);
-
-        return structures;
+        register(mineshaft_spruce);
     }
 
 }

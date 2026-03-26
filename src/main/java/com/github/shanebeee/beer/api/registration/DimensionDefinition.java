@@ -7,7 +7,6 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
@@ -23,27 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class DimensionDefinition {
+public class DimensionDefinition extends Definable<LevelStem> {
 
-    ResourceKey<LevelStem> resourceKey;
-    LevelStem levelStem;
-
-    public DimensionDefinition(ResourceKey<LevelStem> resourceKey, LevelStem levelStem) {
-        this.resourceKey = resourceKey;
-        this.levelStem = levelStem;
-    }
-
-    public ResourceKey<LevelStem> getResourceKey() {
-        return this.resourceKey;
-    }
-
-    public LevelStem getValue() {
-        return this.levelStem;
-    }
-
-    public List<TagKey<LevelStem>> getTagKeys() {
-        // Won't be needing this
-        return List.of();
+    public DimensionDefinition(ResourceKey<LevelStem> resourceKey, LevelStem value, Holder.Reference<LevelStem> holder) {
+        super(resourceKey, value, holder);
     }
 
     public static Builder overworldBuilder(ResourceKey<LevelStem> resourceKey, BootstrapContext<LevelStem> context) {
@@ -77,7 +59,7 @@ public class DimensionDefinition {
                 @Override
                 public Holder.Reference<Biome> apply(ResourceKey<Biome> biomeResourceKey) {
                     HolderGetter<Biome> lookup = context.lookup(Registries.BIOME);
-                    return lookup.get(biomeResourceKey).get();
+                    return lookup.getOrThrow(biomeResourceKey);
                 }
             });
             this.paramList.add(new Pair<>(parameterPoint, biomeReference));
@@ -262,8 +244,8 @@ public class DimensionDefinition {
             Holder.Reference<NoiseGeneratorSettings> genSettings = this.context.lookup(Registries.NOISE_SETTINGS).get(this.noiseGeneratorSettingsKey).get();
 
             LevelStem levelStem = new LevelStem(dimensionTypeReference, new NoiseBasedChunkGenerator(biomeSource, genSettings));
-            this.context.register(this.resourceKey, levelStem);
-            return new DimensionDefinition(this.resourceKey, levelStem);
+            Holder.Reference<LevelStem> holder = this.context.register(this.resourceKey, levelStem);
+            return new DimensionDefinition(this.resourceKey, levelStem, holder);
         }
     }
 

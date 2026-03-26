@@ -1,11 +1,13 @@
 package com.github.shanebeee.beer.mod.registration;
 
+import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.CavePlacements;
@@ -25,31 +27,23 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BiomeRegistration {
+public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> {
 
-    private static final List<BiomeDefinition> BIOMES = new ArrayList<>();
-
-    public static void registerBiomes(BootstrapContext<Biome> context) {
-        BIOMES.addAll(caveBiomes(context));
-        BIOMES.addAll(coastBiomes(context));
-        BIOMES.addAll(desertBiomes(context));
-        BIOMES.addAll(forestBiomes(context));
-        BIOMES.addAll(plainsBiomes(context));
-        BIOMES.addAll(riverBiomes(context));
-        BIOMES.addAll(swampBiomes(context));
+    public BiomeRegistration(BootstrapContext<Biome> context) {
+        super(Registries.BIOME, context);
+        caveBiomes(context);
+        coastBiomes(context);
+        desertBiomes(context);
+        forestBiomes(context);
+        plainsBiomes(context);
+        riverBiomes(context);
+        swampBiomes(context);
     }
 
-    public static List<BiomeDefinition> getBiomeDefinitions() {
-        return BIOMES;
-    }
-
-    private static List<BiomeDefinition> caveBiomes(BootstrapContext<Biome> context) {
-        List<BiomeDefinition> biomes = new ArrayList<>();
-
+    private void caveBiomes(BootstrapContext<Biome> context) {
         BiomeDefinition diorite_cave = BiomeDefinition.builder(BeerBiomes.CAVE_DIORITE_CAVE, context)
             .temperature(0.5f)
             .downfall(0.5f)
@@ -102,7 +96,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(diorite_cave);
+        register(diorite_cave);
 
         BiomeDefinition dry_cave = BiomeDefinition.builder(BeerBiomes.CAVE_DRY_CAVE, context)
             .temperature(0.5f)
@@ -169,7 +163,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(dry_cave);
+        register(dry_cave);
 
         BiomeDefinition ice_cave = BiomeDefinition.builder(BeerBiomes.CAVE_ICE_CAVE, context)
             .hasPrecipitation(true)
@@ -213,14 +207,10 @@ public class BiomeRegistration {
                 BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(ice_cave);
-
-        return biomes;
+        register(ice_cave);
     }
 
-    private static List<BiomeDefinition> coastBiomes(BootstrapContext<Biome> context) {
-        List<BiomeDefinition> biomes = new ArrayList<>();
-
+    private void coastBiomes(BootstrapContext<Biome> context) {
         BiomeDefinition beachy_beach = BiomeDefinition.builder(BeerBiomes.COAST_BEACHY_COAST, context)
             .hasPrecipitation(true)
             .temperature(0.8f)
@@ -257,7 +247,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
             .build();
-        biomes.add(beachy_beach);
+        register(beachy_beach);
 
         BiomeDefinition coast = BiomeDefinition.builder(BeerBiomes.COAST_COAST, context)
             .hasPrecipitation(true)
@@ -310,7 +300,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
             .build();
-        biomes.add(coast);
+        register(coast);
 
         BiomeDefinition dry_coast = BiomeDefinition.builder(BeerBiomes.COAST_DRY_COAST, context)
             .hasPrecipitation(false)
@@ -352,7 +342,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
             .build();
-        biomes.add(dry_coast);
+        register(dry_coast);
 
         BiomeDefinition frozen_beach = BiomeDefinition.builder(BeerBiomes.COAST_FROZEN_BEACH, context)
             .hasPrecipitation(true)
@@ -398,7 +388,7 @@ public class BiomeRegistration {
                 BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
             .build();
-        biomes.add(frozen_beach);
+        register(frozen_beach);
 
         BiomeDefinition lush_coast = BiomeDefinition.builder(BeerBiomes.COAST_LUSH_COAST, context)
             .hasPrecipitation(true)
@@ -449,7 +439,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_WARM_VARIANT_FROGS, BiomeTags.IS_OVERWORLD)
 
             .build();
-        biomes.add(lush_coast);
+        register(lush_coast);
 
         BiomeDefinition palm_beach = BiomeDefinition.builder(BeerBiomes.COAST_PALM_BEACH, context)
             .hasPrecipitation(false)
@@ -487,14 +477,10 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_WARM_VARIANT_FROGS, BiomeTags.IS_OVERWORLD)
 
             .build();
-        biomes.add(palm_beach);
-
-        return biomes;
+        register(palm_beach);
     }
 
-    private static List<BiomeDefinition> desertBiomes(BootstrapContext<Biome> context) {
-        List<BiomeDefinition> biomes = new ArrayList<>();
-
+    private void desertBiomes(BootstrapContext<Biome> context) {
         BiomeDefinition dry_desert = BiomeDefinition.builder(BeerBiomes.DESERT_DRY_DESERT, context)
             .hasPrecipitation(false)
             .temperature(2.0f)
@@ -558,7 +544,7 @@ public class BiomeRegistration {
                 BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(dry_desert);
+        register(dry_desert);
 
         BiomeDefinition lush_desert = BiomeDefinition.builder(BeerBiomes.DESERT_LUSH_DESERT, context)
             .hasPrecipitation(true)
@@ -629,13 +615,11 @@ public class BiomeRegistration {
                 BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(lush_desert);
-
-        return biomes;
+        register(lush_desert);
     }
 
-    private static List<BiomeDefinition> forestBiomes(BootstrapContext<Biome> context) {
-        List<BiomeDefinition> biomes = new ArrayList<>();
+    private void forestBiomes(BootstrapContext<Biome> context) {
+
 
         BiomeDefinition dry_forest = BiomeDefinition.builder(BeerBiomes.FOREST_DRY_FOREST, context)
             .hasPrecipitation(false)
@@ -679,7 +663,7 @@ public class BiomeRegistration {
             .addDefaultPlainsSpawns()// TODO
 
             .build();
-        biomes.add(dry_forest);
+        register(dry_forest);
 
         BiomeDefinition moss_garden = BiomeDefinition.builder(BeerBiomes.FOREST_MOSS_GARDEN, context)
             .hasPrecipitation(true)
@@ -734,7 +718,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(moss_garden);
+        register(moss_garden);
 
         BiomeDefinition tall_oak = BiomeDefinition.builder(BeerBiomes.FOREST_TALL_OAK, context)
             .hasPrecipitation(true)
@@ -785,7 +769,7 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(tall_oak);
+        register(tall_oak);
 
         BiomeDefinition lush_forest = BiomeDefinition.builder(BeerBiomes.FOREST_LUSH_FOREST, context)
             .hasPrecipitation(true)
@@ -845,13 +829,11 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(lush_forest);
-
-        return biomes;
+        register(lush_forest);
     }
 
-    private static List<BiomeDefinition> plainsBiomes(BootstrapContext<Biome> context) {
-        List<BiomeDefinition> biomes = new ArrayList<>();
+    private void plainsBiomes(BootstrapContext<Biome> context) {
+
 
         BiomeDefinition dry_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_DRY_PLAINS, context)
             .hasPrecipitation(false)
@@ -899,7 +881,7 @@ public class BiomeRegistration {
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(dry_plains);
+        register(dry_plains);
 
         BiomeDefinition lush_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_LUSH_PLAINS, context)
             .hasPrecipitation(true)
@@ -954,7 +936,7 @@ public class BiomeRegistration {
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(lush_plains);
+        register(lush_plains);
 
         BiomeDefinition temperate_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_TEMPERATE_PLAINS, context)
             .hasPrecipitation(true)
@@ -1006,7 +988,7 @@ public class BiomeRegistration {
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(temperate_plains);
+        register(temperate_plains);
 
         BiomeDefinition cold_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_COLD_PLAINS, context)
             .hasPrecipitation(true)
@@ -1057,14 +1039,10 @@ public class BiomeRegistration {
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        biomes.add(cold_plains);
-
-        return biomes;
+        register(cold_plains);
     }
 
-    private static List<BiomeDefinition> riverBiomes(BootstrapContext<Biome> context) {
-        List<BiomeDefinition> biomes = new ArrayList<>();
-
+    private void riverBiomes(BootstrapContext<Biome> context) {
         BiomeDefinition desert_river = BiomeDefinition.builder(BeerBiomes.RIVER_DESERT_RIVER, context)
             .hasPrecipitation(false)
             .temperature(2.0f)
@@ -1119,7 +1097,7 @@ public class BiomeRegistration {
                 BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
             .build();
-        biomes.add(desert_river);
+        register(desert_river);
 
         BiomeDefinition lush_river = BiomeDefinition.builder(BeerBiomes.RIVER_LUSH_RIVER, context)
             .hasPrecipitation(true)
@@ -1191,7 +1169,7 @@ public class BiomeRegistration {
                 BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
             .build();
-        biomes.add(lush_river);
+        register(lush_river);
 
         BiomeDefinition temperate_river = BiomeDefinition.builder(BeerBiomes.RIVER_TEMPERATE_RIVER, context)
             .hasPrecipitation(true)
@@ -1252,14 +1230,10 @@ public class BiomeRegistration {
             .addToTag(BiomeTags.IS_RIVER, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
             .build();
-        biomes.add(temperate_river);
-
-        return biomes;
+        register(temperate_river);
     }
 
-    private static List<BiomeDefinition> swampBiomes(BootstrapContext<Biome> context) {
-        List<BiomeDefinition> biomes = new ArrayList<>();
-
+    private void swampBiomes(BootstrapContext<Biome> context) {
         BiomeDefinition cold_swamp = BiomeDefinition.builder(BeerBiomes.SWAMP_COLD_SWAMP, context)
             .hasPrecipitation(true)
             .temperature(0.4f)
@@ -1318,7 +1292,7 @@ public class BiomeRegistration {
                 BiomeTags.HAS_RUINED_PORTAL_SWAMP)
 
             .build();
-        biomes.add(cold_swamp);
+        register(cold_swamp);
 
         BiomeDefinition dripleaf_swamp = BiomeDefinition.builder(BeerBiomes.SWAMP_DRIPLEAF_SWAMP, context)
             .hasPrecipitation(true)
@@ -1370,9 +1344,7 @@ public class BiomeRegistration {
                 BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
 
             .build();
-        biomes.add(dripleaf_swamp);
-
-        return biomes;
+        register(dripleaf_swamp);
     }
 
 }

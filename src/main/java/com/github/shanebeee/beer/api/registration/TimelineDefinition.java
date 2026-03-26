@@ -11,34 +11,18 @@ import net.minecraft.world.attribute.modifier.AttributeModifier;
 import net.minecraft.world.clock.WorldClock;
 import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.timeline.Timeline;
+import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class TimelineDefinition {
+public class TimelineDefinition extends Definable<Timeline> {
 
-    private final ResourceKey<Timeline> resourceKey;
-    private final Timeline timeline;
-    private final List<TagKey<Timeline>> tagKeys;
-
-    private TimelineDefinition(ResourceKey<Timeline> resourceKey, Timeline timeline, List<TagKey<Timeline>> tagKeys) {
-        this.resourceKey = resourceKey;
-        this.timeline = timeline;
-        this.tagKeys = tagKeys;
-    }
-
-    public ResourceKey<Timeline> getResourceKey() {
-        return this.resourceKey;
-    }
-
-    public Timeline getValue() {
-        return this.timeline;
-    }
-
-    public List<TagKey<Timeline>> getTagKeys() {
-        return this.tagKeys;
+    public TimelineDefinition(ResourceKey<Timeline> resourceKey, @NonNull Timeline value, Holder.@Nullable Reference<Timeline> holder, List<TagKey<Timeline>> tagKeys) {
+        super(resourceKey, value, holder, tagKeys);
     }
 
     public static Builder builder(ResourceKey<Timeline> resourceKey, BootstrapContext<Timeline> context) {
@@ -88,10 +72,11 @@ public class TimelineDefinition {
 
         public TimelineDefinition build() {
             Timeline timeline = this.builder.build();
+            Holder.Reference<Timeline> holder = null;
             if (this.context != null && this.resourceKey != null) {
-                this.context.register(this.resourceKey, timeline);
+                holder = this.context.register(this.resourceKey, timeline);
             }
-            return  new TimelineDefinition(this.resourceKey, timeline, this.tagKeys);
+            return new TimelineDefinition(this.resourceKey, timeline, holder, this.tagKeys);
         }
 
     }
