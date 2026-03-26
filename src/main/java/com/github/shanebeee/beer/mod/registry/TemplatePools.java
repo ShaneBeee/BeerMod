@@ -7,7 +7,9 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class TemplatePools {
 
-    public static final ResourceKey<StructureTemplatePool> MINESHAFT_SPRUCE = register("mineshaft/spruce");
+    public static final ResourceKey<StructureTemplatePool> MINESHAFT_SPRUCE_ALL = register("mineshaft/spruce/all");
+    public static final ResourceKey<StructureTemplatePool> MINESHAFT_SPRUCE_HALLS = register("mineshaft/spruce/halls");
+    public static final ResourceKey<StructureTemplatePool> MINESHAFT_SPRUCE_STAIRS = register("mineshaft/spruce/stairs");
 
     private static ResourceKey<StructureTemplatePool> register(String key) {
         return Beer.getKey(Registries.TEMPLATE_POOL, key);

@@ -16,23 +16,36 @@ public class TemplatePoolRegistration extends BaseRegistration<StructureTemplate
     }
 
     private void mineshafts(BootstrapContext<StructureTemplatePool> context) {
-        TemplatePoolDefinition mineshaft = TemplatePoolDefinition.builder(TemplatePools.MINESHAFT_SPRUCE, context)
+        TemplatePoolDefinition mineshaft_spruce_all = TemplatePoolDefinition.builder(TemplatePools.MINESHAFT_SPRUCE_ALL, context)
             // Halls
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/hall/hall_1"), 50)
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/hall/hall_2"), 70)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/hall/hall_1"), 50)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/hall/hall_2"), 70)
 
             // Levels
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/cross/stair_1"), 9)
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/cross/cross_tower_1"), 15)
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/cross/cross_tower_2"), 15)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/stair_1"), 9)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_tower_1"), 15)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_tower_2"), 15)
 
             // Junctions
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/cross/cross_1"), 40)
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/cross/cross_2"), 30)
-            .addTemplate(StructurePoolElement.legacy("beer:mineshaft/spruce/cross/cross_3"), 30)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_1"), 40)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_2"), 30)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_3"), 30)
 
             .build();
-        register(mineshaft);
+        register(mineshaft_spruce_all);
+
+        TemplatePoolDefinition mineshaft_spruce_hall = TemplatePoolDefinition.builder(TemplatePools.MINESHAFT_SPRUCE_HALLS, context)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/hall/hall_1"), 1)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/hall/hall_2"), 1)
+            .build();
+        register(mineshaft_spruce_hall);
+
+        TemplatePoolDefinition mineshaft_spruce_stairs = TemplatePoolDefinition.builder(TemplatePools.MINESHAFT_SPRUCE_STAIRS, context)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/stair_1"), 1)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_tower_1"), 1)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_tower_2"), 1)
+            .build();
+        register(mineshaft_spruce_stairs);
     }
 
 }

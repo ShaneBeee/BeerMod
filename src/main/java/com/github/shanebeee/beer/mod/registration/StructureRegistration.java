@@ -30,7 +30,7 @@ public class StructureRegistration extends BaseRegistration<Structure, Structure
             .startHeight(UniformHeight.of(
                 VerticalAnchor.absolute(-40),
                 VerticalAnchor.absolute(30)))
-            .start(TemplatePools.MINESHAFT_SPRUCE)
+            .start(TemplatePools.MINESHAFT_SPRUCE_STAIRS)
             .step(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)
             .terrainAdjustment(TerrainAdjustment.ENCAPSULATE)
             .build();

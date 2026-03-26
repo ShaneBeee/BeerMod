@@ -17,7 +17,7 @@
       "absolute": -40
     }
   },
-  "start_pool": "beer:mineshaft/spruce",
+  "start_pool": "beer:mineshaft/spruce/stairs",
   "step": "underground_structures",
   "terrain_adaptation": "encapsulate",
   "use_expansion_hack": false
