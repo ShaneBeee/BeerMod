@@ -73,8 +73,8 @@ tasks {
         from("src/main/generated") {
             exclude("**/.DS_Store", ".cache")
         }
-        from("src/main/resources") {
-            include("pack.mcmeta")
+        from("src/main/resources/datapack") {
+
         }
         destinationDirectory = file("build/libs/")
     }
@@ -84,8 +84,7 @@ tasks {
         from("src/main/generated") {
             exclude("**/.DS_Store", ".cache")
         }
-        from("src/main/resources") {
-            include("pack.mcmeta")
+        from("src/main/resources/datapack") {
         }
         destinationDirectory =
             file("/Users/ShaneBee/Desktop/Server/Minecraft/${serverLocation}/universe/world/datapacks/")

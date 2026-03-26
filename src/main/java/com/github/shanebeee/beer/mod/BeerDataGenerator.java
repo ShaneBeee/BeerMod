@@ -6,7 +6,10 @@ import com.github.shanebeee.beer.mod.registration.BiomeRegistration;
 import com.github.shanebeee.beer.mod.registration.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
 import com.github.shanebeee.beer.mod.registration.PlacedFeatureRegistration;
+import com.github.shanebeee.beer.mod.registration.StructureRegistration;
+import com.github.shanebeee.beer.mod.registration.StructureSetRegistration;
 import com.github.shanebeee.beer.mod.registration.TagRegistration;
+import com.github.shanebeee.beer.mod.registration.TemplatePoolRegistration;
 import com.github.shanebeee.beer.mod.registration.TimelineRegistration;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -44,6 +47,9 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         registryBuilder.add(Registries.BIOME, BiomeRegistration::registerBiomes);
         registryBuilder.add(Registries.LEVEL_STEM, DimensionRegistration::registerDimensions);
         registryBuilder.add(Registries.TIMELINE, TimelineRegistration::registerTimelines);
+        registryBuilder.add(Registries.TEMPLATE_POOL, TemplatePoolRegistration::registerPools);
+        registryBuilder.add(Registries.STRUCTURE, StructureRegistration::registerStructures);
+        registryBuilder.add(Registries.STRUCTURE_SET, StructureSetRegistration::registerStructureSets);
     }
 
     public static class DataRegistration extends FabricDynamicRegistryProvider {
@@ -60,6 +66,9 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
             entries.addAll(registries.lookupOrThrow(Registries.BIOME));
             entries.addAll(registries.lookupOrThrow(Registries.LEVEL_STEM));
             entries.addAll(registries.lookupOrThrow(Registries.TIMELINE));
+            entries.addAll(registries.lookupOrThrow(Registries.TEMPLATE_POOL));
+            entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE));
+            entries.addAll(registries.lookupOrThrow(Registries.STRUCTURE_SET));
         }
 
         @Override

@@ -1,6 +1,7 @@
 package com.github.shanebeee.beer.mod.registration;
 
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
+import com.github.shanebeee.beer.mod.registry.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -98,7 +99,7 @@ public class BiomeRegistration {
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
             .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.SALMON, 25, 8, 8)
 
-            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+            .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
         biomes.add(diorite_cave);
