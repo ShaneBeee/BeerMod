@@ -26,6 +26,9 @@ public class Beer implements ModInitializer {
      * @return New {@link ResourceKey} with the "beer" namespace
      */
     public static <T> ResourceKey<T> getKey(ResourceKey<? extends Registry<T>> registry, String key) {
+        if (key.contains(":")) {
+            return ResourceKey.create(registry, Identifier.parse(key));
+        }
         return ResourceKey.create(registry, Identifier.parse(MOD_ID + ":" + key));
     }
 
