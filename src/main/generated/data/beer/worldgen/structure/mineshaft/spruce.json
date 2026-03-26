@@ -3,10 +3,10 @@
   "biomes": "#beer:has_structure/mineshaft/spruce",
   "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": {
-    "horizontal": 116,
-    "vertical": 50
+    "horizontal": 48,
+    "vertical": 30
   },
-  "size": 20,
+  "size": 7,
   "spawn_overrides": {},
   "start_height": {
     "type": "minecraft:uniform",

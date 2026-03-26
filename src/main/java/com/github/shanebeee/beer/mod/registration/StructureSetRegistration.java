@@ -29,7 +29,7 @@ public class StructureSetRegistration extends BaseRegistration<StructureSet, Str
                 0.004f,
                 0,
                 Optional.empty(),
-                1,
+                5,
                 0,
                 RandomSpreadType.LINEAR))
             .addStructure(Structures.MINESHAFT_SPRUCE)

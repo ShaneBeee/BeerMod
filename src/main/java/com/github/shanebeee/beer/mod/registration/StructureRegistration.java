@@ -5,10 +5,8 @@ import com.github.shanebeee.beer.api.registration.StructureDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.Structures;
 import com.github.shanebeee.beer.mod.registry.TemplatePools;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
@@ -27,8 +25,8 @@ public class StructureRegistration extends BaseRegistration<Structure, Structure
         StructureDefinition mineshaft_spruce = StructureDefinition.jigsawBuilder(Structures.MINESHAFT_SPRUCE, context)
             .biomeTag(BeerBiomeTags.HAS_MINESHAFT_SPRUCE)
             .liquidSettings(LiquidSettings.IGNORE_WATERLOGGING)
-            .maxDistanceFromCenter(116, 50)
-            .maxDepth(20)
+            .maxDistanceFromCenter(48, 30)
+            .maxDepth(7)
             .startHeight(UniformHeight.of(
                 VerticalAnchor.absolute(-40),
                 VerticalAnchor.absolute(30)))
