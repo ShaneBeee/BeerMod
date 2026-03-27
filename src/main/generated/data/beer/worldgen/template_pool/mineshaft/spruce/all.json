@@ -9,7 +9,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 30
+      "weight": 40
     },
     {
       "element": {
@@ -53,7 +53,29 @@
         },
         "projection": "rigid"
       },
-      "weight": 9
+      "weight": 15
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/spruce/cross/stair_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 15
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/spruce/cross/stair_3",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 15
     },
     {
       "element": {

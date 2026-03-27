@@ -25,25 +25,32 @@ public class TemplatePoolRegistration extends BaseRegistration<StructureTemplate
         Function<Projection, SinglePoolElement> hall_with_cart = StructurePoolElement.single("beer:mineshaft/spruce/hall/hall_with_cart");
         Function<Projection, SinglePoolElement> hall_with_spawner = StructurePoolElement.single("beer:mineshaft/spruce/hall/hall_with_spawner");
         Function<Projection, SinglePoolElement> stair_1 = StructurePoolElement.single("beer:mineshaft/spruce/cross/stair_1");
+        Function<Projection, SinglePoolElement> stair_2 = StructurePoolElement.single("beer:mineshaft/spruce/cross/stair_2");
+        Function<Projection, SinglePoolElement> stair_3 = StructurePoolElement.single("beer:mineshaft/spruce/cross/stair_3");
         Function<Projection, SinglePoolElement> cross_tower_1 = StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_tower_1");
         Function<Projection, SinglePoolElement> cross_tower_2 = StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_tower_2");
+        Function<Projection, SinglePoolElement> cross_1 = StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_1");
+        Function<Projection, SinglePoolElement> cross_2 = StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_2");
+        Function<Projection, SinglePoolElement> cross_3 = StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_3");
 
         TemplatePoolDefinition mineshaft_spruce_all = TemplatePoolDefinition.builder(TemplatePools.MINESHAFT_SPRUCE_ALL, context)
             // Halls
-            .addTemplate(hall_1, 30)
+            .addTemplate(hall_1, 40)
             .addTemplate(hall_2, 50)
             .addTemplate(hall_with_cart, 10)
             .addTemplate(hall_with_spawner, 10)
 
             // Levels
-            .addTemplate(stair_1, 9)
+            .addTemplate(stair_1, 15)
+            .addTemplate(stair_2, 15)
+            .addTemplate(stair_3, 15)
             .addTemplate(cross_tower_1, 15)
             .addTemplate(cross_tower_2, 15)
 
             // Junctions
-            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_1"), 40)
-            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_2"), 30)
-            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_3"), 30)
+            .addTemplate(cross_1, 40)
+            .addTemplate(cross_2, 30)
+            .addTemplate(cross_3, 30)
 
             .build();
         register(mineshaft_spruce_all);
