@@ -42,7 +42,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 15
+      "weight": 10
     },
     {
       "element": {

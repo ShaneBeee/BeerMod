@@ -25,8 +25,8 @@ public class StructureRegistration extends BaseRegistration<Structure, Structure
         StructureDefinition mineshaft_spruce = StructureDefinition.jigsawBuilder(Structures.MINESHAFT_SPRUCE, context)
             .biomeTag(BeerBiomeTags.HAS_MINESHAFT_SPRUCE)
             .liquidSettings(LiquidSettings.IGNORE_WATERLOGGING)
-            .maxDistanceFromCenter(48, 30)
-            .maxDepth(7)
+            .maxDistanceFromCenter(64, 40)
+            .maxDepth(10)
             .startHeight(UniformHeight.of(
                 VerticalAnchor.absolute(-40),
                 VerticalAnchor.absolute(30)))
