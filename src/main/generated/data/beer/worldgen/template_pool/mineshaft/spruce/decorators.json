@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "beer:mineshaft/spruce/cross/stair_1",
+        "location": "beer:mineshaft/spruce/decorators/lantern_1",
         "processors": {
           "processors": []
         },
@@ -14,7 +14,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "beer:mineshaft/spruce/cross/cross_tower_1",
+        "location": "beer:mineshaft/spruce/decorators/lantern_2",
         "processors": {
           "processors": []
         },
@@ -25,13 +25,24 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "beer:mineshaft/spruce/cross/cross_tower_2",
+        "location": "beer:mineshaft/spruce/decorators/lantern_3",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
       "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/spruce/decorators/lantern_empty",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
     }
   ],
   "fallback": "minecraft:empty"

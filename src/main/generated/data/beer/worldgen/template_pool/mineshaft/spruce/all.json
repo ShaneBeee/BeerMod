@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/hall/hall_1",
         "processors": {
           "processors": []
@@ -13,7 +13,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/hall/hall_2",
         "processors": {
           "processors": []
@@ -24,7 +24,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/cross/stair_1",
         "processors": {
           "processors": []
@@ -35,7 +35,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/cross/cross_tower_1",
         "processors": {
           "processors": []
@@ -46,7 +46,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/cross/cross_tower_2",
         "processors": {
           "processors": []
@@ -57,7 +57,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/cross/cross_1",
         "processors": {
           "processors": []
@@ -68,7 +68,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/cross/cross_2",
         "processors": {
           "processors": []
@@ -79,7 +79,7 @@
     },
     {
       "element": {
-        "element_type": "minecraft:legacy_single_pool_element",
+        "element_type": "minecraft:single_pool_element",
         "location": "beer:mineshaft/spruce/cross/cross_3",
         "processors": {
           "processors": []

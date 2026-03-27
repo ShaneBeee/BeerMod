@@ -46,6 +46,14 @@ public class TemplatePoolRegistration extends BaseRegistration<StructureTemplate
             .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/cross/cross_tower_2"), 1)
             .build();
         register(mineshaft_spruce_stairs);
+
+        TemplatePoolDefinition mineshaft_spruce_decorators = TemplatePoolDefinition.builder(TemplatePools.MINESHAFT_SPRUCE_DECORATORS, context)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/decorators/lantern_1"), 1)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/decorators/lantern_2"), 1)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/decorators/lantern_3"), 1)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/spruce/decorators/lantern_empty"), 10)
+            .build();
+        register(mineshaft_spruce_decorators);
     }
 
 }
