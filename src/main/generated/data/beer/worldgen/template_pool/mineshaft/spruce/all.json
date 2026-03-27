@@ -9,7 +9,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 50
+      "weight": 30
     },
     {
       "element": {
@@ -20,7 +20,29 @@
         },
         "projection": "rigid"
       },
-      "weight": 70
+      "weight": 50
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/spruce/hall/hall_with_cart",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/spruce/hall/hall_with_spawner",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 15
     },
     {
       "element": {
