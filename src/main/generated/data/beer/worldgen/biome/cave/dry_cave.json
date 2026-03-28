@@ -61,8 +61,7 @@
     [
       "minecraft:lake_lava_underground",
       "minecraft:lake_lava_surface",
-      "beer:delta/dry_cave_delta",
-      "beer:terrain/brown_concrete_disk"
+      "beer:delta/dry_cave_delta"
     ],
     [
       "minecraft:amethyst_geode"
@@ -104,7 +103,9 @@
       "minecraft:disk_clay",
       "minecraft:disk_gravel"
     ],
-    [],
+    [
+      "beer:terrain/brown_concrete_disk"
+    ],
     [
       "minecraft:spring_water",
       "minecraft:spring_lava"
@@ -129,14 +130,7 @@
         "weight": 10
       }
     ],
-    "axolotls": [
-      {
-        "type": "minecraft:axolotl",
-        "maxCount": 6,
-        "minCount": 4,
-        "weight": 10
-      }
-    ],
+    "axolotls": [],
     "creature": [],
     "misc": [],
     "monster": [
@@ -147,19 +141,13 @@
         "weight": 100
       },
       {
-        "type": "minecraft:zombie",
+        "type": "minecraft:husk",
         "maxCount": 4,
         "minCount": 4,
         "weight": 95
       },
       {
-        "type": "minecraft:zombie_villager",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "minecraft:skeleton",
+        "type": "minecraft:parched",
         "maxCount": 4,
         "minCount": 4,
         "weight": 100

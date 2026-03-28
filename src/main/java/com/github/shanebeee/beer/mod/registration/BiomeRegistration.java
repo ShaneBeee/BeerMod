@@ -5,6 +5,7 @@ import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -62,7 +63,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
                 Optional.empty(),
                 Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD, 6000, 8, 2.0F)),
-                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD, 0.0011f))
+                List.of(new AmbientAdditionsSettings(Holder.direct(SoundEvents.FOX_SCREECH), 0.0011f))
             ))
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
                 new Music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY, 12000, 24000, true)))
@@ -80,16 +81,18 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                 null,
                 null,
                 null,
-                List.of(PlacedFeatures.BLOB_DEAD_BRAIN, PlacedFeatures.BLOB_DEAD_BUBBLE, PlacedFeatures.BLOB_DEAD_FIRE),
+                List.of(PlacedFeatures.BLOB_DEAD_BRAIN,
+                    PlacedFeatures.BLOB_DEAD_BUBBLE,
+                    PlacedFeatures.BLOB_DEAD_FIRE),
                 List.of(MiscOverworldPlacements.SPRING_WATER, MiscOverworldPlacements.SPRING_LAVA),
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.BOGGED, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CAVE_SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 30, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.EVOKER, 100, 1, 2)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
             .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.SALMON, 25, 8, 8)
 
@@ -113,8 +116,8 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
                 Optional.empty(),
-                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 6000, 8, 2.0F)),
-                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 0.0011f))
+                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0F)),
+                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 0.0011f))
             ))
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
                 new Music(SoundEvents.MUSIC_BIOME_LUSH_CAVES, 12000, 24000, true)))
@@ -125,16 +128,17 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .addDefaultUndergroundOreFeatures()
             .features(null,
                 List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
-                    MiscOverworldPlacements.LAKE_LAVA_SURFACE,
-                    PlacedFeatures.REPLACE_STONE_TO_DIORITE,
-                    PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE),
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
                 List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
                 null,
                 null,
-                List.of(PlacedFeatures.BLOB_STONE, PlacedFeatures.BLOB_TUFF),
                 null,
+                List.of(PlacedFeatures.REPLACE_STONE_TO_DIORITE,
+                    PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
+                    PlacedFeatures.BLOB_STONE,
+                    PlacedFeatures.BLOB_TUFF),
                 List.of(MiscOverworldPlacements.SPRING_WATER, MiscOverworldPlacements.SPRING_LAVA),
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
@@ -190,15 +194,14 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .features(null,
                 List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
                     MiscOverworldPlacements.LAKE_LAVA_SURFACE,
-                    PlacedFeatures.DELTA_DRY_CAVE_DELTA,
-                    PlacedFeatures.TERRAIN_BROWN_CONCRETE_DISK),
+                    PlacedFeatures.DELTA_DRY_CAVE_DELTA),
                 List.of(CavePlacements.AMETHYST_GEODE),
                 List.of(CavePlacements.MONSTER_ROOM,
                     CavePlacements.MONSTER_ROOM_DEEP),
                 null,
                 null,
                 null,
-                null,
+                List.of(PlacedFeatures.TERRAIN_BROWN_CONCRETE_DISK),
                 List.of(MiscOverworldPlacements.SPRING_WATER, MiscOverworldPlacements.SPRING_LAVA),
                 List.of(VegetationPlacements.PATCH_TALL_GRASS_2,
                     PlacedFeatures.DECOR_HANGING_FENCE),
@@ -206,11 +209,9 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             // Spawners
             .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.AXOLOTLS, EntityType.AXOLOTL, 10, 4, 6)
             .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 100, 4, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
             .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.TROPICAL_FISH, 25, 8, 8)
 
@@ -237,25 +238,24 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SNOW_BLOCK.defaultBlockState()), 0.005f)
 
             .addDefaultUndergroundOreFeatures()
-            .features(List.of(PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
+            .features(null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
                     PlacedFeatures.REPLACE_STONE_TO_ICE, PlacedFeatures.REPLACE_STONE_TO_SNOW),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
                 null,
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
             .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
             .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 10, 1, 2)
 
             .addToTag(BiomeTags.SPAWNS_COLD_VARIANT_FROGS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
@@ -887,8 +887,6 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
     }
 
     private void plainsBiomes(BootstrapContext<Biome> context) {
-
-
         BiomeDefinition dry_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_DRY_PLAINS, context)
             .hasPrecipitation(false)
             .temperature(2.0f)

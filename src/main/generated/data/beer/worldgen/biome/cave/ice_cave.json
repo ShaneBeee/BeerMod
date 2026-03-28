@@ -33,11 +33,7 @@
     "water_color": "#5b99d3"
   },
   "features": [
-    [
-      "beer:replace/deepslate_to_ice",
-      "beer:replace/stone_to_ice",
-      "beer:replace/stone_to_snow"
-    ],
+    [],
     [],
     [],
     [],
@@ -74,7 +70,11 @@
       "minecraft:disk_clay",
       "minecraft:disk_gravel"
     ],
-    [],
+    [
+      "beer:replace/deepslate_to_ice",
+      "beer:replace/stone_to_ice",
+      "beer:replace/stone_to_snow"
+    ],
     [],
     [
       "minecraft:glow_lichen"
@@ -91,12 +91,6 @@
     "creature": [
       {
         "type": "minecraft:frog",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:armadillo",
         "maxCount": 2,
         "minCount": 1,
         "weight": 10
@@ -117,7 +111,7 @@
         "weight": 3
       },
       {
-        "type": "minecraft:skeleton",
+        "type": "minecraft:stray",
         "maxCount": 1,
         "minCount": 1,
         "weight": 3

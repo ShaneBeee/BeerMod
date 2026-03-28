@@ -40,9 +40,7 @@
     [],
     [
       "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface",
-      "beer:replace/stone_to_diorite",
-      "beer:replace/deepslate_to_diorite"
+      "minecraft:lake_lava_surface"
     ],
     [
       "minecraft:amethyst_geode"
@@ -82,11 +80,14 @@
       "minecraft:underwater_magma",
       "minecraft:disk_sand",
       "minecraft:disk_clay",
-      "minecraft:disk_gravel",
+      "minecraft:disk_gravel"
+    ],
+    [
+      "beer:replace/stone_to_diorite",
+      "beer:replace/deepslate_to_diorite",
       "beer:blob/stone",
       "beer:blob/tuff"
     ],
-    [],
     [
       "minecraft:spring_water",
       "minecraft:spring_lava"

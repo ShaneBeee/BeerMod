@@ -2,7 +2,9 @@
   "attributes": {
     "minecraft:audio/ambient_sounds": {
       "additions": {
-        "sound": "minecraft:ambient.crimson_forest.mood",
+        "sound": {
+          "sound_id": "minecraft:entity.fox.screech"
+        },
         "tick_chance": 0.0010999999940395355
       },
       "mood": {
@@ -125,7 +127,7 @@
     "misc": [],
     "monster": [
       {
-        "type": "minecraft:spider",
+        "type": "minecraft:cave_spider",
         "maxCount": 4,
         "minCount": 4,
         "weight": 100
@@ -134,18 +136,18 @@
         "type": "minecraft:zombie",
         "maxCount": 4,
         "minCount": 4,
-        "weight": 95
+        "weight": 30
       },
       {
         "type": "minecraft:witch",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 20
       },
       {
-        "type": "minecraft:bogged",
-        "maxCount": 4,
-        "minCount": 4,
+        "type": "minecraft:evoker",
+        "maxCount": 2,
+        "minCount": 1,
         "weight": 100
       },
       {
