@@ -27,13 +27,20 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
         DimensionDefinition.Builder builder = DimensionDefinition.overworldBuilder(Dimensions.BEER_WORLD, context);
 
         // CAVE BIOMES
-        builder.addPoint(Biomes.DRIPSTONE_CAVES, Climate.Parameter.span(0.8f, 1.0f),
-            BiomeDefaults.FULL_RANGE, BiomeDefaults.FULL_RANGE, BiomeDefaults.FULL_RANGE,
-            Climate.Parameter.span(0.2f, 0.9f), BiomeDefaults.FULL_RANGE, 0);
+        builder.addPoint(Biomes.DRIPSTONE_CAVES,
+            Climate.Parameter.span(0.8f, 1.0f),
+            BiomeDefaults.FULL_RANGE,
+            BiomeDefaults.FULL_RANGE, BiomeDefaults.FULL_RANGE,
+            Climate.Parameter.span(0.2f, 0.9f),
+            BiomeDefaults.FULL_RANGE, 0);
 
-        builder.addPoint(Biomes.DEEP_DARK, BiomeDefaults.FULL_RANGE,
-            BiomeDefaults.FULL_RANGE, BiomeDefaults.FULL_RANGE, Climate.Parameter.span(-1.0f, -0.375f),
-            Climate.Parameter.span(1.1f, 2.0f), BiomeDefaults.FULL_RANGE, 0);
+        builder.addPoint(Biomes.DEEP_DARK,
+            BiomeDefaults.FULL_RANGE,
+            BiomeDefaults.FULL_RANGE,
+            BiomeDefaults.FULL_RANGE,
+            Climate.Parameter.span(-1.0f, -0.375f),
+            Climate.Parameter.span(1.1f, 2.0f),
+            BiomeDefaults.FULL_RANGE, 0);
 
         for (int tempIndex = 0; tempIndex < BiomeDefaults.TEMPERATURES.length; tempIndex++) {
             Climate.Parameter temp = BiomeDefaults.TEMPERATURES[tempIndex];
@@ -42,10 +49,14 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
                 Climate.Parameter humidity = BiomeDefaults.HUMIDITIES[humidityIndex];
 
                 ResourceKey<Biome> biomeKey = CaveBiomes.getBiome(tempIndex, humidityIndex);
-                if (biomeKey == null) continue;
 
-                builder.addPoint(biomeKey, BiomeDefaults.FULL_RANGE, temp, humidity, BiomeDefaults.FULL_RANGE,
-                    Climate.Parameter.span(0.078125f, 1.1f), BiomeDefaults.FULL_RANGE, 0);
+                builder.addPoint(biomeKey,
+                    BiomeDefaults.FULL_RANGE,
+                    temp,
+                    humidity,
+                    BiomeDefaults.FULL_RANGE,
+                    Climate.Parameter.span(0.078125f, 1.1f),
+                    BiomeDefaults.FULL_RANGE, 0);
             }
         }
 
@@ -73,7 +84,7 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
                                     weirdVal, pvIndex, erosionIndex);
 
                                 builder.addPoint(biomeKey, continentalness, temp, humidity, erosion,
-                                    BiomeDefaults.FULL_RANGE, weirdness, 0);
+                                    Climate.Parameter.span(-1f,0.078125f), weirdness, 0);
                             }
                         }
                     }
