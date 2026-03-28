@@ -21,6 +21,14 @@
       }
     },
     "minecraft:audio/music_volume": 0.5,
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:ash"
+        },
+        "probability": 0.2
+      }
+    ],
     "minecraft:visual/block_light_tint": "#4d4d05",
     "minecraft:visual/fog_color": "#4d4d05",
     "minecraft:visual/fog_end_distance": 50.0,

@@ -50,6 +50,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .hasPrecipitation(true)
 
             .waterColor(-11711227)
+            .particle(ParticleTypes.ASH, 0.2f)
 
             .setAttribute(EnvironmentAttributes.FOG_COLOR, -11711227)
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
