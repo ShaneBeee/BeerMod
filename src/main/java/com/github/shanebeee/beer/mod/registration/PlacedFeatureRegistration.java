@@ -234,24 +234,33 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState())
                     .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState())
                     .add(Blocks.DEAD_FIRE_CORAL_BLOCK.defaultBlockState())
-                    .add(Blocks.SOUL_SAND.defaultBlockState())
                     .build()),
                 PlacedFeatureDefinition.builder(context)
-                    .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                        new WeightedStateProvider(WeightedList.<BlockState>builder()
-                            .add(Blocks.DEAD_BRAIN_CORAL.defaultBlockState(), 1)
-                            .add(Blocks.DEAD_BUBBLE_CORAL.defaultBlockState(), 1)
-                            .add(Blocks.DEAD_FIRE_CORAL.defaultBlockState(), 1)
-                            .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 3), 4)
-                            .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 4), 3)
-                            .build())))
-                    .build()
-                    .getHolder(),
+                    .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                        List.of(
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                                .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                    new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                        .add(Blocks.DEAD_BRAIN_CORAL.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_BUBBLE_CORAL.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_FIRE_CORAL.defaultBlockState(), 1)
+                                        .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 3), 3)
+                                        .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 4), 1)
+                                        .build())))
+                                .build()
+                                .getHolder(), 0.3f)),
+                        PlacedFeatureDefinition.builder(context)
+                            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(Blocks.SOUL_SAND)))
+                            .placementModifiers(RandomOffsetPlacement.vertical(ConstantInt.of(-1)))
+                            .build().getHolder()))
+                    .build().getHolder(),
+
                 CaveSurface.FLOOR,
                 ConstantInt.of(3),
                 1.0f,
                 4,
-                0.2f,
+                1.0f,
                 UniformInt.of(4, 7),
                 0.7f
             ))

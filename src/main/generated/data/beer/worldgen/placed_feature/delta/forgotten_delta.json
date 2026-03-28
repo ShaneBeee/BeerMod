@@ -25,74 +25,101 @@
               "Name": "minecraft:dead_fire_coral_block"
             },
             "weight": 1
-          },
-          {
-            "data": {
-              "Name": "minecraft:soul_sand"
-            },
-            "weight": 1
           }
         ]
       },
       "replaceable": "#minecraft:mineable/pickaxe",
       "surface": "floor",
-      "vegetation_chance": 0.2,
+      "vegetation_chance": 1.0,
       "vegetation_feature": {
         "feature": {
-          "type": "minecraft:simple_block",
+          "type": "minecraft:random_selector",
           "config": {
-            "to_place": {
-              "type": "minecraft:weighted_state_provider",
-              "entries": [
-                {
-                  "data": {
-                    "Name": "minecraft:dead_brain_coral",
-                    "Properties": {
-                      "waterlogged": "true"
+            "default": {
+              "feature": {
+                "type": "minecraft:simple_block",
+                "config": {
+                  "to_place": {
+                    "type": "minecraft:simple_state_provider",
+                    "state": {
+                      "Name": "minecraft:soul_sand"
                     }
-                  },
-                  "weight": 1
-                },
+                  }
+                }
+              },
+              "placement": [
                 {
-                  "data": {
-                    "Name": "minecraft:dead_bubble_coral",
-                    "Properties": {
-                      "waterlogged": "true"
-                    }
-                  },
-                  "weight": 1
-                },
-                {
-                  "data": {
-                    "Name": "minecraft:dead_fire_coral",
-                    "Properties": {
-                      "waterlogged": "true"
-                    }
-                  },
-                  "weight": 1
-                },
-                {
-                  "data": {
-                    "Name": "minecraft:sea_pickle",
-                    "Properties": {
-                      "pickles": "3",
-                      "waterlogged": "true"
-                    }
-                  },
-                  "weight": 4
-                },
-                {
-                  "data": {
-                    "Name": "minecraft:sea_pickle",
-                    "Properties": {
-                      "pickles": "4",
-                      "waterlogged": "true"
-                    }
-                  },
-                  "weight": 3
+                  "type": "minecraft:random_offset",
+                  "xz_spread": 0,
+                  "y_spread": -1
                 }
               ]
-            }
+            },
+            "features": [
+              {
+                "chance": 0.3,
+                "feature": {
+                  "feature": {
+                    "type": "minecraft:simple_block",
+                    "config": {
+                      "to_place": {
+                        "type": "minecraft:weighted_state_provider",
+                        "entries": [
+                          {
+                            "data": {
+                              "Name": "minecraft:dead_brain_coral",
+                              "Properties": {
+                                "waterlogged": "true"
+                              }
+                            },
+                            "weight": 1
+                          },
+                          {
+                            "data": {
+                              "Name": "minecraft:dead_bubble_coral",
+                              "Properties": {
+                                "waterlogged": "true"
+                              }
+                            },
+                            "weight": 1
+                          },
+                          {
+                            "data": {
+                              "Name": "minecraft:dead_fire_coral",
+                              "Properties": {
+                                "waterlogged": "true"
+                              }
+                            },
+                            "weight": 1
+                          },
+                          {
+                            "data": {
+                              "Name": "minecraft:sea_pickle",
+                              "Properties": {
+                                "pickles": "3",
+                                "waterlogged": "true"
+                              }
+                            },
+                            "weight": 3
+                          },
+                          {
+                            "data": {
+                              "Name": "minecraft:sea_pickle",
+                              "Properties": {
+                                "pickles": "4",
+                                "waterlogged": "true"
+                              }
+                            },
+                            "weight": 1
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "placement": []
+                }
+              }
+            ]
           }
         },
         "placement": []
