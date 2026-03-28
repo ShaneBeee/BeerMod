@@ -16,6 +16,7 @@ import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -92,21 +93,52 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
     }
 
     private void blobs(BootstrapContext<PlacedFeature> context) {
-        PlacedFeatureDefinition stone_blobs = createBlob(context, PlacedFeatures.BLOB_STONE, Blocks.STONE,
+        PlacedFeatureDefinition dead_brain = createBlob(context,
+            PlacedFeatures.BLOB_DEAD_BRAIN,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.DEAD_BRAIN_CORAL_BLOCK,
+            22, -30, 70, 150);
+        register(dead_brain);
+
+        PlacedFeatureDefinition dead_bubble = createBlob(context,
+            PlacedFeatures.BLOB_DEAD_BUBBLE,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.DEAD_BUBBLE_CORAL_BLOCK,
+            22, -40, 70, 150);
+        register(dead_bubble);
+
+        PlacedFeatureDefinition dead_fire = createBlob(context,
+            PlacedFeatures.BLOB_DEAD_FIRE,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.DEAD_FIRE_CORAL_BLOCK,
+            22, -50, 70, 150);
+        register(dead_fire);
+
+        PlacedFeatureDefinition stone_blobs = createBlob(context,
+            PlacedFeatures.BLOB_STONE,
+            Blocks.STONE,
             22, 0, 70, 10);
         register(stone_blobs);
 
-        PlacedFeatureDefinition tuff_blobs = createBlob(context, PlacedFeatures.BLOB_TUFF, Blocks.TUFF,
+        PlacedFeatureDefinition tuff_blobs = createBlob(context,
+            PlacedFeatures.BLOB_TUFF,
+            Blocks.TUFF,
             24, -20, 40, 12);
         register(tuff_blobs);
     }
 
     private static PlacedFeatureDefinition createBlob(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                                      Block replace, int size, int minHeight, int maxHeight, int chance) {
+                                                      Block replacement, int size, int minHeight, int maxHeight, int chance) {
+        return createBlob(context, key, BeerBlockTags.ALT_STONE, replacement, size, minHeight, maxHeight, chance);
+    }
+
+    private static PlacedFeatureDefinition createBlob(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+                                                      TagKey<Block> toReplace, Block replacement, int size, int minHeight,
+                                                      int maxHeight, int chance) {
         return PlacedFeatureDefinition.builder(key, context)
             .configuredFeature(Feature.ORE, new OreConfiguration(
-                new TagMatchTest(BeerBlockTags.ALT_STONE),
-                replace.defaultBlockState(), size))
+                new TagMatchTest(toReplace),
+                replacement.defaultBlockState(), size))
             .placementModifiers(CountPlacement.of(chance),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(minHeight), VerticalAnchor.absolute(maxHeight)),
@@ -194,6 +226,43 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(coastal_delta);
+
+        PlacedFeatureDefinition forgotten_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_FORGOTTEN_DELTA, context)
+            .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
+                BlockTags.MINEABLE_WITH_PICKAXE,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState())
+                    .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState())
+                    .add(Blocks.DEAD_FIRE_CORAL_BLOCK.defaultBlockState())
+                    .add(Blocks.SOUL_SAND.defaultBlockState())
+                    .build()),
+                PlacedFeatureDefinition.builder(context)
+                    .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                        new WeightedStateProvider(WeightedList.<BlockState>builder()
+                            .add(Blocks.DEAD_BRAIN_CORAL.defaultBlockState(), 1)
+                            .add(Blocks.DEAD_BUBBLE_CORAL.defaultBlockState(), 1)
+                            .add(Blocks.DEAD_FIRE_CORAL.defaultBlockState(), 1)
+                            .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 3), 4)
+                            .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 4), 3)
+                            .build())))
+                    .build()
+                    .getHolder(),
+                CaveSurface.FLOOR,
+                ConstantInt.of(3),
+                1.0f,
+                4,
+                0.2f,
+                UniformInt.of(4, 7),
+                0.7f
+            ))
+            .placementModifiers(CountPlacement.of(5),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(-60), VerticalAnchor.absolute(60)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), MatchingBlockTagPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(1)),
+                BiomeFilter.biome())
+            .build();
+        register(forgotten_delta);
 
         PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_MOSS_DELTA)

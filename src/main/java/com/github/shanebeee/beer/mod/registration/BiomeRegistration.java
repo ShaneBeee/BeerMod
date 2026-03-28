@@ -44,6 +44,59 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
     }
 
     private void caveBiomes(BootstrapContext<Biome> context) {
+        BiomeDefinition forgotten_cave = BiomeDefinition.builder(BeerBiomes.CAVE_FORGOTTEN_CAVE, context)
+            .temperature(0.5f)
+            .downfall(0.5f)
+            .hasPrecipitation(true)
+
+            .waterColor(-11711227)
+
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, -11711227)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, -11711227)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD, 6000, 8, 2.0F)),
+                List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD, 0.0011f))
+            ))
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
+                new Music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY, 12000, 24000, true)))
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.5f)
+
+            .addDefaultOverworldCarvers()
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.DELTA_FORGOTTEN_DELTA),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.BLOB_DEAD_BRAIN, PlacedFeatures.BLOB_DEAD_BUBBLE, PlacedFeatures.BLOB_DEAD_FIRE),
+                List.of(MiscOverworldPlacements.SPRING_WATER, MiscOverworldPlacements.SPRING_LAVA),
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.BOGGED, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.SALMON, 25, 8, 8)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(forgotten_cave);
+
         BiomeDefinition diorite_cave = BiomeDefinition.builder(BeerBiomes.CAVE_DIORITE_CAVE, context)
             .temperature(0.5f)
             .downfall(0.5f)

@@ -10,6 +10,7 @@ public class BeerBiomes {
     // CAVE
     public static final ResourceKey<Biome> CAVE_DIORITE_CAVE = register("cave/diorite_cave");
     public static final ResourceKey<Biome> CAVE_DRY_CAVE = register("cave/dry_cave");
+    public static final ResourceKey<Biome> CAVE_FORGOTTEN_CAVE = register("cave/forgotten_cave");
     public static final ResourceKey<Biome> CAVE_ICE_CAVE = register("cave/ice_cave");
 
     // COAST

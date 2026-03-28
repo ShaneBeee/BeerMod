@@ -8,6 +8,9 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 public class PlacedFeatures {
 
     // BLOBS
+    public static final ResourceKey<PlacedFeature> BLOB_DEAD_BRAIN = register("blob/dead_brain");
+    public static final ResourceKey<PlacedFeature> BLOB_DEAD_BUBBLE = register("blob/dead_bubble");
+    public static final ResourceKey<PlacedFeature> BLOB_DEAD_FIRE = register("blob/dead_fire");
     public static final ResourceKey<PlacedFeature> BLOB_STONE = register("blob/stone");
     public static final ResourceKey<PlacedFeature> BLOB_TUFF = register("blob/tuff");
 
@@ -19,6 +22,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> DELTA_COASTAL_DELTA = register("delta/coastal_delta");
     public static final ResourceKey<PlacedFeature> DELTA_DRIPLEAF_SWAMP_DELTA = register("delta/dripleaf_swamp_delta");
     public static final ResourceKey<PlacedFeature> DELTA_DRY_CAVE_DELTA = register("delta/dry_cave_delta");
+    public static final ResourceKey<PlacedFeature> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
     public static final ResourceKey<PlacedFeature> DELTA_LUSH_DESERT_DELTA = register("delta/lush_desert_delta");
     public static final ResourceKey<PlacedFeature> DELTA_SWAMP_DELTA = register("delta/swamp_delta");
 
