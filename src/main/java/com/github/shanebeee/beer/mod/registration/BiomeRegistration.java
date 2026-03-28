@@ -238,7 +238,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
-                    PlacedFeatures.REPLACE_STONE_TO_ICE),
+                    PlacedFeatures.REPLACE_STONE_TO_ICE, PlacedFeatures.REPLACE_STONE_TO_SNOW),
                 null,
                 null,
                 null,

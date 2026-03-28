@@ -35,7 +35,8 @@
   "features": [
     [
       "beer:replace/deepslate_to_ice",
-      "beer:replace/stone_to_ice"
+      "beer:replace/stone_to_ice",
+      "beer:replace/stone_to_snow"
     ],
     [],
     [],

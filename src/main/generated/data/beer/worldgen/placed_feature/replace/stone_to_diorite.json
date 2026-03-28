@@ -4,7 +4,7 @@
     "config": {
       "radius": {
         "type": "minecraft:uniform",
-        "max_inclusive": 12,
+        "max_inclusive": 7,
         "min_inclusive": 5
       },
       "state": {
@@ -36,12 +36,18 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 70
+          "absolute": 120
         },
         "min_inclusive": {
-          "absolute": -8
+          "above_bottom": 0
         }
       }
+    },
+    {
+      "type": "minecraft:surface_relative_threshold_filter",
+      "heightmap": "WORLD_SURFACE_WG",
+      "max_inclusive": -1,
+      "min_inclusive": -100
     },
     {
       "type": "minecraft:biome"

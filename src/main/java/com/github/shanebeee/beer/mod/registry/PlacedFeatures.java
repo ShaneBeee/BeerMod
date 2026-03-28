@@ -32,6 +32,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> REPLACE_GRASS_TO_SAND = register("replace/grass_to_sand");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_DIORITE = register("replace/stone_to_diorite");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_ICE = register("replace/stone_to_ice");
+    public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_SNOW = register("replace/stone_to_snow");
 
     // TERRAIN
     public static final ResourceKey<PlacedFeature> TERRAIN_BROWN_CONCRETE_DISK = register("terrain/brown_concrete_disk");

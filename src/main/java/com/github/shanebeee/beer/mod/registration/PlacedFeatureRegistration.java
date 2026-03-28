@@ -72,6 +72,7 @@ import net.minecraft.world.level.levelgen.placement.NoiseThresholdCountPlacement
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
+import net.minecraft.world.level.levelgen.placement.SurfaceRelativeThresholdFilter;
 import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
@@ -350,16 +351,6 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
     }
 
     private void replace(BootstrapContext<PlacedFeature> context) {
-        PlacedFeatureDefinition deepslate_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
-            Blocks.DEEPSLATE, Blocks.DIORITE,
-            -16, 8, 75, 3, 5);
-        register(deepslate_to_diorite);
-
-        PlacedFeatureDefinition deepslate_to_ice = createReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
-            Blocks.DEEPSLATE, Blocks.BLUE_ICE,
-            -40, 8, 100, 5, 12);
-        register(deepslate_to_ice);
-
         PlacedFeatureDefinition grass_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_TO_SAND, context)
             .configuredFeature(Feature.DISK, new DiskConfiguration(
                 new RuleBasedStateProvider(
@@ -377,20 +368,37 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(grass_to_sand);
 
-        PlacedFeatureDefinition stone_to_diorite = createReplacement(context, PlacedFeatures.REPLACE_STONE_TO_DIORITE,
+        // Diorite
+        PlacedFeatureDefinition deepslate_to_diorite = createUndergroundReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
+            Blocks.DEEPSLATE, Blocks.DIORITE,
+            60, 200, 100, 2, 5);
+        register(deepslate_to_diorite);
+
+        PlacedFeatureDefinition stone_to_diorite = createUndergroundReplacement(context, PlacedFeatures.REPLACE_STONE_TO_DIORITE,
             Blocks.STONE, Blocks.DIORITE,
-            -8, 70, 100, 5, 12);
+            1, 100, 100, 5, 7);
         register(stone_to_diorite);
 
-        PlacedFeatureDefinition stone_to_ice = createReplacement(context, PlacedFeatures.REPLACE_STONE_TO_ICE,
-            Blocks.STONE, Blocks.BLUE_ICE,
-            -8, 70, 100, 5, 12);
+        // Stone
+        PlacedFeatureDefinition stone_to_snow = createUndergroundReplacement(context, PlacedFeatures.REPLACE_STONE_TO_SNOW,
+            Blocks.STONE, Blocks.SNOW_BLOCK,
+            1, 40, 100, 2, 7);
+        register(stone_to_snow);
+
+        PlacedFeatureDefinition stone_to_ice = createUndergroundReplacement(context, PlacedFeatures.REPLACE_STONE_TO_ICE,
+            Blocks.STONE, Blocks.PACKED_ICE,
+            40, 80, 100, 2, 7);
         register(stone_to_ice);
+
+        PlacedFeatureDefinition deepslate_to_ice = createUndergroundReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
+            Blocks.DEEPSLATE, Blocks.BLUE_ICE,
+            60, 200, 100, 2, 7);
+        register(deepslate_to_ice);
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static PlacedFeatureDefinition createReplacement(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                                             Block target, Block replace, int minHeight, int maxHeight, int chance, int minRadius, int maxRadius) {
+    private static PlacedFeatureDefinition createUndergroundReplacement(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
+                                                                        Block target, Block replace, int minDepth, int maxDepth, int chance, int minRadius, int maxRadius) {
         return PlacedFeatureDefinition.builder(key, context)
             .configuredFeature(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(
                 target.defaultBlockState(),
@@ -400,7 +408,8 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     .add(ConstantInt.of(chance), 100)
                     .build())),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(minHeight), VerticalAnchor.absolute(maxHeight)),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(120)),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, -maxDepth, -minDepth),
                 BiomeFilter.biome())
             .build();
     }
