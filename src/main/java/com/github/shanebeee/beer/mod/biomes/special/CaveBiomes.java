@@ -9,10 +9,12 @@ import org.jspecify.annotations.NonNull;
 public class CaveBiomes {
 
     public static @NonNull ResourceKey<Biome> getBiome(int temp, int humidity) {
-        if (temp <= 1) {
+        if (temp < 1) {
             return BeerBiomes.CAVE_ICE_CAVE;
-        } else if (temp == 2) {
+        } else if (temp == 1) {
             return BeerBiomes.CAVE_DIORITE_CAVE;
+        } else if (temp == 2) {
+            return BeerBiomes.CAVE_PLAIN_CAVE;
         } else {
             if (humidity <= 1) {
                 return BeerBiomes.CAVE_DRY_CAVE;

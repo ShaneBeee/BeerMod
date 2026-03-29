@@ -115,6 +115,20 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             22, -50, 70, 150);
         register(dead_fire);
 
+        PlacedFeatureDefinition gray_terracotta = createBlob(context,
+            PlacedFeatures.BLOB_TERRACOTTA_LIGHT_GRAY,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.LIGHT_GRAY_TERRACOTTA,
+            15, -50, 70, 150);
+        register(gray_terracotta);
+
+        PlacedFeatureDefinition blue_terracotta = createBlob(context,
+            PlacedFeatures.BLOB_TERRACOTTA_LIGHT_BLUE,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.LIGHT_BLUE_TERRACOTTA,
+            15, -50, 70, 150);
+        register(blue_terracotta);
+
         PlacedFeatureDefinition stone_blobs = createBlob(context,
             PlacedFeatures.BLOB_STONE,
             Blocks.STONE,
@@ -173,6 +187,30 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(hanging_fence);
+
+        PlacedFeatureDefinition hanging_stone = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_STONE, context)
+            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                List.of(BlockColumnConfiguration.layer(
+                        new WeightedListInt(WeightedList.<IntProvider>builder()
+                            .add(UniformInt.of(3, 10), 2)
+                            .add(UniformInt.of(1, 2), 3)
+                            .add(UniformInt.of(4, 6), 10)
+                            .build()),
+                        new WeightedStateProvider(WeightedList.<BlockState>builder()
+                            .add(Blocks.MOSSY_STONE_BRICK_WALL.defaultBlockState(), 1)
+                            .add(Blocks.STONE_BRICK_WALL.defaultBlockState(), 4)
+                            .build()))),
+                Direction.DOWN,
+                BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                true))
+            .placementModifiers(CountPlacement.of(200),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(256)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
+                BiomeFilter.biome())
+            .build();
+        register(hanging_stone);
     }
 
     private void delta(BootstrapContext<PlacedFeature> context) {
@@ -334,6 +372,35 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(dripleaf_swamp_delta);
+
+        PlacedFeatureDefinition plain_cave = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_PLAIN_CAVE_DELTA, context)
+            .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
+                BlockTags.DRIPSTONE_REPLACEABLE,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.STONE_BRICKS.defaultBlockState(), 5)
+                    .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 5)
+                    .add(Blocks.COBBLESTONE.defaultBlockState(), 2)
+                    .add(Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 2)
+                    .build()),
+                PlacedFeatureDefinition.builder(context)
+                    .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                        BlockStateProvider.simple(Blocks.SEA_PICKLE.defaultBlockState()
+                            .setValue(BlockStateProperties.PICKLES, 2))))
+                    .build().getHolder(),
+                CaveSurface.FLOOR,
+                ConstantInt.of(2),
+                0.0f,
+                5,
+                0.1f,
+                UniformInt.of(4, 7),
+                0.01f))
+            .placementModifiers(CountPlacement.of(10),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(15), VerticalAnchor.absolute(120)),
+                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
+                BiomeFilter.biome())
+            .build();
+        register(plain_cave);
 
         PlacedFeatureDefinition swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SWAMP_DELTA, context)
             .configuredFeature(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(

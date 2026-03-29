@@ -94,7 +94,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 20, 1, 1)
             .addMobSpawn(MobCategory.MONSTER, EntityType.EVOKER, 100, 1, 2)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.SALMON, 25, 8, 8)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.SALMON, 25, 8, 8)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -149,7 +149,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
             .addMobSpawn(MobCategory.MONSTER, EntityType.BOGGED, 100, 4, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.SALMON, 25, 8, 8)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.COD, 25, 8, 8)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -213,7 +213,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 95, 4, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 100, 4, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.TROPICAL_FISH, 25, 8, 8)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.TROPICAL_FISH, 25, 8, 8)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -262,6 +262,46 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .build();
         register(ice_cave);
+
+        BiomeDefinition plain_Cave = BiomeDefinition.builder(BeerBiomes.CAVE_PLAIN_CAVE, context)
+            .hasPrecipitation(false)
+            .temperature(0.8f)
+            .downfall(0.2f)
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, -13487566)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.BLOB_TERRACOTTA_LIGHT_GRAY,
+                    PlacedFeatures.BLOB_TERRACOTTA_LIGHT_BLUE,
+                    PlacedFeatures.DELTA_PLAIN_CAVE_DELTA,
+                    PlacedFeatures.DECOR_HANGING_STONE),
+                null,
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(plain_Cave);
     }
 
     private void coastBiomes(BootstrapContext<Biome> context) {
