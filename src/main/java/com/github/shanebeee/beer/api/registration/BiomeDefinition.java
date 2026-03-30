@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Carvers;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -196,6 +197,12 @@ public class BiomeDefinition extends Definable<Biome> {
                         o, this.resourceKey.identifier().toString());
                 }
             }
+        }
+
+        public Builder addDefaultLakes() {
+            this.genSettings.addFeature(GenerationStep.Decoration.LAKES, MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND);
+            this.genSettings.addFeature(GenerationStep.Decoration.LAKES, MiscOverworldPlacements.LAKE_LAVA_SURFACE);
+            return this;
         }
 
         /**

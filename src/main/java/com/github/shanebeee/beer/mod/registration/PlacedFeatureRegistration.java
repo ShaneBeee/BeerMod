@@ -668,6 +668,20 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
     }
 
     private void tree(BootstrapContext<PlacedFeature> context) {
+        PlacedFeatureDefinition bamboo_jungle = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_BAMBOO_JUNGLE_TREES, context)
+            .configuredFeature(VegetationFeatures.TREES_JUNGLE)
+            .placementModifiers(
+                CountPlacement.of(new WeightedListInt(WeightedList.<IntProvider>builder()
+                    .add(ConstantInt.of(7), 9)
+                    .add(ConstantInt.of(60), 1)
+                    .build())),
+                InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome())
+            .build();
+        register(bamboo_jungle);
+
         PlacedFeatureDefinition cold_swamp_tree = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_COLD_SWAMP_TREE, context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                 List.of(
@@ -858,6 +872,16 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(azalea_bush_or_scrub);
+
+        PlacedFeatureDefinition bamboo = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_BAMBOO_SOME_PODZOL, context)
+            .configuredFeature(VegetationFeatures.BAMBOO_SOME_PODZOL)
+            .placementModifiers(
+                NoiseBasedCountPlacement.of(100, 80.0f, 0.3f),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome())
+            .build();
+        register(bamboo);
 
         PlacedFeatureDefinition desert_azalea_scrub = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB, context)
             .configuredFeature(ConfiguredFeatures.VEGETATION_AZALEA_SCRUB)

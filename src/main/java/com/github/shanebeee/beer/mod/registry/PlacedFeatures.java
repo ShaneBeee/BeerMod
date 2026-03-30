@@ -48,6 +48,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> TERRAIN_WATER_BLOB = register("terrain/water_blob");
 
     // TREE
+    public static final ResourceKey<PlacedFeature> TREE_BAMBOO_JUNGLE_TREES = register("tree/bamboo_jungle_trees");
     public static final ResourceKey<PlacedFeature> TREE_BEACHY_PALM = register("tree/beachy_palm");
     public static final ResourceKey<PlacedFeature> TREE_COLD_SWAMP_TREE = register("tree/cold_swamp_tree");
     public static final ResourceKey<PlacedFeature> TREE_DESERT_RIVER_PALM = register("tree/desert_river_palm");
@@ -64,6 +65,7 @@ public class PlacedFeatures {
 
     // VEGETATION
     public static final ResourceKey<PlacedFeature> VEGETATION_AZALEA_BUSH_OR_SCRUB = register("vegetation/azalea_bush_or_scrub");
+    public static final ResourceKey<PlacedFeature> VEGETATION_BAMBOO_SOME_PODZOL = register("vegetation/bamboo_some_podzol");
     public static final ResourceKey<PlacedFeature> VEGETATION_LUSH_DESERT_AZALEA_SCRUB = register("vegetation/lush_desert_azalea_scrub");
     public static final ResourceKey<PlacedFeature> VEGETATION_MOSS_PATCH = register("vegetation/moss_patch");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_CHERRY_PETALS = register("vegetation/patch_cherry_petals");

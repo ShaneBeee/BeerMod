@@ -715,7 +715,66 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
     }
 
     private void forestBiomes(BootstrapContext<Biome> context) {
+        BiomeDefinition bamboo_jungle = BiomeDefinition.builder(BeerBiomes.FOREST_BAMBOO_JUNGLE, context)
+            .temperature(0.95f)
+            .hasPrecipitation(true)
+            .downfall(0.9f)
+            .waterColor(4159204)
 
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
+                Optional.of(new Music(SoundEvents.MUSIC_BIOME_BAMBOO_JUNGLE,
+                    12000, 24000, true)),
+                Optional.empty(),
+                Optional.empty()
+            ))
+            .setAttribute(EnvironmentAttributes.INCREASED_FIRE_BURNOUT, true)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+
+            .addDefaultOverworldCarvers()
+            .addDefaultUndergroundOreFeatures()
+            .addDefaultLakes()
+            .addDefaultMonsterRoomFeatures()
+            .addDefaultSurfaceFreezingFeatures()
+            .features(null,
+                null,
+                List.of(CavePlacements.AMETHYST_GEODE),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(
+                    PlacedFeatures.TREE_BAMBOO_JUNGLE_TREES,
+                    PlacedFeatures.VEGETATION_BAMBOO_SOME_PODZOL,
+                    VegetationPlacements.BAMBOO_VEGETATION,
+                    VegetationPlacements.FLOWER_WARM,
+                    VegetationPlacements.PATCH_GRASS_JUNGLE,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_PUMPKIN,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
+                    VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER,
+                    VegetationPlacements.VINES,
+                    VegetationPlacements.PATCH_MELON),
+                null)
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 3, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.CHICKEN, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PARROT, 40, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PANDA, 80, 1, 2)
+            .addDefaultMonsterSpawns(false)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.OCELOT, 2, 1, 1)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.IS_JUNGLE, BiomeTags.HAS_JUNGLE_TEMPLE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(bamboo_jungle);
 
         BiomeDefinition dry_forest = BiomeDefinition.builder(BeerBiomes.FOREST_DRY_FOREST, context)
             .hasPrecipitation(false)
