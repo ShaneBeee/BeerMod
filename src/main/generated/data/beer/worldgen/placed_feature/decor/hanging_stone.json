@@ -1,0 +1,121 @@
+{
+  "feature": {
+    "type": "minecraft:block_column",
+    "config": {
+      "allowed_placement": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:air"
+      },
+      "direction": "down",
+      "layers": [
+        {
+          "height": {
+            "type": "minecraft:weighted_list",
+            "distribution": [
+              {
+                "data": {
+                  "type": "minecraft:uniform",
+                  "max_inclusive": 10,
+                  "min_inclusive": 3
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "type": "minecraft:uniform",
+                  "max_inclusive": 2,
+                  "min_inclusive": 1
+                },
+                "weight": 3
+              },
+              {
+                "data": {
+                  "type": "minecraft:uniform",
+                  "max_inclusive": 6,
+                  "min_inclusive": 4
+                },
+                "weight": 10
+              }
+            ]
+          },
+          "provider": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "minecraft:mossy_stone_brick_wall",
+                  "Properties": {
+                    "east": "none",
+                    "north": "none",
+                    "south": "none",
+                    "up": "true",
+                    "waterlogged": "false",
+                    "west": "none"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "minecraft:stone_brick_wall",
+                  "Properties": {
+                    "east": "none",
+                    "north": "none",
+                    "south": "none",
+                    "up": "true",
+                    "waterlogged": "false",
+                    "west": "none"
+                  }
+                },
+                "weight": 4
+              }
+            ]
+          }
+        }
+      ],
+      "prioritize_tip": true
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 200
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 256
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "allowed_search_condition": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:air"
+      },
+      "direction_of_search": "up",
+      "max_steps": 12,
+      "target_condition": {
+        "type": "minecraft:has_sturdy_face",
+        "direction": "down"
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": -1
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

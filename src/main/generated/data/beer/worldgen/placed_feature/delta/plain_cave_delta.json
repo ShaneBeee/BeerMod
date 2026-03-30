@@ -1,0 +1,95 @@
+{
+  "feature": {
+    "type": "minecraft:waterlogged_vegetation_patch",
+    "config": {
+      "depth": 2,
+      "extra_bottom_block_chance": 0.0,
+      "extra_edge_column_chance": 0.01,
+      "ground_state": {
+        "type": "minecraft:weighted_state_provider",
+        "entries": [
+          {
+            "data": {
+              "Name": "minecraft:stone_bricks"
+            },
+            "weight": 5
+          },
+          {
+            "data": {
+              "Name": "minecraft:mossy_stone_bricks"
+            },
+            "weight": 5
+          },
+          {
+            "data": {
+              "Name": "minecraft:cobblestone"
+            },
+            "weight": 2
+          },
+          {
+            "data": {
+              "Name": "minecraft:mossy_cobblestone"
+            },
+            "weight": 2
+          }
+        ]
+      },
+      "replaceable": "#minecraft:dripstone_replaceable_blocks",
+      "surface": "floor",
+      "vegetation_chance": 0.1,
+      "vegetation_feature": {
+        "feature": {
+          "type": "minecraft:simple_block",
+          "config": {
+            "to_place": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:sea_pickle",
+                "Properties": {
+                  "pickles": "2",
+                  "waterlogged": "true"
+                }
+              }
+            }
+          }
+        },
+        "placement": []
+      },
+      "vertical_range": 5,
+      "xz_radius": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 7,
+        "min_inclusive": 4
+      }
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 10
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 120
+        },
+        "min_inclusive": {
+          "above_bottom": 15
+        }
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": 0
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
