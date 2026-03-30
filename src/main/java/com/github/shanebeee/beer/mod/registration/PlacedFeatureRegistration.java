@@ -55,6 +55,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateP
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.CreakingHeartDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
@@ -765,7 +766,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     .setValue(BlockStateProperties.PERSISTENT, false)),
                 new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
                 new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.of(0)))
-                .decorators(List.of(new TrunkVineDecorator()))
+                .decorators(List.of(new TrunkVineDecorator(), new CreakingHeartDecorator(0.1f)))
                 .ignoreVines()
                 .build())
             .placementModifiers(CountPlacement.of(8),

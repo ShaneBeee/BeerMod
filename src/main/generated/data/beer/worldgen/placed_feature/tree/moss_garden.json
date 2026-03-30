@@ -25,6 +25,10 @@
       "decorators": [
         {
           "type": "minecraft:trunk_vine"
+        },
+        {
+          "type": "minecraft:creaking_heart",
+          "probability": 0.1
         }
       ],
       "foliage_placer": {

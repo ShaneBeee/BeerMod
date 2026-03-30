@@ -22,12 +22,14 @@ import net.minecraft.world.attribute.AmbientMoodSettings;
 import net.minecraft.world.attribute.AmbientSounds;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.block.Blocks;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.Optional;
 
@@ -774,8 +776,12 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                 Optional.empty(),
                 Optional.of(new AmbientMoodSettings(SoundEvents.AMBIENT_CAVE, 6000, 8, 2.0f)),
                 List.of()))
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 12171705)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 8484720)
+            .modifyAttribute(EnvironmentAttributes.SKY_LIGHT_FACTOR, FloatModifier.MULTIPLY, 0.03f)
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(1, 6, 52).getRGB())
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(23, 24, 28).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(23, 24, 28).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 8f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 15f)
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 5597568)
 
             .addDefaultUndergroundOreFeatures()
@@ -798,16 +804,10 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
             .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
