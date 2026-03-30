@@ -49,8 +49,8 @@ public class PlacedFeatures {
 
     // TREE
     public static final ResourceKey<PlacedFeature> TREE_BEACHY_PALM = register("tree/beachy_palm");
-    public static final ResourceKey<PlacedFeature> TREE_DESERT_RIVER_PALM = register("tree/desert_river_palm");
     public static final ResourceKey<PlacedFeature> TREE_COLD_SWAMP_TREE = register("tree/cold_swamp_tree");
+    public static final ResourceKey<PlacedFeature> TREE_DESERT_RIVER_PALM = register("tree/desert_river_palm");
     public static final ResourceKey<PlacedFeature> TREE_FALLEN_STRIPPED_PALE_OAK = register("tree/fallen_stripped_pale_oak");
     public static final ResourceKey<PlacedFeature> TREE_FALLEN_WARPED_STEM = register("tree/fallen_warped_stem");
     public static final ResourceKey<PlacedFeature> TREE_LUSH_DESERT_PALM = register("tree/lush_desert_palm");
@@ -68,9 +68,12 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> VEGETATION_MOSS_PATCH = register("vegetation/moss_patch");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_CHERRY_PETALS = register("vegetation/patch_cherry_petals");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_CLIFF_GRASS = register("vegetation/patch_cliff_grass");
-    public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_HAY_BALE = register("vegetation/patch_hay_bale");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_SMALL_DRIPLEAF = register("vegetation/patch_small_dripleaf");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_WATER_LEAVES = register("vegetation/patch_water_leaves");
+    public static final ResourceKey<PlacedFeature> VEGETATION_PILE_AZALEA_LEAVES = register("vegetation/pile_azalea_leaves");
+    public static final ResourceKey<PlacedFeature> VEGETATION_PILE_HAY_BALE = register("vegetation/pile_hay_bale");
+    public static final ResourceKey<PlacedFeature> VEGETATION_PILE_MELON_PUMPKIN = register("vegetation/pile_melon_pumpkin");
+    public static final ResourceKey<PlacedFeature> VEGETATION_PILE_MOSS = register("vegetation/pile_moss");
     public static final ResourceKey<PlacedFeature> VEGETATION_ROOT_DIRT_BLOB = register("vegetation/rooted_dirt_blob");
 
     private static ResourceKey<PlacedFeature> register(String key) {

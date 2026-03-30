@@ -12,6 +12,7 @@
   ],
   "downfall": 0.5,
   "effects": {
+    "dry_foliage_color": "#b593bb",
     "water_color": "#3f76e4"
   },
   "features": [
@@ -66,7 +67,9 @@
       "minecraft:patch_grass_plain",
       "minecraft:patch_waterlily",
       "minecraft:patch_sugar_cane",
-      "beer:vegetation/patch_hay_bale",
+      "beer:vegetation/pile_azalea_leaves",
+      "beer:vegetation/pile_hay_bale",
+      "beer:vegetation/pile_moss",
       "beer:vegetation/patch_cherry_petals",
       "beer:vegetation/rooted_dirt_blob",
       "beer:tree/fallen_stripped_pale_oak"

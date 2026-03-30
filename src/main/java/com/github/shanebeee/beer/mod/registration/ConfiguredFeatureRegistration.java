@@ -32,12 +32,14 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLogsDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.CocoaDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
@@ -159,6 +161,9 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG),
                 UniformInt.of(6, 9))
+                .logDecorators(List.of(new AttachedToLogsDecorator(0.25f,
+                    BlockStateProvider.simple(Blocks.MOSS_CARPET),
+                    List.of(Direction.UP))))
                 .build())
             .build();
         register(fallen_stripped_pale_oak);
@@ -295,8 +300,8 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
         register(stick_plant);
 
         Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
-        WeightedList.Builder<BlockState> a1 = WeightedList.builder();
-        WeightedList.Builder<BlockState> a2 = WeightedList.builder();
+        WeightedList.Builder<BlockState> litter_small = WeightedList.builder();
+        WeightedList.Builder<BlockState> litter_big = WeightedList.builder();
 
         BlockState litter = Blocks.LEAF_LITTER.defaultBlockState();
         for (int i = 1; i < 5; i++) {
@@ -305,9 +310,9 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                     .setValue(BlockStateProperties.SEGMENT_AMOUNT, i)
                     .setValue(BlockStateProperties.HORIZONTAL_FACING, direction);
                 if (i < 4) {
-                    a1.add(blockState, 1);
+                    litter_small.add(blockState, 1);
                 }
-                a2.add(blockState, 1);
+                litter_big.add(blockState, 1);
             }
         }
 
@@ -320,12 +325,33 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 new TwoLayersFeatureSize(2, 0, 2))
                 .ignoreVines()
                 .decorators(List.of(new PlaceOnGroundDecorator(96, 4, 2,
-                        new WeightedStateProvider(a1.build())),
+                        new WeightedStateProvider(litter_small.build())),
                     new PlaceOnGroundDecorator(150, 2, 2,
-                        new WeightedStateProvider(a2.build()))))
+                        new WeightedStateProvider(litter_big.build()))))
                 .build())
             .build();
         register(tall_oak);
+
+        ConfiguredFeatureDefinition tall_stripped_pale_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_TALL_STRIPPED_PALE_OAK, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG),
+                new StraightTrunkPlacer(6, 3, 3),
+                SimpleStateProvider.simple(Blocks.FLOWERING_AZALEA_LEAVES),
+                new RandomSpreadFoliagePlacer(
+                    UniformInt.of(2, 3),
+                    ConstantInt.ZERO,
+                    UniformInt.of(4, 7),
+                    100),
+                new TwoLayersFeatureSize(1, 0, 1))
+                .decorators(List.of(
+                    new BeehiveDecorator(0.002f),
+                    new PlaceOnGroundDecorator(150, 3, 4, new WeightedStateProvider(litter_small.build())),
+                    new PlaceOnGroundDecorator(90, 3, 4, new WeightedStateProvider(litter_big.build()))
+                ))
+                .ignoreVines()
+                .build())
+            .build();
+        register(tall_stripped_pale_oak);
 
         BlockPredicateFilter tropicalPredicate = BlockPredicateFilter.forPredicate(
             BlockPredicate.wouldSurvive(Blocks.ACACIA_SAPLING.defaultBlockState()

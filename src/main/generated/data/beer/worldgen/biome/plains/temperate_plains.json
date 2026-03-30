@@ -64,8 +64,7 @@
       "minecraft:patch_grass_plain",
       "minecraft:patch_waterlily",
       "minecraft:patch_sugar_cane",
-      "beer:vegetation/patch_hay_bale",
-      "beer:vegetation/patch_cherry_petals",
+      "beer:vegetation/pile_hay_bale",
       "beer:vegetation/rooted_dirt_blob"
     ],
     [

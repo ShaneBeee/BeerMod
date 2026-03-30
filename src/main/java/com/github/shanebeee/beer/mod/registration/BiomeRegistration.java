@@ -980,6 +980,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .temperature(0.95f)
             .downfall(0.5f)
             .waterColor(4159204)
+            .dryFoliageColorOverride(new Color(181, 147, 187).getRGB())
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
@@ -1004,7 +1005,9 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                     VegetationPlacements.PATCH_GRASS_PLAIN,
                     VegetationPlacements.PATCH_WATERLILY,
                     VegetationPlacements.PATCH_SUGAR_CANE,
-                    PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
+                    PlacedFeatures.VEGETATION_PILE_AZALEA_LEAVES,
+                    PlacedFeatures.VEGETATION_PILE_HAY_BALE,
+                    PlacedFeatures.VEGETATION_PILE_MOSS,
                     PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS,
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB,
                     PlacedFeatures.TREE_FALLEN_STRIPPED_PALE_OAK),
@@ -1057,8 +1060,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                     VegetationPlacements.PATCH_GRASS_PLAIN,
                     VegetationPlacements.PATCH_WATERLILY,
                     VegetationPlacements.PATCH_SUGAR_CANE,
-                    PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
-                    PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS,
+                    PlacedFeatures.VEGETATION_PILE_HAY_BALE,
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
@@ -1109,7 +1111,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                     VegetationPlacements.PATCH_GRASS_PLAIN,
                     VegetationPlacements.PATCH_WATERLILY,
                     VegetationPlacements.PATCH_SUGAR_CANE,
-                    PlacedFeatures.VEGETATION_PATCH_HAY_BALE,
+                    PlacedFeatures.VEGETATION_PILE_HAY_BALE,
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 

@@ -12,6 +12,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
+import net.minecraft.data.worldgen.features.PileFeatures;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
@@ -21,6 +22,7 @@ import net.minecraft.util.random.Weighted;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.TrapezoidInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.level.block.Block;
@@ -37,6 +39,7 @@ import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockBlobConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockPileConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
@@ -47,18 +50,14 @@ import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFea
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.CreakingHeartDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
@@ -824,19 +823,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         register(tall_oaks);
 
         PlacedFeatureDefinition tall_stripped_pale_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_STRIPPED_PALE_OAK, context)
-            .configuredFeature(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG),
-                new StraightTrunkPlacer(6, 3, 3),
-                SimpleStateProvider.simple(Blocks.FLOWERING_AZALEA_LEAVES),
-                new RandomSpreadFoliagePlacer(
-                    UniformInt.of(2, 3),
-                    ConstantInt.ZERO,
-                    UniformInt.of(4, 7),
-                    100),
-                new TwoLayersFeatureSize(1, 0, 1))
-                .decorators(List.of(new BeehiveDecorator(0.002f)))
-                .ignoreVines()
-                .build())
+            .configuredFeature(ConfiguredFeatures.TREE_TALL_STRIPPED_PALE_OAK)
             .placementModifiers(CountPlacement.of(1),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
@@ -918,10 +905,15 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         PlacedFeatureDefinition cherry_petals = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS, context)
             .configuredFeature(VegetationFeatures.FLOWER_CHERRY)
             .placementModifiers(NoiseThresholdCountPlacement.of(-0.8f, 15, 4),
-                RarityFilter.onAverageOnceEvery(32),
                 InSquarePlacement.spread(),
+                RarityFilter.onAverageOnceEvery(32),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
-                BiomeFilter.biome())
+                BiomeFilter.biome(),
+                CountPlacement.of(96),
+                RandomOffsetPlacement.of(
+                    TrapezoidInt.of(-6, 6, 0),
+                    TrapezoidInt.of(-2, 2, 0)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockTags.AIR)))
             .build();
         register(cherry_petals);
 
@@ -972,22 +964,6 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(cliff_grass);
 
-        PlacedFeatureDefinition hay_bale_patch = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_HAY_BALE, context)
-            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.HAY_BLOCK)))
-            .placementModifiers(BlockPredicateFilter.forPredicate(
-                    BlockPredicate.allOf(
-                        BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
-                    )),
-                CountPlacement.of(96),
-                RandomOffsetPlacement.ofTriangle(7, 3),
-                RarityFilter.onAverageOnceEvery(50),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
-                BiomeFilter.biome())
-            .build();
-        register(hay_bale_patch);
-
         PlacedFeatureDefinition small_dripleaf = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_SMALL_DRIPLEAF, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(SimpleStateProvider.simple(Blocks.SMALL_DRIPLEAF)))
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)),
@@ -1023,6 +999,81 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(water_leaves);
+
+        PlacedFeatureDefinition pile_azalea = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PILE_AZALEA_LEAVES, context)
+            .configuredFeature(Feature.BLOCK_PILE,
+                new BlockPileConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 1)
+                    .add(Blocks.AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 4))))
+            .placementModifiers(
+                CountPlacement.of(10),
+                RandomOffsetPlacement.ofTriangle(7, 3),
+                RarityFilter.onAverageOnceEvery(50),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                    )),
+                BiomeFilter.biome())
+            .build();
+        register(pile_azalea);
+
+        PlacedFeatureDefinition pile_hay = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PILE_HAY_BALE, context)
+            .configuredFeature(PileFeatures.PILE_HAY)
+            .placementModifiers(
+                CountPlacement.of(5),
+                RandomOffsetPlacement.ofTriangle(7, 3),
+                RarityFilter.onAverageOnceEvery(50),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                    )),
+                BiomeFilter.biome())
+            .build();
+        register(pile_hay);
+
+        PlacedFeatureDefinition pile_moss = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PILE_MOSS, context)
+            .configuredFeature(Feature.BLOCK_PILE,
+                new BlockPileConfiguration(BlockStateProvider.simple(Blocks.MOSS_BLOCK)))
+            .placementModifiers(
+                CountPlacement.of(9),
+                RandomOffsetPlacement.ofTriangle(7, 3),
+                RarityFilter.onAverageOnceEvery(50),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                    )),
+                BiomeFilter.biome())
+            .build();
+        register(pile_moss);
+
+        PlacedFeatureDefinition pile_melon_pumpkin = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PILE_MELON_PUMPKIN, context)
+            .configuredFeature(Feature.BLOCK_PILE,
+                new BlockPileConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.PUMPKIN.defaultBlockState(), 25)
+                    .add(Blocks.MELON.defaultBlockState(), 25))))
+            .placementModifiers(
+                CountPlacement.of(10),
+                RandomOffsetPlacement.ofTriangle(7, 3),
+                RarityFilter.onAverageOnceEvery(50),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                    )),
+                BiomeFilter.biome())
+            .build();
+        register(pile_melon_pumpkin);
 
         PlacedFeatureDefinition rooted_dirt_blob = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB, context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
