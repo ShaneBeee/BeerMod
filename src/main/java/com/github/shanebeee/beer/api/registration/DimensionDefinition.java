@@ -19,7 +19,9 @@ import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class DimensionDefinition extends Definable<LevelStem> {
@@ -43,7 +45,7 @@ public class DimensionDefinition extends Definable<LevelStem> {
         ResourceKey<DimensionType> dimensionType;
         ResourceKey<NoiseGeneratorSettings> noiseGeneratorSettingsKey;
         List<Pair<Climate.ParameterPoint, Holder<Biome>>> paramList = new ArrayList<>();
-        java.util.Map<ResourceKey<Biome>, Holder.Reference<Biome>> biomeReferenceCache = new java.util.HashMap<>();
+        Map<ResourceKey<Biome>, Holder.Reference<Biome>> biomeReferenceCache = new HashMap<>();
 
         public Builder(ResourceKey<LevelStem> resourceKey, BootstrapContext<LevelStem> context, ResourceKey<DimensionType> dimensionTypeKey, ResourceKey<NoiseGeneratorSettings> noiseGeneratorSettingsKey) {
             this.context = context;
@@ -72,7 +74,7 @@ public class DimensionDefinition extends Definable<LevelStem> {
             Utils.log("Starting consolidation with " + originalSize + " parameter points");
 
             // Debug: Count unique biomes and duplicates
-            java.util.Map<Holder<Biome>, Integer> biomeCount = new java.util.HashMap<>();
+            Map<Holder<Biome>, Integer> biomeCount = new HashMap<>();
             for (Pair<Climate.ParameterPoint, Holder<Biome>> pair : this.paramList) {
                 biomeCount.merge(pair.getSecond(), 1, Integer::sum);
             }
@@ -89,7 +91,7 @@ public class DimensionDefinition extends Definable<LevelStem> {
                 .forEach(e -> Utils.log("  " + e.getValue() + " times"));
 
             // Group by biome first to avoid O(n²) comparisons across all biomes
-            java.util.Map<Holder<Biome>, java.util.List<Pair<Climate.ParameterPoint, Holder<Biome>>>> groupedByBiome = new java.util.HashMap<>();
+            Map<Holder<Biome>, List<Pair<Climate.ParameterPoint, Holder<Biome>>>> groupedByBiome = new HashMap<>();
             for (Pair<Climate.ParameterPoint, Holder<Biome>> pair : this.paramList) {
                 groupedByBiome.computeIfAbsent(pair.getSecond(), k -> new ArrayList<>()).add(pair);
             }
@@ -99,8 +101,8 @@ public class DimensionDefinition extends Definable<LevelStem> {
             List<Pair<Climate.ParameterPoint, Holder<Biome>>> consolidated = new ArrayList<>();
             int totalMerges = 0;
 
-            for (java.util.Map.Entry<Holder<Biome>, java.util.List<Pair<Climate.ParameterPoint, Holder<Biome>>>> entry : groupedByBiome.entrySet()) {
-                java.util.List<Pair<Climate.ParameterPoint, Holder<Biome>>> biomePoints = new ArrayList<>(entry.getValue());
+            for (Map.Entry<Holder<Biome>, List<Pair<Climate.ParameterPoint, Holder<Biome>>>> entry : groupedByBiome.entrySet()) {
+                List<Pair<Climate.ParameterPoint, Holder<Biome>>> biomePoints = new ArrayList<>(entry.getValue());
                 int originalCount = biomePoints.size();
 
                 boolean merged;
