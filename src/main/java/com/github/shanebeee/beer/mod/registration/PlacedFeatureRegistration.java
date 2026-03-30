@@ -192,15 +192,15 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         PlacedFeatureDefinition hanging_stone = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_STONE, context)
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(BlockColumnConfiguration.layer(
-                        new WeightedListInt(WeightedList.<IntProvider>builder()
-                            .add(UniformInt.of(3, 10), 2)
-                            .add(UniformInt.of(1, 2), 3)
-                            .add(UniformInt.of(4, 6), 10)
-                            .build()),
-                        new WeightedStateProvider(WeightedList.<BlockState>builder()
-                            .add(Blocks.MOSSY_STONE_BRICK_WALL.defaultBlockState(), 1)
-                            .add(Blocks.STONE_BRICK_WALL.defaultBlockState(), 4)
-                            .build()))),
+                    new WeightedListInt(WeightedList.<IntProvider>builder()
+                        .add(UniformInt.of(3, 10), 2)
+                        .add(UniformInt.of(1, 2), 3)
+                        .add(UniformInt.of(4, 6), 10)
+                        .build()),
+                    new WeightedStateProvider(WeightedList.<BlockState>builder()
+                        .add(Blocks.MOSSY_STONE_BRICK_WALL.defaultBlockState(), 1)
+                        .add(Blocks.STONE_BRICK_WALL.defaultBlockState(), 4)
+                        .build()))),
                 Direction.DOWN,
                 BlockPredicate.ONLY_IN_AIR_PREDICATE,
                 true))
@@ -595,11 +595,11 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                         .add(Blocks.STONE_BRICKS.defaultBlockState(), 2)
                         .add(Blocks.CRACKED_STONE_BRICKS.defaultBlockState(), 1)
                         .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 1)
-                        .build()
-                    )
-                )
-            )
+                        .build())))
             .placementModifiers(
+                CountPlacement.of(2048),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                RandomOffsetPlacement.ofTriangle(5, 10),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.anyOf(
                         BlockPredicate.allOf(
@@ -643,11 +643,6 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                         )
                     )
                 ),
-                CountPlacement.of(256),
-                RandomOffsetPlacement.ofTriangle(5, 10),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
-                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
                 BiomeFilter.biome()
             )
             .build();
