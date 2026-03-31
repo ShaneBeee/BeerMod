@@ -16,6 +16,9 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> BLOB_STONE = register("blob/stone");
     public static final ResourceKey<PlacedFeature> BLOB_TUFF = register("blob/tuff");
 
+    // BUSH
+    public static final ResourceKey<PlacedFeature> BUSH_MEDITERRANEAN_BUSHES = register("bush/mediterranean_bushes");
+
     // DECOR
     public static final ResourceKey<PlacedFeature> DECOR_HANGING_FENCE = register("decor/hanging_fence");
     public static final ResourceKey<PlacedFeature> DECOR_HANGING_STONE = register("decor/hanging_stone");

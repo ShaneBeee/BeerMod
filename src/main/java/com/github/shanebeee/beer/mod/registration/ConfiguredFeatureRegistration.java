@@ -14,6 +14,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -50,6 +51,7 @@ import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFeature<?, ?>, ConfiguredFeatureDefinition> {
@@ -128,6 +130,11 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 .build())
             .build();
         register(acacia_forest);
+
+        ConfiguredFeatureDefinition birch_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BIRCH_SCRUB, context)
+            .config(Feature.TREE, createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.BIRCH_LEAVES))
+            .build();
+        register(birch_scrub);
 
         ConfiguredFeatureDefinition cold_swamp_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COLD_SWAMP_OAK, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -246,6 +253,26 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             .build();
         register(mpingo);
 
+        ConfiguredFeatureDefinition oak_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_OAK_SCRUB, context)
+            .config(Feature.TREE, createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.OAK_LEAVES))
+            .build();
+        register(oak_scrub);
+
+        ConfiguredFeatureDefinition olive = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_OLIVE_TREE, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.ACACIA_WOOD.defaultBlockState()),
+                new ForkingTrunkPlacer(2, 2, 1),
+                BlockStateProvider.simple(Blocks.BIRCH_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.PERSISTENT, false)
+                    .setValue(BlockStateProperties.DISTANCE, 7)),
+                new AcaciaFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)),
+                Optional.empty(),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.ACACIA_WOOD))
+                .build())
+            .build();
+        register(olive);
+
         ConfiguredFeatureDefinition palm_tree = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_PALM_TREE, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 SimpleStateProvider.simple(Blocks.JUNGLE_WOOD),
@@ -284,6 +311,11 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 .build())
             .build();
         register(red_ivorywood);
+
+        ConfiguredFeatureDefinition spruce_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_SPRUCE_SCRUB, context)
+            .config(Feature.TREE, createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.SPRUCE_LEAVES))
+            .build();
+        register(spruce_scrub);
 
         ConfiguredFeatureDefinition stick_plant = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_STICK_PLANT, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -399,14 +431,7 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
 
         // AZALEA SCRUB
         ConfiguredFeatureDefinition azalea_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.VEGETATION_AZALEA_SCRUB, entries)
-            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                SimpleStateProvider.simple(Blocks.MANGROVE_ROOTS),
-                new StraightTrunkPlacer(1, 1, 0),
-                SimpleStateProvider.simple(Blocks.ACACIA_LEAVES.defaultBlockState()
-                    .setValue(BlockStateProperties.PERSISTENT, true)),
-                new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 2),
-                new TwoLayersFeatureSize(0, 0, 0))
-                .build())
+            .config(Feature.TREE, createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.AZALEA_LEAVES))
             .build();
         register(azalea_scrub);
 
@@ -416,8 +441,8 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 SimpleStateProvider.simple(Blocks.MANGROVE_ROOTS),
                 new StraightTrunkPlacer(1, 1, 0),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
-                    .add(Blocks.AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 2)
-                    .add(Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 1)
+                    .add(Blocks.AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, false), 2)
+                    .add(Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, false), 1)
                     .build()),
                 new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 2),
                 new TwoLayersFeatureSize(0, 0, 0))
@@ -453,6 +478,24 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                     .getHolder()))
             .build();
         register(azalea_bush);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static TreeConfiguration createScrub(Block trunk, Block roots, Block leaves) {
+        BlockState blockState = leaves.defaultBlockState();
+        if (blockState.is(BlockTags.LEAVES)) {
+            blockState = blockState.setValue(BlockStateProperties.PERSISTENT, false)
+                .setValue(BlockStateProperties.DISTANCE, 7);
+        }
+        return new TreeConfiguration.TreeConfigurationBuilder(
+            BlockStateProvider.simple(trunk),
+            new StraightTrunkPlacer(1, 1, 0),
+            BlockStateProvider.simple(blockState),
+            new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 2),
+            Optional.empty(),
+            new TwoLayersFeatureSize(0, 0, 0),
+            BlockStateProvider.simple(roots))
+            .build();
     }
 
 }

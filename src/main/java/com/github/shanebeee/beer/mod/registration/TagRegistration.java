@@ -24,6 +24,10 @@ public class TagRegistration extends BlockTagsProvider {
         // Since we're replacing some deepslate with these stones, we should allow their ores
         valueLookupBuilder(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
             .add(Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.SMOOTH_BASALT);
+
+        // Prevent leaves from decaying on mangrove roots
+        valueLookupBuilder(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
+            .add(Blocks.MANGROVE_ROOTS);
     }
 
 }

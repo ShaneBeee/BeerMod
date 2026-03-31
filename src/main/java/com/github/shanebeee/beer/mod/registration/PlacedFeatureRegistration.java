@@ -85,6 +85,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
     public PlacedFeatureRegistration(BootstrapContext<PlacedFeature> context) {
         super(Registries.PLACED_FEATURE, context);
         blobs(context);
+        bushes(context);
         decor(context);
         delta(context);
         replace(context);
@@ -159,6 +160,44 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(minHeight), VerticalAnchor.absolute(maxHeight)),
                 BiomeFilter.biome())
             .build();
+    }
+
+    private void bushes(BootstrapContext<PlacedFeature> context) {
+        PlacedFeatureDefinition med_bushes = PlacedFeatureDefinition.builder(PlacedFeatures.BUSH_MEDITERRANEAN_BUSHES, context)
+            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                        .configuredFeature(ConfiguredFeatures.TREE_OLIVE_TREE)
+                        .build().getHolder(), 0.05f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                        .configuredFeature(ConfiguredFeatures.TREE_BIRCH_SCRUB)
+                        .build().getHolder(), 0.6f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                        .configuredFeature(ConfiguredFeatures.TREE_SPRUCE_SCRUB)
+                        .build().getHolder(), 0.4f)),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(ConfiguredFeatures.TREE_OAK_SCRUB)
+                    .build().getHolder()))
+            .placementModifiers(
+                NoiseBasedCountPlacement.of(30, 50, 0),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(1, 0, 0),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(-1, 0, 0),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, 1),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, -1),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(1, 1, 0),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(-1, 1, 0),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, 1),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, -1),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), Blocks.GRASS_BLOCK, Blocks.PACKED_MUD))),
+                BiomeFilter.biome())
+            .build();
+        register(med_bushes);
     }
 
     private void decor(BootstrapContext<PlacedFeature> context) {

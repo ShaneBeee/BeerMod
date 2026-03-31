@@ -36,7 +36,7 @@
             "Name": "minecraft:azalea_leaves",
             "Properties": {
               "distance": "7",
-              "persistent": "true",
+              "persistent": "false",
               "waterlogged": "false"
             }
           },
@@ -47,7 +47,7 @@
             "Name": "minecraft:flowering_azalea_leaves",
             "Properties": {
               "distance": "7",
-              "persistent": "true",
+              "persistent": "false",
               "waterlogged": "false"
             }
           },
