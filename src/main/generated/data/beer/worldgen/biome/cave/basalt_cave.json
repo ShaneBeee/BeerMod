@@ -1,0 +1,88 @@
+{
+  "attributes": {
+    "minecraft:visual/block_light_tint": "#a80303",
+    "minecraft:visual/fog_color": "#340101",
+    "minecraft:visual/fog_end_distance": 50.0,
+    "minecraft:visual/fog_start_distance": 5.0,
+    "minecraft:visual/water_fog_color": "#050533"
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.5,
+  "effects": {
+    "water_color": "#340101"
+  },
+  "features": [
+    [
+      "beer:delta/basalt_delta",
+      "beer:delta/basalt_pool"
+    ],
+    [],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    [],
+    [],
+    [
+      "beer:decor/basalt_pillar",
+      "beer:blob/blackstone",
+      "beer:blob/blackstone_bricks",
+      "beer:blob/mossy_stone",
+      "beer:blob/tuff",
+      "beer:blob/basalt"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [
+      {
+        "type": "minecraft:bat",
+        "maxCount": 8,
+        "minCount": 4,
+        "weight": 10
+      }
+    ],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:cave_spider",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:zombie",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 30
+      },
+      {
+        "type": "minecraft:wither_skeleton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 20
+      },
+      {
+        "type": "minecraft:blaze",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

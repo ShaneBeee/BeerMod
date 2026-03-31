@@ -11,7 +11,7 @@
           },
           "target": {
             "predicate_type": "minecraft:tag_match",
-            "tag": "beer:alt_stone"
+            "tag": "minecraft:base_stone_overworld"
           }
         }
       ]
@@ -30,7 +30,7 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 40
+          "absolute": 120
         },
         "min_inclusive": {
           "absolute": -20

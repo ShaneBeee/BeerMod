@@ -7,7 +7,7 @@
       "targets": [
         {
           "state": {
-            "Name": "minecraft:dead_fire_coral_block"
+            "Name": "minecraft:blackstone"
           },
           "target": {
             "predicate_type": "minecraft:tag_match",
@@ -33,7 +33,7 @@
           "absolute": 120
         },
         "min_inclusive": {
-          "absolute": -50
+          "absolute": -30
         }
       }
     },
