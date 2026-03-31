@@ -960,10 +960,26 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 0.75f))
             .placementModifiers(CountPlacement.of(3),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
         register(moss_patch);
+
+        PlacedFeatureDefinition moss_veg = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_MOSS_VEGETATION, context)
+            .configuredFeature(CaveFeatures.MOSS_VEGETATION)
+            .placementModifiers(CountPlacement.of(128),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome(),
+                RandomOffsetPlacement.of(
+                    TrapezoidInt.of(-6, 6, 0),
+                    TrapezoidInt.of(-2, 2, 0)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
+                    BlockPredicate.matchesTag(BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.AZALEA_GROWS_ON)
+                )))
+            .build();
+        register(moss_veg);
 
         PlacedFeatureDefinition cherry_petals = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS, context)
             .configuredFeature(VegetationFeatures.FLOWER_CHERRY)
