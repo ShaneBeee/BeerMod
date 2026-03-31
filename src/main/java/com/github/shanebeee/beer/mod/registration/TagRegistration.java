@@ -28,6 +28,10 @@ public class TagRegistration extends BlockTagsProvider {
         // Prevent leaves from decaying on mangrove roots
         valueLookupBuilder(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
             .add(Blocks.MANGROVE_ROOTS);
+
+        // Allow small dripleaf on more blocks
+        valueLookupBuilder(BlockTags.SUPPORTS_SMALL_DRIPLEAF)
+            .add(Blocks.GRASS_BLOCK, Blocks.SAND, Blocks.DIRT);
     }
 
 }

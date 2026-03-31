@@ -70,6 +70,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> VEGETATION_AZALEA_BUSH_OR_SCRUB = register("vegetation/azalea_bush_or_scrub");
     public static final ResourceKey<PlacedFeature> VEGETATION_BAMBOO_SOME_PODZOL = register("vegetation/bamboo_some_podzol");
     public static final ResourceKey<PlacedFeature> VEGETATION_LUSH_DESERT_AZALEA_SCRUB = register("vegetation/lush_desert_azalea_scrub");
+    public static final ResourceKey<PlacedFeature> VEGETATION_LUSH_RIVER_PLANTS = register("vegetation/lush_river_plants");
     public static final ResourceKey<PlacedFeature> VEGETATION_MOSS_PATCH = register("vegetation/moss_patch");
     public static final ResourceKey<PlacedFeature> VEGETATION_MOSS_VEGETATION = register("vegetation/moss_vegetation");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_CHERRY_PETALS = register("vegetation/patch_cherry_petals");

@@ -78,6 +78,8 @@
     ],
     [
       "minecraft:glow_lichen",
+      "beer:vegetation/moss_vegetation",
+      "beer:vegetation/lush_river_plants",
       "beer:tree/tropical_forest",
       "minecraft:patch_tall_grass",
       "minecraft:patch_grass_savanna",

@@ -59,6 +59,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.CreakingHeartDe
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
+import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
@@ -186,14 +187,14 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
                         BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(1, 0, 0),Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(-1, 0, 0),Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, 1),Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, -1),Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(1, 1, 0),Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(-1, 1, 0),Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, 1),Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, -1),Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(1, 0, 0), Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(-1, 0, 0), Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, 1), Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, -1), Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(1, 1, 0), Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(-1, 1, 0), Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, 1), Blocks.AIR),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, -1), Blocks.AIR),
                         BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), Blocks.GRASS_BLOCK, Blocks.PACKED_MUD))),
                 BiomeFilter.biome())
             .build();
@@ -935,6 +936,20 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(desert_azalea_scrub);
+
+        PlacedFeatureDefinition lush_river_plants = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_LUSH_RIVER_PLANTS, context)
+            .configuredFeature(ConfiguredFeatures.VEGETATION_LUSH_RIVER_PLANTS)
+            .placementModifiers(
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(61), VerticalAnchor.absolute(62))),
+                CountPlacement.of(128),
+                InSquarePlacement.spread(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
+                    BlockPredicate.matchesFluids(Fluids.WATER),
+                    BlockPredicate.matchesTag(new Vec3i(0,-1,0),BlockTags.SUPPORTS_SMALL_DRIPLEAF)
+                )),
+                BiomeFilter.biome())
+            .build();
+        register(lush_river_plants);
 
         PlacedFeatureDefinition patch = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
