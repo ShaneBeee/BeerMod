@@ -7,7 +7,12 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 public class ConfiguredFeatures {
 
+    // DECOR
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DECOR_BASALT_PILLAR = register("decor/basalt_pillar");
+
     // DELTA
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_POOL = register("delta/basalt_pool");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_DELTA = register("delta/basalt_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MOSS_DELTA = register("delta/moss_delta");
 
     // TERRAIN

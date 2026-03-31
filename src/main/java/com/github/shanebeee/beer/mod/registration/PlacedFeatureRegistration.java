@@ -63,6 +63,7 @@ import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
+import net.minecraft.world.level.levelgen.placement.CountOnEveryLayerPlacement;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.EnvironmentScanPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
@@ -96,54 +97,84 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
     }
 
     private void blobs(BootstrapContext<PlacedFeature> context) {
+        PlacedFeatureDefinition basalt_blobs = createBlob(context,
+            PlacedFeatures.BLOB_BASALT,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.SMOOTH_BASALT,
+            22, -30, 120, 150);
+        register(basalt_blobs);
+
+        PlacedFeatureDefinition blackstone_blobs = createBlob(context,
+            PlacedFeatures.BLOB_BLACKSTONE,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.BLACKSTONE,
+            22, -30, 120, 150);
+        register(blackstone_blobs);
+
+        PlacedFeatureDefinition blackstone_bricks = createBlob(context,
+            PlacedFeatures.BLOB_BLACKSTONE_BRICKS,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.POLISHED_BLACKSTONE_BRICKS,
+            22, -30, 120, 150);
+        register(blackstone_bricks);
+
         PlacedFeatureDefinition dead_brain = createBlob(context,
             PlacedFeatures.BLOB_DEAD_BRAIN,
             BlockTags.BASE_STONE_OVERWORLD,
             Blocks.DEAD_BRAIN_CORAL_BLOCK,
-            22, -30, 70, 150);
+            22, -30, 120, 150);
         register(dead_brain);
 
         PlacedFeatureDefinition dead_bubble = createBlob(context,
             PlacedFeatures.BLOB_DEAD_BUBBLE,
             BlockTags.BASE_STONE_OVERWORLD,
             Blocks.DEAD_BUBBLE_CORAL_BLOCK,
-            22, -40, 70, 150);
+            22, -40, 120, 150);
         register(dead_bubble);
 
         PlacedFeatureDefinition dead_fire = createBlob(context,
             PlacedFeatures.BLOB_DEAD_FIRE,
             BlockTags.BASE_STONE_OVERWORLD,
             Blocks.DEAD_FIRE_CORAL_BLOCK,
-            22, -50, 70, 150);
+            22, -50, 120, 150);
         register(dead_fire);
+
+        PlacedFeatureDefinition mossy_stone = createBlob(context,
+            PlacedFeatures.BLOB_MOSSY_STONE,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.MOSSY_STONE_BRICKS,
+            22, -50, 120, 150);
+        register(mossy_stone);
 
         PlacedFeatureDefinition gray_terracotta = createBlob(context,
             PlacedFeatures.BLOB_TERRACOTTA_LIGHT_GRAY,
             BlockTags.BASE_STONE_OVERWORLD,
             Blocks.LIGHT_GRAY_TERRACOTTA,
-            15, -50, 70, 150);
+            15, -50, 120, 150);
         register(gray_terracotta);
 
         PlacedFeatureDefinition blue_terracotta = createBlob(context,
             PlacedFeatures.BLOB_TERRACOTTA_LIGHT_BLUE,
             BlockTags.BASE_STONE_OVERWORLD,
             Blocks.LIGHT_BLUE_TERRACOTTA,
-            15, -50, 70, 150);
+            15, -50, 120, 150);
         register(blue_terracotta);
 
         PlacedFeatureDefinition stone_blobs = createBlob(context,
             PlacedFeatures.BLOB_STONE,
             Blocks.STONE,
-            22, 0, 70, 10);
+            22, 0, 120, 10);
         register(stone_blobs);
 
         PlacedFeatureDefinition tuff_blobs = createBlob(context,
             PlacedFeatures.BLOB_TUFF,
+            BlockTags.BASE_STONE_OVERWORLD,
             Blocks.TUFF,
-            24, -20, 40, 12);
+            24, -20, 120, 12);
         register(tuff_blobs);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static PlacedFeatureDefinition createBlob(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
                                                       Block replacement, int size, int minHeight, int maxHeight, int chance) {
         return createBlob(context, key, BeerBlockTags.ALT_STONE, replacement, size, minHeight, maxHeight, chance);
@@ -202,6 +233,20 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
     }
 
     private void decor(BootstrapContext<PlacedFeature> context) {
+        PlacedFeatureDefinition basalt_pillar = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_BASALT_PILLAR, context)
+            .configuredFeature(ConfiguredFeatures.DECOR_BASALT_PILLAR)
+            .placementModifiers(CountPlacement.of(200),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(200)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP,
+                    BlockPredicate.hasSturdyFace(Direction.DOWN),
+                    BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                    12),
+                BiomeFilter.biome()
+            )
+            .build();
+        register(basalt_pillar);
+
         PlacedFeatureDefinition hanging_fence = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_FENCE, context)
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(BlockColumnConfiguration.layer(
@@ -253,7 +298,22 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         register(hanging_stone);
     }
 
+    @SuppressWarnings("deprecation")
+    // CountOnEveryLayerPlacement (If Mojang removes this, check "minecraft:delta" feature)
     private void delta(BootstrapContext<PlacedFeature> context) {
+        PlacedFeatureDefinition basalt_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BASALT_DELTA, context)
+            .configuredFeature(ConfiguredFeatures.DELTA_BASALT_DELTA)
+            .placementModifiers(CountOnEveryLayerPlacement.of(1),
+                BiomeFilter.biome())
+            .build();
+        register(basalt_delta);
+        PlacedFeatureDefinition basalt_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BASALT_POOL, context)
+            .configuredFeature(ConfiguredFeatures.DELTA_BASALT_POOL)
+            .placementModifiers(CountOnEveryLayerPlacement.of(2),
+                BiomeFilter.biome())
+            .build();
+        register(basalt_pool);
+
         PlacedFeatureDefinition seaPickle = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                 BlockStateProvider.simple(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 3))))
@@ -960,7 +1020,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 InSquarePlacement.spread(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
                     BlockPredicate.matchesFluids(Fluids.WATER),
-                    BlockPredicate.matchesTag(new Vec3i(0,-1,0),BlockTags.SUPPORTS_SMALL_DRIPLEAF)
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.SUPPORTS_SMALL_DRIPLEAF)
                 )),
                 BiomeFilter.biome())
             .build();

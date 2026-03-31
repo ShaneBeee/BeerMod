@@ -8,9 +8,13 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 public class PlacedFeatures {
 
     // BLOBS
+    public static final ResourceKey<PlacedFeature> BLOB_BASALT = register("blob/basalt");
+    public static final ResourceKey<PlacedFeature> BLOB_BLACKSTONE = register("blob/blackstone");
+    public static final ResourceKey<PlacedFeature> BLOB_BLACKSTONE_BRICKS = register("blob/blackstone_bricks");
     public static final ResourceKey<PlacedFeature> BLOB_DEAD_BRAIN = register("blob/dead_brain");
     public static final ResourceKey<PlacedFeature> BLOB_DEAD_BUBBLE = register("blob/dead_bubble");
     public static final ResourceKey<PlacedFeature> BLOB_DEAD_FIRE = register("blob/dead_fire");
+    public static final ResourceKey<PlacedFeature> BLOB_MOSSY_STONE = register("blob/mossy_stone");
     public static final ResourceKey<PlacedFeature> BLOB_TERRACOTTA_LIGHT_GRAY = register("blob/terracotta_light_gray");
     public static final ResourceKey<PlacedFeature> BLOB_TERRACOTTA_LIGHT_BLUE = register("blob/terracotta_light_blue");
     public static final ResourceKey<PlacedFeature> BLOB_STONE = register("blob/stone");
@@ -20,10 +24,13 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> BUSH_MEDITERRANEAN_BUSHES = register("bush/mediterranean_bushes");
 
     // DECOR
+    public static final ResourceKey<PlacedFeature> DECOR_BASALT_PILLAR = register("decor/basalt_pillar");
     public static final ResourceKey<PlacedFeature> DECOR_HANGING_FENCE = register("decor/hanging_fence");
     public static final ResourceKey<PlacedFeature> DECOR_HANGING_STONE = register("decor/hanging_stone");
 
     // DELTAS
+    public static final ResourceKey<PlacedFeature> DELTA_BASALT_POOL = register("delta/basalt_pool");
+    public static final ResourceKey<PlacedFeature> DELTA_BASALT_DELTA = register("delta/basalt_delta");
     public static final ResourceKey<PlacedFeature> DELTA_BEACH_DELTA = register("delta/beach_delta");
     public static final ResourceKey<PlacedFeature> DELTA_COASTAL_DELTA = register("delta/coastal_delta");
     public static final ResourceKey<PlacedFeature> DELTA_DRIPLEAF_SWAMP_DELTA = register("delta/dripleaf_swamp_delta");

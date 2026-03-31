@@ -24,6 +24,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration.Layer;
+import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FallenTreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
@@ -51,6 +52,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlace
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
+import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,13 +64,68 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
     public ConfiguredFeatureRegistration(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         super(Registries.CONFIGURED_FEATURE, context);
         PlacedFeatureDefinition.setupConfiguredFeatureContext(context);
+        decor(context);
         delta(context);
         terrain(context);
         tree(context);
         vegetation(context);
     }
 
+    private void decor(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        ConfiguredFeatureDefinition basalt_pillar = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_BASALT_PILLAR, context)
+            .config(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                List.of(
+                    new Layer(UniformInt.of(4, 11), BlockStateProvider.simple(Blocks.BASALT))
+                ),
+                Direction.DOWN,
+                BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
+                false))
+            .build();
+        register(basalt_pillar);
+    }
+
     private void delta(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        ConfiguredFeatureDefinition basalt_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_BASALT_DELTA, context)
+            .config(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
+                Blocks.LAVA.defaultBlockState(),
+                Blocks.SMOOTH_BASALT.defaultBlockState(),
+                UniformInt.of(3, 7),
+                UniformInt.of(1, 3)))
+            .build();
+        register(basalt_delta);
+
+        ConfiguredFeatureDefinition basalt_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_BASALT_POOL, context)
+            .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
+                BlockTags.BASE_STONE_OVERWORLD,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.SMOOTH_BASALT.defaultBlockState(), 6)
+                    .add(Blocks.STONE_BRICKS.defaultBlockState(), 2)
+                    .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 1)
+                    .build()),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                        List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(Blocks.SEA_PICKLE.defaultBlockState()
+                                    .setValue(BlockStateProperties.PICKLES, 3))))
+                            .build().getHolder(), 0.1f)),
+                        PlacedFeatureDefinition.builder()
+                            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(Blocks.SOUL_SAND)))
+                            .placementModifiers(RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)))
+                            .build().getHolder()
+                    ))
+                    .build().getHolder(),
+                CaveSurface.FLOOR,
+                ConstantInt.of(2),
+                0.01f,
+                2,
+                0.7f,
+                UniformInt.of(2, 5),
+                0.9f))
+            .build();
+        register(basalt_pool);
+
         ConfiguredFeatureDefinition moss_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MOSS_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
                 BlockTags.LUSH_GROUND_REPLACEABLE,

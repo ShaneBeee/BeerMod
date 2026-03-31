@@ -47,10 +47,58 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
     }
 
     private void caveBiomes(BootstrapContext<Biome> context) {
+        int basaltColors = new Color(52, 1, 1).getRGB();
+        BiomeDefinition basalt_cave = BiomeDefinition.builder(BeerBiomes.CAVE_BASALT_CAVE, context)
+            .temperature(0.5f)
+            .downfall(0.5f)
+            .hasPrecipitation(false)
+
+            .waterColor(basaltColors)
+
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, basaltColors)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(168, 3, 3).getRGB())
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+
+            .addDefaultOverworldCarvers()
+
+            .features(
+                List.of(
+                    PlacedFeatures.DELTA_BASALT_DELTA,
+                    PlacedFeatures.DELTA_BASALT_POOL),
+                null,
+                List.of(CavePlacements.AMETHYST_GEODE),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.DECOR_BASALT_PILLAR,
+                    PlacedFeatures.BLOB_BLACKSTONE,
+                    PlacedFeatures.BLOB_BLACKSTONE_BRICKS,
+                    PlacedFeatures.BLOB_MOSSY_STONE,
+                    PlacedFeatures.BLOB_TUFF,
+                    PlacedFeatures.BLOB_BASALT),
+                null,
+                null,
+                null)
+
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 4, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CAVE_SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 30, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.WITHER_SKELETON, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.BLAZE, 3, 1, 1)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(basalt_cave);
+
         BiomeDefinition forgotten_cave = BiomeDefinition.builder(BeerBiomes.CAVE_FORGOTTEN_CAVE, context)
             .temperature(0.5f)
             .downfall(0.5f)
-            .hasPrecipitation(true)
+            .hasPrecipitation(false)
 
             .waterColor(-11711227)
             .particle(ParticleTypes.ASH, 0.2f)
