@@ -13,8 +13,8 @@ public class ConfiguredFeatureDefinition extends Definable<ConfiguredFeature<?, 
         super(resourceKey, value, holder);
     }
 
-    public static Builder builder(ResourceKey<ConfiguredFeature<?, ?>> key, BootstrapContext<ConfiguredFeature<?, ?>> entries) {
-        return new Builder(key, entries);
+    public static Builder builder(ResourceKey<ConfiguredFeature<?, ?>> key, BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        return new Builder(key, context);
     }
 
     public static Builder builder(BootstrapContext<ConfiguredFeature<?, ?>> context) {
