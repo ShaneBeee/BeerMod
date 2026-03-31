@@ -175,7 +175,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
                         .configuredFeature(ConfiguredFeatures.TREE_SPRUCE_SCRUB)
                         .build().getHolder(), 0.4f)),
-                PlacedFeatureDefinition.builder()
+                PlacedFeatureDefinition.builder(context)
                     .configuredFeature(ConfiguredFeatures.TREE_OAK_SCRUB)
                     .build().getHolder()))
             .placementModifiers(
