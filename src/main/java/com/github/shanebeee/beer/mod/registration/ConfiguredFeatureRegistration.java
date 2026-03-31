@@ -351,6 +351,22 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             }
         }
 
+        ConfiguredFeatureDefinition swamp_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_SWAMP_OAK, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.OAK_LOG),
+                new ForkingTrunkPlacer(4, 2, 2),
+                BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.PERSISTENT, false)
+                    .setValue(BlockStateProperties.DISTANCE, 7)),
+                new BlobFoliagePlacer(UniformInt.of(2, 3), ConstantInt.of(2), 2),
+                Optional.empty(),
+                new TwoLayersFeatureSize(3, 3, 3),
+                BlockStateProvider.simple(Blocks.OAK_LOG))
+                .decorators(List.of(new LeaveVineDecorator(0.25f)))
+                .build())
+            .build();
+        register(swamp_oak);
+
         ConfiguredFeatureDefinition tall_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),

@@ -852,6 +852,21 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(tall_oak_with_litter);
 
+        PlacedFeatureDefinition swamp_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_SWAMP_OAK, context)
+            .configuredFeature(ConfiguredFeatures.TREE_SWAMP_OAK)
+            .placementModifiers(
+                CountPlacement.of(new WeightedListInt(WeightedList.<IntProvider>builder()
+                    .add(ConstantInt.of(20), 4)
+                    .add(ConstantInt.of(30), 1)
+                    .build())),
+                InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(2),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+            .build();
+        register(swamp_oak);
+
         PlacedFeatureDefinition fallen_tall_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_FALLEN_TALL_OAK, context)
             .configuredFeature(ConfiguredFeatures.TREE_FALLEN_TALL_OAK)
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))

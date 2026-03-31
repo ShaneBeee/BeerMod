@@ -1463,7 +1463,8 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                 null,
                 null,
                 null,
-                List.of(VegetationPlacements.TREES_SWAMP,
+                List.of(
+                    PlacedFeatures.TREE_SWAMP_OAK,
                     VegetationPlacements.FLOWER_SWAMP,
                     VegetationPlacements.PATCH_GRASS_NORMAL,
                     VegetationPlacements.PATCH_DEAD_BUSH,

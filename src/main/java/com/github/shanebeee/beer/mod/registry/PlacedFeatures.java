@@ -60,6 +60,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREE_LUSH_DESERT_PALM = register("tree/lush_desert_palm");
     public static final ResourceKey<PlacedFeature> TREE_MOSS_GARDEN = register("tree/moss_garden");
     public static final ResourceKey<PlacedFeature> TREE_PALM_BEACH_PALM = register("tree/palm_beach_palm");
+    public static final ResourceKey<PlacedFeature> TREE_SWAMP_OAK = register("tree/swamp_oak");
     public static final ResourceKey<PlacedFeature> TREE_TALL_FALLEN_TALL_OAK = register("tree/fallen_tall_oak");
     public static final ResourceKey<PlacedFeature> TREE_TALL_OAK_TREES = register("tree/tall_oak_trees");
     public static final ResourceKey<PlacedFeature> TREE_TALL_OAK_WITH_LITTER = register("tree/tall_oak_with_litter");
