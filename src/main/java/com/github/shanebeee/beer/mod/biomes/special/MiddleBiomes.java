@@ -49,7 +49,7 @@ public class MiddleBiomes {
 
     private static ResourceKey<Biome> getWarm(int humidity, int weirdness) {
         return switch (humidity) {
-            case 0 -> Biomes.SAVANNA;
+            case 0 -> weirdness == 1 ? BeerBiomes.FOREST_BAOBAB_SAVANNA : Biomes.SAVANNA;
             case 1 -> BeerBiomes.PLAINS_DRY_PLAINS;
             case 2 -> weirdness == 1 ? BeerBiomes.PLAINS_TEMPERATE_PLAINS : BeerBiomes.FOREST_LUSH_FOREST;
             case 3 -> weirdness == 1 ? Biomes.SPARSE_JUNGLE : Biomes.JUNGLE;

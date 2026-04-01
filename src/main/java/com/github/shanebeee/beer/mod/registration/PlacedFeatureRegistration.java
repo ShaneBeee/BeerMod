@@ -747,6 +747,21 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(bamboo_jungle);
 
+        PlacedFeatureDefinition baobab = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_BAOBABS, context)
+            .configuredFeature(ConfiguredFeatures.TREE_BAOBABS)
+            .placementModifiers(
+                CountPlacement.of(new WeightedListInt(WeightedList.<IntProvider>builder()
+                    .add(ConstantInt.of(0), 10)
+                    .add(ConstantInt.of(1), 9)
+                    .add(ConstantInt.of(3), 1)
+                    .build())),
+                InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome())
+            .build();
+        register(baobab);
+
         PlacedFeatureDefinition cold_swamp_tree = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_COLD_SWAMP_TREE, context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                 List.of(

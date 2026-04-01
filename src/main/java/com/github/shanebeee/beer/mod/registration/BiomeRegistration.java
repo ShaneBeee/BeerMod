@@ -815,6 +815,55 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .build();
         register(bamboo_jungle);
 
+        BiomeDefinition baobab_savanna = BiomeDefinition.builder(BeerBiomes.FOREST_BAOBAB_SAVANNA, context)
+            .hasPrecipitation(false)
+            .temperature(2.0f)
+            .downfall(0.0f)
+            .waterColor(new Color(89, 125, 113).getRGB())
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2171215)
+
+            .addDefaultOverworldCarvers()
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.TREE_BAOBABS,
+                    VegetationPlacements.TREES_SAVANNA,
+                    PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS,
+                    PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
+                    VegetationPlacements.PATCH_GRASS_PLAIN,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
+                    PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.HORSE, 4, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.DONKEY, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.LLAMA, 10, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 30, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 15, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PILLAGER, 10, 3, 4)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_SAVANNA, BiomeTags.IS_SAVANNA, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(baobab_savanna);
+
         BiomeDefinition dry_forest = BiomeDefinition.builder(BeerBiomes.FOREST_DRY_FOREST, context)
             .hasPrecipitation(false)
             .temperature(0.7f)

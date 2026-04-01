@@ -2,6 +2,7 @@
   "values": [
     "beer:desert/dry_desert",
     "beer:desert/lush_desert",
+    "beer:forest/baobab_savanna",
     "beer:plains/dry_plains",
     "beer:river/desert_river",
     "beer:river/lush_river"

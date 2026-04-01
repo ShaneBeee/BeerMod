@@ -21,6 +21,10 @@ public class ConfiguredFeatures {
 
     // TREE
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_ACACIA_FOREST = register("tree/acacia_forest");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBABS = register("tree/baobabs");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBAB_ACACIA = register("tree/baobab_acacia");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBAB_JUNGLE = register("tree/baobab_jungle");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBAB_OAK = register("tree/baobab_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BIRCH_SCRUB = register("tree/birch_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_COLD_SWAMP_OAK = register("tree/cold_swamp_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_COLD_SWAMP_PALE = register("tree/cold_swamp_pale");

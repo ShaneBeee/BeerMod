@@ -59,6 +59,7 @@ public class PlacedFeatures {
 
     // TREE
     public static final ResourceKey<PlacedFeature> TREE_BAMBOO_JUNGLE_TREES = register("tree/bamboo_jungle_trees");
+    public static final ResourceKey<PlacedFeature> TREE_BAOBABS = register("tree/baobabs");
     public static final ResourceKey<PlacedFeature> TREE_BEACHY_PALM = register("tree/beachy_palm");
     public static final ResourceKey<PlacedFeature> TREE_COLD_SWAMP_TREE = register("tree/cold_swamp_tree");
     public static final ResourceKey<PlacedFeature> TREE_DESERT_RIVER_PALM = register("tree/desert_river_palm");

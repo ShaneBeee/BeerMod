@@ -33,6 +33,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConf
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
@@ -50,6 +51,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.CocoaDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.PlaceOnGroundDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
@@ -229,6 +231,59 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 .build())
             .build();
         register(acacia_forest);
+
+        ConfiguredFeatureDefinition baobab_acacia = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BAOBAB_ACACIA, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.ACACIA_LOG),
+                new MegaJungleTrunkPlacer(7, 10, 10),
+                BlockStateProvider.simple(Blocks.ACACIA_LEAVES),
+                new AcaciaFoliagePlacer(UniformInt.of(3, 4), ConstantInt.of(0)),
+                Optional.empty(),
+                new ThreeLayersFeatureSize(1, 1, 0, 1, 3, OptionalInt.empty()),
+                BlockStateProvider.simple(Blocks.ACACIA_LOG))
+                .build())
+            .build();
+        register(baobab_acacia);
+
+        ConfiguredFeatureDefinition baobab_jungle = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BAOBAB_JUNGLE, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.JUNGLE_LOG),
+                new MegaJungleTrunkPlacer(8, 10, 10),
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES),
+                new AcaciaFoliagePlacer(UniformInt.of(3, 4), ConstantInt.of(0)),
+                Optional.empty(),
+                new ThreeLayersFeatureSize(1, 1, 0, 1, 3, OptionalInt.empty()),
+                BlockStateProvider.simple(Blocks.JUNGLE_LOG))
+                .build())
+            .build();
+        register(baobab_jungle);
+
+        ConfiguredFeatureDefinition baobab_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BAOBAB_OAK, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.OAK_LOG),
+                new MegaJungleTrunkPlacer(6, 10, 10),
+                BlockStateProvider.simple(Blocks.OAK_LEAVES),
+                new AcaciaFoliagePlacer(UniformInt.of(3, 4), ConstantInt.of(0)),
+                Optional.empty(),
+                new ThreeLayersFeatureSize(1, 1, 0, 1, 3, OptionalInt.empty()),
+                BlockStateProvider.simple(Blocks.OAK_LOG))
+                .build())
+            .build();
+        register(baobab_oak);
+
+        ConfiguredFeatureDefinition boababs = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BAOBABS, context)
+            .config(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                    .configuredFeature(ConfiguredFeatures.TREE_BAOBAB_ACACIA)
+                    .build().getHolder(), 0.333f),
+                new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                    .configuredFeature(ConfiguredFeatures.TREE_BAOBAB_JUNGLE)
+                    .build().getHolder(), 0.333f)),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(ConfiguredFeatures.TREE_BAOBAB_OAK)
+                    .build().getHolder()))
+            .build();
+        register(boababs);
 
         ConfiguredFeatureDefinition birch_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BIRCH_SCRUB, context)
             .config(Feature.TREE, createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.BIRCH_LEAVES))
