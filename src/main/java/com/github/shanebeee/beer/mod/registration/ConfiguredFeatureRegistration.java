@@ -521,11 +521,12 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
         ConfiguredFeatureDefinition tall_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.OAK_LOG),
-                new StraightTrunkPlacer(9, 4, 0),
+                new StraightTrunkPlacer(8, 4, 3),
                 BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState().setValue(BlockStateProperties.DISTANCE, 7)),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.ZERO, 3),
-                new TwoLayersFeatureSize(2, 0, 2))
-                .ignoreVines()
+                Optional.empty(),
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.OAK_LOG))
                 .decorators(List.of(new PlaceOnGroundDecorator(96, 4, 2,
                         new WeightedStateProvider(litter_small.build())),
                     new PlaceOnGroundDecorator(150, 2, 2,

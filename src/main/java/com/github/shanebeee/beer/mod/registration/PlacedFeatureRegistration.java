@@ -888,7 +888,18 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
         PlacedFeatureDefinition tall_oak_with_litter = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_OAK_WITH_LITTER, context)
             .configuredFeature(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER)
-            .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+            .placementModifiers(
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
+                    BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO),
+                    BlockPredicate.matchesTag(new Vec3i(1, 0, 0), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(-1, 0, 0), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(0, 0, 1), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(0, 0, -1), BlockTags.AIR),
+
+                    BlockPredicate.matchesTag(new Vec3i(1, 0, 1), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(1, 0, -1), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(-1, 0, 1), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(-1, 0, -1), BlockTags.AIR))))
             .build();
         register(tall_oak_with_litter);
 
@@ -920,8 +931,8 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 tall_oak_with_litter.getHolder()))
             .placementModifiers(CountPlacement.of(new WeightedListInt(
                     WeightedList.<IntProvider>builder()
-                        .add(ConstantInt.of(10), 9)
-                        .add(ConstantInt.of(11), 1)
+                        .add(ConstantInt.of(15), 9)
+                        .add(ConstantInt.of(20), 1)
                         .build())),
                 InSquarePlacement.spread(),
                 SurfaceWaterDepthFilter.forMaxDepth(0),
