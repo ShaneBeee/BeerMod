@@ -13,6 +13,7 @@ public class ConfiguredFeatures {
     // DELTA
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_POOL = register("delta/basalt_pool");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_DELTA = register("delta/basalt_delta");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MOSS_DELTA = register("delta/moss_delta");
 
     // TERRAIN

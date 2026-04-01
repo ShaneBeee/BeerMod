@@ -27,6 +27,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -314,11 +315,6 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(basalt_pool);
 
-        PlacedFeatureDefinition seaPickle = PlacedFeatureDefinition.builder(context)
-            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                BlockStateProvider.simple(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 3))))
-            .build();
-
         PlacedFeatureDefinition sandstoneWall = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(BlockColumnConfiguration.layer(
@@ -336,7 +332,11 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
         PlacedFeatureDefinition vegetationFeature = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(seaPickle.getHolder(), 0.05f),
+                List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                        .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                            BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
+                                .setValue(LightBlock.LEVEL, 12))))
+                        .build().getHolder(), 0.05f),
                     new WeightedPlacedFeature(sandstoneWall.getHolder(), 0.8f)),
                 sandstoneWall.getHolder()))
             .placementModifiers(CountPlacement.of(1))
@@ -367,45 +367,10 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         register(coastal_delta);
 
         PlacedFeatureDefinition forgotten_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_FORGOTTEN_DELTA, context)
-            .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.MINEABLE_WITH_PICKAXE,
-                new WeightedStateProvider(WeightedList.<BlockState>builder()
-                    .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState())
-                    .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState())
-                    .add(Blocks.DEAD_FIRE_CORAL_BLOCK.defaultBlockState())
-                    .build()),
-                PlacedFeatureDefinition.builder(context)
-                    .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                        List.of(
-                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
-                                .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                    new WeightedStateProvider(WeightedList.<BlockState>builder()
-                                        .add(Blocks.DEAD_BRAIN_CORAL.defaultBlockState(), 1)
-                                        .add(Blocks.DEAD_BUBBLE_CORAL.defaultBlockState(), 1)
-                                        .add(Blocks.DEAD_FIRE_CORAL.defaultBlockState(), 1)
-                                        .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 3), 3)
-                                        .add(Blocks.SEA_PICKLE.defaultBlockState().setValue(BlockStateProperties.PICKLES, 4), 1)
-                                        .build())))
-                                .build()
-                                .getHolder(), 0.3f)),
-                        PlacedFeatureDefinition.builder(context)
-                            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(Blocks.SOUL_SAND)))
-                            .placementModifiers(RandomOffsetPlacement.vertical(ConstantInt.of(-1)))
-                            .build().getHolder()))
-                    .build().getHolder(),
-
-                CaveSurface.FLOOR,
-                ConstantInt.of(3),
-                1.0f,
-                4,
-                1.0f,
-                UniformInt.of(4, 7),
-                0.7f
-            ))
+            .configuredFeature(ConfiguredFeatures.DELTA_FORGOTTEN_DELTA)
             .placementModifiers(CountPlacement.of(5),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(-60), VerticalAnchor.absolute(60)),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(5), VerticalAnchor.absolute(60)),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), MatchingBlockTagPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(1)),
                 BiomeFilter.biome())
@@ -484,8 +449,8 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     .build()),
                 PlacedFeatureDefinition.builder(context)
                     .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                        BlockStateProvider.simple(Blocks.SEA_PICKLE.defaultBlockState()
-                            .setValue(BlockStateProperties.PICKLES, 2))))
+                        BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
+                            .setValue(LightBlock.LEVEL, 12))))
                     .build().getHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(2),

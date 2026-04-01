@@ -16,6 +16,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -106,8 +107,8 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                     .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
                             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(Blocks.SEA_PICKLE.defaultBlockState()
-                                    .setValue(BlockStateProperties.PICKLES, 3))))
+                                BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
+                                    .setValue(LightBlock.LEVEL, 12))))
                             .build().getHolder(), 0.1f)),
                         PlacedFeatureDefinition.builder()
                             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
@@ -125,6 +126,44 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 0.9f))
             .build();
         register(basalt_pool);
+
+        ConfiguredFeatureDefinition forgotten_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_FORGOTTEN_DELTA, context)
+            .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
+                BlockTags.MINEABLE_WITH_PICKAXE,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState())
+                    .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState())
+                    .add(Blocks.DEAD_FIRE_CORAL_BLOCK.defaultBlockState())
+                    .build()),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                        List.of(
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                    new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                        .add(Blocks.DEAD_BRAIN_CORAL.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_BUBBLE_CORAL.defaultBlockState(), 1)
+                                        .add(Blocks.DEAD_FIRE_CORAL.defaultBlockState(), 1)
+                                        .add(Blocks.LIGHT.defaultBlockState().setValue(LightBlock.LEVEL, 12), 1)
+                                        .build())))
+                                .build()
+                                .getHolder(), 0.3f)),
+                        PlacedFeatureDefinition.builder()
+                            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(Blocks.SOUL_SAND)))
+                            .placementModifiers(RandomOffsetPlacement.vertical(ConstantInt.of(-1)))
+                            .build().getHolder()))
+                    .build().getHolder(),
+                CaveSurface.FLOOR,
+                ConstantInt.of(3),
+                1.0f,
+                4,
+                1.0f,
+                UniformInt.of(4, 7),
+                0.7f
+            ))
+            .build();
+        register(forgotten_delta);
 
         ConfiguredFeatureDefinition moss_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MOSS_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
