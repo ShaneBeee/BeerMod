@@ -1284,6 +1284,59 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
     }
 
     private void riverBiomes(BootstrapContext<Biome> context) {
+        BiomeDefinition cold_river = BiomeDefinition.builder(BeerBiomes.RIVER_COLD_RIVER, context)
+            .hasPrecipitation(true)
+            .temperature(0.15f)
+            .downfall(0.5f)
+            .waterColor(new Color(61, 87, 214).getRGB())
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS,
+                new AmbientSounds(
+                    Optional.empty(),
+                    Optional.of(new AmbientMoodSettings(
+                        SoundEvents.AMBIENT_CAVE,
+                        6000,
+                        8,
+                        2.0)),
+                    List.of())
+            )
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, -8543233)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
+                List.of(CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                null,
+                null,
+                null,
+                null,
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    AquaticPlacements.SEAGRASS_RIVER,
+                    AquaticPlacements.KELP_COLD),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.DROWNED, 100, 1, 1)
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 2, 4)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.SALMON, 5, 1, 5)
+
+            .addToTag(BiomeTags.IS_RIVER, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
+
+            .build();
+        register(cold_river);
+
         BiomeDefinition desert_river = BiomeDefinition.builder(BeerBiomes.RIVER_DESERT_RIVER, context)
             .hasPrecipitation(false)
             .temperature(2.0f)

@@ -42,6 +42,7 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> PLAINS_TEMPERATE_PLAINS = register("plains/temperate_plains");
 
     // RIVERS
+    public static final ResourceKey<Biome> RIVER_COLD_RIVER = register("river/cold_river");
     public static final ResourceKey<Biome> RIVER_DESERT_RIVER = register("river/desert_river");
     public static final ResourceKey<Biome> RIVER_LUSH_RIVER = register("river/lush_river");
     public static final ResourceKey<Biome> RIVER_TEMPERATE_RIVER = register("river/temperate_river");
