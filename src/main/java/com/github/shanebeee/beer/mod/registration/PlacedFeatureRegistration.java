@@ -1031,7 +1031,11 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     TrapezoidInt.of(-2, 2, 0)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
                     BlockPredicate.matchesTag(BlockTags.AIR),
-                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.AZALEA_GROWS_ON)
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.AZALEA_GROWS_ON),
+                    BlockPredicate.matchesTag(new Vec3i(1, 0, 0), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(-1, 0, 0), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(0, 0, 1), BlockTags.AIR),
+                    BlockPredicate.matchesTag(new Vec3i(0, 0, -1), BlockTags.AIR)
                 )))
             .build();
         register(moss_veg);
