@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": "beer:tree/baobab_oak",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.333,
+        "feature": {
+          "feature": "beer:tree/baobab_acacia",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.333,
+        "feature": {
+          "feature": "beer:tree/baobab_jungle",
+          "placement": []
+        }
+      }
+    ]
+  }
+}
