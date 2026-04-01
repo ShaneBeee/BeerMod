@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.api.registration;
 
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -56,7 +57,12 @@ public class StructureSetDefinition extends Definable<StructureSet> {
 
         public StructureSetDefinition build() {
             StructureSet structureSet = new StructureSet(this.set, this.placement);
-            Holder.Reference<StructureSet> holder = this.context.register(this.resourceKey, structureSet);
+            Holder.Reference<StructureSet> holder;
+            if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
+                holder = this.context.lookup(Registries.STRUCTURE_SET).getOrThrow(this.resourceKey);
+            } else {
+                holder = this.context.register(this.resourceKey, structureSet);
+            }
             return new StructureSetDefinition(this.resourceKey, structureSet, holder, this.tagKeys);
         }
     }

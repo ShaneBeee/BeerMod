@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.api.registration;
 
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -154,7 +155,12 @@ public class StructureDefinition extends Definable<Structure> {
                 this.dimensionPadding,
                 this.liquidSettings);
 
-            Holder.Reference<Structure> holder = this.context.register(this.resourceKey, jigsawStructure);
+            Holder.Reference<Structure> holder;
+            if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
+                holder = this.context.lookup(Registries.STRUCTURE).getOrThrow(this.resourceKey);
+            } else {
+                holder = this.context.register(this.resourceKey, jigsawStructure);
+            }
 
             return new StructureDefinition(this.resourceKey, jigsawStructure, holder);
         }

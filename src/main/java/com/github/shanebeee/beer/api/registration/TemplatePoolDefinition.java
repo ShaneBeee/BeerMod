@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.api.registration;
 
+import com.github.shanebeee.beer.mod.Beer;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -57,7 +58,13 @@ public class TemplatePoolDefinition extends Definable<StructureTemplatePool> {
         public TemplatePoolDefinition build() {
             Holder.Reference<StructureTemplatePool> pool = this.context.lookup(Registries.TEMPLATE_POOL).getOrThrow(this.fallback);
             StructureTemplatePool structureTemplatePool = new StructureTemplatePool(pool, this.templates, this.projection);
-            Holder.Reference<StructureTemplatePool> holder = this.context.register(this.resourceKey, structureTemplatePool);
+
+            Holder.Reference<StructureTemplatePool> holder;
+            if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
+                holder = this.context.lookup(Registries.TEMPLATE_POOL).getOrThrow(this.resourceKey);
+            } else {
+                holder = this.context.register(this.resourceKey, structureTemplatePool);
+            }
             return new TemplatePoolDefinition(this.resourceKey, structureTemplatePool, holder);
         }
 

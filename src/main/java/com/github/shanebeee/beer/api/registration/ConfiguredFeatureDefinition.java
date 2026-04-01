@@ -1,6 +1,8 @@
 package com.github.shanebeee.beer.api.registration;
 
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -23,13 +25,13 @@ public class ConfiguredFeatureDefinition extends Definable<ConfiguredFeature<?, 
 
     public static class Builder {
 
-        private final ResourceKey<ConfiguredFeature<?, ?>> identifier;
+        private final ResourceKey<ConfiguredFeature<?, ?>> resourceKey;
         private final BootstrapContext<ConfiguredFeature<?, ?>> context;
         private Feature<? extends FeatureConfiguration> feature;
         private FeatureConfiguration config;
 
         public Builder(ResourceKey<ConfiguredFeature<?, ?>> key, BootstrapContext<ConfiguredFeature<?, ?>> context) {
-            this.identifier = key;
+            this.resourceKey = key;
             this.context = context;
         }
 
@@ -43,10 +45,14 @@ public class ConfiguredFeatureDefinition extends Definable<ConfiguredFeature<?, 
         public ConfiguredFeatureDefinition build() {
             ConfiguredFeature<?, ?> configuredFeature = new ConfiguredFeature(this.feature, this.config);
             Holder.Reference<ConfiguredFeature<?, ?>> holder = null;
-            if (this.identifier != null) {
-                holder = this.context.register(this.identifier, configuredFeature);
+            if (this.resourceKey != null) {
+                if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
+                    holder = this.context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(this.resourceKey);
+                } else {
+                    holder = this.context.register(this.resourceKey, configuredFeature);
+                }
             }
-            return new ConfiguredFeatureDefinition(this.identifier, configuredFeature, holder);
+            return new ConfiguredFeatureDefinition(this.resourceKey, configuredFeature, holder);
         }
 
     }

@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.api.registration;
 
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -74,7 +75,11 @@ public class TimelineDefinition extends Definable<Timeline> {
             Timeline timeline = this.builder.build();
             Holder.Reference<Timeline> holder = null;
             if (this.context != null && this.resourceKey != null) {
-                holder = this.context.register(this.resourceKey, timeline);
+                if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
+                    holder = this.context.lookup(Registries.TIMELINE).getOrThrow(this.resourceKey);
+                } else {
+                    holder = this.context.register(this.resourceKey, timeline);
+                }
             }
             return new TimelineDefinition(this.resourceKey, timeline, holder, this.tagKeys);
         }

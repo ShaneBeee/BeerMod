@@ -1,6 +1,7 @@
 package com.github.shanebeee.beer.api.registration;
 
 import com.github.shanebeee.beer.api.utils.Utils;
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.IdentifierException;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
@@ -388,7 +389,12 @@ public class BiomeDefinition extends Definable<Biome> {
                 .mobSpawnSettings(this.mobSpawnSettings.build());
 
             Biome biome = this.biomeBuilder.build();
-            Holder.Reference<Biome> holder = this.context.register(this.resourceKey, this.biomeBuilder.build());
+            Holder.Reference<Biome> holder;
+            if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
+                holder = this.context.lookup(Registries.BIOME).getOrThrow(this.resourceKey);
+            } else {
+                holder = this.context.register(this.resourceKey, this.biomeBuilder.build());
+            }
             return new BiomeDefinition(this.resourceKey, biome, holder, this.tagKeys);
         }
     }

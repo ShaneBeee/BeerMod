@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.api.registration;
 
+import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -83,7 +84,11 @@ public class PlacedFeatureDefinition extends Definable<PlacedFeature> {
             PlacedFeature placedFeature = new PlacedFeature(this.configuredFeature, this.placementModifiers);
             Holder.Reference<PlacedFeature> holder = null;
             if (this.context != null && this.resourceKey != null) {
-                holder = this.context.register(this.resourceKey, placedFeature);
+                if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
+                    holder = this.context.lookup(Registries.PLACED_FEATURE).getOrThrow(this.resourceKey);
+                } else {
+                    holder = this.context.register(this.resourceKey, placedFeature);
+                }
             }
             return new PlacedFeatureDefinition(this.resourceKey, placedFeature, holder);
         }
