@@ -89,8 +89,8 @@
     "ambient": [
       {
         "type": "minecraft:bat",
-        "maxCount": 8,
-        "minCount": 8,
+        "maxCount": 4,
+        "minCount": 2,
         "weight": 10
       }
     ],
@@ -111,26 +111,13 @@
         "weight": 95
       },
       {
-        "type": "minecraft:skeleton",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
         "type": "minecraft:drowned",
         "maxCount": 1,
         "minCount": 1,
         "weight": 100
       }
     ],
-    "underground_water_creature": [
-      {
-        "type": "minecraft:glow_squid",
-        "maxCount": 6,
-        "minCount": 4,
-        "weight": 10
-      }
-    ],
+    "underground_water_creature": [],
     "water_ambient": [
       {
         "type": "minecraft:salmon",
