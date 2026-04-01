@@ -1035,7 +1035,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .setAttribute(EnvironmentAttributes.FOG_COLOR, 16379351)
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2171215)
 
-            .addDefaultOverworldCarvers()
+            .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.TERRAIN_STONE_CLIFF),
                 null,
                 null,
