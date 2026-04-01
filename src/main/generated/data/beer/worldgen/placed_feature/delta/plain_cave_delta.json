@@ -44,10 +44,10 @@
             "to_place": {
               "type": "minecraft:simple_state_provider",
               "state": {
-                "Name": "minecraft:sea_pickle",
+                "Name": "minecraft:light",
                 "Properties": {
-                  "pickles": "2",
-                  "waterlogged": "true"
+                  "level": "12",
+                  "waterlogged": "false"
                 }
               }
             }
