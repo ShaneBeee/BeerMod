@@ -39,7 +39,7 @@ public class PlateauBiomes {
     private static @NotNull ResourceKey<Biome> getTemperate(int humidity, int weirdness) {
         return switch (humidity) {
             case 0, 1 -> weirdness == 1 ? Biomes.CHERRY_GROVE : Biomes.MEADOW;
-            case 2 -> weirdness == 1 ? Biomes.FOREST : BeerBiomes.FOREST_MOSS_GARDEN;
+            case 2 -> weirdness == 1 ? BeerBiomes.FOREST_MOSS_GARDEN : Biomes.FOREST;
             case 3 -> weirdness == 1 ? Biomes.BIRCH_FOREST : Biomes.MEADOW;
             default -> weirdness == 1 ? Biomes.PALE_GARDEN : Biomes.DARK_FOREST;
         };

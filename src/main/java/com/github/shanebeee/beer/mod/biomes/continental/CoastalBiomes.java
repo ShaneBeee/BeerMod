@@ -5,7 +5,6 @@ import com.github.shanebeee.beer.mod.biomes.special.BeachBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.MiddleBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.RiverBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.ShatteredBiomes;
-import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -24,11 +23,7 @@ public class CoastalBiomes {
     }
 
     public static @NotNull ResourceKey<Biome> getValley(int temp, int humidity, int weirdness) {
-        return switch (temp) {
-            case 0, 1 -> RiverBiomes.getBiome(temp, humidity, weirdness);
-            case 2 -> BeerBiomes.RIVER_TEMPERATE_RIVER;
-            default -> humidity > 3 ? BeerBiomes.RIVER_LUSH_RIVER : BeerBiomes.RIVER_DESERT_RIVER;
-        };
+        return RiverBiomes.getBiome(temp, humidity, weirdness);
     }
 
     public static @NotNull ResourceKey<Biome> getLow(int temp, int humidity, int weirdness, int erosion) {

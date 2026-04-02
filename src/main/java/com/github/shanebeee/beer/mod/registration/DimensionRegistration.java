@@ -4,7 +4,6 @@ import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.DimensionDefinition;
 import com.github.shanebeee.beer.api.utils.BiomeDefaults;
 import com.github.shanebeee.beer.mod.biomes.continental.CoastalBiomes;
-import com.github.shanebeee.beer.mod.biomes.continental.DeepOceanBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.FarInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.MidInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.NearInlandBiomes;
@@ -96,8 +95,8 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
     private @NotNull ResourceKey<Biome> getBiome(int continent, int temp, int humidity, int weirdness, int pv, int erosion) {
         return switch (continent) {
             case 0 -> Biomes.MUSHROOM_FIELDS;
-            case 1 -> DeepOceanBiomes.getBiome(temp, humidity, weirdness);
-            case 2 -> OceanBiomes.getBiome(temp, humidity, weirdness);
+            case 1 -> OceanBiomes.getBiome(true, temp, humidity, weirdness);
+            case 2 -> OceanBiomes.getBiome(false, temp, humidity, weirdness);
             case 3 -> CoastalBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
             case 4 -> NearInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
             case 5 -> MidInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);

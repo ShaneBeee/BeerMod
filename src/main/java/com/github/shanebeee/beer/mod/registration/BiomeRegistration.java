@@ -1130,8 +1130,8 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
         BiomeDefinition tall_oak = BiomeDefinition.builder(BeerBiomes.FOREST_TALL_OAK, context)
             .hasPrecipitation(true)
-            .temperature(0.7f)
-            .downfall(0.8f)
+            .temperature(0.2f)
+            .downfall(0.5f)
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
