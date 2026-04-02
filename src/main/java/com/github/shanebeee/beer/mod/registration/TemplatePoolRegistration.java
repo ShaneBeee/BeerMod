@@ -33,7 +33,7 @@ public class TemplatePoolRegistration extends BaseRegistration<StructureTemplate
         TemplatePoolDefinition mineshaft_minecart = TemplatePoolDefinition.builder(TemplatePools.MINESHAFT_COMMON_MINECART, context)
             .addTemplate(StructurePoolElement.single("beer:mineshaft/common/minecart/empty"), 10)
             .addTemplate(StructurePoolElement.single("beer:mineshaft/common/minecart/looted_cart"), 1)
-            .addTemplate(StructurePoolElement.single("beer:mineshaft/common/minecart/empty_cart"), 3)
+            .addTemplate(StructurePoolElement.single("beer:mineshaft/common/minecart/empty_cart"), 2)
             .build();
         register(mineshaft_minecart);
     }

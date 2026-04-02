@@ -31,7 +31,7 @@
         },
         "projection": "rigid"
       },
-      "weight": 3
+      "weight": 2
     }
   ],
   "fallback": "minecraft:empty"
