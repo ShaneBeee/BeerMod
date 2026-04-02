@@ -48,6 +48,8 @@ public class ConfiguredFeatures {
     // VEGETATION
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_AZALEA_BUSH_OR_SCRUB = register("vegetation/azalea_bush_or_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_AZALEA_SCRUB = register("vegetation/azalea_scrub");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_DESERT_CACTUS = register("vegetation/desert_cactus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_DESERT_CACTUS_FLOWER = register("vegetation/desert_cactus_flower");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_FLOWERING_AZALEA_SCRUB = register("vegetation/flowering_azalea_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_LUSH_RIVER_PLANTS = register("vegetation/lush_river_plants");
 

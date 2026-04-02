@@ -42,7 +42,7 @@ public class ShatteredBiomes {
     }
 
     private static @NotNull ResourceKey<Biome> getHot(int temp, int humidity, int weirdness) {
-        return humidity <= 2 ? BeerBiomes.DESERT_DRY_DESERT : BeerBiomes.DESERT_LUSH_DESERT;
+        return DesertBiomes.getBiome(4, humidity, weirdness);
     }
 
 }

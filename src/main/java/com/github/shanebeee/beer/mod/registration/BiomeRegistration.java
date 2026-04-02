@@ -617,6 +617,65 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
     }
 
     private void desertBiomes(BootstrapContext<Biome> context) {
+        BiomeDefinition cactus_fields = BiomeDefinition.builder(BeerBiomes.DESERT_CACTUS_FIELDS, context)
+            .hasPrecipitation(false)
+            .temperature(1.0f)
+            .downfall(0.8f)
+
+            .waterColor(6003155)
+            .foliageColorOverride(442658)
+            .grassColorOverride(-8213182)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
+            .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.REPLACE_GRASS_TO_SAND),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
+                List.of(CavePlacements.AMETHYST_GEODE),
+                List.of(CavePlacements.FOSSIL_UPPER,
+                    CavePlacements.FOSSIL_LOWER,
+                    CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                List.of(MiscOverworldPlacements.DESERT_WELL),
+                null,
+                null,
+                null,
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB,
+                    PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
+                    VegetationPlacements.PATCH_GRASS_BADLANDS,
+                    VegetationPlacements.PATCH_DRY_GRASS_DESERT,
+                    VegetationPlacements.PATCH_DEAD_BUSH_2,
+                    PlacedFeatures.VEGETATION_CACTUS_FIELDS_CACTUS),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PILLAGER, 5, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
+                BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.SPAWNS_GOLD_RABBITS,
+                BiomeTags.HAS_RUINED_PORTAL_DESERT, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
+                BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(cactus_fields);
+
         BiomeDefinition dry_desert = BiomeDefinition.builder(BeerBiomes.DESERT_DRY_DESERT, context)
             .hasPrecipitation(false)
             .temperature(2.0f)
@@ -684,7 +743,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
         BiomeDefinition lush_desert = BiomeDefinition.builder(BeerBiomes.DESERT_LUSH_DESERT, context)
             .hasPrecipitation(true)
-            .temperature(0.7f)
+            .temperature(1.0f)
             .downfall(0.8f)
 
             .waterColor(6003155)
@@ -751,6 +810,65 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .build();
         register(lush_desert);
+
+        BiomeDefinition steppe = BiomeDefinition.builder(BeerBiomes.DESERT_STEPPE_DESERT, context)
+            .hasPrecipitation(false)
+            .temperature(1.0f)
+            .downfall(0.8f)
+
+            .waterColor(6003155)
+            .foliageColorOverride(442658)
+            .grassColorOverride(-8213182)
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
+            .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.REPLACE_GRASS_TO_SAND),
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
+                List.of(CavePlacements.AMETHYST_GEODE),
+                List.of(CavePlacements.FOSSIL_UPPER,
+                    CavePlacements.FOSSIL_LOWER,
+                    CavePlacements.MONSTER_ROOM,
+                    CavePlacements.MONSTER_ROOM_DEEP),
+                List.of(MiscOverworldPlacements.DESERT_WELL),
+                null,
+                null,
+                null,
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB,
+                    PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
+                    VegetationPlacements.PATCH_GRASS_BADLANDS,
+                    VegetationPlacements.PATCH_DRY_GRASS_DESERT,
+                    VegetationPlacements.PATCH_DEAD_BUSH_2,
+                    PlacedFeatures.VEGETATION_STEPPE_DESERT_CACTUS),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PILLAGER, 5, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+
+            .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
+                BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.SPAWNS_GOLD_RABBITS,
+                BiomeTags.HAS_RUINED_PORTAL_DESERT, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
+                BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(steppe);
     }
 
     private void forestBiomes(BootstrapContext<Biome> context) {

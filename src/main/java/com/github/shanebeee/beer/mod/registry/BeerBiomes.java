@@ -24,8 +24,10 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> COAST_PALM_BEACH = register("coast/palm_beach");
 
     // DESERT
+    public static final ResourceKey<Biome> DESERT_CACTUS_FIELDS = register("desert/cactus_fields");
     public static final ResourceKey<Biome> DESERT_DRY_DESERT = register("desert/dry_desert");
     public static final ResourceKey<Biome> DESERT_LUSH_DESERT = register("desert/lush_desert");
+    public static final ResourceKey<Biome> DESERT_STEPPE_DESERT = register("desert/steppe_desert");
 
     // FOREST
     public static final ResourceKey<Biome> FOREST_BAMBOO_JUNGLE = register("forest/bamboo_jungle");

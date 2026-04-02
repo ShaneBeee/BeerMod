@@ -1,0 +1,56 @@
+{
+  "feature": {
+    "type": "minecraft:random_selector",
+    "config": {
+      "default": {
+        "feature": "beer:vegetation/desert_cactus",
+        "placement": []
+      },
+      "features": [
+        {
+          "chance": 0.2,
+          "feature": {
+            "feature": "beer:vegetation/desert_cactus_flower",
+            "placement": []
+          }
+        }
+      ]
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 5
+    },
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 5,
+        "min_inclusive": 2
+      }
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "minecraft:cactus",
+          "Properties": {
+            "age": "0"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

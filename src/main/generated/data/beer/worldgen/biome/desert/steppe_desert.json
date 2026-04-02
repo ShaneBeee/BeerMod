@@ -26,8 +26,7 @@
   },
   "features": [
     [
-      "beer:replace/grass_to_sand",
-      "beer:delta/lush_desert_delta"
+      "beer:replace/grass_to_sand"
     ],
     [
       "minecraft:lake_lava_underground"
@@ -83,34 +82,21 @@
     ],
     [
       "minecraft:glow_lichen",
-      "beer:tree/lush_desert_palm",
       "beer:vegetation/lush_desert_azalea_scrub",
       "beer:vegetation/azalea_bush_or_scrub",
-      "minecraft:flower_default",
       "minecraft:patch_grass_badlands",
       "minecraft:patch_dry_grass_desert",
       "minecraft:patch_dead_bush_2",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal",
-      "minecraft:patch_sugar_cane_desert",
-      "minecraft:patch_pumpkin",
-      "minecraft:patch_cactus_desert"
+      "beer:vegetation/steppe_desert_cactus"
     ],
     [
       "minecraft:freeze_top_layer"
     ]
   ],
-  "has_precipitation": true,
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [
-      {
-        "type": "minecraft:bat",
-        "maxCount": 8,
-        "minCount": 8,
-        "weight": 10
-      }
-    ],
+    "ambient": [],
     "axolotls": [],
     "creature": [
       {
@@ -135,19 +121,7 @@
         "weight": 100
       },
       {
-        "type": "minecraft:zombie",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 19
-      },
-      {
-        "type": "minecraft:zombie_villager",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "minecraft:skeleton",
+        "type": "minecraft:stray",
         "maxCount": 4,
         "minCount": 4,
         "weight": 50
@@ -159,21 +133,15 @@
         "weight": 100
       },
       {
-        "type": "minecraft:slime",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
         "type": "minecraft:enderman",
         "maxCount": 4,
         "minCount": 1,
         "weight": 10
       },
       {
-        "type": "minecraft:witch",
-        "maxCount": 1,
-        "minCount": 1,
+        "type": "minecraft:pillager",
+        "maxCount": 4,
+        "minCount": 2,
         "weight": 5
       },
       {

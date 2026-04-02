@@ -1,7 +1,9 @@
 {
   "values": [
+    "beer:desert/cactus_fields",
     "beer:desert/dry_desert",
     "beer:desert/lush_desert",
+    "beer:desert/steppe_desert",
     "beer:forest/baobab_savanna",
     "beer:plains/dry_plains",
     "beer:river/desert_river",

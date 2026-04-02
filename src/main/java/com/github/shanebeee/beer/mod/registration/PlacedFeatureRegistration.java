@@ -1253,6 +1253,42 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(rooted_dirt_blob);
+
+        PlacedFeatureDefinition cactus_fields_cactus = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_CACTUS_FIELDS_CACTUS, context)
+            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                    .configuredFeature(ConfiguredFeatures.VEGETATION_DESERT_CACTUS_FLOWER)
+                    .build().getHolder(), 0.335f)),
+                PlacedFeatureDefinition.builder(context)
+                    .configuredFeature(ConfiguredFeatures.VEGETATION_DESERT_CACTUS)
+                    .build().getHolder()))
+            .placementModifiers(
+                RarityFilter.onAverageOnceEvery(3),
+                CountPlacement.of(UniformInt.of(3, 7)),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO)),
+                BiomeFilter.biome())
+            .build();
+        register(cactus_fields_cactus);
+
+        PlacedFeatureDefinition steppe_cactus = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_STEPPE_DESERT_CACTUS, context)
+            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                    .configuredFeature(ConfiguredFeatures.VEGETATION_DESERT_CACTUS_FLOWER)
+                    .build().getHolder(), 0.2f)),
+                PlacedFeatureDefinition.builder(context)
+                    .configuredFeature(ConfiguredFeatures.VEGETATION_DESERT_CACTUS)
+                    .build().getHolder()))
+            .placementModifiers(
+                RarityFilter.onAverageOnceEvery(5),
+                CountPlacement.of(UniformInt.of(2, 5)),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO)),
+                BiomeFilter.biome())
+            .build();
+        register(steppe_cactus);
     }
 
 }

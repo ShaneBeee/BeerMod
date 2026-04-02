@@ -1,6 +1,8 @@
 {
   "values": [
+    "beer:desert/cactus_fields",
     "beer:desert/dry_desert",
-    "beer:desert/lush_desert"
+    "beer:desert/lush_desert",
+    "beer:desert/steppe_desert"
   ]
 }

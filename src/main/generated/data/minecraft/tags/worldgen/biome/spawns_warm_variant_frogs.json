@@ -2,8 +2,10 @@
   "values": [
     "beer:coast/lush_coast",
     "beer:coast/palm_beach",
+    "beer:desert/cactus_fields",
     "beer:desert/dry_desert",
     "beer:desert/lush_desert",
+    "beer:desert/steppe_desert",
     "beer:swamp/dripleaf_swamp"
   ]
 }

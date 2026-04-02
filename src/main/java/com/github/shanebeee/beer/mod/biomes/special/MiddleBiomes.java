@@ -58,7 +58,7 @@ public class MiddleBiomes {
     }
 
     private static ResourceKey<Biome> getHot(int humidity, int weirdness) {
-        return humidity <= 2 ? BeerBiomes.DESERT_DRY_DESERT : BeerBiomes.DESERT_LUSH_DESERT;
+        return DesertBiomes.getBiome(4, humidity, weirdness);
     }
 
 }

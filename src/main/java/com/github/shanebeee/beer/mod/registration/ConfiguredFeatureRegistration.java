@@ -650,6 +650,29 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             .build();
         register(azalea_bush);
 
+        ConfiguredFeatureDefinition desert_cactus = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.VEGETATION_DESERT_CACTUS, context)
+            .config(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                List.of(
+                    new Layer(UniformInt.of(2, 4), BlockStateProvider.simple(Blocks.CACTUS))
+                ),
+                Direction.UP,
+                BlockPredicate.matchesTag(BlockTags.AIR),
+                false))
+            .build();
+        register(desert_cactus);
+
+        ConfiguredFeatureDefinition desert_cactus_flower = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.VEGETATION_DESERT_CACTUS_FLOWER, context)
+            .config(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                List.of(
+                    new Layer(UniformInt.of(2, 4), BlockStateProvider.simple(Blocks.CACTUS)),
+                    new Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.CACTUS_FLOWER))
+                ),
+                Direction.UP,
+                BlockPredicate.matchesTag(BlockTags.AIR),
+                false))
+            .build();
+        register(desert_cactus_flower);
+
         List<WeightedPlacedFeature> plants = new ArrayList<>();
         Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
         for (Direction direction : directions) {

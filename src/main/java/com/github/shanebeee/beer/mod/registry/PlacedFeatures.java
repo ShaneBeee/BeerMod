@@ -78,6 +78,7 @@ public class PlacedFeatures {
     // VEGETATION
     public static final ResourceKey<PlacedFeature> VEGETATION_AZALEA_BUSH_OR_SCRUB = register("vegetation/azalea_bush_or_scrub");
     public static final ResourceKey<PlacedFeature> VEGETATION_BAMBOO_SOME_PODZOL = register("vegetation/bamboo_some_podzol");
+    public static final ResourceKey<PlacedFeature> VEGETATION_CACTUS_FIELDS_CACTUS = register("vegetation/cactus_fields_cactus");
     public static final ResourceKey<PlacedFeature> VEGETATION_LUSH_DESERT_AZALEA_SCRUB = register("vegetation/lush_desert_azalea_scrub");
     public static final ResourceKey<PlacedFeature> VEGETATION_LUSH_RIVER_PLANTS = register("vegetation/lush_river_plants");
     public static final ResourceKey<PlacedFeature> VEGETATION_MOSS_PATCH = register("vegetation/moss_patch");
@@ -91,6 +92,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> VEGETATION_PILE_MELON_PUMPKIN = register("vegetation/pile_melon_pumpkin");
     public static final ResourceKey<PlacedFeature> VEGETATION_PILE_MOSS = register("vegetation/pile_moss");
     public static final ResourceKey<PlacedFeature> VEGETATION_ROOT_DIRT_BLOB = register("vegetation/rooted_dirt_blob");
+    public static final ResourceKey<PlacedFeature> VEGETATION_STEPPE_DESERT_CACTUS = register("vegetation/steppe_desert_cactus");
 
     private static ResourceKey<PlacedFeature> register(String key) {
         return Beer.getKey(Registries.PLACED_FEATURE, key);
