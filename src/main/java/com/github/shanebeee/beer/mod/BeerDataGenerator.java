@@ -24,6 +24,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.timeline.Timeline;
 import org.jspecify.annotations.NonNull;
 
@@ -37,6 +38,7 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = generator.createPack();
         pack.addProvider(DataRegistration::new);
         pack.addProvider(BiomeTagRegistration::new);
+        pack.addProvider(StructureTagRegistration::new);
         pack.addProvider(TimelineTagRegistration::new);
         pack.addProvider(TagRegistration::new);
     }
@@ -84,6 +86,28 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
             for (Definable<Biome> definition : BaseRegistration.getDefinables(Registries.BIOME)) {
                 for (TagKey<Biome> tagKey : definition.getTagKeys()) {
                     ResourceKey<Biome> resourceKey = definition.getResourceKey();
+                    // Should never happen, but let's be safe
+                    if (resourceKey == null) continue;
+
+                    getOrCreateRawBuilder(tagKey)
+                        .addElement(resourceKey.identifier())
+                        .build();
+                }
+            }
+        }
+    }
+
+    public static class StructureTagRegistration extends FabricTagsProvider<Structure> {
+
+        public StructureTagRegistration(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+            super(output, Registries.STRUCTURE, registriesFuture);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
+            for (Definable<Structure> definition : BaseRegistration.getDefinables(Registries.STRUCTURE)) {
+                for (TagKey<Structure> tagKey : definition.getTagKeys()) {
+                    ResourceKey<Structure> resourceKey = definition.getResourceKey();
                     // Should never happen, but let's be safe
                     if (resourceKey == null) continue;
 

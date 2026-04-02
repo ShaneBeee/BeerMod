@@ -7,7 +7,7 @@ import net.minecraft.world.level.levelgen.structure.StructureSet;
 
 public class StructureSets {
 
-    public static ResourceKey<StructureSet> MINESHAFTS = register("mineshafts");
+    // Currently none
 
     private static ResourceKey<StructureSet> register(String key) {
         return Beer.getKey(Registries.STRUCTURE_SET, key);

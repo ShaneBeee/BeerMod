@@ -23,6 +23,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSetting
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +32,9 @@ import java.util.Optional;
 
 public class StructureDefinition extends Definable<Structure> {
 
-    public StructureDefinition(ResourceKey<Structure> resourceKey, @NonNull Structure value, Holder.@Nullable Reference<Structure> holder) {
-        super(resourceKey, value, holder);
+    public StructureDefinition(ResourceKey<Structure> resourceKey, @NonNull Structure value,
+                               Holder.@Nullable Reference<Structure> holder, List<TagKey<Structure>> tagKeys) {
+        super(resourceKey, value, holder, tagKeys);
     }
 
     public static JigsawBuilder jigsawBuilder(ResourceKey<Structure> resourceKey, BootstrapContext<Structure> context) {
@@ -58,6 +61,7 @@ public class StructureDefinition extends Definable<Structure> {
         private JigsawStructure.MaxDistance maxDistanceFromCenter;
         private DimensionPadding dimensionPadding = DimensionPadding.ZERO;
         private LiquidSettings liquidSettings = LiquidSettings.APPLY_WATERLOGGING;
+        private final List<TagKey<Structure>> tagKeys = new ArrayList<>();
 
         public JigsawBuilder(ResourceKey<Structure> resourceKey, BootstrapContext<Structure> context) {
             this.resourceKey = resourceKey;
@@ -134,6 +138,12 @@ public class StructureDefinition extends Definable<Structure> {
             return this;
         }
 
+        @SafeVarargs
+        public final JigsawBuilder addToTag(TagKey<Structure>... tagKeys) {
+            Collections.addAll(this.tagKeys, tagKeys);
+            return this;
+        }
+
         public StructureDefinition build() {
             HolderSet.Named<Biome> orThrow = this.context.lookup(Registries.BIOME).getOrThrow(this.biomeTagKey);
             Structure.StructureSettings structureSettings = new Structure.StructureSettings(
@@ -162,7 +172,7 @@ public class StructureDefinition extends Definable<Structure> {
                 holder = this.context.register(this.resourceKey, jigsawStructure);
             }
 
-            return new StructureDefinition(this.resourceKey, jigsawStructure, holder);
+            return new StructureDefinition(this.resourceKey, jigsawStructure, holder, this.tagKeys);
         }
     }
 

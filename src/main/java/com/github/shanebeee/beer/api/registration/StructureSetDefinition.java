@@ -50,9 +50,7 @@ public class StructureSetDefinition extends Definable<StructureSet> {
         }
 
         public Builder addStructure(ResourceKey<Structure> key) {
-            Holder.Reference<Structure> structure = this.context.lookup(Registries.STRUCTURE).getOrThrow(key);
-            this.set.add(StructureSet.entry(structure));
-            return this;
+            return addStructure(key, 1);
         }
 
         public StructureSetDefinition build() {

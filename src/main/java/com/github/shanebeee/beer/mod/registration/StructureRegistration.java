@@ -7,6 +7,7 @@ import com.github.shanebeee.beer.mod.registry.Structures;
 import com.github.shanebeee.beer.mod.registry.TemplatePools;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.tags.StructureTags;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
@@ -33,6 +34,7 @@ public class StructureRegistration extends BaseRegistration<Structure, Structure
             .start(TemplatePools.MINESHAFT_SPRUCE_STAIRS)
             .step(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)
             .terrainAdjustment(TerrainAdjustment.ENCAPSULATE)
+            .addToTag(StructureTags.MINESHAFT)
             .build();
         register(mineshaft_spruce);
     }
