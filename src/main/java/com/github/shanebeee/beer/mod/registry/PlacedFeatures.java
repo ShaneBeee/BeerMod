@@ -38,6 +38,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
     public static final ResourceKey<PlacedFeature> DELTA_LUSH_DESERT_DELTA = register("delta/lush_desert_delta");
     public static final ResourceKey<PlacedFeature> DELTA_PLAIN_CAVE_DELTA = register("delta/plain_cave_delta");
+    public static final ResourceKey<PlacedFeature> DELTA_STONE_LAVA_DELTA = register("delta/stone_lava_delta");
     public static final ResourceKey<PlacedFeature> DELTA_SWAMP_DELTA = register("delta/swamp_delta");
 
     // REPLACE
@@ -47,6 +48,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_DIORITE = register("replace/stone_to_diorite");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_ICE = register("replace/stone_to_ice");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_SNOW = register("replace/stone_to_snow");
+    public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_STONE_BRICKS = register("replace/stone_to_stone_bricks");
 
     // TERRAIN
     public static final ResourceKey<PlacedFeature> TERRAIN_BROWN_CONCRETE_DISK = register("terrain/brown_concrete_disk");

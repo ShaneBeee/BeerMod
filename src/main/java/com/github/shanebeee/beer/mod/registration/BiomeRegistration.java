@@ -25,6 +25,8 @@ import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.animal.chicken.ChickenSoundVariant;
+import net.minecraft.world.entity.animal.chicken.ChickenSoundVariants;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.block.Blocks;
@@ -352,6 +354,53 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .build();
         register(plain_Cave);
+
+        // FOR THE MEMEs
+        // Not a real biome put in place
+        ChickenSoundVariant.ChickenSoundSet chickenSoundSet = SoundEvents.CHICKEN_SOUNDS.get(ChickenSoundVariants.SoundSet.CLASSIC).adultSounds();
+        BiomeDefinition lava_chicken = BiomeDefinition.builder(BeerBiomes.CAVE_LAVA_CHICKEN, context)
+            .hasPrecipitation(false)
+            .temperature(0.8f)
+            .downfall(0.2f)
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, -13487566)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.0f)
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.empty(),
+                List.of(new AmbientAdditionsSettings(SoundEvents.MUSIC_DISC_LAVA_CHICKEN, 0.0000001f),
+                    new AmbientAdditionsSettings(SoundEvents.CHICKEN_HURT_BABY, 0.0005f),
+                    new AmbientAdditionsSettings(chickenSoundSet.hurtSound(), 0.0005f),
+                    new AmbientAdditionsSettings(SoundEvents.CHICKEN_AMBIENT_BABY, 0.0005f),
+                    new AmbientAdditionsSettings(chickenSoundSet.ambientSound(), 0.0005f)))
+            )
+
+            .addDefaultUndergroundOreFeatures()
+            .features(List.of(PlacedFeatures.DELTA_STONE_LAVA_DELTA),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.REPLACE_STONE_TO_STONE_BRICKS),
+                null,
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CHICKEN, 2, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(lava_chicken);
     }
 
     private void coastBiomes(BootstrapContext<Biome> context) {

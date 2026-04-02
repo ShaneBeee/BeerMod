@@ -97,6 +97,15 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             .build();
         register(basalt_delta);
 
+        ConfiguredFeatureDefinition stone_lava = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_STONE_LAVA_DELTA, context)
+            .config(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
+                Blocks.LAVA.defaultBlockState(),
+                Blocks.STONE_BRICKS.defaultBlockState(),
+                UniformInt.of(3, 7),
+                UniformInt.of(1, 3)))
+            .build();
+        register(stone_lava);
+
         ConfiguredFeatureDefinition basalt_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_BASALT_POOL, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
                 BlockTags.BASE_STONE_OVERWORLD,

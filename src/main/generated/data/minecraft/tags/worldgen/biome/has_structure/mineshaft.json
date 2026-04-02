@@ -2,6 +2,7 @@
   "values": [
     "beer:cave/ice_cave",
     "beer:cave/plain_cave",
+    "beer:cave/lava_chicken",
     "beer:desert/dry_desert",
     "beer:desert/lush_desert",
     "beer:forest/baobab_savanna",

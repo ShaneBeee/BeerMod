@@ -308,6 +308,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(basalt_delta);
+
         PlacedFeatureDefinition basalt_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BASALT_POOL, context)
             .configuredFeature(ConfiguredFeatures.DELTA_BASALT_POOL)
             .placementModifiers(CountOnEveryLayerPlacement.of(2),
@@ -467,6 +468,13 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(plain_cave);
 
+        PlacedFeatureDefinition stone_lava = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_STONE_LAVA_DELTA, context)
+            .configuredFeature(ConfiguredFeatures.DELTA_STONE_LAVA_DELTA)
+            .placementModifiers(CountOnEveryLayerPlacement.of(UniformInt.of(10, 20)),
+                BiomeFilter.biome())
+            .build();
+        register(stone_lava);
+
         PlacedFeatureDefinition swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SWAMP_DELTA, context)
             .configuredFeature(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
                 Blocks.WATER.defaultBlockState(),
@@ -516,6 +524,11 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             Blocks.STONE, Blocks.SNOW_BLOCK,
             1, 40, 100, 2, 7);
         register(stone_to_snow);
+
+        PlacedFeatureDefinition stone_to_stone_bricks = createUndergroundReplacement(context, PlacedFeatures.REPLACE_STONE_TO_STONE_BRICKS,
+            Blocks.STONE, Blocks.STONE_BRICKS,
+            1, 100, 100, 10, 12);
+        register(stone_to_stone_bricks);
 
         PlacedFeatureDefinition stone_to_ice = createUndergroundReplacement(context, PlacedFeatures.REPLACE_STONE_TO_ICE,
             Blocks.STONE, Blocks.PACKED_ICE,

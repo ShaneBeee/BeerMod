@@ -32,6 +32,10 @@ public class TagRegistration extends BlockTagsProvider {
         // Allow small dripleaf on more blocks
         valueLookupBuilder(BlockTags.SUPPORTS_SMALL_DRIPLEAF)
             .add(Blocks.GRASS_BLOCK, Blocks.SAND, Blocks.DIRT);
+
+        // Allow chickens to spawn on stone bricks
+        valueLookupBuilder(BlockTags.ANIMALS_SPAWNABLE_ON)
+            .add(Blocks.STONE_BRICKS);
     }
 
 }

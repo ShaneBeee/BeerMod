@@ -15,6 +15,7 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_DELTA = register("delta/basalt_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MOSS_DELTA = register("delta/moss_delta");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_STONE_LAVA_DELTA = register("delta/stone_lava_delta");
 
     // TERRAIN
     public static final ResourceKey<ConfiguredFeature<?, ?>> TERRAIN_SAND_SHORE_DISK = register("terrain/sand_shore_disk");
