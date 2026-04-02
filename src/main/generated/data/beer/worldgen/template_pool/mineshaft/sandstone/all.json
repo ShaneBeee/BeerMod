@@ -1,0 +1,148 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/hall/hall_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 40
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/hall/hall_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 50
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/hall/hall_3",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 40
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/hall/hall_with_spawner",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 10
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/stair_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/stair_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 7
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/stair_3",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 7
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/cross_tower_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 15
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/cross_tower_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 15
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/cross_tower_3",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 15
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/cross_1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 40
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/cross_2",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 30
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "beer:mineshaft/sandstone/cross/cross_3",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 30
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

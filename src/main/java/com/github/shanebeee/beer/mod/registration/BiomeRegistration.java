@@ -265,7 +265,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
             .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.TROPICAL_FISH, 25, 8, 8)
 
-            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+            .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SANDSTONE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
         register(dry_cave);

@@ -8,6 +8,7 @@ import net.minecraft.world.level.biome.Biome;
 
 public class BeerBiomeTags {
 
+    public static TagKey<Biome> HAS_MINESHAFT_SANDSTONE = register("has_structure/mineshaft/sandstone");
     public static TagKey<Biome> HAS_MINESHAFT_SPRUCE = register("has_structure/mineshaft/spruce");
 
     private static TagKey<Biome> register(String key) {

@@ -9,6 +9,10 @@
   },
   "structures": [
     {
+      "structure": "beer:mineshaft/sandstone",
+      "weight": 1
+    },
+    {
       "structure": "beer:mineshaft/spruce",
       "weight": 1
     },

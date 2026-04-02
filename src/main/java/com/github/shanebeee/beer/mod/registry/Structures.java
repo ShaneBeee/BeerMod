@@ -7,6 +7,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 
 public class Structures {
 
+    public static ResourceKey<Structure> MINESHAFT_SANDSTONE = register("mineshaft/sandstone");
     public static ResourceKey<Structure> MINESHAFT_SPRUCE = register("mineshaft/spruce");
 
     private static ResourceKey<Structure> register(String key) {

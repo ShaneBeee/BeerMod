@@ -33,6 +33,7 @@ public class StructureSetRegistration extends BaseRegistration<StructureSet, Str
                 1,
                 0,
                 RandomSpreadType.LINEAR))
+            .addStructure(Structures.MINESHAFT_SANDSTONE)
             .addStructure(Structures.MINESHAFT_SPRUCE)
             .addStructure(BuiltinStructures.MINESHAFT)
             .addStructure(BuiltinStructures.MINESHAFT_MESA)

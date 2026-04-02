@@ -23,6 +23,21 @@ public class StructureRegistration extends BaseRegistration<Structure, Structure
     }
 
     private void mineshafts(BootstrapContext<Structure> context) {
+        StructureDefinition mineshaft_sandstone = StructureDefinition.jigsawBuilder(Structures.MINESHAFT_SANDSTONE, context)
+            .biomeTag(BeerBiomeTags.HAS_MINESHAFT_SANDSTONE)
+            .liquidSettings(LiquidSettings.IGNORE_WATERLOGGING)
+            .maxDistanceFromCenter(64, 40)
+            .maxDepth(10)
+            .startHeight(UniformHeight.of(
+                VerticalAnchor.absolute(-40),
+                VerticalAnchor.absolute(30)))
+            .start(TemplatePools.MINESHAFT_SANDSTONE_STAIRS)
+            .step(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)
+            .terrainAdjustment(TerrainAdjustment.ENCAPSULATE)
+            .addToTag(StructureTags.MINESHAFT)
+            .build();
+        register(mineshaft_sandstone);
+
         StructureDefinition mineshaft_spruce = StructureDefinition.jigsawBuilder(Structures.MINESHAFT_SPRUCE, context)
             .biomeTag(BeerBiomeTags.HAS_MINESHAFT_SPRUCE)
             .liquidSettings(LiquidSettings.IGNORE_WATERLOGGING)
