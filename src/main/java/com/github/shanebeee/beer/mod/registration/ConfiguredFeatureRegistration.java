@@ -256,7 +256,17 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 new MegaJungleTrunkPlacer(7, 10, 10),
                 BlockStateProvider.simple(Blocks.ACACIA_LEAVES),
                 new AcaciaFoliagePlacer(UniformInt.of(3, 4), ConstantInt.of(0)),
-                Optional.empty(),
+                Optional.of(new MangroveRootPlacer(
+                    UniformInt.of(1, 2),
+                    BlockStateProvider.simple(Blocks.ACACIA_WOOD),
+                    Optional.empty(),
+                    new MangroveRootPlacement(
+                        HolderSet.empty(),
+                        HolderSet.empty(),
+                        BlockStateProvider.simple(Blocks.DIRT),
+                        5,
+                        7,
+                        1.0f))),
                 new ThreeLayersFeatureSize(1, 1, 0, 1, 3, OptionalInt.empty()),
                 BlockStateProvider.simple(Blocks.ACACIA_LOG))
                 .build())
@@ -269,7 +279,17 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 new MegaJungleTrunkPlacer(8, 10, 10),
                 BlockStateProvider.simple(Blocks.JUNGLE_LEAVES),
                 new AcaciaFoliagePlacer(UniformInt.of(3, 4), ConstantInt.of(0)),
-                Optional.empty(),
+                Optional.of(new MangroveRootPlacer(
+                    UniformInt.of(1, 2),
+                    BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
+                    Optional.empty(),
+                    new MangroveRootPlacement(
+                        HolderSet.empty(),
+                        HolderSet.empty(),
+                        BlockStateProvider.simple(Blocks.DIRT),
+                        5,
+                        7,
+                        1.0f))),
                 new ThreeLayersFeatureSize(1, 1, 0, 1, 3, OptionalInt.empty()),
                 BlockStateProvider.simple(Blocks.JUNGLE_LOG))
                 .build())
@@ -282,7 +302,17 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 new MegaJungleTrunkPlacer(6, 10, 10),
                 BlockStateProvider.simple(Blocks.OAK_LEAVES),
                 new AcaciaFoliagePlacer(UniformInt.of(3, 4), ConstantInt.of(0)),
-                Optional.empty(),
+                Optional.of(new MangroveRootPlacer(
+                    UniformInt.of(1, 2),
+                    BlockStateProvider.simple(Blocks.OAK_WOOD),
+                    Optional.empty(),
+                    new MangroveRootPlacement(
+                        HolderSet.empty(),
+                        HolderSet.empty(),
+                        BlockStateProvider.simple(Blocks.DIRT),
+                        5,
+                        7,
+                        1.0f))),
                 new ThreeLayersFeatureSize(1, 1, 0, 1, 3, OptionalInt.empty()),
                 BlockStateProvider.simple(Blocks.OAK_LOG))
                 .build())
