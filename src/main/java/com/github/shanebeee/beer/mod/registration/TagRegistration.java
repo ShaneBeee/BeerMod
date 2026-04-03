@@ -25,9 +25,9 @@ public class TagRegistration extends BlockTagsProvider {
         valueLookupBuilder(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
             .add(Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.SMOOTH_BASALT);
 
-        // Prevent leaves from decaying on mangrove roots
+        // Prevent leaves from decaying on mangrove roots/bamboo
         valueLookupBuilder(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
-            .add(Blocks.MANGROVE_ROOTS);
+            .add(Blocks.MANGROVE_ROOTS, Blocks.BAMBOO);
 
         // Allow small dripleaf on more blocks
         valueLookupBuilder(BlockTags.SUPPORTS_SMALL_DRIPLEAF)

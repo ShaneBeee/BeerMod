@@ -7,6 +7,7 @@ import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
@@ -14,10 +15,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BambooLeaves;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -38,7 +41,11 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.rootplacers.AboveRootPlacement;
+import net.minecraft.world.level.levelgen.feature.rootplacers.MangroveRootPlacement;
+import net.minecraft.world.level.levelgen.feature.rootplacers.MangroveRootPlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
@@ -50,6 +57,8 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorato
 import net.minecraft.world.level.levelgen.feature.treedecorators.CocoaDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.PlaceOnGroundDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
@@ -280,6 +289,25 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             .build();
         register(baobab_oak);
 
+        ConfiguredFeatureDefinition bamboo_palm = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BAMBOO_PALM, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.BAMBOO.defaultBlockState()
+                    .setValue(BambooStalkBlock.AGE, 1)
+                    .setValue(BambooStalkBlock.STAGE, 1)
+                    .setValue(BambooStalkBlock.LEAVES, BambooLeaves.NONE)),
+                new StraightTrunkPlacer(2, 2, 0),
+                BlockStateProvider.simple(Blocks.AZALEA_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+                new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(1), 2),
+                Optional.empty(),
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.GRASS_BLOCK))
+                .ignoreVines()
+                .build())
+            .build();
+        register(bamboo_palm);
+
         ConfiguredFeatureDefinition boababs = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BAOBABS, context)
             .config(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
@@ -326,6 +354,31 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 .build())
             .build();
         register(cold_swamp_pale);
+
+        ConfiguredFeatureDefinition cypress_shallow = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_CYPRESS_SHALLOW, context)
+            .config(Feature.TREE, createCyprus(context, 1, 3, 2, 12, 1.0f))
+            .build();
+        register(cypress_shallow);
+
+        ConfiguredFeatureDefinition cypress_mid = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_CYPRESS_MID, context)
+            .config(Feature.TREE, createCyprus(context, 3, 5, 1, 15, 0f))
+            .build();
+        register(cypress_mid);
+
+        ConfiguredFeatureDefinition cypress_deep = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_CYPRESS_DEEP, context)
+            .config(Feature.TREE, createCyprus(context, 7, 9, 1, 20, 0f))
+            .build();
+        register(cypress_deep);
+
+        ConfiguredFeatureDefinition cypress_surface = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_CYPRESS_SURFACE, context)
+            .config(Feature.TREE, createCyprus(context, 1, 2, 2, 12, 1.0f))
+            .build();
+        register(cypress_surface);
+
+        ConfiguredFeatureDefinition cypress_surface_alt = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_CYPRESS_SURFACE_ALT, context)
+            .config(Feature.TREE, createCyprus(context, 1, 2, 1, 12, 0f))
+            .build();
+        register(cypress_surface_alt);
 
         ConfiguredFeatureDefinition fallen_stripped_pale_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, context)
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
@@ -734,4 +787,39 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             .build();
     }
 
+    private static TreeConfiguration createCyprus(BootstrapContext<ConfiguredFeature<?, ?>> context,
+                                                  int trunkOffsetYMin, int trunkOffsetYMax,
+                                                  int maxRootWidth, int maxRootLength, float randomSkewChance) {
+        return new TreeConfiguration.TreeConfigurationBuilder(
+            BlockStateProvider.simple(Blocks.ACACIA_WOOD),
+            new FancyTrunkPlacer(10, 2, 8),
+            BlockStateProvider.simple(Blocks.AZALEA_LEAVES.defaultBlockState()
+                .setValue(BlockStateProperties.DISTANCE, 7)
+                .setValue(BlockStateProperties.PERSISTENT, false)),
+            new MegaJungleFoliagePlacer(UniformInt.of(1, 2), ConstantInt.of(1), 1),
+            Optional.of(new MangroveRootPlacer(
+                UniformInt.of(trunkOffsetYMin, trunkOffsetYMax),
+                BlockStateProvider.simple(Blocks.ACACIA_WOOD),
+                Optional.of(new AboveRootPlacement(
+                    new WeightedStateProvider(WeightedList.<BlockState>builder()
+                        .add(Blocks.MOSS_CARPET.defaultBlockState(), 5)
+                        .add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1)
+                        .build()
+                    ), 1.0f)),
+                new MangroveRootPlacement(
+                    context.lookup(Registries.BLOCK).getOrThrow(BlockTags.MANGROVE_ROOTS_CAN_GROW_THROUGH),
+                    HolderSet.direct(
+                        BuiltInRegistries.BLOCK.getOrThrow(Blocks.MUD.builtInRegistryHolder().key()),
+                        BuiltInRegistries.BLOCK.getOrThrow(Blocks.MUDDY_MANGROVE_ROOTS.builtInRegistryHolder().key())),
+                    BlockStateProvider.simple(Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState()
+                        .setValue(BlockStateProperties.AXIS, Direction.Axis.Y)),
+                    maxRootWidth,
+                    maxRootLength,
+                    randomSkewChance))),
+            new TwoLayersFeatureSize(2, 0, 2, OptionalInt.of(4)),
+            BlockStateProvider.simple(Blocks.ACACIA_LOG))
+            .decorators(List.of(new TrunkVineDecorator()))
+            .ignoreVines()
+            .build();
+    }
 }

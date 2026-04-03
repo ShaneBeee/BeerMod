@@ -1,0 +1,116 @@
+{
+  "attributes": {
+    "minecraft:audio/ambient_sounds": {
+      "additions": [
+        {
+          "sound": "minecraft:music_disc.lava_chicken",
+          "tick_chance": 1.0000000116860974E-7
+        },
+        {
+          "sound": "minecraft:entity.baby_chicken.hurt",
+          "tick_chance": 5.000000237487257E-4
+        },
+        {
+          "sound": "minecraft:entity.chicken.hurt",
+          "tick_chance": 5.000000237487257E-4
+        },
+        {
+          "sound": "minecraft:entity.baby_chicken.ambient",
+          "tick_chance": 5.000000237487257E-4
+        },
+        {
+          "sound": "minecraft:entity.chicken.ambient",
+          "tick_chance": 5.000000237487257E-4
+        }
+      ]
+    },
+    "minecraft:audio/music_volume": 0.0,
+    "minecraft:visual/fog_color": "#323232",
+    "minecraft:visual/fog_end_distance": 50.0,
+    "minecraft:visual/fog_start_distance": 5.0,
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/water_fog_color": "#86fcec"
+  },
+  "carvers": [],
+  "downfall": 0.2,
+  "effects": {
+    "water_color": "#3f76e4"
+  },
+  "features": [
+    [
+      "beer:delta/stone_lava_delta"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_medium",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper",
+      "minecraft:underwater_magma",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [
+      "beer:replace/stone_to_stone_bricks"
+    ],
+    [],
+    [
+      "minecraft:glow_lichen"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:chicken",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 2
+      },
+      {
+        "type": "minecraft:zombie",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.8
+}

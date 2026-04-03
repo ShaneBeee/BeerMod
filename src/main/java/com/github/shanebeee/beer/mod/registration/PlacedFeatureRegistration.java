@@ -806,6 +806,26 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(beachy_palm);
 
+        PlacedFeatureDefinition cypresses = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_CYPRESSES, context)
+            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
+                        .configuredFeature(ConfiguredFeatures.TREE_BAMBOO_PALM)
+                        .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.AIR)))
+                        .build().getHolder(), 0.15f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_CYPRESS_SHALLOW).build().getHolder(), 0.25f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_CYPRESS_MID).build().getHolder(), 0.25f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_CYPRESS_DEEP).build().getHolder(), 0.25f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_CYPRESS_SURFACE_ALT).build().getHolder(), 0.15f)),
+                PlacedFeatureDefinition.builder(context).configuredFeature(ConfiguredFeatures.TREE_CYPRESS_SURFACE_ALT).build().getHolder()))
+            .placementModifiers(CountPlacement.of(40),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.MANGROVE_PROPAGULE.defaultBlockState(), BlockPos.ZERO)))
+            .build();
+        register(cypresses);
+
         PlacedFeatureDefinition desert_river_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_DESERT_RIVER_PALM, context)
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
             .placementModifiers(CountPlacement.of(15),

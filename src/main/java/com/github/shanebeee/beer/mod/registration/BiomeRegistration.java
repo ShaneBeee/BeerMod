@@ -1031,6 +1031,43 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .build();
         register(baobab_savanna);
 
+        BiomeDefinition bayou = BiomeDefinition.builder(BeerBiomes.FOREST_BAYOU, context)
+            .hasPrecipitation(true)
+            .temperature(1.2f)
+            .downfall(0.2f)
+            .waterColor(3829036)
+            .foliageColorOverride(7441446)
+
+            .addDefaultOverworldCarvers()
+
+            .features(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.TREE_CYPRESSES,
+                    VegetationPlacements.PATCH_GRASS_SAVANNA,
+                    VegetationPlacements.PATCH_WATERLILY,
+                    VegetationPlacements.PATCH_SUGAR_CANE_SWAMP,
+                    AquaticPlacements.SEAGRASS_SWAMP),
+                null)
+
+            .addDefaultMonsterSpawns(false)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 50, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 50, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.PARROT, 20, 1, 3)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.TROPICAL_FISH, 20, 5, 8)
+
+            .addToTag( BiomeTags.IS_OVERWORLD, BiomeTags.WATER_ON_MAP_OUTLINES)
+
+            .build();
+        register(bayou);
+
         BiomeDefinition dry_forest = BiomeDefinition.builder(BeerBiomes.FOREST_DRY_FOREST, context)
             .hasPrecipitation(false)
             .temperature(0.7f)

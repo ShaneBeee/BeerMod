@@ -22,6 +22,7 @@ public class ConfiguredFeatures {
 
     // TREE
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_ACACIA_FOREST = register("tree/acacia_forest");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAMBOO_PALM = register("tree/bamboo_palm");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBABS = register("tree/baobabs");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBAB_ACACIA = register("tree/baobab_acacia");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBAB_JUNGLE = register("tree/baobab_jungle");
@@ -29,6 +30,11 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BIRCH_SCRUB = register("tree/birch_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_COLD_SWAMP_OAK = register("tree/cold_swamp_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_COLD_SWAMP_PALE = register("tree/cold_swamp_pale");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_CYPRESS_DEEP = register("tree/cypress_deep");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_CYPRESS_MID = register("tree/cypress_mid");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_CYPRESS_SHALLOW = register("tree/cypress_shallow");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_CYPRESS_SURFACE = register("tree/cypress_surface");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_CYPRESS_SURFACE_ALT = register("tree/cypress_surface_alt");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_STRIPPED_PALE_OAK = register("tree/fallen_stripped_pale_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_STRIPPED_WARPED_STEM = register("tree/fallen_stripped_warped_stem");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_TALL_OAK = register("tree/fallen_tall_oak");
