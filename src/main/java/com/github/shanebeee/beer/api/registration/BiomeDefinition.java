@@ -40,8 +40,8 @@ public class BiomeDefinition extends Definable<Biome> {
         super(resourceKey, value, holder, tagKeys);
     }
 
-    public static Builder builder(ResourceKey<Biome> resourceKey, BootstrapContext<Biome> entries) {
-        return new Builder(resourceKey, entries);
+    public static Builder builder(ResourceKey<Biome> resourceKey, BootstrapContext<Biome> context) {
+        return new Builder(resourceKey, context);
     }
 
     @SuppressWarnings("unused")
