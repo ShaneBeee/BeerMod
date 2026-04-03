@@ -60,7 +60,7 @@ public class BiomeDefaults {
         Climate.Parameter.span(0.56666666F, 0.7666667F)
     };
 
-    public static final Climate.Parameter[][] PVS = new Climate.Parameter[][] {
+    public static final Climate.Parameter[][] PVS = new Climate.Parameter[][]{
         PV_VALLEYS, PV_LOW, PV_MID, PV_HIGH, PV_PEAK
     };
 
@@ -68,7 +68,6 @@ public class BiomeDefaults {
     public static final Climate.Parameter DEEP_OCEAN_CONTINENTALNESS = Climate.Parameter.span(-1.05F, -0.455F);
     public static final Climate.Parameter OCEAN_CONTINENTALNESS = Climate.Parameter.span(-0.455F, -0.19F);
     public static final Climate.Parameter COAST_CONTINENTALNESS = Climate.Parameter.span(-0.19F, -0.11F);
-    public static final Climate.Parameter INLAND_CONTINENTALNESS = Climate.Parameter.span(-0.11F, 0.55F);
     public static final Climate.Parameter NEAR_INLAND_CONTINENTALNESS = Climate.Parameter.span(-0.11F, 0.03F);
     public static final Climate.Parameter MID_INLAND_CONTINENTALNESS = Climate.Parameter.span(0.03F, 0.3F);
     public static final Climate.Parameter FAR_INLAND_CONTINENTALNESS = Climate.Parameter.span(0.3F, 1.0F);
@@ -78,7 +77,6 @@ public class BiomeDefaults {
         DEEP_OCEAN_CONTINENTALNESS,
         OCEAN_CONTINENTALNESS,
         COAST_CONTINENTALNESS,
-        INLAND_CONTINENTALNESS,
         NEAR_INLAND_CONTINENTALNESS,
         MID_INLAND_CONTINENTALNESS,
         FAR_INLAND_CONTINENTALNESS
