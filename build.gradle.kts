@@ -87,6 +87,6 @@ tasks {
         from("src/main/resources/datapack") {
         }
         destinationDirectory =
-            file("/Users/ShaneBee/Desktop/Server/Minecraft/${serverLocation}/universe/world/datapacks/")
+            file("/Users/ShaneBee/Desktop/Server/Minecraft/${serverLocation}/world/datapacks/")
     }
 }
