@@ -995,6 +995,16 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING))
             .build();
         register(tropical_forest);
+
+        PlacedFeatureDefinition windswept_pine = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_WINDSWEPT_OAK, context)
+            .configuredFeature(ConfiguredFeatures.TREE_WINDSWEPT_OAK)
+            .placementModifiers(CountPlacement.of(1),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+            .build();
+        register(windswept_pine);
     }
 
     private void vegetation(BootstrapContext<PlacedFeature> context) {
@@ -1187,10 +1197,10 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                             .setValue(BlockStateProperties.WATERLOGGED, true),
                         1)
                     .build())))
-            .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(BlockPos.ZERO, Fluids.WATER)),
-                CountPlacement.of(32),
-                InSquarePlacement.spread(),
-                RandomOffsetPlacement.ofTriangle(3, 0),
+            .placementModifiers(
+                CountPlacement.of(64),
+                RandomOffsetPlacement.ofTriangle(5, 0),
+                SurfaceWaterDepthFilter.forMaxDepth(3),
                 HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(62))),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(BlockPos.ZERO, Fluids.WATER)),
                 BiomeFilter.biome())

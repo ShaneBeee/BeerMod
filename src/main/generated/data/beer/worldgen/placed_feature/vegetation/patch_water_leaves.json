@@ -42,25 +42,15 @@
   },
   "placement": [
     {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "minecraft:matching_fluids",
-        "fluids": "minecraft:water"
-      }
-    },
-    {
       "type": "minecraft:count",
-      "count": 32
-    },
-    {
-      "type": "minecraft:in_square"
+      "count": 64
     },
     {
       "type": "minecraft:random_offset",
       "xz_spread": {
         "type": "minecraft:trapezoid",
-        "max": 3,
-        "min": -3,
+        "max": 5,
+        "min": -5,
         "plateau": 0
       },
       "y_spread": {
@@ -69,6 +59,10 @@
         "min": 0,
         "plateau": 0
       }
+    },
+    {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 3
     },
     {
       "type": "minecraft:height_range",

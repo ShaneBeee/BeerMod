@@ -686,6 +686,30 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                     .build().getHolder()))
             .build();
         register(tropical_forest);
+
+        ConfiguredFeatureDefinition windswept_pine = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_WINDSWEPT_OAK, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                SimpleStateProvider.simple(Blocks.OAK_WOOD),
+                new ForkingTrunkPlacer(5, 2, 3),
+                SimpleStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.WATERLOGGED, false)
+                    .setValue(BlockStateProperties.PERSISTENT, false)
+                    .setValue(BlockStateProperties.DISTANCE, 7)),
+                new AcaciaFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(List.of(
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.PODZOL.defaultBlockState(), 1)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState(), 3)
+                                .build()))))
+                )
+                .build())
+            .build();
+        register(windswept_pine);
     }
 
     private void vegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {

@@ -442,13 +442,13 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .build();
         register(beachy_beach);
 
-        BiomeDefinition coast = BiomeDefinition.builder(BeerBiomes.COAST_COAST, context)
+        BiomeDefinition coast = BiomeDefinition.builder(BeerBiomes.COAST_TEMPERATE_COAST, context)
             .hasPrecipitation(true)
             .temperature(0.7f)
             .downfall(0.5f)
             .waterColor(6003155)
-            .foliageColorOverride(442658)
-            .grassColorOverride(11060330)
+            //.foliageColorOverride(442658)
+            //.grassColorOverride(11060330)
 
             .particle(ParticleTypes.CHERRY_LEAVES, 0.0005f)
 
@@ -468,12 +468,13 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                 null,
                 null,
                 null,
-                List.of(PlacedFeatures.VEGETATION_PATCH_WATER_LEAVES,
+                List.of(
+                    PlacedFeatures.VEGETATION_PATCH_WATER_LEAVES,
                     PlacedFeatures.TERRAIN_SAND_SHORE_DISK,
-                    PlacedFeatures.TREE_PALM_BEACH_PALM,
+                    PlacedFeatures.TREE_WINDSWEPT_OAK,
                     PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
                     PlacedFeatures.TERRAIN_MOSSIFY_GRASS,
-                    PlacedFeatures.BUSH_MEDITERRANEAN_BUSHES,
+                    //PlacedFeatures.BUSH_MEDITERRANEAN_BUSHES,
                     VegetationPlacements.PATCH_GRASS_SAVANNA,
                     AquaticPlacements.SEAGRASS_NORMAL),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))

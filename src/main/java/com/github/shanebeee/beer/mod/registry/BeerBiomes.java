@@ -17,8 +17,8 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> CAVE_LAVA_CHICKEN = register("cave/lava_chicken");
 
     // COAST
-    public static final ResourceKey<Biome> COAST_BEACHY_COAST = register("coast/beachy_beach");
-    public static final ResourceKey<Biome> COAST_COAST = register("coast/coast");
+    public static final ResourceKey<Biome> COAST_BEACHY_COAST = register("coast/beachy_coast");
+    public static final ResourceKey<Biome> COAST_TEMPERATE_COAST = register("coast/temperate_coast");
     public static final ResourceKey<Biome> COAST_DRY_COAST = register("coast/dry_coast");
     public static final ResourceKey<Biome> COAST_FROZEN_BEACH = register("coast/frozen_beach");
     public static final ResourceKey<Biome> COAST_LUSH_COAST = register("coast/lush_coast");

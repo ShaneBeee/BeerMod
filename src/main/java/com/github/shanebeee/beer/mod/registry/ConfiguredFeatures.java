@@ -51,6 +51,7 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_TALL_OAK_WITH_LITTER = register("tree/tall_oak_with_litter");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_TALL_STRIPPED_PALE_OAK = register("tree/tall_stripped_pale_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_TROPICAL_FOREST = register("tree/tropical_forest");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_WINDSWEPT_OAK = register("tree/windswept_oak");
 
     // VEGETATION
     public static final ResourceKey<ConfiguredFeature<?, ?>> VEGETATION_AZALEA_BUSH_OR_SCRUB = register("vegetation/azalea_bush_or_scrub");
