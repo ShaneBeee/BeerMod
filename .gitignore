@@ -40,3 +40,6 @@ replay_*.log
 *.jfr
 
 *.cache/
+
+# Generated
+src/main/generated/data/minecraft/dimension/
