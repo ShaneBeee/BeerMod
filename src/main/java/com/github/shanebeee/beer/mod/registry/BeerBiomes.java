@@ -55,6 +55,10 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> SWAMP_COLD_SWAMP = register("swamp/cold_swamp");
     public static final ResourceKey<Biome> SWAMP_DRIPLEAF_SWAMP = register("swamp/dripleaf_swamp");
 
+    // HOLDER
+    // Will remove this once updated to 26.2
+    public static final ResourceKey<Biome> SULFUR_CAVE_PLACEHOLDER = CAVE_BASALT_CAVE;
+
     private static ResourceKey<Biome> register(String key) {
         return Beer.getKey(Registries.BIOME, key);
     }
