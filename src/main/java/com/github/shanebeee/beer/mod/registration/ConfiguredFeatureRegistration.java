@@ -28,12 +28,12 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration.Layer;
+import net.minecraft.world.level.levelgen.feature.configurations.CompositeFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FallenTreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
@@ -117,7 +117,7 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
 
         ConfiguredFeatureDefinition basalt_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_BASALT_POOL, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.BASE_STONE_OVERWORLD,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.BASE_STONE_OVERWORLD),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.SMOOTH_BASALT.defaultBlockState(), 6)
                     .add(Blocks.STONE_BRICKS.defaultBlockState(), 2)
@@ -149,7 +149,7 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
 
         ConfiguredFeatureDefinition forgotten_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_FORGOTTEN_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.MINEABLE_WITH_PICKAXE,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState())
                     .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState())
@@ -187,14 +187,14 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
 
         ConfiguredFeatureDefinition moss_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MOSS_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MOSS_BLOCK.defaultBlockState(), 4)
                     .add(Blocks.GRASS_BLOCK.defaultBlockState(), 1)
                     .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 1)
                     .build()),
                 PlacedFeatureDefinition.builder()
-                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new CompositeFeatureConfiguration(
                         HolderSet.direct(
                             PlacedFeatureDefinition.builder()
                                 .configuredFeature(CaveFeatures.DRIPLEAF)

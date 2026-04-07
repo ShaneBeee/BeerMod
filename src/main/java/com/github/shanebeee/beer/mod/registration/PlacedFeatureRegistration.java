@@ -41,13 +41,13 @@ import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockBlobConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockPileConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.CompositeFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.ReplaceSphereConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
@@ -150,14 +150,14 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         PlacedFeatureDefinition gray_terracotta = createBlob(context,
             PlacedFeatures.BLOB_TERRACOTTA_LIGHT_GRAY,
             BlockTags.BASE_STONE_OVERWORLD,
-            Blocks.LIGHT_GRAY_TERRACOTTA,
+            Blocks.DYED_TERRACOTTA.lightGray(),
             15, -50, 120, 150);
         register(gray_terracotta);
 
         PlacedFeatureDefinition blue_terracotta = createBlob(context,
             PlacedFeatures.BLOB_TERRACOTTA_LIGHT_BLUE,
             BlockTags.BASE_STONE_OVERWORLD,
-            Blocks.LIGHT_BLUE_TERRACOTTA,
+            Blocks.DYED_TERRACOTTA.lightBlue(),
             15, -50, 120, 150);
         register(blue_terracotta);
 
@@ -390,7 +390,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
         PlacedFeatureDefinition dry_cave_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRY_CAVE_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.SANDSTONE.defaultBlockState(), 10)
                     .add(Blocks.COARSE_DIRT.defaultBlockState(), 3)
@@ -416,7 +416,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
         PlacedFeatureDefinition dripleaf_swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRIPLEAF_SWAMP_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.DIRT,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.DIRT),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.GRASS_BLOCK.defaultBlockState(), 10)
                     .add(Blocks.MUD.defaultBlockState(), 3)
@@ -441,7 +441,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
         PlacedFeatureDefinition plain_cave = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_PLAIN_CAVE_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.DRIPSTONE_REPLACEABLE,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.DRIPSTONE_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.STONE_BRICKS.defaultBlockState(), 5)
                     .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 5)
@@ -566,7 +566,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     BlockStateProvider.simple(Blocks.DEAD_BRAIN_CORAL_BLOCK),
                     List.of(new RuleBasedStateProvider.Rule(
                         BlockPredicate.matchesTag(BlockTags.BASE_STONE_OVERWORLD),
-                        BlockStateProvider.simple(Blocks.BROWN_CONCRETE_POWDER)))),
+                        BlockStateProvider.simple(Blocks.CONCRETE_POWDER.brown())))),
                 BlockPredicate.matchesTag(BlockTags.BASE_STONE_OVERWORLD),
                 UniformInt.of(2, 6),
                 2))
@@ -860,7 +860,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
         PlacedFeatureDefinition fallen_warped_stem = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_WARPED_STEM, context)
             .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
-                new SimpleRandomFeatureConfiguration(HolderSet.direct(
+                new CompositeFeatureConfiguration(HolderSet.direct(
                     PlacedFeatureDefinition.builder(context)
                         .configuredFeature(ConfiguredFeatures.TREE_FALLEN_WARPED_STEM)
                         .build().getHolder(),
@@ -1072,7 +1072,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
         PlacedFeatureDefinition moss_patch = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_MOSS_PATCH, context)
             .configuredFeature(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.MOSS_REPLACEABLE,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.MOSS_REPLACEABLE),
                 BlockStateProvider.simple(Blocks.MOSS_BLOCK),
                 patch.getHolder(),
                 CaveSurface.FLOOR,
