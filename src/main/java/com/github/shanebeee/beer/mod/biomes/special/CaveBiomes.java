@@ -8,21 +8,33 @@ import org.jspecify.annotations.NonNull;
 
 public class CaveBiomes {
 
-    public static @NonNull ResourceKey<Biome> getBiome(int continentalness, int temp, int humidity) {
+    public static @NonNull ResourceKey<Biome> getBiome(int continentalness, int temp, int humidity, int weirdness, int pv) {
         if (temp == 0) {
             return BeerBiomes.CAVE_ICE_CAVE;
         } else if (temp == 1) {
             return BeerBiomes.CAVE_DIORITE_CAVE;
         } else if (temp == 2) {
+            if (pv == 2) {
+                return BeerBiomes.CAVE_SULFUR_CAVE;
+            }
+            if (humidity == 4) {
+                return BeerBiomes.CAVE_MUDDY_FEN;
+            }
             return BeerBiomes.CAVE_PLAIN_CAVE;
         } else if (temp == 3) {
+            if (pv == 2) {
+                return BeerBiomes.CAVE_SULFUR_CAVE;
+            }
             return BeerBiomes.CAVE_BASALT_CAVE;
         } else {
-            if (humidity <= 1) {
-                if (continentalness == 7) {
-                    return Biomes.DRIPSTONE_CAVES;
-                }
+            if (continentalness == 6) {
+                return Biomes.DRIPSTONE_CAVES;
+            }
+
+            if (humidity == 0) {
                 return BeerBiomes.CAVE_DRY_CAVE;
+            } else if (humidity == 1) {
+                return BeerBiomes.CAVE_SMOKY_CAVE;
             } else if (humidity == 4) {
                 return Biomes.LUSH_CAVES;
             } else {

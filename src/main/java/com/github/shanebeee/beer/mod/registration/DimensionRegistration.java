@@ -43,15 +43,25 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
                 for (int humidityIndex = 0; humidityIndex < BiomeDefaults.HUMIDITIES.length; humidityIndex++) {
                     Climate.Parameter humidity = BiomeDefaults.HUMIDITIES[humidityIndex];
 
-                    ResourceKey<Biome> biomeKey = CaveBiomes.getBiome(contIndex, tempIndex, humidityIndex);
+                    for (int pvIndex = 0; pvIndex < BiomeDefaults.PVS.length; pvIndex++) {
 
-                    builder.addPoint(biomeKey,
-                        continentalness,
-                        temp,
-                        humidity,
-                        BiomeDefaults.FULL_RANGE,
-                        Climate.Parameter.span(0.078125f, 1.1f),
-                        BiomeDefaults.FULL_RANGE, 0);
+                        for (int weirdIndex = 0; weirdIndex < BiomeDefaults.PVS[pvIndex].length; weirdIndex++) {
+                            Climate.Parameter weirdness = BiomeDefaults.PVS[pvIndex][weirdIndex];
+
+                            int weirdVal = weirdness.max() <= 0 ? 0 : 1;
+
+                            ResourceKey<Biome> biomeKey = CaveBiomes.getBiome(contIndex, tempIndex,
+                                humidityIndex, weirdVal, pvIndex);
+
+                            builder.addPoint(biomeKey,
+                                continentalness,
+                                temp,
+                                humidity,
+                                BiomeDefaults.FULL_RANGE,
+                                Climate.Parameter.span(0.078125f, 1.1f),
+                                weirdness, 0);
+                        }
+                    }
                 }
             }
         }

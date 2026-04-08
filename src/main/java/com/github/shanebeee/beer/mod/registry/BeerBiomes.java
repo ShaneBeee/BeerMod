@@ -13,8 +13,11 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> CAVE_DRY_CAVE = register("cave/dry_cave");
     public static final ResourceKey<Biome> CAVE_FORGOTTEN_CAVE = register("cave/forgotten_cave");
     public static final ResourceKey<Biome> CAVE_ICE_CAVE = register("cave/ice_cave");
+    public static final ResourceKey<Biome> CAVE_MUDDY_FEN = register("cave/muddy_fen");
     public static final ResourceKey<Biome> CAVE_PLAIN_CAVE = register("cave/plain_cave");
     public static final ResourceKey<Biome> CAVE_LAVA_CHICKEN = register("cave/lava_chicken");
+    public static final ResourceKey<Biome> CAVE_SMOKY_CAVE = register("cave/smoky_cave");
+    public static final ResourceKey<Biome> CAVE_SULFUR_CAVE = register("cave/sulfur_cave");
 
     // COAST
     public static final ResourceKey<Biome> COAST_BEACHY_COAST = register("coast/beachy_coast");

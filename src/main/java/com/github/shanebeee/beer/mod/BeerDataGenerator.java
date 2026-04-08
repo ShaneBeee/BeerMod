@@ -17,17 +17,22 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.timeline.Timeline;
 import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
@@ -66,6 +71,54 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
         protected void configure(HolderLookup.@NonNull Provider registries, @NonNull Entries entries) {
             for (BaseRegistration<?, ?> registration : BaseRegistration.getRegistrations()) {
                 registration.addToEntries(entries);
+            }
+            logMissingVanillaBiomes(registries);
+        }
+
+        @SuppressWarnings({"unchecked", "OptionalGetWithoutIsPresent"})
+        private void logMissingVanillaBiomes(HolderLookup.@NonNull Provider registries) {
+            // Verify missing overworld vanilla biomes
+            // This is used to see if I accidentally forgot a vanilla biome
+            List<ResourceKey<Biome>> minecraftBiomes = new ArrayList<>();
+            registries.listRegistries().forEach(registry -> {
+                if (registry.key() == Registries.BIOME) {
+                    registry.listElements().forEach(element -> {
+                        ResourceKey<?> key = element.key();
+                        if (key.identifier().getNamespace().equals("minecraft")) {
+                            minecraftBiomes.add((ResourceKey<Biome>) key);
+                        }
+                    });
+                }
+            });
+            // Remove nether/end biomes
+            minecraftBiomes.removeIf(p -> p.identifier().getPath().contains("end_"));
+            minecraftBiomes.remove(Biomes.THE_END);
+            minecraftBiomes.remove(Biomes.NETHER_WASTES);
+            minecraftBiomes.remove(Biomes.SOUL_SAND_VALLEY);
+            minecraftBiomes.remove(Biomes.CRIMSON_FOREST);
+            minecraftBiomes.remove(Biomes.WARPED_FOREST);
+            minecraftBiomes.remove(Biomes.BASALT_DELTAS);
+            minecraftBiomes.remove(Biomes.THE_VOID);
+
+            List<ResourceKey<Biome>> missing = new ArrayList<>();
+            Definable<LevelStem> first = BaseRegistration.getDefinables(Registries.LEVEL_STEM).getFirst();
+            LevelStem value = first.getValue();
+            BiomeSource biomeSource = value.generator().getBiomeSource();
+
+            List<ResourceKey<Biome>> possible = new ArrayList<>();
+            for (Holder<Biome> possibleBiome : biomeSource.possibleBiomes()) {
+                ResourceKey<Biome> key = possibleBiome.unwrapKey().get();
+                if (key.identifier().getNamespace().equalsIgnoreCase("minecraft")) {
+                    possible.add(key);
+                }
+            }
+            for (ResourceKey<Biome> minecraftBiome : minecraftBiomes) {
+                if (!possible.contains(minecraftBiome)) {
+                    missing.add(minecraftBiome);
+                }
+            }
+            for (ResourceKey<Biome> biomeResourceKey : missing) {
+                Beer.LOGGER.info("Missing Vanilla Biome: '{}'", biomeResourceKey.identifier());
             }
         }
 

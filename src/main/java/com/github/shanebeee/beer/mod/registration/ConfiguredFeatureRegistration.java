@@ -7,6 +7,7 @@ import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -18,6 +19,8 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CaveVinesBlock;
+import net.minecraft.world.level.block.HangingMossBlock;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BambooLeaves;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration.Layer;
@@ -94,6 +98,78 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 false))
             .build();
         register(basalt_pillar);
+
+
+        ConfiguredFeatureDefinition muddy_blob = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_MUDDY_BLOB, context)
+            .config(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
+                BlockTags.MOSS_REPLACEABLE,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.MUD.defaultBlockState(), 5)
+                    .add(Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState(), 1)
+                    .add(Blocks.MOSS_BLOCK.defaultBlockState(), 1)
+                    .build()),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                        List.of(
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                    List.of(
+                                        new Layer(UniformInt.of(2, 6),
+                                            BlockStateProvider.simple(Blocks.PALE_HANGING_MOSS.defaultBlockState()
+                                                .setValue(HangingMossBlock.TIP, false))),
+                                        new Layer(ConstantInt.of(1),
+                                            BlockStateProvider.simple(Blocks.PALE_HANGING_MOSS))),
+                                    Direction.DOWN,
+                                    BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
+                                    false)).build().getHolder(),
+                                0.25f),
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                    List.of(
+                                        new Layer(UniformInt.of(1, 2),
+                                            BlockStateProvider.simple(Blocks.CAVE_VINES_PLANT.defaultBlockState())),
+                                        new Layer(ConstantInt.of(1), new WeightedStateProvider(
+                                            WeightedList.<BlockState>builder()
+                                                .add(Blocks.CAVE_VINES.defaultBlockState()
+                                                    .setValue(CaveVinesBlock.BERRIES, true), 1)
+                                                .add(Blocks.CAVE_VINES.defaultBlockState()
+                                                    .setValue(CaveVinesBlock.BERRIES, false), 3)
+                                                .build()
+                                        ))),
+                                    Direction.DOWN,
+                                    BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
+                                    false)).build().getHolder(),
+                                0.025f),
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                    List.of(
+                                        new Layer(ConstantInt.of(1),
+                                            BlockStateProvider.simple(Blocks.HANGING_ROOTS))),
+                                    Direction.DOWN,
+                                    BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
+                                    false)).build().getHolder(),
+                                0.25f)),
+                        PlacedFeatureDefinition.builder()
+                            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                List.of(
+                                    new Layer(ConstantInt.of(1),
+                                        BlockStateProvider.simple(Blocks.MUDDY_MANGROVE_ROOTS)),
+                                    new Layer(UniformInt.of(1, 4),
+                                        BlockStateProvider.simple(Blocks.MANGROVE_ROOTS))),
+                                Direction.DOWN,
+                                BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
+                                false)).build().getHolder()
+                    )).build().getHolder(),
+                CaveSurface.CEILING,
+                UniformInt.of(2, 4),
+                0.3f,
+                3,
+                0.25f,
+                UniformInt.of(3, 7),
+                0.1f
+            ))
+            .build();
+        register(muddy_blob);
     }
 
     private void delta(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -213,6 +289,68 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 0.9f))
             .build();
         register(moss_delta);
+
+        ConfiguredFeatureDefinition muddy_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MUDDY_DELTA, context)
+            .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
+                BlockTags.LUSH_GROUND_REPLACEABLE,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.MUD.defaultBlockState(), 3)
+                    .add(Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState(), 1)
+                    .add(Blocks.MOSS_BLOCK.defaultBlockState(), 1)
+                    .build()),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                        List.of(
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(CaveFeatures.DRIPLEAF)
+                                .build().getHolder(), 0.2f),
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                    List.of(
+                                        new Layer(ConstantInt.of(1),
+                                            BlockStateProvider.simple(Blocks.MUDDY_MANGROVE_ROOTS)),
+                                        new Layer(UniformInt.of(2, 6),
+                                            BlockStateProvider.simple(Blocks.MANGROVE_ROOTS))),
+                                    Direction.UP,
+                                    BlockPredicate.allOf(
+                                        BlockPredicate.not(BlockPredicate.matchesBlocks(new Vec3i(0, 0, 1), Blocks.MANGROVE_ROOTS)),
+                                        BlockPredicate.not(BlockPredicate.matchesBlocks(new Vec3i(0, 0, -1), Blocks.MANGROVE_ROOTS)),
+                                        BlockPredicate.not(BlockPredicate.matchesBlocks(new Vec3i(1, 0, 0), Blocks.MANGROVE_ROOTS)),
+                                        BlockPredicate.not(BlockPredicate.matchesBlocks(new Vec3i(-1, 0, 0), Blocks.MANGROVE_ROOTS))
+                                    ), false))
+                                .build().getHolder(), 0.4f),
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                    BlockStateProvider.simple(Blocks.SEAGRASS)))
+                                .build().getHolder(), 0.2f),
+                            new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                    BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
+                                        .setValue(LightBlock.LEVEL, 10))))
+                                .build().getHolder(), 0.2f)),
+
+                        PlacedFeatureDefinition.builder()
+                            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(Blocks.SOUL_SAND)))
+                            .placementModifiers(RandomOffsetPlacement.vertical(ConstantInt.of(-1)))
+                            .build().getHolder()))
+                    .build().getHolder(),
+                CaveSurface.FLOOR,
+                UniformInt.of(1, 4),
+                0.01f,
+                1,
+                0.35f,
+                UniformInt.of(1, 3),
+                0.9f))
+            .build();
+        register(muddy_delta);
+
+        ConfiguredFeatureDefinition sulfur_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_SULFUR_POOL, context)
+            .config(Feature.LAKE, new LakeFeature.Configuration(
+                BlockStateProvider.simple(Blocks.WATER),
+                BlockStateProvider.simple(Blocks.ORANGE_TERRACOTTA)))
+            .build();
+        register(sulfur_pool);
     }
 
     private void terrain(BootstrapContext<ConfiguredFeature<?, ?>> entries) {
