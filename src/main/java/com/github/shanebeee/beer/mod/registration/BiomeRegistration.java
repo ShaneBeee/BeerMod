@@ -479,6 +479,42 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .build();
         register(smoky_cave);
+
+        BiomeDefinition sulfur_cave = BiomeDefinition.builder(BeerBiomes.CAVE_SULFUR_CAVE, context)
+            .temperature(0.8f)
+            .downfall(0.4f)
+            .waterColor(new Color(52, 191, 137).getRGB())
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(23, 84, 60).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(45, 58, 16).getRGB())
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(45, 58, 16).getRGB())
+
+            .addDefaultOverworldCarvers()
+            .addDefaultUndergroundOreFeatures()
+            .addDefaultMonsterRoomFeatures()
+            .features(null,
+                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                List.of(CavePlacements.AMETHYST_GEODE),
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.BLOB_SULFUR,
+                    PlacedFeatures.DELTA_SULFUR_POOL,
+                    PlacedFeatures.BLOB_SOULSAND),
+                null,
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultCaveSpawns()
+            .addDefaultMonsterSpawns(false)
+
+            .build();
+        register(sulfur_cave);
     }
 
     private void coastBiomes(BootstrapContext<Biome> context) {

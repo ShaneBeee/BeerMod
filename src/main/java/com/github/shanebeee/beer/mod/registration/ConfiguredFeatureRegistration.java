@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration.Layer;
@@ -343,6 +344,13 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 0.9f))
             .build();
         register(muddy_delta);
+
+        ConfiguredFeatureDefinition sulfur_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_SULFUR_POOL, context)
+            .config(Feature.LAKE, new LakeFeature.Configuration(
+                BlockStateProvider.simple(Blocks.WATER),
+                BlockStateProvider.simple(Blocks.ORANGE_TERRACOTTA)))
+            .build();
+        register(sulfur_pool);
     }
 
     private void terrain(BootstrapContext<ConfiguredFeature<?, ?>> entries) {

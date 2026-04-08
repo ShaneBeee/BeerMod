@@ -18,6 +18,8 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> BLOB_TERRACOTTA_LIGHT_GRAY = register("blob/terracotta_light_gray");
     public static final ResourceKey<PlacedFeature> BLOB_TERRACOTTA_LIGHT_BLUE = register("blob/terracotta_light_blue");
     public static final ResourceKey<PlacedFeature> BLOB_STONE = register("blob/stone");
+    public static final ResourceKey<PlacedFeature> BLOB_SOULSAND = register("blob/soulsand");
+    public static final ResourceKey<PlacedFeature> BLOB_SULFUR = register("blob/sulfur");
     public static final ResourceKey<PlacedFeature> BLOB_TUFF = register("blob/tuff");
 
     // BUSH
@@ -43,6 +45,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> DELTA_MUDDY_DELTA = register("delta/muddy_delta");
     public static final ResourceKey<PlacedFeature> DELTA_PLAIN_CAVE_DELTA = register("delta/plain_cave_delta");
     public static final ResourceKey<PlacedFeature> DELTA_STONE_LAVA_DELTA = register("delta/stone_lava_delta");
+    public static final ResourceKey<PlacedFeature> DELTA_SULFUR_POOL = register("delta/sulfur_pool");
     public static final ResourceKey<PlacedFeature> DELTA_SWAMP_DELTA = register("delta/swamp_delta");
 
     // REPLACE

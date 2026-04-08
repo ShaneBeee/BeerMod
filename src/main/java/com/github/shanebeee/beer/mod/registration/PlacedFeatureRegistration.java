@@ -168,6 +168,33 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             22, 0, 120, 10);
         register(stone_blobs);
 
+        PlacedFeatureDefinition soulsand = PlacedFeatureDefinition.builder(PlacedFeatures.BLOB_SOULSAND, context)
+            .configuredFeature(Feature.DISK, new DiskConfiguration(
+                BlockStateProvider.simple(Blocks.SOUL_SAND),
+                BlockPredicate.solid(),
+                ConstantInt.of(1),
+                0
+            ))
+            .placementModifiers(CountPlacement.of(256),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(-60), VerticalAnchor.absolute(120)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN,
+                    BlockPredicate.allOf(
+                        BlockPredicate.solid(),
+                        BlockPredicate.matchesFluids(new Vec3i(0,1,0),Fluids.WATER)
+                    ),
+                    12),
+                BiomeFilter.biome())
+            .build();
+        register(soulsand);
+
+        PlacedFeatureDefinition sulfur_blobs = createBlob(context,
+            PlacedFeatures.BLOB_SULFUR,
+            BlockTags.BASE_STONE_OVERWORLD,
+            Blocks.YELLOW_TERRACOTTA,
+            50, -60, 120, 150);
+        register(sulfur_blobs);
+
         PlacedFeatureDefinition tuff_blobs = createBlob(context,
             PlacedFeatures.BLOB_TUFF,
             BlockTags.BASE_STONE_OVERWORLD,
@@ -537,6 +564,22 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(stone_lava);
+
+        PlacedFeatureDefinition sulfur_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SULFUR_POOL, context)
+            .configuredFeature(ConfiguredFeatures.DELTA_SULFUR_POOL)
+            .placementModifiers(CountPlacement.of(256),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(256)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.solid()),
+                EnvironmentScanPlacement.scanningFor(Direction.UP,
+                    BlockPredicate.matchesTag(BlockTags.AIR),
+                    32),
+                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.YELLOW_TERRACOTTA)),
+                BiomeFilter.biome()
+            )
+            .build();
+        register(sulfur_pool);
 
         PlacedFeatureDefinition swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SWAMP_DELTA, context)
             .configuredFeature(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
