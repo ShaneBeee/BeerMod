@@ -21,7 +21,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -119,7 +118,7 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
                 }
             }
             for (ResourceKey<Biome> biomeResourceKey : missing) {
-                DataProvider.LOGGER.info("Missing Vanilla Biome: {}", biomeResourceKey.identifier());
+                Beer.LOGGER.info("Missing Vanilla Biome: '{}'", biomeResourceKey.identifier());
             }
         }
 
