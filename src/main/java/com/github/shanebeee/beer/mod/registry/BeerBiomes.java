@@ -17,7 +17,7 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> CAVE_PLAIN_CAVE = register("cave/plain_cave");
     public static final ResourceKey<Biome> CAVE_LAVA_CHICKEN = register("cave/lava_chicken");
     public static final ResourceKey<Biome> CAVE_SMOKY_CAVE = register("cave/smoky_cave");
-    public static final ResourceKey<Biome> CAVE_SULFUR_CAVE = register("cave/sulfur_cave");
+    public static final ResourceKey<Biome> CAVE_SULFUR_CAVE = register("minecraft:sulfur_caves");
 
     // COAST
     public static final ResourceKey<Biome> COAST_BEACHY_COAST = register("coast/beachy_coast");

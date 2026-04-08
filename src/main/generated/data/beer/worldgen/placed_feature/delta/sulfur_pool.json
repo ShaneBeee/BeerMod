@@ -1,5 +1,24 @@
 {
-  "feature": "beer:delta/sulfur_pool",
+  "feature": {
+    "type": "minecraft:lake",
+    "config": {
+      "barrier": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:sulfur"
+        }
+      },
+      "fluid": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:water",
+          "Properties": {
+            "level": "0"
+          }
+        }
+      }
+    }
+  },
   "placement": [
     {
       "type": "minecraft:count",
@@ -13,10 +32,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 256
+          "absolute": 128
         },
         "min_inclusive": {
-          "above_bottom": 0
+          "above_bottom": 4
         }
       }
     },
@@ -44,7 +63,7 @@
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:matching_blocks",
-        "blocks": "minecraft:yellow_terracotta"
+        "blocks": "minecraft:sulfur"
       }
     },
     {

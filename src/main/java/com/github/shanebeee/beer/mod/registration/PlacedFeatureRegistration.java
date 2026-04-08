@@ -168,33 +168,6 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             22, 0, 120, 10);
         register(stone_blobs);
 
-        PlacedFeatureDefinition soulsand = PlacedFeatureDefinition.builder(PlacedFeatures.BLOB_SOULSAND, context)
-            .configuredFeature(Feature.DISK, new DiskConfiguration(
-                BlockStateProvider.simple(Blocks.SOUL_SAND),
-                BlockPredicate.solid(),
-                ConstantInt.of(1),
-                0
-            ))
-            .placementModifiers(CountPlacement.of(256),
-                InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(-60), VerticalAnchor.absolute(120)),
-                EnvironmentScanPlacement.scanningFor(Direction.DOWN,
-                    BlockPredicate.allOf(
-                        BlockPredicate.solid(),
-                        BlockPredicate.matchesFluids(new Vec3i(0,1,0),Fluids.WATER)
-                    ),
-                    12),
-                BiomeFilter.biome())
-            .build();
-        register(soulsand);
-
-        PlacedFeatureDefinition sulfur_blobs = createBlob(context,
-            PlacedFeatures.BLOB_SULFUR,
-            BlockTags.BASE_STONE_OVERWORLD,
-            Blocks.YELLOW_TERRACOTTA,
-            50, -60, 120, 150);
-        register(sulfur_blobs);
-
         PlacedFeatureDefinition tuff_blobs = createBlob(context,
             PlacedFeatures.BLOB_TUFF,
             BlockTags.BASE_STONE_OVERWORLD,
@@ -357,7 +330,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(
                     new Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.SOUL_CAMPFIRE)),
-                    new Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.WAXED_EXPOSED_COPPER_TRAPDOOR))
+                    new Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.COPPER_TRAPDOOR.exposed()))
                 ),
                 Direction.UP,
                 BlockPredicate.alwaysTrue(),
@@ -376,6 +349,39 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                     )))
             .build();
         register(smoky_grate);
+
+        PlacedFeatureDefinition sulfur_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_SULFUR_POOL, context)
+            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                            BlockStateProvider.simple(Blocks.SOUL_SAND)))
+                        .build().getHolder(),
+                        0.4f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                            BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
+                                .setValue(LightBlock.LEVEL, 11)
+                                .setValue(LightBlock.WATERLOGGED, true))))
+                        .placementModifiers(RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(1)))
+                        .build().getHolder(),
+                        0.4f)
+                ),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                        BlockStateProvider.simple(Blocks.POTENT_SULFUR)))
+                    .build().getHolder()))
+            .placementModifiers(CountPlacement.of(512),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(-50), VerticalAnchor.absolute(120)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN,
+                    BlockPredicate.allOf(
+                        BlockPredicate.solid(),
+                        BlockPredicate.matchesFluids(new Vec3i(0,1,0),Fluids.WATER)
+                    ), 12),
+                BiomeFilter.biome())
+            .build();
+        register(sulfur_pool);
     }
 
     @SuppressWarnings("deprecation")
@@ -566,16 +572,19 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         register(stone_lava);
 
         PlacedFeatureDefinition sulfur_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SULFUR_POOL, context)
-            .configuredFeature(ConfiguredFeatures.DELTA_SULFUR_POOL)
+            .configuredFeature(Feature.LAKE, new LakeFeature.Configuration(
+                BlockStateProvider.simple(Blocks.WATER.defaultBlockState()),
+                BlockStateProvider.simple(Blocks.SULFUR.defaultBlockState())
+            ))
             .placementModifiers(CountPlacement.of(256),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(256)),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(4), VerticalAnchor.absolute(128)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.solid()),
                 EnvironmentScanPlacement.scanningFor(Direction.UP,
                     BlockPredicate.matchesTag(BlockTags.AIR),
                     32),
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.YELLOW_TERRACOTTA)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.SULFUR)),
                 BiomeFilter.biome()
             )
             .build();

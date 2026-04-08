@@ -1,0 +1,113 @@
+{
+  "feature": {
+    "type": "minecraft:random_selector",
+    "config": {
+      "default": {
+        "feature": {
+          "type": "minecraft:simple_block",
+          "config": {
+            "to_place": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:potent_sulfur"
+              }
+            }
+          }
+        },
+        "placement": []
+      },
+      "features": [
+        {
+          "chance": 0.4,
+          "feature": {
+            "feature": {
+              "type": "minecraft:simple_block",
+              "config": {
+                "to_place": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "minecraft:soul_sand"
+                  }
+                }
+              }
+            },
+            "placement": []
+          }
+        },
+        {
+          "chance": 0.4,
+          "feature": {
+            "feature": {
+              "type": "minecraft:simple_block",
+              "config": {
+                "to_place": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "minecraft:light",
+                    "Properties": {
+                      "level": "11",
+                      "waterlogged": "true"
+                    }
+                  }
+                }
+              }
+            },
+            "placement": [
+              {
+                "type": "minecraft:random_offset",
+                "xz_spread": 0,
+                "y_spread": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 512
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 120
+        },
+        "min_inclusive": {
+          "absolute": -50
+        }
+      }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "direction_of_search": "down",
+      "max_steps": 12,
+      "target_condition": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:solid"
+          },
+          {
+            "type": "minecraft:matching_fluids",
+            "fluids": "minecraft:water",
+            "offset": [
+              0,
+              1,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

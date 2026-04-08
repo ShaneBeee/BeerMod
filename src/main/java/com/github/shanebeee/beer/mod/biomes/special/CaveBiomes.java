@@ -14,7 +14,7 @@ public class CaveBiomes {
         } else if (temp == 1) {
             return BeerBiomes.CAVE_DIORITE_CAVE;
         } else if (temp == 2) {
-            if (pv == 2) {
+            if (humidity == 0) {
                 return BeerBiomes.CAVE_SULFUR_CAVE;
             }
             if (humidity == 4) {
@@ -22,7 +22,7 @@ public class CaveBiomes {
             }
             return BeerBiomes.CAVE_PLAIN_CAVE;
         } else if (temp == 3) {
-            if (pv == 2) {
+            if (humidity == 0) {
                 return BeerBiomes.CAVE_SULFUR_CAVE;
             }
             return BeerBiomes.CAVE_BASALT_CAVE;

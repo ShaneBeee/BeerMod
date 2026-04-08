@@ -483,35 +483,40 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
         BiomeDefinition sulfur_cave = BiomeDefinition.builder(BeerBiomes.CAVE_SULFUR_CAVE, context)
             .temperature(0.8f)
             .downfall(0.4f)
-            .waterColor(new Color(52, 191, 137).getRGB())
+            .waterColor(new Color(41, 147, 106).getRGB())
 
             .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(23, 84, 60).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(45, 58, 16).getRGB())
-            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(45, 58, 16).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(26, 33, 9).getRGB())
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(46, 58, 16).getRGB())
 
             .addDefaultOverworldCarvers()
             .addDefaultUndergroundOreFeatures()
             .addDefaultMonsterRoomFeatures()
             .features(null,
                 List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
-                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
+                    MiscOverworldPlacements.LAKE_LAVA_SURFACE,
+                    PlacedFeatures.DELTA_SULFUR_POOL,
+                    PlacedFeatures.DECOR_SULFUR_POOL),
                 List.of(CavePlacements.AMETHYST_GEODE),
                 null,
                 null,
                 null,
                 null,
-                List.of(PlacedFeatures.BLOB_SULFUR,
-                    PlacedFeatures.DELTA_SULFUR_POOL,
-                    PlacedFeatures.BLOB_SOULSAND),
+                List.of(CavePlacements.ROOTED_SULFUR_SPRING),
                 null,
                 null,
-                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+                null)
 
-            .addDefaultCaveSpawns()
-            .addDefaultMonsterSpawns(false)
+            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SULFUR_CUBE, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 50, 2, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 50, 2, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 25, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CAVE_SPIDER, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 50, 2, 2)
 
             .build();
         register(sulfur_cave);
