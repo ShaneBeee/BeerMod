@@ -9,12 +9,14 @@ public class ConfiguredFeatures {
 
     // DECOR
     public static final ResourceKey<ConfiguredFeature<?, ?>> DECOR_BASALT_PILLAR = register("decor/basalt_pillar");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DECOR_MUDDY_BLOB = register("decor/muddy_blob");
 
     // DELTA
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_POOL = register("delta/basalt_pool");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_DELTA = register("delta/basalt_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MOSS_DELTA = register("delta/moss_delta");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MUDDY_DELTA = register("delta/muddy_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_STONE_LAVA_DELTA = register("delta/stone_lava_delta");
 
     // TERRAIN

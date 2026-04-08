@@ -40,6 +40,7 @@ import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockBlobConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration.Layer;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockPileConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
@@ -248,6 +249,23 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(basalt_pillar);
 
+        PlacedFeatureDefinition hanging_chain = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_CHAIN, context)
+            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                List.of(
+                    new Layer(UniformInt.of(6, 12), BlockStateProvider.simple(Blocks.COPPER_CHAIN.exposed()))
+                ),
+                Direction.DOWN,
+                BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
+                false))
+            .placementModifiers(CountPlacement.of(256),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(30), VerticalAnchor.absolute(120)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
+                BiomeFilter.biome())
+            .build();
+        register(hanging_chain);
+
         PlacedFeatureDefinition hanging_fence = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_FENCE, context)
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(BlockColumnConfiguration.layer(
@@ -297,6 +315,40 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(hanging_stone);
+
+        PlacedFeatureDefinition muddy_blob = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_MUDDY_BLOB, context)
+            .configuredFeature(ConfiguredFeatures.DECOR_MUDDY_BLOB)
+            .placementModifiers(CountPlacement.of(100),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(5), VerticalAnchor.absolute(120)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                BiomeFilter.biome())
+            .build();
+        register(muddy_blob);
+
+        PlacedFeatureDefinition smoky_grate = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_SMOKY_GRATE, context)
+            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                List.of(
+                    new Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.SOUL_CAMPFIRE)),
+                    new Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.WAXED_EXPOSED_COPPER_TRAPDOOR))
+                ),
+                Direction.UP,
+                BlockPredicate.alwaysTrue(),
+                false))
+            .placementModifiers(CountPlacement.of(100),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(5), VerticalAnchor.absolute(120)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.hasSturdyFace(Direction.UP), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(
+                    BlockPredicate.allOf(
+                        BlockPredicate.solid(new Vec3i(0, 0, 1)),
+                        BlockPredicate.solid(new Vec3i(0, 0, -1)),
+                        BlockPredicate.solid(new Vec3i(1, 0, 0)),
+                        BlockPredicate.solid(new Vec3i(-1, 0, 0))
+                    )))
+            .build();
+        register(smoky_grate);
     }
 
     @SuppressWarnings("deprecation")
@@ -388,6 +440,17 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(lush_desert_delta);
 
+        PlacedFeatureDefinition muddy_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_MUDDY_DELTA, context)
+            .configuredFeature(ConfiguredFeatures.DELTA_MUDDY_DELTA)
+            .placementModifiers(CountPlacement.of(55),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(5), VerticalAnchor.absolute(60)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), MatchingBlockTagPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(1)),
+                BiomeFilter.biome())
+            .build();
+        register(muddy_delta);
+
         PlacedFeatureDefinition dry_cave_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRY_CAVE_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
                 BlockTags.LUSH_GROUND_REPLACEABLE,
@@ -451,7 +514,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 PlacedFeatureDefinition.builder(context)
                     .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                         BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
-                            .setValue(LightBlock.LEVEL, 12))))
+                            .setValue(LightBlock.LEVEL, 5))))
                     .build().getHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(2),

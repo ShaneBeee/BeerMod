@@ -12,26 +12,23 @@ public class CaveBiomes {
         if (temp == 0) {
             return BeerBiomes.CAVE_ICE_CAVE;
         } else if (temp == 1) {
-            if (pv == 2) {
-                return BeerBiomes.SULFUR_CAVE_PLACEHOLDER;
-            }
             return BeerBiomes.CAVE_DIORITE_CAVE;
         } else if (temp == 2) {
-            if (pv == 2) {
-                return BeerBiomes.SULFUR_CAVE_PLACEHOLDER;
+            if (humidity == 4) {
+                return BeerBiomes.CAVE_MUDDY_FEN;
             }
             return BeerBiomes.CAVE_PLAIN_CAVE;
         } else if (temp == 3) {
             return BeerBiomes.CAVE_BASALT_CAVE;
         } else {
-            if (pv == 2) {
-                return BeerBiomes.SULFUR_CAVE_PLACEHOLDER;
+            if (continentalness == 6) {
+                return Biomes.DRIPSTONE_CAVES;
             }
-            if (humidity <= 1) {
-                if (continentalness == 7) {
-                    return Biomes.DRIPSTONE_CAVES;
-                }
+
+            if (humidity == 0) {
                 return BeerBiomes.CAVE_DRY_CAVE;
+            } else if (humidity == 1) {
+                return BeerBiomes.CAVE_SMOKY_CAVE;
             } else if (humidity == 4) {
                 return Biomes.LUSH_CAVES;
             } else {

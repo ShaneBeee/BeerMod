@@ -4,6 +4,7 @@ import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 
 public class BeerBiomes {
 
@@ -13,8 +14,10 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> CAVE_DRY_CAVE = register("cave/dry_cave");
     public static final ResourceKey<Biome> CAVE_FORGOTTEN_CAVE = register("cave/forgotten_cave");
     public static final ResourceKey<Biome> CAVE_ICE_CAVE = register("cave/ice_cave");
+    public static final ResourceKey<Biome> CAVE_MUDDY_FEN = register("cave/muddy_fen");
     public static final ResourceKey<Biome> CAVE_PLAIN_CAVE = register("cave/plain_cave");
     public static final ResourceKey<Biome> CAVE_LAVA_CHICKEN = register("cave/lava_chicken");
+    public static final ResourceKey<Biome> CAVE_SMOKY_CAVE = register("cave/smoky_cave");
 
     // COAST
     public static final ResourceKey<Biome> COAST_BEACHY_COAST = register("coast/beachy_coast");
@@ -57,7 +60,7 @@ public class BeerBiomes {
 
     // HOLDER
     // Will remove this once updated to 26.2
-    public static final ResourceKey<Biome> SULFUR_CAVE_PLACEHOLDER = CAVE_BASALT_CAVE;
+    public static final ResourceKey<Biome> SULFUR_CAVE_PLACEHOLDER = Biomes.WARPED_FOREST;
 
     private static ResourceKey<Biome> register(String key) {
         return Beer.getKey(Registries.BIOME, key);

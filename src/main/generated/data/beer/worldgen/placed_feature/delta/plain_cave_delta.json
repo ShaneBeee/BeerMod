@@ -46,7 +46,7 @@
               "state": {
                 "Name": "minecraft:light",
                 "Properties": {
-                  "level": "12",
+                  "level": "5",
                   "waterlogged": "false"
                 }
               }

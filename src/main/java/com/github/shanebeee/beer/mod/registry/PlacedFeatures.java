@@ -25,8 +25,11 @@ public class PlacedFeatures {
 
     // DECOR
     public static final ResourceKey<PlacedFeature> DECOR_BASALT_PILLAR = register("decor/basalt_pillar");
+    public static final ResourceKey<PlacedFeature> DECOR_HANGING_CHAIN = register("decor/hanging_chain");
     public static final ResourceKey<PlacedFeature> DECOR_HANGING_FENCE = register("decor/hanging_fence");
     public static final ResourceKey<PlacedFeature> DECOR_HANGING_STONE = register("decor/hanging_stone");
+    public static final ResourceKey<PlacedFeature> DECOR_MUDDY_BLOB = register("decor/muddy_blob");
+    public static final ResourceKey<PlacedFeature> DECOR_SMOKY_GRATE = register("decor/smoky_grate");
 
     // DELTAS
     public static final ResourceKey<PlacedFeature> DELTA_BASALT_POOL = register("delta/basalt_pool");
@@ -37,6 +40,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> DELTA_DRY_CAVE_DELTA = register("delta/dry_cave_delta");
     public static final ResourceKey<PlacedFeature> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
     public static final ResourceKey<PlacedFeature> DELTA_LUSH_DESERT_DELTA = register("delta/lush_desert_delta");
+    public static final ResourceKey<PlacedFeature> DELTA_MUDDY_DELTA = register("delta/muddy_delta");
     public static final ResourceKey<PlacedFeature> DELTA_PLAIN_CAVE_DELTA = register("delta/plain_cave_delta");
     public static final ResourceKey<PlacedFeature> DELTA_STONE_LAVA_DELTA = register("delta/stone_lava_delta");
     public static final ResourceKey<PlacedFeature> DELTA_SWAMP_DELTA = register("delta/swamp_delta");

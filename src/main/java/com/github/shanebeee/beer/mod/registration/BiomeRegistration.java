@@ -61,7 +61,8 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
             .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(168, 3, 3).getRGB())
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, basaltColors)
+            .setAttribute(EnvironmentAttributes.NIGHT_VISION_COLOR, basaltColors)
 
             .addDefaultOverworldCarvers()
 
@@ -315,6 +316,45 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .build();
         register(ice_cave);
 
+        BiomeDefinition muddy_fen = BiomeDefinition.builder(BeerBiomes.CAVE_MUDDY_FEN, context)
+            .hasPrecipitation(false)
+            .temperature(0.8f)
+            .downfall(0.2f)
+            .waterColor(new Color(43, 38, 29).getRGB())
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(30, 31, 21).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(15, 13, 10).getRGB())
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.0f)
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(130, 115, 135).getRGB())
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.DELTA_MUDDY_DELTA,
+                    PlacedFeatures.DECOR_MUDDY_BLOB),
+                null,
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(muddy_fen);
+
         BiomeDefinition plain_Cave = BiomeDefinition.builder(BeerBiomes.CAVE_PLAIN_CAVE, context)
             .hasPrecipitation(false)
             .temperature(0.8f)
@@ -401,6 +441,44 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
             .build();
         register(lava_chicken);
+
+        BiomeDefinition smoky_cave = BiomeDefinition.builder(BeerBiomes.CAVE_SMOKY_CAVE, context)
+            .hasPrecipitation(false)
+            .temperature(0.8f)
+            .downfall(0.2f)
+            .waterColor(4159204)
+
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, -13487566)
+            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 0.0f)
+            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 15.0f)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(PlacedFeatures.DECOR_SMOKY_GRATE,
+                    PlacedFeatures.DECOR_HANGING_CHAIN),
+                null,
+                null,
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+
+            .build();
+        register(smoky_cave);
     }
 
     private void coastBiomes(BootstrapContext<Biome> context) {
@@ -1064,7 +1142,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .addMobSpawn(MobCategory.CREATURE, EntityType.PARROT, 20, 1, 3)
             .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.TROPICAL_FISH, 20, 5, 8)
 
-            .addToTag( BiomeTags.IS_OVERWORLD, BiomeTags.WATER_ON_MAP_OUTLINES)
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.WATER_ON_MAP_OUTLINES)
 
             .build();
         register(bayou);
