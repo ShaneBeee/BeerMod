@@ -15,6 +15,7 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_POOL = register("delta/basalt_pool");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_BASALT_DELTA = register("delta/basalt_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_LUSH_DESERT_DELTA = register("delta/lush_desert_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MOSS_DELTA = register("delta/moss_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_MUDDY_DELTA = register("delta/muddy_delta");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DELTA_STONE_LAVA_DELTA = register("delta/stone_lava_delta");
@@ -47,6 +48,7 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_OAK_SCRUB = register("tree/oak_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_OLIVE_TREE = register("tree/olive_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_PALM_TREE = register("tree/palm_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_PALM_TREE_OASIS = register("tree/palm_tree_oasis");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_RED_IVORYWOOD = register("tree/red_ivorywood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_SPRUCE_SCRUB = register("tree/spruce_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_STICK_PLANT = register("tree/stick_plant");

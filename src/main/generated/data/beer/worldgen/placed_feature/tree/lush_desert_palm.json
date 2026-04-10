@@ -2,8 +2,8 @@
   "feature": "beer:tree/palm_tree",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
+      "type": "minecraft:count",
+      "count": 3
     },
     {
       "type": "minecraft:in_square"
@@ -17,7 +17,10 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "minecraft:dead_bush"
+          "Name": "minecraft:oak_sapling",
+          "Properties": {
+            "stage": "0"
+          }
         }
       }
     },

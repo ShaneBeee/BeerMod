@@ -7,6 +7,7 @@ import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
@@ -35,6 +36,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.blockpredicates.MatchingBlockTagPredicate;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
@@ -86,8 +88,11 @@ import java.util.OptionalInt;
 
 public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, PlacedFeatureDefinition> {
 
+    private final BootstrapContext<PlacedFeature> context;
+
     public PlacedFeatureRegistration(BootstrapContext<PlacedFeature> context) {
         super(Registries.PLACED_FEATURE, context);
+        this.context = context;
         blobs(context);
         bushes(context);
         decor(context);
@@ -181,7 +186,7 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN,
                     BlockPredicate.allOf(
                         BlockPredicate.solid(),
-                        BlockPredicate.matchesFluids(new Vec3i(0,1,0),Fluids.WATER)
+                        BlockPredicate.matchesFluids(new Vec3i(0, 1, 0), Fluids.WATER)
                     ),
                     12),
                 BiomeFilter.biome())
@@ -458,11 +463,14 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
         register(forgotten_delta);
 
         PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, context)
-            .configuredFeature(ConfiguredFeatures.DELTA_MOSS_DELTA)
-            .placementModifiers(RarityFilter.onAverageOnceEvery(5),
+            .configuredFeature(ConfiguredFeatures.DELTA_LUSH_DESERT_DELTA)
+            .placementModifiers(CountPlacement.of(10),
                 InSquarePlacement.spread(),
+                NoiseBasedCountPlacement.of(1, 150, -0.75f),
+                CountPlacement.of(75),
+                RandomOffsetPlacement.of(ConstantInt.of(2), ConstantInt.of(0)),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(0)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)),
                 BiomeFilter.biome())
             .build();
         register(lush_desert_delta);
@@ -613,6 +621,25 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(grass_to_sand);
+
+        PlacedFeatureDefinition grass_water_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_UNDER_WATER_TO_SAND, context)
+            .configuredFeature(Feature.DISK, new DiskConfiguration(
+                new RuleBasedStateProvider(
+                    null,
+                    List.of(
+                        new RuleBasedStateProvider.Rule(
+                            BlockPredicate.matchesBlocks(Blocks.DIRT, Blocks.GRASS_BLOCK),
+                            BlockStateProvider.simple(Blocks.SAND)))),
+                BlockPredicate.matchesBlocks(new Vec3i(0, 1, 0),
+                    Blocks.WATER, Blocks.SEAGRASS, Blocks.BIG_DRIPLEAF_STEM),
+                UniformInt.of(2, 6),
+                2))
+            .placementModifiers(CountPlacement.of(30),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome())
+            .build();
+        register(grass_water_to_sand);
 
         // Diorite
         PlacedFeatureDefinition deepslate_to_diorite = createUndergroundReplacement(context, PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
@@ -831,6 +858,25 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(cliff_feature);
 
+        PlacedFeatureDefinition oasis_patch = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_OASIS_PATCH, context)
+            .configuredFeature(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(
+                Blocks.SAND.defaultBlockState(),
+                Blocks.GRASS_BLOCK.defaultBlockState(),
+                UniformInt.of(2, 4)
+            ))
+            .placementModifiers(
+                CountPlacement.of(16),
+                InSquarePlacement.spread(),
+                NoiseBasedCountPlacement.of(1, 150, -0.72f),
+                CountPlacement.of(32),
+                RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.of(0)),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(63), VerticalAnchor.absolute(77))),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.SAND, Blocks.GRASS_BLOCK)),
+                BiomeFilter.biome())
+            .build();
+        register(oasis_patch);
+
         PlacedFeatureDefinition water_blob = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_WATER_BLOB, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.WATER)))
             .placementModifiers(BlockPredicateFilter.forPredicate(
@@ -1015,12 +1061,33 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(palm_beach_palm);
 
-        PlacedFeatureDefinition lush_desert_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_LUSH_DESERT_PALM, context)
-            .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
-            .placementModifiers(RarityFilter.onAverageOnceEvery(2),
+        PlacedFeatureDefinition palm_oasis_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_PALM_TREE_OASIS, context)
+            .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE_OASIS)
+            .placementModifiers(CountPlacement.of(15),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
+                    BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO),
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(0, 0, 1))),
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(0, 0, -1))),
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(1, 0, 0))),
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(-1, 0, 0))),
+
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(1, 0, 1))),
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(1, 0, -1))),
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(-1, 0, 1))),
+                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(-1, 0, -1)))
+                )),
+                BiomeFilter.biome())
+            .build();
+        register(palm_oasis_palm);
+
+        PlacedFeatureDefinition lush_desert_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_LUSH_DESERT_PALM, context)
+            .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
+            .placementModifiers(CountPlacement.of(3),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)),
                 BiomeFilter.biome())
             .build();
         register(lush_desert_palm);
@@ -1277,6 +1344,25 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
             .build();
         register(cliff_grass);
 
+        PlacedFeatureDefinition oasis_flowers = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_OASIS_FLOWERS, context)
+            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(
+                    getWeightedFeature(VegetationFeatures.SUNFLOWER, 0.1f),
+                    getWeightedFeature(VegetationFeatures.WILDFLOWER, 0.2f),
+                    getWeightedFeature(VegetationFeatures.FIREFLY_BUSH, 0.2f),
+                    getWeightedFeature(VegetationFeatures.FLOWER_CHERRY, 0.1f)
+                ),
+                getFeature(VegetationFeatures.FLOWER_FLOWER_FOREST)
+            ))
+            .placementModifiers(CountPlacement.of(52),
+                InSquarePlacement.spread(),
+                RandomOffsetPlacement.ofTriangle(7, 3),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), Blocks.GRASS_BLOCK)),
+                BiomeFilter.biome())
+            .build();
+        register(oasis_flowers);
+
         PlacedFeatureDefinition small_dripleaf = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_SMALL_DRIPLEAF, context)
             .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(SimpleStateProvider.simple(Blocks.SMALL_DRIPLEAF)))
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)),
@@ -1438,6 +1524,14 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
                 BiomeFilter.biome())
             .build();
         register(steppe_cactus);
+    }
+
+    private Holder<PlacedFeature> getFeature(ResourceKey<ConfiguredFeature<?, ?>> key) {
+        return PlacedFeatureDefinition.builder(this.context).configuredFeature(key).build().getHolder();
+    }
+
+    private WeightedPlacedFeature getWeightedFeature(ResourceKey<ConfiguredFeature<?, ?>> key, float weight) {
+        return new WeightedPlacedFeature(getFeature(key), weight);
     }
 
 }

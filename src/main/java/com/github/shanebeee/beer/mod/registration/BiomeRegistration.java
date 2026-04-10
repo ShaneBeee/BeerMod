@@ -910,7 +910,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .temperature(1.0f)
             .downfall(0.8f)
 
-            .waterColor(6003155)
+            .waterColor(new Color(61, 174, 130).getRGB())
             .foliageColorOverride(442658)
             .grassColorOverride(-8213182)
 
@@ -921,36 +921,35 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
             .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
+            .addDefaultOverworldCarvers()
+
             .addDefaultUndergroundOreFeatures()
             .features(List.of(PlacedFeatures.REPLACE_GRASS_TO_SAND,
-                    PlacedFeatures.DELTA_LUSH_DESERT_DELTA),
-                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND),
-                List.of(CavePlacements.AMETHYST_GEODE),
-                List.of(CavePlacements.FOSSIL_UPPER,
-                    CavePlacements.FOSSIL_LOWER,
-                    CavePlacements.MONSTER_ROOM,
-                    CavePlacements.MONSTER_ROOM_DEEP),
+                    PlacedFeatures.TERRAIN_OASIS_PATCH,
+                    PlacedFeatures.DELTA_LUSH_DESERT_DELTA,
+                PlacedFeatures.REPLACE_GRASS_UNDER_WATER_TO_SAND
+                ),
+                null,
+                null,
+                null,
                 List.of(MiscOverworldPlacements.DESERT_WELL),
                 null,
                 null,
                 null,
-                List.of(MiscOverworldPlacements.SPRING_WATER,
-                    MiscOverworldPlacements.SPRING_LAVA),
-                List.of(PlacedFeatures.TREE_LUSH_DESERT_PALM,
+                null,
+                List.of(
+                    PlacedFeatures.TREE_LUSH_DESERT_PALM,
+                    PlacedFeatures.TREE_PALM_TREE_OASIS,
                     PlacedFeatures.VEGETATION_LUSH_DESERT_AZALEA_SCRUB,
                     PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB,
-                    VegetationPlacements.FLOWER_DEFAULT,
-                    VegetationPlacements.PATCH_GRASS_BADLANDS,
+                    PlacedFeatures.VEGETATION_PATCH_OASIS_FLOWERS,
+                    VegetationPlacements.PATCH_GRASS_JUNGLE,
                     VegetationPlacements.PATCH_DRY_GRASS_DESERT,
                     VegetationPlacements.PATCH_DEAD_BUSH_2,
-                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
-                    VegetationPlacements.RED_MUSHROOM_NORMAL,
                     VegetationPlacements.PATCH_SUGAR_CANE_DESERT,
-                    VegetationPlacements.PATCH_PUMPKIN,
-                    VegetationPlacements.PATCH_CACTUS_DESERT),
+                    VegetationPlacements.PATCH_CACTUS_DESERT
+                ),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
-
-            .addDefaultOverworldCarvers()
 
             .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
             .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)

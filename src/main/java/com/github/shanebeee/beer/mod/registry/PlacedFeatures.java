@@ -52,6 +52,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> REPLACE_DEEPSLATE_TO_DIORITE = register("replace/deepslate_to_diorite");
     public static final ResourceKey<PlacedFeature> REPLACE_DEEPSLATE_TO_ICE = register("replace/deepslate_to_ice");
     public static final ResourceKey<PlacedFeature> REPLACE_GRASS_TO_SAND = register("replace/grass_to_sand");
+    public static final ResourceKey<PlacedFeature> REPLACE_GRASS_UNDER_WATER_TO_SAND = register("replace/grass_under_water_to_sand");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_DIORITE = register("replace/stone_to_diorite");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_ICE = register("replace/stone_to_ice");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_SNOW = register("replace/stone_to_snow");
@@ -62,6 +63,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> TERRAIN_DIORITE_CLIFFS = register("terrain/diorite_cliffs");
     public static final ResourceKey<PlacedFeature> TERRAIN_LUSH_PLAINS_LAKE = register("terrain/lush_plains_lake");
     public static final ResourceKey<PlacedFeature> TERRAIN_MOSSIFY_GRASS = register("terrain/mossify_grass");
+    public static final ResourceKey<PlacedFeature> TERRAIN_OASIS_PATCH = register("terrain/oasis_patch");
     public static final ResourceKey<PlacedFeature> TERRAIN_SAND_SHORE_DISK = register("terrain/sand_shore_disk");
     public static final ResourceKey<PlacedFeature> TERRAIN_STONE_CLIFF = register("terrain/stone_cliff");
     public static final ResourceKey<PlacedFeature> TERRAIN_WATER_BLOB = register("terrain/water_blob");
@@ -78,6 +80,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREE_LUSH_DESERT_PALM = register("tree/lush_desert_palm");
     public static final ResourceKey<PlacedFeature> TREE_MOSS_GARDEN = register("tree/moss_garden");
     public static final ResourceKey<PlacedFeature> TREE_PALM_BEACH_PALM = register("tree/palm_beach_palm");
+    public static final ResourceKey<PlacedFeature> TREE_PALM_TREE_OASIS = register("tree/palm_tree_oasis");
     public static final ResourceKey<PlacedFeature> TREE_SWAMP_OAK = register("tree/swamp_oak");
     public static final ResourceKey<PlacedFeature> TREE_TALL_FALLEN_TALL_OAK = register("tree/fallen_tall_oak");
     public static final ResourceKey<PlacedFeature> TREE_TALL_OAK_TREES = register("tree/tall_oak_trees");
@@ -96,6 +99,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> VEGETATION_MOSS_VEGETATION = register("vegetation/moss_vegetation");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_CHERRY_PETALS = register("vegetation/patch_cherry_petals");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_CLIFF_GRASS = register("vegetation/patch_cliff_grass");
+    public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_OASIS_FLOWERS = register("vegetation/patch_oasis_flowers");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_SMALL_DRIPLEAF = register("vegetation/patch_small_dripleaf");
     public static final ResourceKey<PlacedFeature> VEGETATION_PATCH_WATER_LEAVES = register("vegetation/patch_water_leaves");
     public static final ResourceKey<PlacedFeature> VEGETATION_PILE_AZALEA_LEAVES = register("vegetation/pile_azalea_leaves");
