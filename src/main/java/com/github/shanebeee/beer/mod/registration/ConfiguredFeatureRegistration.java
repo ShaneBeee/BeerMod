@@ -262,13 +262,13 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
 
         ConfiguredFeatureDefinition lush_desert_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_LUSH_DESERT_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                context.lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MOSS_BLOCK.defaultBlockState(), 4)
                     .add(Blocks.GRASS_BLOCK.defaultBlockState(), 1)
                     .build()),
                 PlacedFeatureDefinition.builder()
-                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new CompositeFeatureConfiguration(
                         HolderSet.direct(
                             PlacedFeatureDefinition.builder()
                                 .configuredFeature(CaveFeatures.DRIPLEAF)
