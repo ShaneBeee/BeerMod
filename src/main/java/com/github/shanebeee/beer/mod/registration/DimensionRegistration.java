@@ -1,8 +1,14 @@
 package com.github.shanebeee.beer.mod.registration;
 
+import com.github.shanebeee.beer.api.biome.BiomeDefaults;
+import com.github.shanebeee.beer.api.biome.Continentalness;
+import com.github.shanebeee.beer.api.biome.Erosion;
+import com.github.shanebeee.beer.api.biome.Humidity;
+import com.github.shanebeee.beer.api.biome.PeaksAndValleys;
+import com.github.shanebeee.beer.api.biome.Temperature;
+import com.github.shanebeee.beer.api.biome.Weirdness;
 import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.DimensionDefinition;
-import com.github.shanebeee.beer.api.utils.BiomeDefaults;
 import com.github.shanebeee.beer.mod.biomes.continental.CoastalBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.FarInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.MidInlandBiomes;
@@ -10,14 +16,23 @@ import com.github.shanebeee.beer.mod.biomes.continental.NearInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.OceanBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.CaveBiomes;
 import com.github.shanebeee.beer.mod.registry.Dimensions;
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
+import net.minecraft.world.level.biome.Climate.Parameter;
+import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
+import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterLists;
+import net.minecraft.world.level.biome.OverworldBiomeBuilder;
 import net.minecraft.world.level.dimension.LevelStem;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Function;
 
 public class DimensionRegistration extends BaseRegistration<LevelStem, DimensionDefinition> {
 
@@ -30,67 +45,50 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
             BiomeDefaults.FULL_RANGE,
             BiomeDefaults.FULL_RANGE,
             BiomeDefaults.FULL_RANGE,
-            Climate.Parameter.span(-1.0f, -0.375f),
-            Climate.Parameter.span(1.1f, 2.0f),
+            Parameter.span(-1.0f, -0.375f),
+            Parameter.span(1.1f, 2.0f),
             BiomeDefaults.FULL_RANGE, 0);
 
-        for (int contIndex = 0; contIndex < BiomeDefaults.CONTINENTALNESS.length; contIndex++) {
-            Climate.Parameter continentalness = BiomeDefaults.CONTINENTALNESS[contIndex];
+        for (Continentalness continentalness : Continentalness.values()) {
+            for (Temperature temperature : Temperature.values()) {
+                for (Humidity humidity : Humidity.values()) {
+                    for (PeaksAndValleys pv : PeaksAndValleys.values()) {
+                        for (Weirdness weirdness : pv.weirdness()) {
 
-            for (int tempIndex = 0; tempIndex < BiomeDefaults.TEMPERATURES.length; tempIndex++) {
-                Climate.Parameter temp = BiomeDefaults.TEMPERATURES[tempIndex];
-
-                for (int humidityIndex = 0; humidityIndex < BiomeDefaults.HUMIDITIES.length; humidityIndex++) {
-                    Climate.Parameter humidity = BiomeDefaults.HUMIDITIES[humidityIndex];
-
-                    for (int pvIndex = 0; pvIndex < BiomeDefaults.PVS.length; pvIndex++) {
-
-                        for (int weirdIndex = 0; weirdIndex < BiomeDefaults.PVS[pvIndex].length; weirdIndex++) {
-                            Climate.Parameter weirdness = BiomeDefaults.PVS[pvIndex][weirdIndex];
-
-                            int weirdVal = weirdness.max() <= 0 ? 0 : 1;
-
-                            ResourceKey<Biome> biomeKey = CaveBiomes.getBiome(contIndex, tempIndex,
-                                humidityIndex, weirdVal, pvIndex);
+                            ResourceKey<Biome> biomeKey = CaveBiomes.getBiome(continentalness, temperature,
+                                humidity, weirdness, pv);
 
                             builder.addPoint(biomeKey,
-                                continentalness,
-                                temp,
-                                humidity,
+                                continentalness.span(),
+                                temperature.span(),
+                                humidity.span(),
                                 BiomeDefaults.FULL_RANGE,
-                                Climate.Parameter.span(0.078125f, 1.1f),
-                                weirdness, 0);
+                                BiomeDefaults.CAVE_DEPTH,
+                                weirdness.span());
                         }
                     }
                 }
             }
         }
 
-        // OVERWORLD BIOMES
-        for (int contIndex = 0; contIndex < BiomeDefaults.CONTINENTALNESS.length; contIndex++) {
-            Climate.Parameter continentalness = BiomeDefaults.CONTINENTALNESS[contIndex];
+        // ABOVE SURFACE BIOMES
+        for (Continentalness continentalness : Continentalness.values()) {
+            for (Temperature temp : Temperature.values()) {
+                for (Humidity humidity : Humidity.values()) {
+                    for (Erosion erosion : Erosion.values()) {
+                        for (PeaksAndValleys pv : PeaksAndValleys.values()) {
+                            for (Weirdness weirdness : pv.weirdness()) {
 
-            for (int tempIndex = 0; tempIndex < BiomeDefaults.TEMPERATURES.length; tempIndex++) {
-                Climate.Parameter temp = BiomeDefaults.TEMPERATURES[tempIndex];
+                                ResourceKey<Biome> biomeKey = getBiome(continentalness, temp, humidity,
+                                    weirdness, pv, erosion);
 
-                for (int humidityIndex = 0; humidityIndex < BiomeDefaults.HUMIDITIES.length; humidityIndex++) {
-                    Climate.Parameter humidity = BiomeDefaults.HUMIDITIES[humidityIndex];
-
-                    for (int erosionIndex = 0; erosionIndex < BiomeDefaults.EROSIONS.length; erosionIndex++) {
-                        Climate.Parameter erosion = BiomeDefaults.EROSIONS[erosionIndex];
-
-                        for (int pvIndex = 0; pvIndex < BiomeDefaults.PVS.length; pvIndex++) {
-
-                            for (int weirdIndex = 0; weirdIndex < BiomeDefaults.PVS[pvIndex].length; weirdIndex++) {
-                                Climate.Parameter weirdness = BiomeDefaults.PVS[pvIndex][weirdIndex];
-
-                                int weirdVal = weirdness.max() <= 0 ? 0 : 1;
-
-                                ResourceKey<Biome> biomeKey = getBiome(contIndex, tempIndex, humidityIndex,
-                                    weirdVal, pvIndex, erosionIndex);
-
-                                builder.addPoint(biomeKey, continentalness, temp, humidity, erosion,
-                                    Climate.Parameter.span(-1f, 0.078125f), weirdness, 0);
+                                builder.addPoint(biomeKey,
+                                    continentalness.span(),
+                                    temp.span(),
+                                    humidity.span(),
+                                    erosion.span(),
+                                    BiomeDefaults.SURFACE_DEPTH,
+                                    weirdness.span());
                             }
                         }
                     }
@@ -102,15 +100,15 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
         register(builder.consolidate().build());
     }
 
-    private @NotNull ResourceKey<Biome> getBiome(int continent, int temp, int humidity, int weirdness, int pv, int erosion) {
+    private @NotNull ResourceKey<Biome> getBiome(Continentalness continent, Temperature temp, Humidity humidity, Weirdness weirdness, PeaksAndValleys pv, Erosion erosion) {
         return switch (continent) {
-            case 0 -> Biomes.MUSHROOM_FIELDS;
-            case 1 -> OceanBiomes.getBiome(true, temp, humidity, weirdness);
-            case 2 -> OceanBiomes.getBiome(false, temp, humidity, weirdness);
-            case 3 -> CoastalBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
-            case 4 -> NearInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
-            case 5 -> MidInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
-            default -> FarInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
+            case MUSHROOM_FIELDS -> Biomes.MUSHROOM_FIELDS;
+            case DEEP_OCEAN -> OceanBiomes.getBiome(true, temp, humidity, weirdness);
+            case OCEAN -> OceanBiomes.getBiome(false, temp, humidity, weirdness);
+            case COASTAL -> CoastalBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
+            case NEAR_INLAND -> NearInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
+            case MID_INLAND -> MidInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
+            case FAR_INLAND -> FarInlandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
         };
     }
 

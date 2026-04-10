@@ -1,5 +1,7 @@
 package com.github.shanebeee.beer.mod.biomes.special;
 
+import com.github.shanebeee.beer.api.biome.Humidity;
+import com.github.shanebeee.beer.api.biome.Weirdness;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -7,15 +9,13 @@ import net.minecraft.world.level.biome.Biome;
 public class DesertBiomes {
 
     @SuppressWarnings("unused")
-    public static ResourceKey<Biome> getBiome(int temp, int humidity, int weirdness) {
-        if (humidity <= 1) {
-            return BeerBiomes.DESERT_DRY_DESERT;
-        } else if (humidity == 3) {
-            return BeerBiomes.DESERT_CACTUS_FIELDS;
-        } else if (humidity == 4) {
-            return BeerBiomes.DESERT_LUSH_DESERT;
-        }
-        return BeerBiomes.DESERT_STEPPE_DESERT;
+    public static ResourceKey<Biome> getBiome(int temp, Humidity humidity, Weirdness weirdness) {
+        return switch (humidity) {
+            case ARID, SEMI_ARID -> BeerBiomes.DESERT_DRY_DESERT;
+            case MODERATE -> BeerBiomes.DESERT_STEPPE_DESERT;
+            case SEMI_HUMID -> BeerBiomes.DESERT_CACTUS_FIELDS;
+            case HUMID -> BeerBiomes.DESERT_LUSH_DESERT;
+        };
     }
 
 }
