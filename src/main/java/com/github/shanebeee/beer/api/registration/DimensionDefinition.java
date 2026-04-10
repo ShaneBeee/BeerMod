@@ -54,6 +54,10 @@ public class DimensionDefinition extends Definable<LevelStem> {
             this.noiseGeneratorSettingsKey = noiseGeneratorSettingsKey;
         }
 
+        public Builder addPoint(@NotNull ResourceKey<Biome> biomeKey, Climate.Parameter continentalness, Climate.Parameter temperature, Climate.Parameter humidity, Climate.Parameter erosion, Climate.Parameter depth, Climate.Parameter weirdness) {
+            return this.addPoint(biomeKey, continentalness, temperature, humidity, erosion, depth, weirdness, 0);
+        }
+
         @SuppressWarnings("UnusedReturnValue")
         public Builder addPoint(@NotNull ResourceKey<Biome> biomeKey, Climate.Parameter continentalness, Climate.Parameter temperature, Climate.Parameter humidity, Climate.Parameter erosion, Climate.Parameter depth, Climate.Parameter weirdness, long offset) {
             Climate.ParameterPoint parameterPoint = new Climate.ParameterPoint(temperature, humidity, continentalness, erosion, depth, weirdness, offset);

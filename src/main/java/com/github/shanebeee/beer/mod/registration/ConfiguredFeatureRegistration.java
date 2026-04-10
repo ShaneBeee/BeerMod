@@ -260,6 +260,34 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
             .build();
         register(forgotten_delta);
 
+        ConfiguredFeatureDefinition lush_desert_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_LUSH_DESERT_DELTA, context)
+            .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
+                BlockTags.LUSH_GROUND_REPLACEABLE,
+                new WeightedStateProvider(WeightedList.<BlockState>builder()
+                    .add(Blocks.MOSS_BLOCK.defaultBlockState(), 4)
+                    .add(Blocks.GRASS_BLOCK.defaultBlockState(), 1)
+                    .build()),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                        HolderSet.direct(
+                            PlacedFeatureDefinition.builder()
+                                .configuredFeature(CaveFeatures.DRIPLEAF)
+                                .build().getHolder(),
+                            PlacedFeatureDefinition.builder()
+                                .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                    BlockStateProvider.simple(Blocks.SEAGRASS)))
+                                .build().getHolder())))
+                    .build().getHolder(),
+                CaveSurface.FLOOR,
+                ConstantInt.of(1),
+                0.01f,
+                1,
+                0.1f,
+                UniformInt.of(3, 7),
+                0.9f))
+            .build();
+        register(lush_desert_delta);
+
         ConfiguredFeatureDefinition moss_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MOSS_DELTA, context)
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
                 context.lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
@@ -284,7 +312,7 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 0.01f,
                 1,
                 0.1f,
-                UniformInt.of(1, 3),
+                UniformInt.of(3, 7),
                 0.9f))
             .build();
         register(moss_delta);
@@ -665,6 +693,22 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
                 .build())
             .build();
         register(palm_tree);
+
+        ConfiguredFeatureDefinition palm_tree_oasis = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_PALM_TREE_OASIS, context)
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                SimpleStateProvider.simple(Blocks.JUNGLE_WOOD),
+                new StraightTrunkPlacer(6, 5, 5),
+                SimpleStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.WATERLOGGED, false)
+                    .setValue(BlockStateProperties.PERSISTENT, false)
+                    .setValue(BlockStateProperties.DISTANCE, 7)),
+                new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                Optional.empty(),
+                new TwoLayersFeatureSize(1, 1, 2),
+                BlockStateProvider.simple(Blocks.JUNGLE_WOOD))
+                .build())
+            .build();
+        register(palm_tree_oasis);
 
         ConfiguredFeatureDefinition red_ivorywood = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_RED_IVORYWOOD, context)
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
