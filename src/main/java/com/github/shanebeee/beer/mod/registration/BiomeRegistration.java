@@ -696,11 +696,10 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
         BiomeDefinition lush_coast = BiomeDefinition.builder(BeerBiomes.COAST_LUSH_COAST, context)
             .hasPrecipitation(true)
-            .temperature(0.7f)
-            .downfall(0.8f)
-            .waterColor(6003155)
+            .temperature(1.5f)
+            .downfall(0.7f)
+            .waterColor(new Color(52, 155, 148).getRGB())
             .foliageColorOverride(442658)
-            .grassColorOverride(6017902)
 
             .particle(ParticleTypes.CHERRY_LEAVES, 0.0005f)
 
@@ -1332,8 +1331,8 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
         BiomeDefinition lush_forest = BiomeDefinition.builder(BeerBiomes.FOREST_LUSH_FOREST, context)
             .hasPrecipitation(true)
-            .temperature(0.8f)
-            .downfall(0.5f)
+            .temperature(1.4f)
+            .downfall(0.6f)
             .waterColor(3832426)
             .foliageColorOverride(9285927)
 
@@ -1392,14 +1391,14 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
     }
 
     private void plainsBiomes(BootstrapContext<Biome> context) {
-        BiomeDefinition dry_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_DRY_PLAINS, context)
+        BiomeDefinition semi_arid_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_SEMI_ARID_PLAINS, context)
             .hasPrecipitation(false)
-            .temperature(2.0f)
-            .downfall(0.05f)
-            .waterColor(5336976)
+            .temperature(1.5f)
+            .downfall(0.25f)
+            .waterColor(new Color(112, 148, 96).getRGB())
 
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16379351)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(168, 192, 220).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(220, 215, 195).getRGB())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2171215)
 
             .addDefaultUndergroundOreFeatures()
@@ -1438,18 +1437,18 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
-        register(dry_plains);
+        register(semi_arid_plains);
 
         BiomeDefinition lush_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_LUSH_PLAINS, context)
             .hasPrecipitation(true)
-            .temperature(0.95f)
-            .downfall(0.5f)
+            .temperature(0.8f)
+            .downfall(0.65f)
             .waterColor(4159204)
             .dryFoliageColorOverride(new Color(181, 147, 187).getRGB())
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(112, 163, 207).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(185, 210, 220).getRGB())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()
@@ -1500,8 +1499,8 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
         BiomeDefinition temperate_plains = BiomeDefinition.builder(BeerBiomes.PLAINS_TEMPERATE_PLAINS, context)
             .hasPrecipitation(true)
-            .temperature(0.8f)
-            .downfall(0.2f)
+            .temperature(0.85f)
+            .downfall(0.5f)
             .waterColor(4159204)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
@@ -1713,9 +1712,9 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
 
         BiomeDefinition lush_river = BiomeDefinition.builder(BeerBiomes.RIVER_LUSH_RIVER, context)
             .hasPrecipitation(true)
-            .temperature(2f)
-            .downfall(0.2f)
-            .waterColor(3832426)
+            .temperature(1.5f)
+            .downfall(0.8f)
+            .waterColor(new Color(52, 155, 148).getRGB())
             .foliageColorOverride(9285927)
 
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(

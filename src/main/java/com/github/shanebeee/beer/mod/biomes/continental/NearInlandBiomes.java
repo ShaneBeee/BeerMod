@@ -11,6 +11,7 @@ import com.github.shanebeee.beer.mod.biomes.special.PlateauBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.RiverBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.ShatteredBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.SwampBiomes;
+import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -30,7 +31,9 @@ public class NearInlandBiomes {
     }
 
     public static @NotNull ResourceKey<Biome> getValley(Temperature temp, Humidity humidity, Weirdness weirdness, PeaksAndValleys pv, Erosion erosion) {
-        if (erosion.isFullyEroded()) return SwampBiomes.getBiome(temp, humidity, weirdness);
+        if (erosion.isFullyEroded()) {
+            return SwampBiomes.getBiome(temp, humidity, weirdness, PeaksAndValleys.VALLEY);
+        }
         return RiverBiomes.getBiome(temp, humidity, weirdness);
     }
 
@@ -48,7 +51,7 @@ public class NearInlandBiomes {
             }
             case FULLY_ERODED -> switch (temp) {
                 case FROZEN -> MiddleBiomes.getBiome(temp, humidity, weirdness);
-                default -> SwampBiomes.getBiome(temp, humidity, weirdness);
+                default -> SwampBiomes.getBiome(temp, humidity, weirdness, PeaksAndValleys.LOW);
             };
         };
 
@@ -77,7 +80,7 @@ public class NearInlandBiomes {
             }
             case FULLY_ERODED -> switch (temp) {
                 case FROZEN -> MiddleBiomes.getBiome(temp, humidity, weirdness);
-                default -> SwampBiomes.getBiome(temp, humidity, weirdness);
+                default -> SwampBiomes.getBiome(temp, humidity, weirdness, PeaksAndValleys.MID);
             };
         };
     }

@@ -36,7 +36,7 @@ public class MidInlandBiomes {
             case REDUCED, MODERATE, INCREASED, HIGH -> RiverBiomes.getBiome(temp, humidity, weirdness);
             case FULLY_ERODED -> switch (temp) {
                 case FROZEN -> RiverBiomes.getBiome(temp, humidity, weirdness);
-                default -> SwampBiomes.getBiome(temp, humidity, weirdness);
+                default -> SwampBiomes.getBiome(temp, humidity, weirdness, PeaksAndValleys.VALLEY);
             };
         };
     }
@@ -56,7 +56,7 @@ public class MidInlandBiomes {
             case INCREASED, HIGH -> MiddleBiomes.getBiome(temp, humidity, weirdness);
             case FULLY_ERODED -> switch (temp) {
                 case FROZEN -> MiddleBiomes.getBiome(temp, humidity, weirdness);
-                default -> SwampBiomes.getBiome(temp, humidity, weirdness);
+                default -> SwampBiomes.getBiome(temp, humidity, weirdness, PeaksAndValleys.LOW);
             };
         };
     }
@@ -80,7 +80,7 @@ public class MidInlandBiomes {
             case HIGH -> ShatteredBiomes.getBiome(temp, humidity, weirdness);
             case FULLY_ERODED -> switch (temp) {
                 case FROZEN -> MiddleBiomes.getBiome(temp, humidity, weirdness);
-                default -> SwampBiomes.getBiome(temp, humidity, weirdness);
+                default -> SwampBiomes.getBiome(temp, humidity, weirdness, PeaksAndValleys.MID);
             };
         };
     }

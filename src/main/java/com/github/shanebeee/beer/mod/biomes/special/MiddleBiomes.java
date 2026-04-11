@@ -44,22 +44,22 @@ public class MiddleBiomes {
             case SEMI_ARID -> BeerBiomes.PLAINS_TEMPERATE_PLAINS;
             case MODERATE -> weirdness.isWeird() ? Biomes.FLOWER_FOREST : Biomes.FOREST;
             case SEMI_HUMID -> weirdness.isWeird() ? Biomes.OLD_GROWTH_BIRCH_FOREST : Biomes.BIRCH_FOREST;
-            default -> weirdness.isWeird() ? BeerBiomes.PLAINS_LUSH_PLAINS : Biomes.DARK_FOREST;
+            case HUMID -> weirdness.isWeird() ? BeerBiomes.PLAINS_LUSH_PLAINS : Biomes.DARK_FOREST;
         };
     }
 
     private static ResourceKey<Biome> getWarm(Humidity humidity, Weirdness weirdness) {
         return switch (humidity) {
             case ARID -> weirdness.isWeird() ? BeerBiomes.FOREST_BAOBAB_SAVANNA : Biomes.SAVANNA;
-            case SEMI_ARID -> BeerBiomes.PLAINS_DRY_PLAINS;
+            case SEMI_ARID -> BeerBiomes.PLAINS_SEMI_ARID_PLAINS;
             case MODERATE -> weirdness.isWeird() ? BeerBiomes.PLAINS_TEMPERATE_PLAINS : BeerBiomes.FOREST_LUSH_FOREST;
-            case SEMI_HUMID -> weirdness.isWeird() ? Biomes.SPARSE_JUNGLE : Biomes.JUNGLE;
+            case SEMI_HUMID -> weirdness.isWeird() ? Biomes.SPARSE_JUNGLE : BeerBiomes.FOREST_LUSH_FOREST;
             case HUMID -> weirdness.isWeird() ? BeerBiomes.FOREST_BAMBOO_JUNGLE : Biomes.JUNGLE;
         };
     }
 
     private static ResourceKey<Biome> getHot(Humidity humidity, Weirdness weirdness) {
-        return DesertBiomes.getBiome(4, humidity, weirdness);
+        return DesertBiomes.getBiome(Temperature.HOT, humidity, weirdness);
     }
 
 }
