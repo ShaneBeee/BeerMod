@@ -2,9 +2,9 @@ package com.github.shanebeee.beer.mod;
 
 import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.Definable;
-import com.github.shanebeee.beer.mod.registration.ConfiguredFeatureRegistration;
+import com.github.shanebeee.beer.mod.registration.feature.config.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
-import com.github.shanebeee.beer.mod.registration.PlacedFeatureRegistration;
+import com.github.shanebeee.beer.mod.registration.feature.placed.PlacedFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.StructureRegistration;
 import com.github.shanebeee.beer.mod.registration.StructureSetRegistration;
 import com.github.shanebeee.beer.mod.registration.TagRegistration;
