@@ -1,4 +1,4 @@
-package com.github.shanebeee.beer.mod.registration;
+package com.github.shanebeee.beer.mod.registration.structure;
 
 import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.StructureDefinition;
