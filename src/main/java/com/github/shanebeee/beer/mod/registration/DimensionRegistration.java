@@ -16,23 +16,14 @@ import com.github.shanebeee.beer.mod.biomes.continental.NearInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.OceanBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.CaveBiomes;
 import com.github.shanebeee.beer.mod.registry.Dimensions;
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.biome.Climate.Parameter;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterLists;
-import net.minecraft.world.level.biome.OverworldBiomeBuilder;
 import net.minecraft.world.level.dimension.LevelStem;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Function;
 
 public class DimensionRegistration extends BaseRegistration<LevelStem, DimensionDefinition> {
 
@@ -71,7 +62,7 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
             }
         }
 
-        // ABOVE SURFACE BIOMES
+        // SURFACE BIOMES
         for (Continentalness continentalness : Continentalness.values()) {
             for (Temperature temp : Temperature.values()) {
                 for (Humidity humidity : Humidity.values()) {
