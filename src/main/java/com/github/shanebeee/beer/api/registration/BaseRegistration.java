@@ -32,16 +32,22 @@ public abstract class BaseRegistration<R, T extends Definable<R>> {
     // INSTANCE
     private final ResourceKey<Registry<R>> registryKey;
     private final List<T> definables = new ArrayList<>();
+    private final BootstrapContext<R> context;
 
     @SuppressWarnings("unused")
     public BaseRegistration(ResourceKey<Registry<R>> registryKey, BootstrapContext<R> context) {
         this.registryKey = registryKey;
+        this.context = context;
         REGISTRATIONS.add(this);
     }
 
     public void register(T definable) {
         this.definables.add(definable);
         addDefinable(this.registryKey, definable);
+    }
+
+    public BootstrapContext<R> getContext() {
+        return this.context;
     }
 
     public void addToEntries(FabricDynamicRegistryProvider.Entries entries) {

@@ -2,7 +2,6 @@ package com.github.shanebeee.beer.mod;
 
 import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.Definable;
-import com.github.shanebeee.beer.mod.registration.BiomeRegistration;
 import com.github.shanebeee.beer.mod.registration.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
 import com.github.shanebeee.beer.mod.registration.PlacedFeatureRegistration;
@@ -11,6 +10,7 @@ import com.github.shanebeee.beer.mod.registration.StructureSetRegistration;
 import com.github.shanebeee.beer.mod.registration.TagRegistration;
 import com.github.shanebeee.beer.mod.registration.TemplatePoolRegistration;
 import com.github.shanebeee.beer.mod.registration.TimelineRegistration;
+import com.github.shanebeee.beer.mod.registration.biome.BiomeRegistration;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
