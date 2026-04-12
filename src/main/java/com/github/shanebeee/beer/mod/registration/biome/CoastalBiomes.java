@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.mod.registration.biome;
 
+import com.github.shanebeee.beer.api.biome.BiomeColors;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
@@ -30,8 +31,8 @@ public class CoastalBiomes {
             .waterColor(4159204)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.WARM_MODERATE.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.WARM_MODERATE.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()
@@ -71,8 +72,8 @@ public class CoastalBiomes {
             .particle(ParticleTypes.CHERRY_LEAVES, 0.0005f)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.TEMPERATE_MODERATE.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.TEMPERATE_MODERATE.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
 
             .addDefaultUndergroundOreFeatures()
@@ -118,8 +119,8 @@ public class CoastalBiomes {
             .waterColor(4159204)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.HOT_ARID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.HOT_ARID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()
@@ -168,8 +169,8 @@ public class CoastalBiomes {
                     List.of()))
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8364543)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.FROZEN_ARID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.FROZEN_ARID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()
@@ -208,8 +209,8 @@ public class CoastalBiomes {
             .particle(ParticleTypes.CHERRY_LEAVES, 0.0005f)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.WARM_SEMI_HUMID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.WARM_SEMI_HUMID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
 
             .addDefaultUndergroundOreFeatures()
@@ -246,14 +247,14 @@ public class CoastalBiomes {
 
         BiomeDefinition palm_beach = BiomeDefinition.builder(BeerBiomes.COAST_PALM_BEACH, reg.getContext())
             .hasPrecipitation(false)
-            .temperature(2.0f)
-            .downfall(0.0f)
+            .temperature(1.5f)
+            .downfall(0.2f)
             .foliageColorOverride(442658)
             .grassColorOverride(6017902)
             .waterColor(6003155)
 
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.WARM_SEMI_ARID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.WARM_SEMI_ARID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
 
             .addDefaultUndergroundOreFeatures()
@@ -282,5 +283,5 @@ public class CoastalBiomes {
             .build();
         reg.register(palm_beach);
     }
-    
+
 }

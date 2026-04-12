@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.mod.registration.biome;
 
+import com.github.shanebeee.beer.api.biome.BiomeColors;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
@@ -22,8 +23,8 @@ public class PlainsBiomes {
             .downfall(0.25f)
             .waterColor(new Color(112, 148, 96).getRGB())
 
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(168, 192, 220).getRGB())
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(220, 215, 195).getRGB())
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.WARM_ARID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.WARM_ARID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2171215)
 
             .addDefaultUndergroundOreFeatures()
@@ -71,9 +72,8 @@ public class PlainsBiomes {
             .waterColor(4159204)
             .dryFoliageColorOverride(new Color(181, 147, 187).getRGB())
 
-            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(112, 163, 207).getRGB())
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(185, 210, 220).getRGB())
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.WARM_SEMI_HUMID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.WARM_SEMI_HUMID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()
@@ -128,9 +128,8 @@ public class PlainsBiomes {
             .downfall(0.5f)
             .waterColor(4159204)
 
-            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7907327)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.TEMPERATE_MODERATE.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.TEMPERATE_MODERATE.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()
@@ -180,8 +179,8 @@ public class PlainsBiomes {
             .waterColor(4159204)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, -8543233)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.COLD_SEMI_HUMID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.COLD_SEMI_HUMID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
 
             .addDefaultUndergroundOreFeatures()

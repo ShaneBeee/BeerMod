@@ -9,8 +9,8 @@
     },
     "minecraft:audio/music_volume": 1.0,
     "minecraft:gameplay/snow_golem_melts": true,
-    "minecraft:visual/fog_color": "#d3cb97",
-    "minecraft:visual/sky_color": "#76d6cb",
+    "minecraft:visual/fog_color": "#daccab",
+    "minecraft:visual/sky_color": "#68debf",
     "minecraft:visual/water_fog_color": "#238061"
   },
   "carvers": [
@@ -18,7 +18,7 @@
     "minecraft:cave_extra_underground",
     "minecraft:canyon"
   ],
-  "downfall": 0.8,
+  "downfall": 0.6,
   "effects": {
     "foliage_color": "#06c122",
     "grass_color": "#82ad42",
@@ -161,5 +161,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 1.0
+  "temperature": 2.0
 }

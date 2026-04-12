@@ -1,7 +1,7 @@
 {
   "attributes": {
-    "minecraft:visual/fog_color": "#fcbf86",
-    "minecraft:visual/sky_color": "#55f7dc",
+    "minecraft:visual/fog_color": "#cdbe97",
+    "minecraft:visual/sky_color": "#6ebdcb",
     "minecraft:visual/water_fog_color": "#86fcec"
   },
   "carvers": [
@@ -9,7 +9,7 @@
     "minecraft:cave_extra_underground",
     "minecraft:canyon"
   ],
-  "downfall": 0.0,
+  "downfall": 0.2,
   "effects": {
     "foliage_color": "#06c122",
     "grass_color": "#5bd36e",
@@ -88,5 +88,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 2.0
+  "temperature": 1.5
 }

@@ -9,8 +9,8 @@
       }
     },
     "minecraft:audio/music_volume": 1.0,
-    "minecraft:visual/fog_color": "#c0d8ff",
-    "minecraft:visual/sky_color": "#7da3ff"
+    "minecraft:visual/fog_color": "#b4bfd2",
+    "minecraft:visual/sky_color": "#1e7bd7"
   },
   "carvers": [
     "minecraft:cave",

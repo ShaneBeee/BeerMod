@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.mod.registration.biome;
 
+import com.github.shanebeee.beer.api.biome.BiomeColors;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
@@ -31,8 +32,8 @@ public class DesertBiomes {
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
             .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.HOT_SEMI_HUMID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.HOT_SEMI_HUMID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
@@ -89,8 +90,8 @@ public class DesertBiomes {
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
             .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.HOT_ARID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.HOT_ARID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
@@ -145,8 +146,8 @@ public class DesertBiomes {
 
         BiomeDefinition lush_desert = BiomeDefinition.builder(BeerBiomes.DESERT_LUSH_DESERT, reg.getContext())
             .hasPrecipitation(true)
-            .temperature(1.0f)
-            .downfall(0.8f)
+            .temperature(2.0f)
+            .downfall(1.0f)
 
             .waterColor(new Color(61, 174, 130).getRGB())
             .foliageColorOverride(442658)
@@ -155,8 +156,8 @@ public class DesertBiomes {
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
             .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.HOT_HUMID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.HOT_HUMID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultOverworldCarvers()
@@ -214,8 +215,8 @@ public class DesertBiomes {
 
         BiomeDefinition steppe = BiomeDefinition.builder(BeerBiomes.DESERT_STEPPE_DESERT, reg.getContext())
             .hasPrecipitation(false)
-            .temperature(1.0f)
-            .downfall(0.8f)
+            .temperature(2.0f)
+            .downfall(0.6f)
 
             .waterColor(6003155)
             .foliageColorOverride(442658)
@@ -224,8 +225,8 @@ public class DesertBiomes {
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
             .setAttribute(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.HOT_MODERATE.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.HOT_MODERATE.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
@@ -271,5 +272,5 @@ public class DesertBiomes {
             .build();
         reg.register(steppe);
     }
-    
+
 }

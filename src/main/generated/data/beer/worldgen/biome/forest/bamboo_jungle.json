@@ -9,8 +9,8 @@
       }
     },
     "minecraft:gameplay/increased_fire_burnout": true,
-    "minecraft:visual/fog_color": "#d3cb97",
-    "minecraft:visual/sky_color": "#76d6cb"
+    "minecraft:visual/fog_color": "#acb4b9",
+    "minecraft:visual/sky_color": "#78b3b8"
   },
   "carvers": [
     "minecraft:cave",

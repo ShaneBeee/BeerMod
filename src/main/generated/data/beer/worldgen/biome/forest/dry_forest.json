@@ -8,7 +8,9 @@
         "tick_delay": 6000
       }
     },
-    "minecraft:audio/music_volume": 0.0
+    "minecraft:audio/music_volume": 0.0,
+    "minecraft:visual/fog_color": "#b4aa8c",
+    "minecraft:visual/sky_color": "#588cca"
   },
   "carvers": [
     "minecraft:cave",

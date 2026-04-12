@@ -1,8 +1,8 @@
 {
   "attributes": {
     "minecraft:audio/music_volume": 1.0,
-    "minecraft:visual/fog_color": "#c0d8ff",
-    "minecraft:visual/sky_color": "#7da3ff",
+    "minecraft:visual/fog_color": "#a6b5d2",
+    "minecraft:visual/sky_color": "#1c7be1",
     "minecraft:visual/water_fog_color": "#050533"
   },
   "carvers": [

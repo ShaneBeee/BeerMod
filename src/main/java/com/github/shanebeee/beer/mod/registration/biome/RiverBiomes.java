@@ -1,5 +1,6 @@
 package com.github.shanebeee.beer.mod.registration.biome;
 
+import com.github.shanebeee.beer.api.biome.BiomeColors;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
@@ -40,8 +41,8 @@ public class RiverBiomes {
             )
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, -8543233)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.COLD_MODERATE.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.COLD_MODERATE.fogColor())
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
@@ -83,8 +84,8 @@ public class RiverBiomes {
             .foliageColorOverride(9285927)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7788235)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.HOT_ARID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.HOT_ARID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2326625)
 
             .addDefaultUndergroundOreFeatures()
@@ -149,8 +150,8 @@ public class RiverBiomes {
             ))
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7782102)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 13880215)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.WARM_SEMI_HUMID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.WARM_SEMI_HUMID.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 5077600)
 
             .addDefaultUndergroundOreFeatures()
@@ -222,8 +223,8 @@ public class RiverBiomes {
                 ))
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 7391487)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 12638463)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.TEMPERATE_MODERATE.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.TEMPERATE_MODERATE.fogColor())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 2302743)
 
             .addDefaultUndergroundOreFeatures()

@@ -17,8 +17,8 @@
         "probability": 0.2
       }
     ],
-    "minecraft:visual/fog_color": "#c0d8ff",
-    "minecraft:visual/sky_color": "#7fa1ff",
+    "minecraft:visual/fog_color": "#a1a1a0",
+    "minecraft:visual/sky_color": "#0074c1",
     "minecraft:visual/water_fog_color": "#050533"
   },
   "carvers": [

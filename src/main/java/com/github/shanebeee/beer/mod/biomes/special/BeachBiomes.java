@@ -9,11 +9,12 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 public class BeachBiomes {
 
     public static @NotNull ResourceKey<Biome> getBiome(Temperature temp, Humidity humidity, Weirdness weirdness) {
         return switch (temp) {
-            case FROZEN -> weirdness.isWeird() ? BeerBiomes.COAST_FROZEN_BEACH : Biomes.SNOWY_BEACH;
+            case FROZEN -> humidity.isHumidOrSemiHumid() ? BeerBiomes.COAST_FROZEN_BEACH : Biomes.SNOWY_BEACH;
             case COLD -> Biomes.BEACH;
             case TEMPERATE -> humidity.isModerateOrLess() ? BeerBiomes.COAST_BEACHY_COAST : BeerBiomes.COAST_TEMPERATE_COAST;
             case WARM -> humidity.isModerateOrLess() ? BeerBiomes.COAST_PALM_BEACH : BeerBiomes.COAST_LUSH_COAST;
