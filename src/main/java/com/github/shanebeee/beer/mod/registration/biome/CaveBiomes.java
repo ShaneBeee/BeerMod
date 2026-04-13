@@ -257,12 +257,10 @@ public class CaveBiomes {
 
         BiomeDefinition ice_cave = BiomeDefinition.builder(BeerBiomes.CAVE_ICE_CAVE, reg.getContext())
             .hasPrecipitation(true)
-            .temperature(0.7f)
+            .temperature(0.0f)
             .downfall(0.8f)
 
             .waterColor(6003155)
-            .foliageColorOverride(442658)
-            .grassColorOverride(6017902)
 
             .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
             .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
