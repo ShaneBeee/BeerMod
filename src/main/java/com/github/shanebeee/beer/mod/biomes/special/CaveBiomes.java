@@ -5,6 +5,7 @@ import com.github.shanebeee.beer.api.biome.Humidity;
 import com.github.shanebeee.beer.api.biome.PeaksAndValleys;
 import com.github.shanebeee.beer.api.biome.Temperature;
 import com.github.shanebeee.beer.api.biome.Weirdness;
+import com.github.shanebeee.beer.mod.biomes.continental.IslandBiomes;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -14,6 +15,9 @@ import org.jspecify.annotations.NonNull;
 public class CaveBiomes {
 
     public static @NonNull ResourceKey<Biome> getBiome(Continentalness continentalness, Temperature temp, Humidity humidity, Weirdness weirdness, PeaksAndValleys pv) {
+        if (continentalness.isMushroomFields()) {
+            return IslandBiomes.getIslandCave(continentalness, temp, humidity, weirdness, pv);
+        }
         if (temp.isFrozen()) {
             return BeerBiomes.CAVE_ICE_CAVE;
         } else if (temp.isCold()) {
@@ -32,7 +36,7 @@ public class CaveBiomes {
             }
             return BeerBiomes.CAVE_BASALT_CAVE;
         } else {
-            if (continentalness == Continentalness.FAR_INLAND) {
+            if (continentalness.isFarInland()) {
                 return Biomes.DRIPSTONE_CAVES;
             }
 

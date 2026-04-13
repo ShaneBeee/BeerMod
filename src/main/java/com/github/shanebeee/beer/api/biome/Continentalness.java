@@ -21,4 +21,32 @@ public enum Continentalness {
         return this.span;
     }
 
+    public boolean isMushroomFields() {
+        return this == MUSHROOM_FIELDS;
+    }
+
+    public boolean isDeepOcean() {
+        return this == DEEP_OCEAN;
+    }
+
+    public boolean isOcean() {
+        return this == OCEAN;
+    }
+
+    public boolean isCoastal() {
+        return this == COASTAL;
+    }
+
+    public boolean isNearInland() {
+        return this == NEAR_INLAND;
+    }
+
+    public boolean isMidInland() {
+        return this == MID_INLAND;
+    }
+
+    public boolean isFarInland() {
+        return this == FAR_INLAND;
+    }
+
 }
