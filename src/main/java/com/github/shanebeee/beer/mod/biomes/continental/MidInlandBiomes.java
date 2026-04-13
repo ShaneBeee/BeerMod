@@ -63,8 +63,12 @@ public class MidInlandBiomes {
 
     public static @NotNull ResourceKey<Biome> getMid(Temperature temp, Humidity humidity, Weirdness weirdness, Erosion erosion) {
         return switch (erosion) {
-            case NONE ->
-                temp.isTemperateOrBelow() ? humidity.isAridOrSemiArid() ? Biomes.SNOWY_SLOPES : Biomes.GROVE : PlateauBiomes.getBiome(temp, humidity, weirdness);
+            case NONE -> {
+                if (temp.isFrozen()) {
+                    yield Biomes.SNOWY_SLOPES;
+                }
+                yield humidity.isAridOrSemiArid() ? Biomes.GROVE : PlateauBiomes.getBiome(temp, humidity, weirdness);
+            }
             case MINIMAL -> {
                 if (temp.isFrozen()) {
                     yield humidity.isAridOrSemiArid() ? Biomes.SNOWY_SLOPES : Biomes.GROVE;

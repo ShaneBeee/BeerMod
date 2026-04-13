@@ -89,8 +89,8 @@ public class FarInlandBiomes {
     public static @NotNull ResourceKey<Biome> getHigh(Temperature temp, Humidity humidity, Weirdness weirdness, Erosion erosion) {
         return switch (erosion) {
             case NONE -> switch (temp) {
-                case FROZEN, COLD, TEMPERATE -> weirdness.isWeird() ? Biomes.FROZEN_PEAKS : Biomes.JAGGED_PEAKS;
-                case WARM -> Biomes.STONY_PEAKS;
+                case FROZEN, COLD -> weirdness.isWeird() ? Biomes.FROZEN_PEAKS : Biomes.JAGGED_PEAKS;
+                case TEMPERATE, WARM -> Biomes.STONY_PEAKS;
                 case HOT -> BadlandBiomes.getBiome(temp, humidity, weirdness);
             };
             case MINIMAL -> switch (temp) {
@@ -107,8 +107,8 @@ public class FarInlandBiomes {
     public static @NotNull ResourceKey<Biome> getPeaks(Temperature temp, Humidity humidity, Weirdness weirdness, Erosion erosion) {
         return switch (erosion) {
             case NONE, MINIMAL -> switch (temp) {
-                case FROZEN, COLD, TEMPERATE -> weirdness.isWeird() ? Biomes.FROZEN_PEAKS : Biomes.JAGGED_PEAKS;
-                case WARM -> Biomes.STONY_PEAKS;
+                case FROZEN, COLD -> weirdness.isWeird() ? Biomes.FROZEN_PEAKS : Biomes.JAGGED_PEAKS;
+                case TEMPERATE, WARM -> Biomes.STONY_PEAKS;
                 case HOT -> BadlandBiomes.getBiome(temp, humidity, weirdness);
             };
             case REDUCED, MODERATE -> PlateauBiomes.getBiome(temp, humidity, weirdness);
