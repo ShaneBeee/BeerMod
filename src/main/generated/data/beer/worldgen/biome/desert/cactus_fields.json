@@ -18,10 +18,8 @@
     "minecraft:cave_extra_underground",
     "minecraft:canyon"
   ],
-  "downfall": 0.8,
+  "downfall": 0.7,
   "effects": {
-    "foliage_color": "#06c122",
-    "grass_color": "#82ad42",
     "water_color": "#5b99d3"
   },
   "features": [

@@ -24,11 +24,9 @@ public class DesertBiomes {
         BiomeDefinition cactus_fields = BiomeDefinition.builder(BeerBiomes.DESERT_CACTUS_FIELDS, reg.getContext())
             .hasPrecipitation(false)
             .temperature(1.0f)
-            .downfall(0.8f)
+            .downfall(0.7f)
 
             .waterColor(6003155)
-            .foliageColorOverride(442658)
-            .grassColorOverride(-8213182)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
@@ -86,7 +84,6 @@ public class DesertBiomes {
             .downfall(0.0f)
 
             .waterColor(4112789)
-            .foliageColorOverride(9285927)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
@@ -218,11 +215,9 @@ public class DesertBiomes {
         BiomeDefinition steppe = BiomeDefinition.builder(BeerBiomes.DESERT_STEPPE_DESERT, reg.getContext())
             .hasPrecipitation(false)
             .temperature(2.0f)
-            .downfall(0.6f)
+            .downfall(0.3f)
 
             .waterColor(6003155)
-            .foliageColorOverride(442658)
-            .grassColorOverride(-8213182)
 
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))

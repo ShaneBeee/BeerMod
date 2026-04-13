@@ -79,10 +79,7 @@ public class FarInlandBiomes {
                 temp.isNotHot() ? MiddleBiomes.getBiome(temp, humidity, weirdness) : BadlandBiomes.getBiome(temp, humidity, weirdness);
             case INCREASED -> MiddleBiomes.getBiome(temp, humidity, weirdness);
             case HIGH -> ShatteredBiomes.getBiome(temp, humidity, weirdness);
-            case FULLY_ERODED -> switch (temp) {
-                case FROZEN -> MiddleBiomes.getBiome(temp, humidity, weirdness);
-                default -> SwampBiomes.getBiome(temp, humidity, weirdness, PeaksAndValleys.MID);
-            };
+            case FULLY_ERODED -> MiddleBiomes.getBiome(temp, humidity, weirdness);
         };
     }
 
