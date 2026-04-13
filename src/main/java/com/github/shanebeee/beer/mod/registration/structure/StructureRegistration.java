@@ -2,7 +2,7 @@ package com.github.shanebeee.beer.mod.registration.structure;
 
 import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.StructureDefinition;
-import com.github.shanebeee.beer.mod.registry.BeerBiomeTags;
+import com.github.shanebeee.beer.mod.registry.tags.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.Structures;
 import com.github.shanebeee.beer.mod.registry.TemplatePools;
 import net.minecraft.core.registries.Registries;

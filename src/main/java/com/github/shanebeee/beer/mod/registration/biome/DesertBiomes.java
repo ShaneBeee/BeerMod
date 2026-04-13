@@ -4,6 +4,7 @@ import com.github.shanebeee.beer.api.biome.BiomeColors;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
+import com.github.shanebeee.beer.mod.registry.tags.TNTBiomeTags;
 import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -139,7 +140,8 @@ public class DesertBiomes {
                 BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.SPAWNS_GOLD_RABBITS,
                 BiomeTags.HAS_RUINED_PORTAL_DESERT, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
-                BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO)
+                BiomeTags.HAS_PILLAGER_OUTPOST, BiomeTags.STRONGHOLD_BIASED_TO,
+                TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_TUDOR)
 
             .build();
         reg.register(dry_desert);

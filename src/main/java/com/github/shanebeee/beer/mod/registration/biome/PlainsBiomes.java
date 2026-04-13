@@ -4,6 +4,7 @@ import com.github.shanebeee.beer.api.biome.BiomeColors;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
+import com.github.shanebeee.beer.mod.registry.tags.TNTBiomeTags;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.tags.BiomeTags;
@@ -58,9 +59,10 @@ public class PlainsBiomes {
             .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
             .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
 
-            .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
+            .addToTag(BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
-                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO,
+                TNTBiomeTags.TNT_HAS_VILLAGE_RUSTIC, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_RUSTIC)
 
             .build();
         reg.register(semi_arid_plains);
@@ -218,7 +220,8 @@ public class PlainsBiomes {
 
             .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_COLD_VARIANT_FARM_ANIMALS,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
-                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO,
+                TNTBiomeTags.TNT_HAS_VILLAGE_IBERIAN, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_IBERIAN)
 
             .build();
         reg.register(cold_plains);

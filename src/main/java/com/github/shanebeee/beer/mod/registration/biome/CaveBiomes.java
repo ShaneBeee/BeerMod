@@ -1,7 +1,7 @@
 package com.github.shanebeee.beer.mod.registration.biome;
 
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
-import com.github.shanebeee.beer.mod.registry.BeerBiomeTags;
+import com.github.shanebeee.beer.mod.registry.tags.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.Holder;

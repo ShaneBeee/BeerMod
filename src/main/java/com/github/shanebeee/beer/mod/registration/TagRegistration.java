@@ -1,6 +1,6 @@
 package com.github.shanebeee.beer.mod.registration;
 
-import com.github.shanebeee.beer.mod.registry.BeerBlockTags;
+import com.github.shanebeee.beer.mod.registry.tags.BeerBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider.BlockTagsProvider;
 import net.minecraft.core.HolderLookup;

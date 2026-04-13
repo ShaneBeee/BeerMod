@@ -1,4 +1,4 @@
-package com.github.shanebeee.beer.mod.registry;
+package com.github.shanebeee.beer.mod.registry.tags;
 
 import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.registries.Registries;

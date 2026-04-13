@@ -1,7 +1,7 @@
 package com.github.shanebeee.beer.mod.registration.feature.placed;
 
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
-import com.github.shanebeee.beer.mod.registry.BeerBlockTags;
+import com.github.shanebeee.beer.mod.registry.tags.BeerBlockTags;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;

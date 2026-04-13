@@ -3,6 +3,7 @@ package com.github.shanebeee.beer.mod.registration.biome;
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
+import com.github.shanebeee.beer.mod.registry.tags.TNTBiomeTags;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
@@ -126,7 +127,7 @@ public class SwampBiomes {
 
             .addToTag(BiomeTags.HAS_SWAMP_HUT, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
                 BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.WATER_ON_MAP_OUTLINES,
-                BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
+                BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS, TNTBiomeTags.TNT_HAS_VILLAGE_SWAMP_BOAT)
 
             .build();
         reg.register(dripleaf_swamp);
