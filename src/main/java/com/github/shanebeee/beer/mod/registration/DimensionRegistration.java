@@ -15,6 +15,7 @@ import com.github.shanebeee.beer.mod.biomes.continental.MidInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.NearInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.OceanBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.CaveBiomes;
+import com.github.shanebeee.beer.mod.biomes.continental.IslandBiomes;
 import com.github.shanebeee.beer.mod.registry.Dimensions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -93,7 +94,7 @@ public class DimensionRegistration extends BaseRegistration<LevelStem, Dimension
 
     private @NotNull ResourceKey<Biome> getBiome(Continentalness continent, Temperature temp, Humidity humidity, Weirdness weirdness, PeaksAndValleys pv, Erosion erosion) {
         return switch (continent) {
-            case MUSHROOM_FIELDS -> Biomes.MUSHROOM_FIELDS;
+            case MUSHROOM_FIELDS -> IslandBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
             case DEEP_OCEAN -> OceanBiomes.getBiome(true, temp, humidity, weirdness);
             case OCEAN -> OceanBiomes.getBiome(false, temp, humidity, weirdness);
             case COASTAL -> CoastalBiomes.getBiome(temp, humidity, weirdness, pv, erosion);
