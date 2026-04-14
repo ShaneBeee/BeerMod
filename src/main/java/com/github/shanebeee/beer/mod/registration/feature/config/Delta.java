@@ -6,7 +6,7 @@ import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Vec3i;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
@@ -16,15 +16,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.CompositeFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.DeltaFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
@@ -56,7 +55,7 @@ public class Delta {
 
         ConfiguredFeatureDefinition basalt_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_BASALT_POOL, reg.getContext())
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.BASE_STONE_OVERWORLD,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.BASE_STONE_OVERWORLD),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.SMOOTH_BASALT.defaultBlockState(), 6)
                     .add(Blocks.STONE_BRICKS.defaultBlockState(), 2)
@@ -88,7 +87,7 @@ public class Delta {
 
         ConfiguredFeatureDefinition forgotten_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_FORGOTTEN_DELTA, reg.getContext())
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.MINEABLE_WITH_PICKAXE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.MINEABLE_WITH_PICKAXE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState())
                     .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState())
@@ -126,13 +125,13 @@ public class Delta {
 
         ConfiguredFeatureDefinition lush_desert_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_LUSH_DESERT_DELTA, reg.getContext())
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MOSS_BLOCK.defaultBlockState(), 4)
                     .add(Blocks.GRASS_BLOCK.defaultBlockState(), 1)
                     .build()),
                 PlacedFeatureDefinition.builder()
-                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new CompositeFeatureConfiguration(
                         HolderSet.direct(
                             PlacedFeatureDefinition.builder()
                                 .configuredFeature(CaveFeatures.DRIPLEAF)
@@ -154,14 +153,14 @@ public class Delta {
 
         ConfiguredFeatureDefinition moss_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MOSS_DELTA, reg.getContext())
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MOSS_BLOCK.defaultBlockState(), 4)
                     .add(Blocks.GRASS_BLOCK.defaultBlockState(), 1)
                     .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 1)
                     .build()),
                 PlacedFeatureDefinition.builder()
-                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new SimpleRandomFeatureConfiguration(
+                    .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR, new CompositeFeatureConfiguration(
                         HolderSet.direct(
                             PlacedFeatureDefinition.builder()
                                 .configuredFeature(CaveFeatures.DRIPLEAF)
@@ -183,7 +182,7 @@ public class Delta {
 
         ConfiguredFeatureDefinition muddy_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_MUDDY_DELTA, reg.getContext())
             .config(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MUD.defaultBlockState(), 3)
                     .add(Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState(), 1)
@@ -239,9 +238,9 @@ public class Delta {
         ConfiguredFeatureDefinition sulfur_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_SULFUR_POOL, reg.getContext())
             .config(Feature.LAKE, new LakeFeature.Configuration(
                 BlockStateProvider.simple(Blocks.WATER),
-                BlockStateProvider.simple(Blocks.ORANGE_TERRACOTTA)))
+                BlockStateProvider.simple(Blocks.DYED_TERRACOTTA.orange())))
             .build();
         reg.register(sulfur_pool);
     }
-    
+
 }

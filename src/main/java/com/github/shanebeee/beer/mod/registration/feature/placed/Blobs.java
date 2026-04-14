@@ -82,14 +82,14 @@ public class Blobs {
         PlacedFeatureDefinition gray_terracotta = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_TERRACOTTA_LIGHT_GRAY,
             BlockTags.BASE_STONE_OVERWORLD,
-            Blocks.LIGHT_GRAY_TERRACOTTA,
+            Blocks.DYED_TERRACOTTA.lightGray(),
             15, -50, 120, 150);
         reg.register(gray_terracotta);
 
         PlacedFeatureDefinition blue_terracotta = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_TERRACOTTA_LIGHT_BLUE,
             BlockTags.BASE_STONE_OVERWORLD,
-            Blocks.LIGHT_BLUE_TERRACOTTA,
+            Blocks.DYED_TERRACOTTA.lightBlue(),
             15, -50, 120, 150);
         reg.register(blue_terracotta);
 
@@ -122,7 +122,7 @@ public class Blobs {
         PlacedFeatureDefinition sulfur_blobs = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_SULFUR,
             BlockTags.BASE_STONE_OVERWORLD,
-            Blocks.YELLOW_TERRACOTTA,
+            Blocks.DYED_TERRACOTTA.yellow(),
             50, -60, 120, 150);
         reg.register(sulfur_blobs);
 

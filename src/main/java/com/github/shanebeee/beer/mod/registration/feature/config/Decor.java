@@ -4,6 +4,7 @@ import com.github.shanebeee.beer.api.registration.ConfiguredFeatureDefinition;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -40,7 +41,7 @@ public class Decor {
 
         ConfiguredFeatureDefinition muddy_blob = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_MUDDY_BLOB, reg.getContext())
             .config(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.MOSS_REPLACEABLE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.MOSS_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MUD.defaultBlockState(), 5)
                     .add(Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState(), 1)

@@ -6,6 +6,7 @@ import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.data.worldgen.features.PileFeatures;
@@ -120,7 +121,7 @@ public class Vegetation {
 
         PlacedFeatureDefinition moss_patch = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_MOSS_PATCH, reg.getContext())
             .configuredFeature(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.MOSS_REPLACEABLE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.MOSS_REPLACEABLE),
                 BlockStateProvider.simple(Blocks.MOSS_BLOCK),
                 patch.getHolder(),
                 CaveSurface.FLOOR,

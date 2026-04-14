@@ -127,7 +127,7 @@ public class Decor {
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(
                     new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.SOUL_CAMPFIRE)),
-                    new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.WAXED_EXPOSED_COPPER_TRAPDOOR))
+                    new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.COPPER_TRAPDOOR.waxedExposed()))
                 ),
                 Direction.UP,
                 BlockPredicate.alwaysTrue(),

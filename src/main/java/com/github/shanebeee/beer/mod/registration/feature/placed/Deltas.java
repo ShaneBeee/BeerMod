@@ -5,6 +5,7 @@ import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
@@ -149,7 +150,7 @@ public class Deltas {
 
         PlacedFeatureDefinition dry_cave_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRY_CAVE_DELTA, reg.getContext())
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.SANDSTONE.defaultBlockState(), 10)
                     .add(Blocks.COARSE_DIRT.defaultBlockState(), 3)
@@ -175,7 +176,7 @@ public class Deltas {
 
         PlacedFeatureDefinition dripleaf_swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRIPLEAF_SWAMP_DELTA, reg.getContext())
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.DIRT,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.DIRT),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.GRASS_BLOCK.defaultBlockState(), 10)
                     .add(Blocks.MUD.defaultBlockState(), 3)
@@ -200,7 +201,7 @@ public class Deltas {
 
         PlacedFeatureDefinition plain_cave = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_PLAIN_CAVE_DELTA, reg.getContext())
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.DRIPSTONE_REPLACEABLE,
+                reg.getContext().lookup(Registries.BLOCK).getOrThrow(BlockTags.DRIPSTONE_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.STONE_BRICKS.defaultBlockState(), 5)
                     .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 5)
@@ -244,7 +245,7 @@ public class Deltas {
                     BlockPredicate.matchesTag(BlockTags.AIR),
                     32),
                 RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.YELLOW_TERRACOTTA)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.DYED_TERRACOTTA.yellow())),
                 BiomeFilter.biome()
             )
             .build();

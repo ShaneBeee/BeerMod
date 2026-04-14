@@ -46,7 +46,7 @@ public class Terrain {
                     BlockStateProvider.simple(Blocks.DEAD_BRAIN_CORAL_BLOCK),
                     List.of(new RuleBasedStateProvider.Rule(
                         BlockPredicate.matchesTag(BlockTags.BASE_STONE_OVERWORLD),
-                        BlockStateProvider.simple(Blocks.BROWN_CONCRETE_POWDER)))),
+                        BlockStateProvider.simple(Blocks.CONCRETE_POWDER.brown())))),
                 BlockPredicate.matchesTag(BlockTags.BASE_STONE_OVERWORLD),
                 UniformInt.of(2, 6),
                 2))
