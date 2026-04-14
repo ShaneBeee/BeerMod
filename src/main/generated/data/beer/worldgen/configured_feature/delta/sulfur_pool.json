@@ -7,6 +7,27 @@
         "Name": "minecraft:orange_terracotta"
       }
     },
+    "can_place_feature": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "minecraft:sand",
+        "minecraft:grass_block"
+      ]
+    },
+    "can_replace_with_air_or_fluid": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "minecraft:sand",
+        "minecraft:grass_block"
+      ]
+    },
+    "can_replace_with_barrier": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "minecraft:sand",
+        "minecraft:grass_block"
+      ]
+    },
     "fluid": {
       "type": "minecraft:simple_state_provider",
       "state": {

@@ -235,10 +235,14 @@ public class Delta {
             .build();
         reg.register(muddy_delta);
 
+        // TODO lake stuff
         ConfiguredFeatureDefinition sulfur_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_SULFUR_POOL, reg.getContext())
             .config(Feature.LAKE, new LakeFeature.Configuration(
                 BlockStateProvider.simple(Blocks.WATER),
-                BlockStateProvider.simple(Blocks.DYED_TERRACOTTA.orange())))
+                BlockStateProvider.simple(Blocks.DYED_TERRACOTTA.orange()),
+                BlockPredicate.matchesBlocks(Blocks.SAND, Blocks.GRASS_BLOCK),
+                BlockPredicate.matchesBlocks(Blocks.SAND, Blocks.GRASS_BLOCK),
+                BlockPredicate.matchesBlocks(Blocks.SAND, Blocks.GRASS_BLOCK)))
             .build();
         reg.register(sulfur_pool);
     }

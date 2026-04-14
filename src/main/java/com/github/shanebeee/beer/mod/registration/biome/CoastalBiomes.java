@@ -13,7 +13,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.attribute.AmbientMoodSettings;
 import net.minecraft.world.attribute.AmbientSounds;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 
 import java.awt.Color;
@@ -54,7 +54,7 @@ public class CoastalBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 15, 2, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 15, 2, 2)
 
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
@@ -100,12 +100,12 @@ public class CoastalBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 10, 1, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 10, 1, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.ARMADILLO, 10, 1, 2)
 
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
@@ -141,12 +141,12 @@ public class CoastalBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 10, 1, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 10, 1, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.ARMADILLO, 10, 1, 2)
 
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
@@ -191,7 +191,7 @@ public class CoastalBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 15, 2, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 15, 2, 2)
 
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_COLD_VARIANT_FROGS,
                 BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
@@ -235,10 +235,10 @@ public class CoastalBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 10, 1, 2)
 
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_WARM_VARIANT_FROGS, BiomeTags.IS_OVERWORLD)
 
@@ -276,7 +276,7 @@ public class CoastalBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 15, 2, 2)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 15, 2, 2)
 
             .addToTag(BiomeTags.IS_BEACH, BiomeTags.HAS_SHIPWRECK_BEACHED, BiomeTags.SPAWNS_WARM_VARIANT_FROGS, BiomeTags.IS_OVERWORLD)
 

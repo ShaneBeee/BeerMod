@@ -121,11 +121,14 @@ public class Terrain {
             .build();
         reg.register(mossify_grass);
 
-        @SuppressWarnings("deprecation")
+        BlockPredicate ground_predicate = BlockPredicate.matchesBlocks(Blocks.DIRT, Blocks.GRASS_BLOCK);
         PlacedFeatureDefinition lush_plains_lake = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_LUSH_PLAINS_LAKE, reg.getContext())
             .configuredFeature(Feature.LAKE, new LakeFeature.Configuration(
                 BlockStateProvider.simple(Blocks.WATER.defaultBlockState()),
-                BlockStateProvider.simple(Blocks.SAND.defaultBlockState())))
+                BlockStateProvider.simple(Blocks.SAND.defaultBlockState()),
+                ground_predicate,
+                ground_predicate,
+                ground_predicate))
             .placementModifiers(RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
@@ -219,7 +222,7 @@ public class Terrain {
                 RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.of(0)),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(63), VerticalAnchor.absolute(77))),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.SAND, Blocks.GRASS_BLOCK)),
+                BlockPredicateFilter.forPredicate(ground_predicate),
                 BiomeFilter.biome())
             .build();
         reg.register(oasis_patch);

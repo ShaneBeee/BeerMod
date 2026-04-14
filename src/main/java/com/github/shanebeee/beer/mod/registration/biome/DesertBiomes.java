@@ -12,7 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 
 import java.awt.Color;
@@ -59,15 +59,15 @@ public class DesertBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 50, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PILLAGER, 5, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.STRAY, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PILLAGER, 5, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PARCHED, 50, 4, 4)
 
             .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
                 BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
@@ -119,19 +119,19 @@ public class DesertBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 50, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PARCHED, 50, 4, 4)
 
             .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
                 BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
@@ -189,19 +189,19 @@ public class DesertBiomes {
                 ),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 50, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PARCHED, 50, 4, 4)
 
             .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
                 BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
@@ -250,15 +250,15 @@ public class DesertBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 12, 2, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.CAMEL, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 50, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PILLAGER, 5, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 50, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.RABBIT, 12, 2, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.CAMEL, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.STRAY, 50, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PILLAGER, 5, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PARCHED, 50, 4, 4)
 
             .addToTag(BiomeTags.HAS_VILLAGE_DESERT, BiomeTags.HAS_DESERT_PYRAMID,
                 BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,

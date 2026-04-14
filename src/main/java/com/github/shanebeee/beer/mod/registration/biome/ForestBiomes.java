@@ -18,7 +18,7 @@ import net.minecraft.world.attribute.AmbientSounds;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.attribute.modifier.FloatModifier;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 
 import java.awt.Color;
@@ -73,16 +73,16 @@ public class ForestBiomes {
                     VegetationPlacements.PATCH_MELON),
                 null)
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 3, 8)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 2, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 2, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.CHICKEN, 2, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 2, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PARROT, 40, 1, 1)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PANDA, 80, 1, 2)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 3, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.SHEEP, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PIG, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.CHICKEN, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.COW, 2, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PARROT, 40, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PANDA, 80, 1, 2)
             .addDefaultMonsterSpawns(false)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.OCELOT, 2, 1, 1)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.OCELOT, 2, 1, 1)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityTypes.GLOW_SQUID, 10, 4, 6)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.IS_JUNGLE, BiomeTags.HAS_JUNGLE_TEMPLE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -120,16 +120,16 @@ public class ForestBiomes {
                     PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB),
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.HORSE, 4, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.DONKEY, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.LLAMA, 10, 1, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.ARMADILLO, 30, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 15, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 100, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PILLAGER, 10, 3, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.HORSE, 4, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.DONKEY, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.LLAMA, 10, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.ARMADILLO, 30, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.RABBIT, 15, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.HUSK, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.STRAY, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PILLAGER, 10, 3, 4)
 
             .addToTag(BiomeTags.HAS_VILLAGE_SAVANNA, BiomeTags.IS_SAVANNA, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
@@ -169,10 +169,10 @@ public class ForestBiomes {
                 null)
 
             .addDefaultMonsterSpawns(false)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 50, 1, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 50, 1, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PARROT, 20, 1, 3)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.TROPICAL_FISH, 20, 5, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 50, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.RABBIT, 50, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PARROT, 20, 1, 3)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.TROPICAL_FISH, 20, 5, 8)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.WATER_ON_MAP_OUTLINES)
 
@@ -271,10 +271,10 @@ public class ForestBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
                 BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_NILOTIC)
@@ -316,20 +316,20 @@ public class ForestBiomes {
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 12, 4, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 4, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.CHICKEN, 10, 4, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 8, 4, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.WOLF, 5, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.SHEEP, 12, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PIG, 10, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.CHICKEN, 10, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.COW, 8, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.WOLF, 5, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityTypes.GLOW_SQUID, 10, 4, 6)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
                 BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_SWEDISH)
@@ -389,8 +389,8 @@ public class ForestBiomes {
             .addDefaultMonsterSpawns(true)
             .addDefaultFarmAnimalsSpawns()
             .addDefaultCaveSpawns()
-            .addMobSpawn(MobCategory.MONSTER, EntityType.OCELOT, 2, 1, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.WOLF, 10, 2, 5)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.OCELOT, 2, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.WOLF, 10, 2, 5)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
                 BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_SWEDISH)

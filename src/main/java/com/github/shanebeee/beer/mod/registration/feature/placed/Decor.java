@@ -49,7 +49,7 @@ public class Decor {
         PlacedFeatureDefinition hanging_chain = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_CHAIN, reg.getContext())
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(
-                    new BlockColumnConfiguration.Layer(UniformInt.of(6, 12), BlockStateProvider.simple(Blocks.COPPER_CHAIN.exposed()))
+                    new BlockColumnConfiguration.Layer(UniformInt.of(6, 12), BlockStateProvider.simple(Blocks.COPPER_CHAIN.weathering().exposed()))
                 ),
                 Direction.DOWN,
                 BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
@@ -127,7 +127,7 @@ public class Decor {
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(
                     new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.SOUL_CAMPFIRE)),
-                    new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.COPPER_TRAPDOOR.waxedExposed()))
+                    new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.COPPER_TRAPDOOR.waxed().exposed()))
                 ),
                 Direction.UP,
                 BlockPredicate.alwaysTrue(),

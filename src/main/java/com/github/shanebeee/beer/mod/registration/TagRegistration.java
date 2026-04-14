@@ -4,7 +4,10 @@ import com.github.shanebeee.beer.mod.registry.tags.BeerBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider.BlockTagsProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.NonNull;
 
@@ -36,6 +39,21 @@ public class TagRegistration extends BlockTagsProvider {
         // Allow chickens to spawn on stone bricks
         valueLookupBuilder(BlockTags.ANIMALS_SPAWNABLE_ON)
             .add(Blocks.STONE_BRICKS);
+    }
+
+    private BeerBuilder valueLookupBuilder(TagKey<Block> tag) {
+        TagAppender<Block> builder = builder(tag);
+        return new BeerBuilder(builder);
+    }
+
+    private record BeerBuilder(TagAppender<Block> builder) {
+
+        private BeerBuilder add(Block... blocks) {
+            for (Block block : blocks) {
+                this.builder.add(block.builtInRegistryHolder().key());
+            }
+            return this;
+        }
     }
 
 }

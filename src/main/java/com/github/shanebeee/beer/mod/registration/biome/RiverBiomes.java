@@ -13,10 +13,10 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.attribute.AmbientMoodSettings;
 import net.minecraft.world.attribute.AmbientSounds;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,11 +65,11 @@ public class RiverBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.DROWNED, 100, 1, 1)
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 2, 4)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.SALMON, 5, 1, 5)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.DROWNED, 100, 1, 1)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 2, 4)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.SALMON, 5, 1, 5)
 
             .addToTag(BiomeTags.IS_RIVER, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
@@ -114,17 +114,17 @@ public class RiverBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 80, 4, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.RABBIT, 4, 2, 3)
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.HUSK, 80, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.RABBIT, 4, 2, 3)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityTypes.GLOW_SQUID, 10, 4, 6)
 
             .addToTag(BiomeTags.IS_RIVER, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS,
                 BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
@@ -182,21 +182,21 @@ public class RiverBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 19, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 1, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.OCELOT, 2, 1, 3)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 4, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.CHICKEN, 10, 4, 4)
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.PUFFERFISH, 15, 1, 3)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.COD, 25, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 19, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 1, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.OCELOT, 2, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PIG, 10, 4, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.CHICKEN, 10, 4, 4)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityTypes.GLOW_SQUID, 10, 4, 6)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.PUFFERFISH, 15, 1, 3)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.COD, 25, 8, 8)
 
             .addToTag(BiomeTags.IS_RIVER, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS,
                 BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
@@ -247,18 +247,18 @@ public class RiverBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 1, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.DROWNED, 100, 1, 1)
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityType.GLOW_SQUID, 10, 4, 6)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.SALMON, 5, 1, 5)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 1, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.DROWNED, 100, 1, 1)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityTypes.GLOW_SQUID, 10, 4, 6)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.SALMON, 5, 1, 5)
 
             .addToTag(BiomeTags.IS_RIVER, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS)
 
