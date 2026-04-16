@@ -21,9 +21,12 @@ public class CaveBiomes {
         if (temp.isFrozen()) {
             return BeerBiomes.CAVE_ICE_CAVE;
         } else if (temp.isCold()) {
+            if (humidity.isHumidOrSemiHumid()) {
+                return BeerBiomes.CAVE_FORGOTTEN_CAVE;
+            }
             return BeerBiomes.CAVE_DIORITE_CAVE;
         } else if (temp.isTemperate()) {
-            if (pv.isMid()) {
+            if (humidity.isArid()) {
                 return BeerBiomes.CAVE_SULFUR_CAVE;
             }
             if (humidity.isHumid()) {
@@ -31,8 +34,11 @@ public class CaveBiomes {
             }
             return BeerBiomes.CAVE_PLAIN_CAVE;
         } else if (temp.isWarm()) {
-            if (pv.isMid()) {
+            if (humidity.isArid()) {
                 return BeerBiomes.CAVE_SULFUR_CAVE;
+            }
+            if (humidity.isHumidOrSemiHumid()) {
+                return BeerBiomes.CAVE_FORGOTTEN_CAVE;
             }
             return BeerBiomes.CAVE_BASALT_CAVE;
         } else {
@@ -40,14 +46,12 @@ public class CaveBiomes {
                 return Biomes.DRIPSTONE_CAVES;
             }
 
-            if (humidity.isArid()) {
-                return BeerBiomes.CAVE_DRY_CAVE;
-            } else if (humidity.isSemiArid()) {
+            if (humidity.isSemiArid()) {
                 return BeerBiomes.CAVE_SMOKY_CAVE;
             } else if (humidity.isHumid()) {
                 return Biomes.LUSH_CAVES;
             } else {
-                return BeerBiomes.CAVE_FORGOTTEN_CAVE;
+                return BeerBiomes.CAVE_DRY_CAVE;
             }
         }
     }
