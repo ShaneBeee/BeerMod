@@ -33,6 +33,14 @@ public enum Continentalness {
         return this == OCEAN;
     }
 
+    public boolean isAnyOcean() {
+        return this.isDeepOcean() || this.isOcean();
+    }
+
+    public boolean isLand() {
+        return !this.isAnyOcean();
+    }
+
     public boolean isCoastal() {
         return this == COASTAL;
     }
