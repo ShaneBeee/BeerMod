@@ -3,6 +3,7 @@
     "beer:forest/dry_forest",
     "beer:forest/moss_garden",
     "beer:forest/tall_oak",
-    "beer:forest/lush_forest"
+    "beer:forest/lush_forest",
+    "beer:island/moss_garden_island"
   ]
 }

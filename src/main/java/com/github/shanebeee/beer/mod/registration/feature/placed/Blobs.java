@@ -53,28 +53,28 @@ public class Blobs {
 
         PlacedFeatureDefinition dead_brain = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_DEAD_BRAIN,
-            BlockTags.BASE_STONE_OVERWORLD,
+            BlockTags.FOREST_ROCK_CAN_PLACE_ON,
             Blocks.DEAD_BRAIN_CORAL_BLOCK,
             22, -30, 120, 150);
         reg.register(dead_brain);
 
         PlacedFeatureDefinition dead_bubble = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_DEAD_BUBBLE,
-            BlockTags.BASE_STONE_OVERWORLD,
+            BlockTags.FOREST_ROCK_CAN_PLACE_ON,
             Blocks.DEAD_BUBBLE_CORAL_BLOCK,
             22, -40, 120, 150);
         reg.register(dead_bubble);
 
         PlacedFeatureDefinition dead_fire = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_DEAD_FIRE,
-            BlockTags.BASE_STONE_OVERWORLD,
+            BlockTags.FOREST_ROCK_CAN_PLACE_ON,
             Blocks.DEAD_FIRE_CORAL_BLOCK,
             22, -50, 120, 150);
         reg.register(dead_fire);
 
         PlacedFeatureDefinition mossy_stone = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_MOSSY_STONE,
-            BlockTags.BASE_STONE_OVERWORLD,
+            BlockTags.FOREST_ROCK_CAN_PLACE_ON,
             Blocks.MOSSY_STONE_BRICKS,
             22, -50, 120, 150);
         reg.register(mossy_stone);
@@ -128,7 +128,7 @@ public class Blobs {
 
         PlacedFeatureDefinition tuff_blobs = createBlob(reg.getContext(),
             PlacedFeatures.BLOB_TUFF,
-            BlockTags.BASE_STONE_OVERWORLD,
+            BlockTags.FOREST_ROCK_CAN_PLACE_ON,
             Blocks.TUFF,
             24, -20, 120, 12);
         reg.register(tuff_blobs);

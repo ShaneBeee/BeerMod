@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": "beer:tree/dead_fire_coral_tree",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.33,
+        "feature": {
+          "feature": "beer:tree/dead_brain_coral_tree",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.33,
+        "feature": {
+          "feature": "beer:tree/dead_bubble_coral_tree",
+          "placement": []
+        }
+      }
+    ]
+  }
+}

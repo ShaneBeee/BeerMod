@@ -14,6 +14,7 @@ public class BiomeRegistration extends BaseRegistration<Biome, BiomeDefinition> 
         CoastalBiomes.register(this);
         DesertBiomes.register(this);
         ForestBiomes.register(this);
+        IslandBiomes.register(this);
         PlainsBiomes.register(this);
         RiverBiomes.register(this);
         SwampBiomes.register(this);

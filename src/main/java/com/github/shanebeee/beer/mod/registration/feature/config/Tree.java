@@ -5,6 +5,7 @@ import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -46,6 +47,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLogsD
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.CocoaDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.PaleMossDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.PlaceOnGroundDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
@@ -53,6 +55,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlace
 import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +64,9 @@ import java.util.OptionalInt;
 public class Tree {
 
     public static void register(ConfiguredFeatureRegistration reg) {
+        deadCoralTrees(reg);
+        cottonCandy(reg);
+
         ConfiguredFeatureDefinition acacia_forest = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_ACACIA_FOREST, reg.getContext())
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.ACACIA_LOG),
@@ -244,6 +250,14 @@ public class Tree {
             .build();
         reg.register(cypress_surface_alt);
 
+        ConfiguredFeatureDefinition fallen_crimsom_stem = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_CRIMSOM_STEM, reg.getContext())
+            .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.CRIMSON_STEM),
+                UniformInt.of(4, 7))
+                .build())
+            .build();
+        reg.register(fallen_crimsom_stem);
+
         ConfiguredFeatureDefinition fallen_stripped_pale_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, reg.getContext())
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG),
@@ -262,6 +276,14 @@ public class Tree {
                 .build())
             .build();
         reg.register(fallen_warped_stem);
+
+        ConfiguredFeatureDefinition fallen_crimsom_stem_stripped = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_CRIMSOM_STEM, reg.getContext())
+            .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.STRIPPED_CRIMSON_STEM),
+                UniformInt.of(4, 7))
+                .build())
+            .build();
+        reg.register(fallen_crimsom_stem_stripped);
 
         ConfiguredFeatureDefinition fallen_warped_stem_stripped = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_FALLEN_STRIPPED_WARPED_STEM, reg.getContext())
             .config(Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
@@ -613,6 +635,84 @@ public class Tree {
             Optional.empty(),
             new TwoLayersFeatureSize(0, 0, 0),
             BlockStateProvider.simple(roots))
+            .build();
+    }
+
+    public static void deadCoralTrees(ConfiguredFeatureRegistration reg) {
+        BootstrapContext<ConfiguredFeature<?, ?>> context = reg.getContext();
+        ConfiguredFeatureDefinition dead_brain_coral = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_DEAD_BRAIN_CORAL_TREE, context)
+            .config(Feature.TREE, createDeadCoral(Blocks.DEAD_BRAIN_CORAL_BLOCK, Blocks.WAXED_EXPOSED_COPPER_GRATE))
+            .build();
+        reg.register(dead_brain_coral);
+
+        ConfiguredFeatureDefinition dead_bubble_coral = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_DEAD_BUBBLE_CORAL_TREE, context)
+            .config(Feature.TREE, createDeadCoral(Blocks.DEAD_BUBBLE_CORAL_BLOCK, Blocks.WAXED_COPPER_GRATE))
+            .build();
+        reg.register(dead_bubble_coral);
+
+        ConfiguredFeatureDefinition dead_fire_coral = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_DEAD_FIRE_CORAL_TREE, context)
+            .config(Feature.TREE, createDeadCoral(Blocks.DEAD_FIRE_CORAL_BLOCK, Blocks.WAXED_OXIDIZED_COPPER_GRATE))
+            .build();
+        reg.register(dead_fire_coral);
+
+        ConfiguredFeatureDefinition dead_coral_trees = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_DEAD_CORAL_TREES, context)
+            .config(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(ConfiguredFeatures.TREE_DEAD_BRAIN_CORAL_TREE)
+                        .build().getHolder(), 0.33f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(ConfiguredFeatures.TREE_DEAD_BUBBLE_CORAL_TREE)
+                        .build().getHolder(), 0.33f)),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(ConfiguredFeatures.TREE_DEAD_FIRE_CORAL_TREE)
+                    .build().getHolder()))
+            .build();
+        reg.register(dead_coral_trees);
+    }
+
+    private static TreeConfiguration createDeadCoral(Block trunk, Block leaves) {
+        return new TreeConfiguration.TreeConfigurationBuilder(
+            BlockStateProvider.simple(trunk),
+            new FancyTrunkPlacer(2, 10, 10),
+            BlockStateProvider.simple(leaves),
+            new RandomSpreadFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), ConstantInt.of(3), 25),
+            Optional.empty(),
+            new TwoLayersFeatureSize(1, 3, 3),
+            BlockStateProvider.simple(trunk))
+            .decorators(List.of(new PaleMossDecorator(0.1f, 0.5f, 0.05f)))
+            .build();
+    }
+
+    private static void cottonCandy(ConfiguredFeatureRegistration reg) {
+        BootstrapContext<ConfiguredFeature<?, ?>> context = reg.getContext();
+
+        Holder<PlacedFeature> cotton_candy_a = PlacedFeatureDefinition.builder()
+            .configuredFeature(Feature.TREE, createCottonCandy( Blocks.STRIPPED_WARPED_HYPHAE))
+            .build().getHolder();
+        Holder<PlacedFeature> cotton_candy_b = PlacedFeatureDefinition.builder()
+            .configuredFeature(Feature.TREE, createCottonCandy( Blocks.STRIPPED_CRIMSON_HYPHAE))
+            .build().getHolder();
+
+        ConfiguredFeatureDefinition cotton_candy = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_COTTON_CANDY_TREES, context)
+            .config(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(new WeightedPlacedFeature(cotton_candy_b, 0.5f)),
+                cotton_candy_a))
+            .build();
+        reg.register(cotton_candy);
+    }
+
+    private static TreeConfiguration createCottonCandy(Block trunk) {
+        return new TreeConfiguration.TreeConfigurationBuilder(
+            BlockStateProvider.simple(trunk),
+            new FancyTrunkPlacer(4, 20, 3),
+            BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState()
+                .setValue(BlockStateProperties.PERSISTENT, true)),
+            new RandomSpreadFoliagePlacer(UniformInt.of(2,4),
+                ConstantInt.of(0), UniformInt.of(2,5), 75),
+            Optional.empty(),
+            new TwoLayersFeatureSize(1, 3, 3),
+            BlockStateProvider.simple(trunk))
             .build();
     }
 

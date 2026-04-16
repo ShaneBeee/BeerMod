@@ -123,6 +123,17 @@ public class Deltas {
             .build();
         reg.register(forgotten_delta);
 
+        PlacedFeatureDefinition forgotten_island_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_FORGOTTEN_ISLAND_DELTA, reg.getContext())
+            .configuredFeature(ConfiguredFeatures.DELTA_FORGOTTEN_DELTA)
+            .placementModifiers(CountPlacement.of(10),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(63), VerticalAnchor.absolute(85)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), MatchingBlockTagPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(1)),
+                BiomeFilter.biome())
+            .build();
+        reg.register(forgotten_island_delta);
+
         PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, reg.getContext())
             .configuredFeature(ConfiguredFeatures.DELTA_LUSH_DESERT_DELTA)
             .placementModifiers(CountPlacement.of(10),

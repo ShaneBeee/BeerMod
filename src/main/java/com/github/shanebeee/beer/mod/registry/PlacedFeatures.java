@@ -41,6 +41,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> DELTA_DRIPLEAF_SWAMP_DELTA = register("delta/dripleaf_swamp_delta");
     public static final ResourceKey<PlacedFeature> DELTA_DRY_CAVE_DELTA = register("delta/dry_cave_delta");
     public static final ResourceKey<PlacedFeature> DELTA_FORGOTTEN_DELTA = register("delta/forgotten_delta");
+    public static final ResourceKey<PlacedFeature> DELTA_FORGOTTEN_ISLAND_DELTA = register("delta/forgotten_island_delta");
     public static final ResourceKey<PlacedFeature> DELTA_LUSH_DESERT_DELTA = register("delta/lush_desert_delta");
     public static final ResourceKey<PlacedFeature> DELTA_MUDDY_DELTA = register("delta/muddy_delta");
     public static final ResourceKey<PlacedFeature> DELTA_PLAIN_CAVE_DELTA = register("delta/plain_cave_delta");
@@ -52,6 +53,7 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> REPLACE_DEEPSLATE_TO_DIORITE = register("replace/deepslate_to_diorite");
     public static final ResourceKey<PlacedFeature> REPLACE_DEEPSLATE_TO_ICE = register("replace/deepslate_to_ice");
     public static final ResourceKey<PlacedFeature> REPLACE_GRASS_TO_SAND = register("replace/grass_to_sand");
+    public static final ResourceKey<PlacedFeature> REPLACE_GRASS_TO_STONE = register("replace/grass_to_stone");
     public static final ResourceKey<PlacedFeature> REPLACE_GRASS_UNDER_WATER_TO_SAND = register("replace/grass_under_water_to_sand");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_DIORITE = register("replace/stone_to_diorite");
     public static final ResourceKey<PlacedFeature> REPLACE_STONE_TO_ICE = register("replace/stone_to_ice");
@@ -73,12 +75,16 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREE_BAOBABS = register("tree/baobabs");
     public static final ResourceKey<PlacedFeature> TREE_BEACHY_PALM = register("tree/beachy_palm");
     public static final ResourceKey<PlacedFeature> TREE_COLD_SWAMP_TREE = register("tree/cold_swamp_tree");
+    public static final ResourceKey<PlacedFeature> TREE_COTTON_CANDY_TREES = register("tree/candy_cane_trees");
     public static final ResourceKey<PlacedFeature> TREE_CYPRESSES = register("tree/cypresses");
+    public static final ResourceKey<PlacedFeature> TREE_DEAD_CORAL_TREES = register("tree/dead_coral_trees");
     public static final ResourceKey<PlacedFeature> TREE_DESERT_RIVER_PALM = register("tree/desert_river_palm");
+    public static final ResourceKey<PlacedFeature> TREE_FALLEN_CRIMSON_STEM = register("tree/fallen_crimson_stem");
     public static final ResourceKey<PlacedFeature> TREE_FALLEN_STRIPPED_PALE_OAK = register("tree/fallen_stripped_pale_oak");
     public static final ResourceKey<PlacedFeature> TREE_FALLEN_WARPED_STEM = register("tree/fallen_warped_stem");
     public static final ResourceKey<PlacedFeature> TREE_LUSH_DESERT_PALM = register("tree/lush_desert_palm");
     public static final ResourceKey<PlacedFeature> TREE_MOSS_GARDEN = register("tree/moss_garden");
+    public static final ResourceKey<PlacedFeature> TREE_MOSS_GARDEN_ISLAND = register("tree/moss_garden_island");
     public static final ResourceKey<PlacedFeature> TREE_PALM_BEACH_PALM = register("tree/palm_beach_palm");
     public static final ResourceKey<PlacedFeature> TREE_PALM_TREE_OASIS = register("tree/palm_tree_oasis");
     public static final ResourceKey<PlacedFeature> TREE_SWAMP_OAK = register("tree/swamp_oak");

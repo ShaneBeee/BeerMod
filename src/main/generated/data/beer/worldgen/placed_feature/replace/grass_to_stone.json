@@ -1,0 +1,64 @@
+{
+  "feature": {
+    "type": "minecraft:disk",
+    "config": {
+      "half_height": 2,
+      "radius": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 6,
+        "min_inclusive": 2
+      },
+      "state_provider": {
+        "type": "minecraft:rule_based_state_provider",
+        "fallback": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "minecraft:stone"
+          }
+        },
+        "rules": [
+          {
+            "if_true": {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:dirt",
+              "offset": [
+                0,
+                -1,
+                0
+              ]
+            },
+            "then": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:stone"
+              }
+            }
+          }
+        ]
+      },
+      "target": {
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "minecraft:dirt",
+          "minecraft:grass_block"
+        ]
+      }
+    }
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 30
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "attributes": {
+    "minecraft:visual/cloud_color": "#ffeea3f5",
+    "minecraft:visual/sky_color": "#0ceeee"
+  },
+  "carvers": [],
+  "downfall": 1.0,
+  "effects": {
+    "foliage_color": "#eea3f5",
+    "grass_color": "#0ceeee",
+    "water_color": "#eea3f5"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "beer:tree/candy_cane_trees",
+      "minecraft:patch_grass_jungle",
+      "minecraft:flower_flower_forest"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 1.0
+}

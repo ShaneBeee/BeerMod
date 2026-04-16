@@ -99,6 +99,16 @@ public class Trees {
             .build();
         reg.register(cold_swamp_tree);
 
+        PlacedFeatureDefinition cotton_candy = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_COTTON_CANDY_TREES, reg.getContext())
+            .configuredFeature(ConfiguredFeatures.TREE_COTTON_CANDY_TREES)
+            .placementModifiers(CountPlacement.of(3),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+            .build();
+        reg.register(cotton_candy);
+
         PlacedFeatureDefinition beachy_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_BEACHY_PALM, reg.getContext())
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
             .placementModifiers(CountPlacement.of(1),
@@ -129,6 +139,16 @@ public class Trees {
             .build();
         reg.register(cypresses);
 
+        PlacedFeatureDefinition dead_corals = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_DEAD_CORAL_TREES, reg.getContext())
+            .configuredFeature(ConfiguredFeatures.TREE_DEAD_CORAL_TREES)
+            .placementModifiers(CountPlacement.of(40),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new Vec3i(0,-1,0), Blocks.GRASS_BLOCK)))
+            .build();
+        reg.register(dead_corals);
+
         PlacedFeatureDefinition desert_river_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_DESERT_RIVER_PALM, reg.getContext())
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
             .placementModifiers(CountPlacement.of(15),
@@ -147,6 +167,26 @@ public class Trees {
                 BiomeFilter.biome())
             .build();
         reg.register(desert_river_palm);
+
+        PlacedFeatureDefinition fallen_crimsom_stem = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_CRIMSON_STEM, reg.getContext())
+            .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
+                new SimpleRandomFeatureConfiguration(HolderSet.direct(
+                    PlacedFeatureDefinition.builder(reg.getContext())
+                        .configuredFeature(ConfiguredFeatures.TREE_FALLEN_CRIMSOM_STEM)
+                        .build().getHolder(),
+                    PlacedFeatureDefinition.builder(reg.getContext())
+                        .configuredFeature(ConfiguredFeatures.TREE_FALLEN_STRIPPED_CRIMSOM_STEM)
+                        .build().getHolder())))
+            .placementModifiers(CountPlacement.of(1),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BlockPredicateFilter.forPredicate(BlockPredicate.anyOf(
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.DIRT),
+                    BlockPredicate.matchesTag(new Vec3i(0, -1, 0), BlockTags.GRASS_BLOCKS)
+                )),
+                BiomeFilter.biome())
+            .build();
+        reg.register(fallen_crimsom_stem);
 
         PlacedFeatureDefinition fallen_stripped_pale_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_STRIPPED_PALE_OAK, reg.getContext())
             .configuredFeature(ConfiguredFeatures.TREE_FALLEN_STRIPPED_PALE_OAK)
@@ -201,6 +241,27 @@ public class Trees {
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
             .build();
         reg.register(moss_garden);
+
+        PlacedFeatureDefinition moss_garden_island = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_MOSS_GARDEN_ISLAND, reg.getContext())
+            .configuredFeature(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                SimpleStateProvider.simple(Blocks.CRIMSON_STEM.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y)),
+                new DarkOakTrunkPlacer(8, 3, 1),
+                SimpleStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+                new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.of(0)))
+                .decorators(List.of(new TrunkVineDecorator(), new CreakingHeartDecorator(0.1f)))
+                .ignoreVines()
+                .build())
+            .placementModifiers(CountPlacement.of(8),
+                InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+            .build();
+        reg.register(moss_garden_island);
 
         PlacedFeatureDefinition palm_beach_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_PALM_BEACH_PALM, reg.getContext())
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)

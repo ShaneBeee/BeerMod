@@ -51,6 +51,23 @@ public class Replacements {
             .build();
         reg.register(grass_to_sand);
 
+        PlacedFeatureDefinition grass_to_stone = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_TO_STONE, reg.getContext())
+            .configuredFeature(Feature.DISK, new DiskConfiguration(
+                new RuleBasedStateProvider(
+                    BlockStateProvider.simple(Blocks.STONE),
+                    List.of(new RuleBasedStateProvider.Rule(
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.DIRT),
+                        BlockStateProvider.simple(Blocks.STONE)))),
+                BlockPredicate.matchesBlocks(Blocks.DIRT, Blocks.GRASS_BLOCK),
+                UniformInt.of(2, 6),
+                2))
+            .placementModifiers(CountPlacement.of(30),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
+                BiomeFilter.biome())
+            .build();
+        reg.register(grass_to_stone);
+
         PlacedFeatureDefinition grass_water_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_UNDER_WATER_TO_SAND, reg.getContext())
             .configuredFeature(Feature.DISK, new DiskConfiguration(
                 new RuleBasedStateProvider(

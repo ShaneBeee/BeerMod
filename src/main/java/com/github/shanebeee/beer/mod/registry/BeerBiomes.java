@@ -42,6 +42,12 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> FOREST_TALL_OAK = register("forest/tall_oak");
     public static final ResourceKey<Biome> FOREST_LUSH_FOREST = register("forest/lush_forest");
 
+    // ISLANDS
+    public static final ResourceKey<Biome> ISLAND_COTTON_CANDY_ISLAND = register("island/candy_cane_island");
+    public static final ResourceKey<Biome> ISLAND_COTTON_CANDY_ISLAND_ALT = register("island/candy_cane_island_alt");
+    public static final ResourceKey<Biome> ISLAND_FORGOTTEN_ISLAND = register("island/forgotten_island");
+    public static final ResourceKey<Biome> ISLAND_MOSS_GARDEN_ISLAND = register("island/moss_garden_island");
+
     // PLAINS
     public static final ResourceKey<Biome> PLAINS_COLD_PLAINS = register("plains/cold_plains");
     public static final ResourceKey<Biome> PLAINS_LUSH_PLAINS = register("plains/lush_plains");
