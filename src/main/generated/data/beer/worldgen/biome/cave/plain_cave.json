@@ -82,19 +82,19 @@
         "type": "minecraft:zombie",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 10
       },
       {
         "type": "minecraft:stray",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 7
       },
       {
         "type": "minecraft:creeper",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 5
       }
     ],
     "underground_water_creature": [],

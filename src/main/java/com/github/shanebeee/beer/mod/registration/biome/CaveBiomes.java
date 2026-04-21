@@ -365,9 +365,9 @@ public class CaveBiomes {
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 10, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 7, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 5, 1, 1)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
