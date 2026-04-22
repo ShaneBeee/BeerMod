@@ -667,6 +667,7 @@ public class TreeConfigs {
         reg.register(windswept_pine);
     }
 
+    @SuppressWarnings("deprecation") // Block#builtInRegistryHolder
     private static TreeConfiguration createCyprus(BootstrapContext<ConfiguredFeature<?, ?>> context,
                                                   int trunkOffsetYMin, int trunkOffsetYMax,
                                                   int maxRootWidth, int maxRootLength, float randomSkewChance) {
