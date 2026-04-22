@@ -1,9 +1,9 @@
 package com.github.shanebeee.beer.mod.registration.biome;
 
 import com.github.shanebeee.beer.api.registration.BiomeDefinition;
-import com.github.shanebeee.beer.mod.registry.tags.BeerBiomeTags;
 import com.github.shanebeee.beer.mod.registry.BeerBiomes;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
+import com.github.shanebeee.beer.mod.registry.tags.BeerBiomeTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,11 +20,9 @@ import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.animal.chicken.ChickenSoundVariant;
-import net.minecraft.world.entity.animal.chicken.ChickenSoundVariants;
 import net.minecraft.world.level.block.Blocks;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -285,8 +283,8 @@ public class CaveBiomes {
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 10, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.POLAR_BEAR, 1, 1, 2)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
             .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
 
@@ -366,61 +364,14 @@ public class CaveBiomes {
 
             .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
             .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 10, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 7, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 7, 1, 3)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.VINDICATOR, 3, 1, 1)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
             .build();
         reg.register(plain_Cave);
-
-        // FOR THE MEMEs
-        // Not a real biome put in place
-        ChickenSoundVariant.ChickenSoundSet chickenSoundSet = SoundEvents.CHICKEN_SOUNDS.get(ChickenSoundVariants.SoundSet.CLASSIC).adultSounds();
-        BiomeDefinition lava_chicken = BiomeDefinition.builder(BeerBiomes.CAVE_LAVA_CHICKEN, reg.getContext())
-            .hasPrecipitation(false)
-            .temperature(0.8f)
-            .downfall(0.2f)
-            .waterColor(4159204)
-
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, -13487566)
-            .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
-            .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
-            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.0f)
-            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
-                Optional.empty(),
-                Optional.empty(),
-                List.of(new AmbientAdditionsSettings(SoundEvents.MUSIC_DISC_LAVA_CHICKEN, 0.0000001f),
-                    new AmbientAdditionsSettings(SoundEvents.CHICKEN_HURT_BABY, 0.0005f),
-                    new AmbientAdditionsSettings(chickenSoundSet.hurtSound(), 0.0005f),
-                    new AmbientAdditionsSettings(SoundEvents.CHICKEN_AMBIENT_BABY, 0.0005f),
-                    new AmbientAdditionsSettings(chickenSoundSet.ambientSound(), 0.0005f)))
-            )
-
-            .addDefaultUndergroundOreFeatures()
-            .features(List.of(PlacedFeatures.DELTA_STONE_LAVA_DELTA),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                List.of(PlacedFeatures.REPLACE_STONE_TO_STONE_BRICKS),
-                null,
-                null,
-                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
-
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CHICKEN, 2, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-
-            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
-                BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
-
-            .build();
-        reg.register(lava_chicken);
 
         BiomeDefinition smoky_cave = BiomeDefinition.builder(BeerBiomes.CAVE_SMOKY_CAVE, reg.getContext())
             .hasPrecipitation(false)
@@ -450,8 +401,8 @@ public class CaveBiomes {
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityType.VEX, 3, 1, 1)
             .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,

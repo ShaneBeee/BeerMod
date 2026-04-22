@@ -80,10 +80,10 @@
         "type": "minecraft:zombie",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 20
       },
       {
-        "type": "minecraft:stray",
+        "type": "minecraft:vex",
         "maxCount": 1,
         "minCount": 1,
         "weight": 3
