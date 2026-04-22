@@ -234,6 +234,7 @@ public class DeltaConfigs {
             .build();
         reg.register(muddy_delta);
 
+        @SuppressWarnings("deprecation") // Lake feature
         ConfiguredFeatureDefinition sulfur_pool = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_SULFUR_POOL, reg.getContext())
             .config(Feature.LAKE, new LakeFeature.Configuration(
                 BlockStateProvider.simple(Blocks.WATER),
