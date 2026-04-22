@@ -21,7 +21,7 @@ import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -227,6 +227,64 @@ public class ForestBiomes {
 
             .build();
         reg.register(dry_forest);
+
+        BiomeDefinition japanese_garden = BiomeDefinition.builder(BeerBiomes.FOREST_JAPANESE_GARDEN, reg.getContext())
+            .hasPrecipitation(true)
+            .temperature(0.65f)
+            .downfall(0.85f)
+            .waterColor(new Color(58,122,106).getRGB())
+            .foliageColorOverride(new Color(141, 68, 67).getRGB())
+            .dryFoliageColorOverride(new Color(141, 81, 67).getRGB())
+
+            .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                Optional.empty(),
+                Optional.of(new AmbientMoodSettings(
+                    SoundEvents.AMBIENT_CAVE,
+                    6000,
+                    8,
+                    2.0)),
+                List.of()))
+
+            .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, BiomeColors.WARM_HUMID.skyColor())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, BiomeColors.WARM_HUMID.fogColor())
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 5077600)
+
+            .addDefaultUndergroundOreFeatures()
+            .features(null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                List.of(MiscOverworldPlacements.SPRING_WATER,
+                    MiscOverworldPlacements.SPRING_LAVA),
+                List.of(PlacedFeatures.VEGETATION_MOSS_VEGETATION,
+                    PlacedFeatures.TREE_JAPANESE_MAPLE,
+                    VegetationPlacements.PATCH_TALL_GRASS,
+                    VegetationPlacements.PATCH_GRASS_SAVANNA,
+                    VegetationPlacements.WILDFLOWERS_MEADOW,
+                    VegetationPlacements.BROWN_MUSHROOM_NORMAL,
+                    VegetationPlacements.RED_MUSHROOM_NORMAL,
+                    VegetationPlacements.PATCH_SUGAR_CANE,
+                    AquaticPlacements.SEAGRASS_SWAMP),
+                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
+
+            .addDefaultOverworldCarvers()
+
+            .addDefaultMonsterSpawns(true)
+            .addDefaultFarmAnimalsSpawns()
+            .addDefaultCaveSpawns()
+            .addMobSpawn(MobCategory.MONSTER, EntityType.OCELOT, 2, 1, 3)
+            .addMobSpawn(MobCategory.CREATURE, EntityType.WOLF, 10, 2, 5)
+
+            .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
+                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_SWEDISH)
+
+            .build();
+        reg.register(japanese_garden);
 
         BiomeDefinition moss_garden = BiomeDefinition.builder(BeerBiomes.FOREST_MOSS_GARDEN, reg.getContext())
             .hasPrecipitation(true)

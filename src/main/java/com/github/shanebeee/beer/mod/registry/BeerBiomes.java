@@ -15,7 +15,6 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> CAVE_ICE_CAVE = register("cave/ice_cave");
     public static final ResourceKey<Biome> CAVE_MUDDY_FEN = register("cave/muddy_fen");
     public static final ResourceKey<Biome> CAVE_PLAIN_CAVE = register("cave/plain_cave");
-    public static final ResourceKey<Biome> CAVE_LAVA_CHICKEN = register("cave/lava_chicken");
     public static final ResourceKey<Biome> CAVE_SMOKY_CAVE = register("cave/smoky_cave");
     public static final ResourceKey<Biome> CAVE_SULFUR_CAVE = register("cave/sulfur_cave");
 
@@ -38,6 +37,7 @@ public class BeerBiomes {
     public static final ResourceKey<Biome> FOREST_BAOBAB_SAVANNA = register("forest/baobab_savanna");
     public static final ResourceKey<Biome> FOREST_BAYOU = register("forest/bayou");
     public static final ResourceKey<Biome> FOREST_DRY_FOREST = register("forest/dry_forest");
+    public static final ResourceKey<Biome> FOREST_JAPANESE_GARDEN = register("forest/japanese_garden");
     public static final ResourceKey<Biome> FOREST_MOSS_GARDEN = register("forest/moss_garden");
     public static final ResourceKey<Biome> FOREST_TALL_OAK = register("forest/tall_oak");
     public static final ResourceKey<Biome> FOREST_LUSH_FOREST = register("forest/lush_forest");

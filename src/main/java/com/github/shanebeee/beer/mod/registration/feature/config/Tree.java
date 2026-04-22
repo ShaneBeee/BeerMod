@@ -61,6 +61,25 @@ import java.util.OptionalInt;
 public class Tree {
 
     public static void register(ConfiguredFeatureRegistration reg) {
+        // DEFAULTS
+        Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
+        WeightedList.Builder<BlockState> litter_small = WeightedList.builder();
+        WeightedList.Builder<BlockState> litter_big = WeightedList.builder();
+
+        BlockState litter = Blocks.LEAF_LITTER.defaultBlockState();
+        for (int i = 1; i < 5; i++) {
+            for (Direction direction : directions) {
+                BlockState blockState = litter
+                    .setValue(BlockStateProperties.SEGMENT_AMOUNT, i)
+                    .setValue(BlockStateProperties.HORIZONTAL_FACING, direction);
+                if (i < 4) {
+                    litter_small.add(blockState, 1);
+                }
+                litter_big.add(blockState, 1);
+            }
+        }
+
+        // TREES
         ConfiguredFeatureDefinition acacia_forest = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_ACACIA_FOREST, reg.getContext())
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.ACACIA_LOG),
@@ -83,6 +102,31 @@ public class Tree {
                 .build())
             .build();
         reg.register(acacia_forest);
+
+        ConfiguredFeatureDefinition acacia_forest_litter = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_ACACIA_FOREST_LITTER, reg.getContext())
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.ACACIA_LOG),
+                new ForkingTrunkPlacer(5, 2, 3),
+                BlockStateProvider.simple(Blocks.ACACIA_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+
+                new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(List.of(
+                    new PlaceOnGroundDecorator(150, 3, 3,
+                        new WeightedStateProvider(litter_small)),
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState()
+                                    .setValue(BlockStateProperties.SNOWY, false), 4)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .build())))))
+                .build())
+            .build();
+        reg.register(acacia_forest_litter);
 
         ConfiguredFeatureDefinition baobab_acacia = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_BAOBAB_ACACIA, reg.getContext())
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -310,6 +354,38 @@ public class Tree {
             .build();
         reg.register(marula);
 
+        ConfiguredFeatureDefinition marula_litter = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_MARULA_LITTER, reg.getContext())
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.OAK_LOG),
+                new ForkingTrunkPlacer(10, 6, 0),
+                BlockStateProvider.simple(Blocks.OAK_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+
+                new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(1)),
+                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
+                .decorators(List.of(
+                    new AttachedToLeavesDecorator(
+                        0.001f,
+                        0,
+                        0,
+                        BlockStateProvider.simple(Blocks.HONEY_BLOCK),
+                        2,
+                        List.of(Direction.DOWN)),
+                    new PlaceOnGroundDecorator(150, 3, 3,
+                        new WeightedStateProvider(litter_small)),
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState()
+                                    .setValue(BlockStateProperties.SNOWY, false), 4)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .build())))))
+                .build())
+            .build();
+        reg.register(marula_litter);
+
         ConfiguredFeatureDefinition mpingo = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_MPINGO, reg.getContext())
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.DARK_OAK_LOG),
@@ -408,6 +484,30 @@ public class Tree {
             .build();
         reg.register(red_ivorywood);
 
+        ConfiguredFeatureDefinition red_ivorywood_litter = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_RED_IVORYWOOD_LITTER, reg.getContext())
+            .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.MANGROVE_LOG),
+                new ForkingTrunkPlacer(6, 2, 3),
+                BlockStateProvider.simple(Blocks.MANGROVE_LEAVES.defaultBlockState()
+                    .setValue(BlockStateProperties.DISTANCE, 7)
+                    .setValue(BlockStateProperties.PERSISTENT, false)),
+                new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(List.of(
+                    new PlaceOnGroundDecorator(150, 3, 3,
+                        new WeightedStateProvider(litter_small)),
+                    new AlterGroundDecorator(
+                        RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
+                            new WeightedStateProvider(WeightedList.<BlockState>builder()
+                                .add(Blocks.GRASS_BLOCK.defaultBlockState()
+                                    .setValue(BlockStateProperties.SNOWY, false), 4)
+                                .add(Blocks.COARSE_DIRT.defaultBlockState(), 1)
+                                .add(Blocks.ROOTED_DIRT.defaultBlockState(), 1)
+                                .build())))))
+                .build())
+            .build();
+        reg.register(red_ivorywood_litter);
+
         ConfiguredFeatureDefinition spruce_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_SPRUCE_SCRUB, reg.getContext())
             .config(Feature.TREE, createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.SPRUCE_LEAVES))
             .build();
@@ -426,23 +526,6 @@ public class Tree {
                 .build())
             .build();
         reg.register(stick_plant);
-
-        Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
-        WeightedList.Builder<BlockState> litter_small = WeightedList.builder();
-        WeightedList.Builder<BlockState> litter_big = WeightedList.builder();
-
-        BlockState litter = Blocks.LEAF_LITTER.defaultBlockState();
-        for (int i = 1; i < 5; i++) {
-            for (Direction direction : directions) {
-                BlockState blockState = litter
-                    .setValue(BlockStateProperties.SEGMENT_AMOUNT, i)
-                    .setValue(BlockStateProperties.HORIZONTAL_FACING, direction);
-                if (i < 4) {
-                    litter_small.add(blockState, 1);
-                }
-                litter_big.add(blockState, 1);
-            }
-        }
 
         ConfiguredFeatureDefinition swamp_oak = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_SWAMP_OAK, reg.getContext())
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -536,6 +619,28 @@ public class Tree {
                     .build().getHolder()))
             .build();
         reg.register(tropical_forest);
+
+        ConfiguredFeatureDefinition japan_maple = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_JAPANESE_MAPLE, reg.getContext())
+            .config(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                List.of(
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(marula_litter.getHolder())
+                        .placementModifiers(tropicalPredicate)
+                        .build()
+                        .getHolder(),
+                        0.3f),
+                    new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
+                        .configuredFeature(red_ivorywood_litter.getHolder())
+                        .placementModifiers(tropicalPredicate)
+                        .build()
+                        .getHolder(),
+                        0.3f)),
+                PlacedFeatureDefinition.builder()
+                    .configuredFeature(acacia_forest_litter.getHolder())
+                    .placementModifiers(tropicalPredicate)
+                    .build().getHolder()))
+            .build();
+        reg.register(japan_maple);
 
         ConfiguredFeatureDefinition windswept_pine = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.TREE_WINDSWEPT_OAK, reg.getContext())
             .config(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(

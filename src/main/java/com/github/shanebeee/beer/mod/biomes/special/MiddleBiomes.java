@@ -44,7 +44,7 @@ public class MiddleBiomes {
             case SEMI_ARID -> BeerBiomes.PLAINS_TEMPERATE_PLAINS;
             case MODERATE -> weirdness.isWeird() ? Biomes.FLOWER_FOREST : Biomes.FOREST;
             case SEMI_HUMID -> weirdness.isWeird() ? Biomes.OLD_GROWTH_BIRCH_FOREST : Biomes.BIRCH_FOREST;
-            case HUMID -> weirdness.isWeird() ? BeerBiomes.PLAINS_LUSH_PLAINS : Biomes.DARK_FOREST;
+            case HUMID -> weirdness.isWeird() ? BeerBiomes.PLAINS_LUSH_PLAINS : BeerBiomes.FOREST_JAPANESE_GARDEN;
         };
     }
 

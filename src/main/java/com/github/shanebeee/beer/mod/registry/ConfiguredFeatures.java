@@ -26,6 +26,7 @@ public class ConfiguredFeatures {
 
     // TREE
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_ACACIA_FOREST = register("tree/acacia_forest");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_ACACIA_FOREST_LITTER = register("tree/acacia_forest_litter");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAMBOO_PALM = register("tree/bamboo_palm");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBABS = register("tree/baobabs");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_BAOBAB_ACACIA = register("tree/baobab_acacia");
@@ -43,13 +44,16 @@ public class ConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_STRIPPED_WARPED_STEM = register("tree/fallen_stripped_warped_stem");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_TALL_OAK = register("tree/fallen_tall_oak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_FALLEN_WARPED_STEM = register("tree/fallen_warped_stem");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_JAPANESE_MAPLE = register("tree/japanese_maple");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_MARULA = register("tree/marula");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_MARULA_LITTER = register("tree/marula_litter");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_MPINGO = register("tree/mpingo");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_OAK_SCRUB = register("tree/oak_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_OLIVE_TREE = register("tree/olive_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_PALM_TREE = register("tree/palm_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_PALM_TREE_OASIS = register("tree/palm_tree_oasis");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_RED_IVORYWOOD = register("tree/red_ivorywood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_RED_IVORYWOOD_LITTER = register("tree/red_ivorywood_litter");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_SPRUCE_SCRUB = register("tree/spruce_scrub");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_STICK_PLANT = register("tree/stick_plant");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_SWAMP_OAK = register("tree/swamp_oak");

@@ -233,6 +233,17 @@ public class Trees {
             .build();
         reg.register(palm_oasis_palm);
 
+        PlacedFeatureDefinition japan_maple = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_JAPANESE_MAPLE, reg.getContext())
+            .configuredFeature(ConfiguredFeatures.TREE_JAPANESE_MAPLE)
+            .placementModifiers(
+                NoiseBasedCountPlacement.of(15, 70, 0.3),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(250))),
+                BiomeFilter.biome(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING))
+            .build();
+        reg.register(japan_maple);
+
         PlacedFeatureDefinition lush_desert_palm = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_LUSH_DESERT_PALM, reg.getContext())
             .configuredFeature(ConfiguredFeatures.TREE_PALM_TREE)
             .placementModifiers(CountPlacement.of(3),
