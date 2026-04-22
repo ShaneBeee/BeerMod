@@ -42,7 +42,7 @@ import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
 import java.util.List;
 
-public class Deltas {
+public class DeltaFeatures {
 
     @SuppressWarnings("deprecation")
     // CountOnEveryLayerPlacement (If Mojang removes this, check "minecraft:delta" feature)

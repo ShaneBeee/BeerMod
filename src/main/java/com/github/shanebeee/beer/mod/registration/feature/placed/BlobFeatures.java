@@ -27,7 +27,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
 
-public class Blobs {
+public class BlobFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition basalt_blobs = createBlob(reg.getContext(),

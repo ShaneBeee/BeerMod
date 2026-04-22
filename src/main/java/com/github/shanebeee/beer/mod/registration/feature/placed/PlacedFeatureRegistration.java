@@ -10,14 +10,14 @@ public class PlacedFeatureRegistration extends BaseRegistration<PlacedFeature, P
 
     public PlacedFeatureRegistration(BootstrapContext<PlacedFeature> context) {
         super(Registries.PLACED_FEATURE, context);
-        Blobs.register(this);
-        Bushes.register(this);
-        Decor.register(this);
-        Deltas.register(this);
-        Replacements.register(this);
-        Terrain.register(this);
-        Trees.register(this);
-        Vegetation.register(this);
+        BlobFeatures.register(this);
+        BushFeatures.register(this);
+        DecorFeatures.register(this);
+        DeltaFeatures.register(this);
+        ReplacementFeatures.register(this);
+        TerrainFeatures.register(this);
+        TreeFeatures.register(this);
+        VegetationFeatures.register(this);
     }
 
 }

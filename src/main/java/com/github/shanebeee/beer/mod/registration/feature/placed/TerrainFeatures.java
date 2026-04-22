@@ -37,7 +37,7 @@ import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 
-public class Terrain {
+public class TerrainFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition brown_concrete_disk = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_BROWN_CONCRETE_DISK, reg.getContext())

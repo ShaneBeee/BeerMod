@@ -46,7 +46,7 @@ import net.minecraft.world.level.material.Fluids;
 import java.util.List;
 import java.util.OptionalInt;
 
-public class Trees {
+public class TreeFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition bamboo_jungle = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_BAMBOO_JUNGLE_TREES, reg.getContext())

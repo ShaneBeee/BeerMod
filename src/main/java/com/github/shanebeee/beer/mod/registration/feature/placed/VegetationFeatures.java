@@ -9,7 +9,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.data.worldgen.features.PileFeatures;
-import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
@@ -53,7 +52,7 @@ import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 
-public class Vegetation {
+public class VegetationFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition azalea_bush_or_scrub = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_AZALEA_BUSH_OR_SCRUB, reg.getContext())
@@ -71,7 +70,7 @@ public class Vegetation {
         reg.register(azalea_bush_or_scrub);
 
         PlacedFeatureDefinition bamboo = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_BAMBOO_SOME_PODZOL, reg.getContext())
-            .configuredFeature(VegetationFeatures.BAMBOO_SOME_PODZOL)
+            .configuredFeature(net.minecraft.data.worldgen.features.VegetationFeatures.BAMBOO_SOME_PODZOL)
             .placementModifiers(
                 NoiseBasedCountPlacement.of(100, 80.0f, 0.3f),
                 InSquarePlacement.spread(),
@@ -158,7 +157,7 @@ public class Vegetation {
         reg.register(moss_veg);
 
         PlacedFeatureDefinition cherry_petals = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CHERRY_PETALS, reg.getContext())
-            .configuredFeature(VegetationFeatures.FLOWER_CHERRY)
+            .configuredFeature(net.minecraft.data.worldgen.features.VegetationFeatures.FLOWER_CHERRY)
             .placementModifiers(NoiseThresholdCountPlacement.of(-0.8f, 15, 4),
                 InSquarePlacement.spread(),
                 RarityFilter.onAverageOnceEvery(32),
@@ -223,12 +222,12 @@ public class Vegetation {
         PlacedFeatureDefinition oasis_flowers = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_OASIS_FLOWERS, reg.getContext())
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                 List.of(
-                    getWeightedFeature(context, VegetationFeatures.SUNFLOWER, 0.1f),
-                    getWeightedFeature(context, VegetationFeatures.WILDFLOWER, 0.2f),
-                    getWeightedFeature(context, VegetationFeatures.FIREFLY_BUSH, 0.2f),
-                    getWeightedFeature(context, VegetationFeatures.FLOWER_CHERRY, 0.1f)
+                    getWeightedFeature(context, net.minecraft.data.worldgen.features.VegetationFeatures.SUNFLOWER, 0.1f),
+                    getWeightedFeature(context, net.minecraft.data.worldgen.features.VegetationFeatures.WILDFLOWER, 0.2f),
+                    getWeightedFeature(context, net.minecraft.data.worldgen.features.VegetationFeatures.FIREFLY_BUSH, 0.2f),
+                    getWeightedFeature(context, net.minecraft.data.worldgen.features.VegetationFeatures.FLOWER_CHERRY, 0.1f)
                 ),
-                getFeature(context, VegetationFeatures.FLOWER_FLOWER_FOREST)
+                getFeature(context, net.minecraft.data.worldgen.features.VegetationFeatures.FLOWER_FLOWER_FOREST)
             ))
             .placementModifiers(CountPlacement.of(52),
                 InSquarePlacement.spread(),

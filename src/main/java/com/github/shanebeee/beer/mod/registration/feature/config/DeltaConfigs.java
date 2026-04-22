@@ -6,7 +6,6 @@ import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Vec3i;
-import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
@@ -33,7 +31,7 @@ import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
 import java.util.List;
 
-public class Delta {
+public class DeltaConfigs {
 
     public static void register(ConfiguredFeatureRegistration reg) {
         ConfiguredFeatureDefinition basalt_delta = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DELTA_BASALT_DELTA, reg.getContext())

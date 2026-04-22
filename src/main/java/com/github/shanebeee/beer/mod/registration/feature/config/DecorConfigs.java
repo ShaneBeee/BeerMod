@@ -24,7 +24,7 @@ import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import java.util.List;
 
-public class Decor {
+public class DecorConfigs {
 
     public static void register(ConfiguredFeatureRegistration reg) {
         ConfiguredFeatureDefinition basalt_pillar = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_BASALT_PILLAR, reg.getContext())

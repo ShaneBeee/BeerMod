@@ -58,7 +58,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
-public class Tree {
+public class TreeConfigs {
 
     public static void register(ConfiguredFeatureRegistration reg) {
         // DEFAULTS

@@ -30,7 +30,7 @@ import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vegetation {
+public class VegetationConfigs {
 
     public static void register(ConfiguredFeatureRegistration reg) {
         // PREDICATES
@@ -38,7 +38,7 @@ public class Vegetation {
 
         // AZALEA SCRUB
         ConfiguredFeatureDefinition azalea_scrub = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.VEGETATION_AZALEA_SCRUB, reg.getContext())
-            .config(Feature.TREE, Tree.createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.AZALEA_LEAVES))
+            .config(Feature.TREE, TreeConfigs.createScrub(Blocks.MANGROVE_ROOTS, Blocks.MUDDY_MANGROVE_ROOTS, Blocks.AZALEA_LEAVES))
             .build();
         reg.register(azalea_scrub);
 

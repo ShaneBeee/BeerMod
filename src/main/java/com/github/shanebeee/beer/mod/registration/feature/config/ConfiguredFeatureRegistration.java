@@ -12,11 +12,11 @@ public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFe
     public ConfiguredFeatureRegistration(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         super(Registries.CONFIGURED_FEATURE, context);
         PlacedFeatureDefinition.setupConfiguredFeatureContext(context);
-        Decor.register(this);
-        Delta.register(this);
-        Terrain.register(this);
-        Tree.register(this);
-        Vegetation.register(this);
+        DecorConfigs.register(this);
+        DeltaConfigs.register(this);
+        TerrainConfigs.register(this);
+        TreeConfigs.register(this);
+        VegetationConfigs.register(this);
     }
 
 }

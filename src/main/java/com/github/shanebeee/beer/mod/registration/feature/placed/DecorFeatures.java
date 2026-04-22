@@ -29,7 +29,7 @@ import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
 import java.util.List;
 
-public class Decor {
+public class DecorFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition basalt_pillar = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_BASALT_PILLAR, reg.getContext())

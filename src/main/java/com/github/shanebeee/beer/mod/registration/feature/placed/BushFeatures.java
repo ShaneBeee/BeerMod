@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
 
 import java.util.List;
 
-public class Bushes {
+public class BushFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition med_bushes = PlacedFeatureDefinition.builder(PlacedFeatures.BUSH_MEDITERRANEAN_BUSHES, reg.getContext())

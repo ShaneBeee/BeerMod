@@ -31,7 +31,7 @@ import net.minecraft.world.level.levelgen.placement.SurfaceRelativeThresholdFilt
 
 import java.util.List;
 
-public class Replacements {
+public class ReplacementFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition grass_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_TO_SAND, reg.getContext())
