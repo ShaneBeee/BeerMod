@@ -16,6 +16,7 @@ import com.github.shanebeee.beer.mod.biomes.continental.NearInlandBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.OceanBiomes;
 import com.github.shanebeee.beer.mod.biomes.special.CaveBiomes;
 import com.github.shanebeee.beer.mod.biomes.continental.IslandBiomes;
+import com.github.shanebeee.beer.mod.registry.DimensionTypes;
 import com.github.shanebeee.beer.mod.registry.Dimensions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -24,13 +25,15 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate.Parameter;
 import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import org.jetbrains.annotations.NotNull;
 
 public class DimensionRegistration extends BaseRegistration<LevelStem, DimensionDefinition> {
 
     public DimensionRegistration(BootstrapContext<LevelStem> context) {
         super(Registries.LEVEL_STEM, context);
-        DimensionDefinition.Builder builder = DimensionDefinition.overworldBuilder(Dimensions.BEER_WORLD, context);
+        DimensionDefinition.Builder builder = DimensionDefinition.builder(Dimensions.BEER_WORLD, context,
+            DimensionTypes.OVERWORLD, NoiseGeneratorSettings.OVERWORLD);
 
         // CAVE BIOMES
         builder.addPoint(Biomes.DEEP_DARK,

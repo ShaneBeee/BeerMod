@@ -7,7 +7,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 
 public class DimensionTypes {
 
-    public static ResourceKey<DimensionType> OVERWORLD = register("minecraft:overworld");
+    public static ResourceKey<DimensionType> OVERWORLD = register("beer:overworld");
 
     private static ResourceKey<DimensionType> register(String key) {
         return Beer.getKey(Registries.DIMENSION_TYPE, key);
