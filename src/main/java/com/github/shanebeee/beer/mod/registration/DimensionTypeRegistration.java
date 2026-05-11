@@ -43,7 +43,7 @@ public class DimensionTypeRegistration extends BaseRegistration<DimensionType, D
             .setAttribute(EnvironmentAttributes.NETHER_PORTAL_SPAWNS_PIGLINS, true)
             .setAttribute(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
             .setAttribute(EnvironmentAttributes.AMBIENT_LIGHT_COLOR, new Color(10, 10, 10).getRGB())
-            .setAttribute(EnvironmentAttributes.CLOUD_COLOR, new Color(204, 255, 255, 1).getRGB())
+            .setAttribute(EnvironmentAttributes.CLOUD_COLOR, new Color(255, 255, 255, 204).getRGB())
             .setAttribute(EnvironmentAttributes.CLOUD_HEIGHT, 192.33f)
             .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(192, 216, 255).getRGB())
             .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(120, 167, 255).getRGB())
