@@ -84,7 +84,7 @@ public class ReplacementFeatures {
         // Stone
         PlacedFeatureDefinition stone_to_snow = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_SNOW,
             Blocks.STONE, Blocks.SNOW_BLOCK,
-            1, 40, 100, 2, 7);
+            1, 50, 100, 2, 7);
         reg.register(stone_to_snow);
 
         PlacedFeatureDefinition stone_to_stone_bricks = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_STONE_BRICKS,
@@ -94,12 +94,12 @@ public class ReplacementFeatures {
 
         PlacedFeatureDefinition stone_to_ice = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_ICE,
             Blocks.STONE, Blocks.PACKED_ICE,
-            40, 80, 100, 2, 7);
+            50, 150, 100, 2, 7);
         reg.register(stone_to_ice);
 
         PlacedFeatureDefinition deepslate_to_ice = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
             Blocks.DEEPSLATE, Blocks.BLUE_ICE,
-            60, 200, 100, 2, 7);
+            90, 300, 100, 2, 7);
         reg.register(deepslate_to_ice);
     }
 
