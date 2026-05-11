@@ -268,6 +268,8 @@ public class CaveBiomes {
             .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.BLUE_ICE.defaultBlockState()), 0.005f)
             .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SNOW_BLOCK.defaultBlockState()), 0.005f)
 
+            .addDefaultOverworldCarvers()
+
             .addDefaultUndergroundOreFeatures()
             .features(null,
                 null,
@@ -308,6 +310,8 @@ public class CaveBiomes {
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.0f)
             .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(130, 115, 135).getRGB())
 
+            .addDefaultOverworldCarvers()
+
             .addDefaultUndergroundOreFeatures()
             .features(null,
                 null,
@@ -345,6 +349,8 @@ public class CaveBiomes {
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
+
+            .addDefaultOverworldCarvers()
 
             .addDefaultUndergroundOreFeatures()
             .features(null,
@@ -386,6 +392,8 @@ public class CaveBiomes {
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
 
+            .addDefaultOverworldCarvers()
+
             .addDefaultUndergroundOreFeatures()
             .features(null,
                 null,
@@ -424,6 +432,7 @@ public class CaveBiomes {
             .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(45, 58, 16).getRGB())
 
             .addDefaultOverworldCarvers()
+
             .addDefaultUndergroundOreFeatures()
             .addDefaultMonsterRoomFeatures()
             .features(null,
