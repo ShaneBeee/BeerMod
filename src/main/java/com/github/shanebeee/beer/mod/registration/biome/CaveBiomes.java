@@ -46,6 +46,7 @@ public class CaveBiomes {
 
             .addDefaultOverworldCarvers()
 
+            .addDefaultUndergroundOreFeatures()
             .features(
                 List.of(
                     PlacedFeatures.DELTA_BASALT_DELTA,
