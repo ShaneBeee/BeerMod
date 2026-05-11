@@ -2,6 +2,7 @@ package com.github.shanebeee.beer.mod;
 
 import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.Definable;
+import com.github.shanebeee.beer.mod.registration.CarverRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionTypeRegistration;
 import com.github.shanebeee.beer.mod.registration.feature.config.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
@@ -27,7 +28,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.timeline.Timeline;
@@ -52,6 +52,7 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(RegistrySetBuilder builder) {
+        builder.add(Registries.CONFIGURED_CARVER, CarverRegistration::new);
         builder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureRegistration::new);
         builder.add(Registries.PLACED_FEATURE, PlacedFeatureRegistration::new);
         builder.add(Registries.BIOME, BiomeRegistration::new);
