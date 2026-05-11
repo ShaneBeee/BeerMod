@@ -12,8 +12,8 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 384,
-    "min_y": -64,
+    "height": 512,
+    "min_y": -256,
     "size_horizontal": 1,
     "size_vertical": 2
   },
@@ -46,7 +46,7 @@
                   "argument1": {
                     "type": "minecraft:y_clamped_gradient",
                     "from_value": 0.0,
-                    "from_y": -64,
+                    "from_y": -256,
                     "to_value": 1.0,
                     "to_y": -40
                   },
@@ -170,7 +170,7 @@
       "type": "minecraft:noise",
       "noise": "minecraft:aquifer_fluid_level_floodedness",
       "xz_scale": 1.0,
-      "y_scale": 0.67
+      "y_scale": 0.00
     },
     "fluid_level_spread": {
       "type": "minecraft:noise",
@@ -181,8 +181,8 @@
     "lava": {
       "type": "minecraft:noise",
       "noise": "minecraft:aquifer_lava",
-      "xz_scale": 1.0,
-      "y_scale": 1.0
+      "xz_scale": 0.0,
+      "y_scale": 0.0
     },
     "preliminary_surface_level": {
       "type": "minecraft:find_top_surface",
@@ -198,7 +198,7 @@
             "argument1": {
               "type": "minecraft:y_clamped_gradient",
               "from_value": 0.0,
-              "from_y": -64,
+              "from_y": -256,
               "to_value": 1.0,
               "to_y": -40
             },
@@ -255,7 +255,7 @@
                         }
                       },
                       "max": 64.0,
-                      "min": -64.0
+                      "min": -256.0
                     }
                   }
                 }
@@ -264,7 +264,7 @@
           }
         }
       },
-      "lower_bound": -64,
+      "lower_bound": -256,
       "upper_bound": {
         "type": "minecraft:clamp",
         "input": {
@@ -2577,11 +2577,11 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 8
+            "absolute": -88
           },
           "random_name": "minecraft:deepslate",
           "true_at_and_below": {
-            "absolute": 0
+            "absolute": -96
           }
         },
         "then_run": {
