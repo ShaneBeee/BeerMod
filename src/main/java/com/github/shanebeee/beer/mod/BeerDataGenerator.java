@@ -3,27 +3,33 @@ package com.github.shanebeee.beer.mod;
 import com.github.shanebeee.beer.api.registration.BaseRegistration;
 import com.github.shanebeee.beer.api.registration.Definable;
 import com.github.shanebeee.beer.mod.registration.CarverRegistration;
-import com.github.shanebeee.beer.mod.registration.DimensionTypeRegistration;
-import com.github.shanebeee.beer.mod.registration.feature.config.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.DimensionRegistration;
+import com.github.shanebeee.beer.mod.registration.DimensionTypeRegistration;
+import com.github.shanebeee.beer.mod.registration.TagRegistration;
+import com.github.shanebeee.beer.mod.registration.TimelineRegistration;
+import com.github.shanebeee.beer.mod.registration.biome.BiomeRegistration;
+import com.github.shanebeee.beer.mod.registration.feature.config.ConfiguredFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.feature.placed.PlacedFeatureRegistration;
 import com.github.shanebeee.beer.mod.registration.structure.StructureRegistration;
 import com.github.shanebeee.beer.mod.registration.structure.StructureSetRegistration;
-import com.github.shanebeee.beer.mod.registration.TagRegistration;
 import com.github.shanebeee.beer.mod.registration.structure.template.TemplatePoolRegistration;
-import com.github.shanebeee.beer.mod.registration.TimelineRegistration;
-import com.github.shanebeee.beer.mod.registration.biome.BiomeRegistration;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
+import net.minecraft.DetectedVersion;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.metadata.PackMetadataGenerator;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -43,6 +49,16 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(@NonNull FabricDataGenerator generator) {
         FabricDataGenerator.Pack pack = generator.createPack();
+        // Pack Details (pack.mcmeta)
+        ((DataGenerator.PackGenerator) pack).addProvider((packOutput) ->
+            new PackMetadataGenerator(packOutput)
+                .add(PackMetadataSection.SERVER_TYPE,
+                    new PackMetadataSection(
+                        Component.literal("A whole new world!"),
+                        DetectedVersion.BUILT_IN.packVersion(PackType.SERVER_DATA)
+                            .minorRange()))
+        );
+        // Providers
         pack.addProvider(DataRegistration::new);
         pack.addProvider(BiomeTagRegistration::new);
         pack.addProvider(StructureTagRegistration::new);
