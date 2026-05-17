@@ -22,7 +22,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.Blocks;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,12 +87,12 @@ public class CaveBiomes {
             .waterColor(-11711227)
             .particle(ParticleTypes.ASH, 0.2f)
 
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, -11711227)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(77, 77, 5).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
-            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, -11711227)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 329011)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(123, 164, 255).getRGB())
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(77, 77, 5).getRGB())
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(5, 5, 51).getRGB())
 
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
                 Optional.empty(),
@@ -142,11 +142,11 @@ public class CaveBiomes {
 
             .waterColor(-14168075)
 
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, -16573926)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(3, 26, 26).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, -14168075)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(123, 164, 255).getRGB())
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(39, 207, 245).getRGB())
             .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(115, 217, 217).getRGB())
 
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
@@ -197,15 +197,15 @@ public class CaveBiomes {
             .hasPrecipitation(true)
 
             // Special Effects
-            .waterColor(-6390206)
+            .waterColor(new Color(158, 126, 66).getRGB())
 
             // Attributes
             // Colors
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, -11058147)
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(87, 68, 29).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, -6390206)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(123, 164, 255).getRGB())
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(158, 126, 66).getRGB())
 
             // Sounds
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
@@ -260,11 +260,11 @@ public class CaveBiomes {
             .temperature(0.0f)
             .downfall(0.8f)
 
-            .waterColor(6003155)
+            .waterColor(new Color(91, 153, 211).getRGB())
 
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 5634012)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, 16564102)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(85, 247, 220).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(252, 191, 134).getRGB())
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(134, 252, 236).getRGB())
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
 
             .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.BLUE_ICE.defaultBlockState()), 0.005f)
@@ -345,11 +345,11 @@ public class CaveBiomes {
             .downfall(0.2f)
             .waterColor(4159204)
 
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, -13487566)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(0, 0, 0).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(50, 50, 50).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(134, 252, 236).getRGB())
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
 
             .addDefaultOverworldCarvers()
@@ -387,11 +387,11 @@ public class CaveBiomes {
             .downfall(0.2f)
             .waterColor(4159204)
 
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, -13487566)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(0, 0, 0).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(50, 50, 50).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 0.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 15.0f)
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 8846572)
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(134, 252, 236).getRGB())
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 1.0f)
 
             .addDefaultOverworldCarvers()
@@ -426,7 +426,7 @@ public class CaveBiomes {
             .downfall(0.4f)
             .waterColor(new Color(52, 191, 137).getRGB())
 
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, 0)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(0, 0, 0).getRGB())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(23, 84, 60).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
