@@ -1,6 +1,7 @@
 {
   "attributes": {
     "minecraft:audio/music_volume": 1.0,
+    "minecraft:visual/block_light_tint": "#60594a",
     "minecraft:visual/fog_color": "#323232",
     "minecraft:visual/fog_end_distance": 15.0,
     "minecraft:visual/fog_start_distance": 0.0,

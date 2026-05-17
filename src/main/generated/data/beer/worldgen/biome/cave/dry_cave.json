@@ -41,10 +41,11 @@
         "probability": 0.005
       }
     ],
+    "minecraft:visual/block_light_tint": "#af7104",
     "minecraft:visual/fog_color": "#57441d",
     "minecraft:visual/fog_end_distance": 50.0,
     "minecraft:visual/fog_start_distance": 5.0,
-    "minecraft:visual/sky_color": "#7ba4ff",
+    "minecraft:visual/sky_color": "#57441d",
     "minecraft:visual/water_fog_color": "#9e7e42"
   },
   "carvers": [

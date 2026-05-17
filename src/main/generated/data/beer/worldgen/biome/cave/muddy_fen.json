@@ -5,7 +5,7 @@
     "minecraft:visual/fog_color": "#1e1f15",
     "minecraft:visual/fog_end_distance": 50.0,
     "minecraft:visual/fog_start_distance": 5.0,
-    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/sky_color": "#1e1f15",
     "minecraft:visual/water_fog_color": "#0f0d0a"
   },
   "carvers": [
