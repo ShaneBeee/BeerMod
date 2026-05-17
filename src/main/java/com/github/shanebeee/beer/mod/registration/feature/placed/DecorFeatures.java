@@ -132,7 +132,7 @@ public class DecorFeatures {
                 Direction.UP,
                 BlockPredicate.alwaysTrue(),
                 false))
-            .placementModifiers(CountPlacement.of(100),
+            .placementModifiers(CountPlacement.of(10),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(5), VerticalAnchor.absolute(120)),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.hasSturdyFace(Direction.UP), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
