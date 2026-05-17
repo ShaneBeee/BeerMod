@@ -147,6 +147,7 @@ public class CaveBiomes {
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
             .setAttribute(EnvironmentAttributes.SKY_COLOR, 8103167)
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, -14168075)
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(115, 217, 217).getRGB())
 
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
                 Optional.empty(),

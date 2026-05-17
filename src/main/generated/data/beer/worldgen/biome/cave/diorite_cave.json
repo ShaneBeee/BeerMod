@@ -21,6 +21,7 @@
       }
     },
     "minecraft:audio/music_volume": 0.5,
+    "minecraft:visual/block_light_tint": "#73d9d9",
     "minecraft:visual/fog_color": "#031a1a",
     "minecraft:visual/fog_end_distance": 50.0,
     "minecraft:visual/fog_start_distance": 5.0,
