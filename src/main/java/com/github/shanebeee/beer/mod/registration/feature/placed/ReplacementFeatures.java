@@ -70,37 +70,38 @@ public class ReplacementFeatures {
             .build();
         reg.register(grass_water_to_sand);
 
-        // Diorite
+        // Stone to Diorite
         PlacedFeatureDefinition deepslate_to_diorite = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_DEEPSLATE_TO_DIORITE,
             Blocks.DEEPSLATE, Blocks.DIORITE,
-            60, 200, 100, 2, 5);
+            60, 400, 100, 2, 5);
         reg.register(deepslate_to_diorite);
 
         PlacedFeatureDefinition stone_to_diorite = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_DIORITE,
             Blocks.STONE, Blocks.DIORITE,
-            1, 100, 100, 5, 7);
+            1, 200, 100, 5, 7);
         reg.register(stone_to_diorite);
 
-        // Stone
+        // Stone to Snow/Ice
         PlacedFeatureDefinition stone_to_snow = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_SNOW,
             Blocks.STONE, Blocks.SNOW_BLOCK,
             1, 50, 100, 2, 7);
         reg.register(stone_to_snow);
 
-        PlacedFeatureDefinition stone_to_stone_bricks = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_STONE_BRICKS,
-            Blocks.STONE, Blocks.STONE_BRICKS,
-            1, 100, 100, 10, 12);
-        reg.register(stone_to_stone_bricks);
-
         PlacedFeatureDefinition stone_to_ice = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_ICE,
             Blocks.STONE, Blocks.PACKED_ICE,
-            50, 150, 100, 2, 7);
+            50, 200, 100, 2, 7);
         reg.register(stone_to_ice);
 
         PlacedFeatureDefinition deepslate_to_ice = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_DEEPSLATE_TO_ICE,
             Blocks.DEEPSLATE, Blocks.BLUE_ICE,
-            90, 300, 100, 2, 7);
+            90, 400, 100, 2, 7);
         reg.register(deepslate_to_ice);
+
+        // Stone to Stone Bricks
+        PlacedFeatureDefinition stone_to_stone_bricks = createUndergroundReplacement(reg.getContext(), PlacedFeatures.REPLACE_STONE_TO_STONE_BRICKS,
+            Blocks.STONE, Blocks.STONE_BRICKS,
+            1, 100, 100, 10, 12);
+        reg.register(stone_to_stone_bricks);
     }
 
     @SuppressWarnings("SameParameterValue")

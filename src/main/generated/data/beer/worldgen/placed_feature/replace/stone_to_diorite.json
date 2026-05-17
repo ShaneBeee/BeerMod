@@ -47,7 +47,7 @@
       "type": "minecraft:surface_relative_threshold_filter",
       "heightmap": "WORLD_SURFACE_WG",
       "max_inclusive": -1,
-      "min_inclusive": -100
+      "min_inclusive": -200
     },
     {
       "type": "minecraft:biome"
