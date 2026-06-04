@@ -38,6 +38,7 @@ public class CaveBiomes {
             .waterColor(basaltColors)
 
             .setAttribute(EnvironmentAttributes.FOG_COLOR, basaltColors)
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, basaltColors)
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
             .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(168, 3, 3).getRGB())
@@ -84,13 +85,13 @@ public class CaveBiomes {
             .downfall(0.5f)
             .hasPrecipitation(false)
 
-            .waterColor(-11711227)
+            .waterColor(new Color(77, 77, 5).getRGB())
             .particle(ParticleTypes.ASH, 0.2f)
 
-            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(77, 77, 5).getRGB())
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(28, 28, 1).getRGB())
+            .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(28, 28, 1).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(123, 164, 255).getRGB())
             .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(77, 77, 5).getRGB())
             .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(5, 5, 51).getRGB())
 
@@ -140,14 +141,14 @@ public class CaveBiomes {
             .downfall(0.5f)
             .hasPrecipitation(true)
 
-            .waterColor(-14168075)
+            .waterColor(new Color(39, 207, 245).getRGB())
+            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(39, 207, 245).getRGB())
 
+            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(6, 42, 42).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_COLOR, new Color(3, 26, 26).getRGB())
             .setAttribute(EnvironmentAttributes.FOG_START_DISTANCE, 5.0f)
             .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 50.0f)
-            .setAttribute(EnvironmentAttributes.SKY_COLOR, new Color(123, 164, 255).getRGB())
-            .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, new Color(39, 207, 245).getRGB())
-            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(115, 217, 217).getRGB())
+            .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(197, 246, 246).getRGB())
 
             .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
                 Optional.empty(),
