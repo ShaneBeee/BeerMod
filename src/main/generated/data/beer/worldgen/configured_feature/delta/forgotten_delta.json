@@ -27,7 +27,7 @@
         }
       ]
     },
-    "replaceable": "#minecraft:mineable/pickaxe",
+    "replaceable": "#minecraft:base_stone_overworld",
     "surface": "floor",
     "vegetation_chance": 1.0,
     "vegetation_feature": {

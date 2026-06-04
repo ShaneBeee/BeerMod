@@ -251,6 +251,25 @@ public class BiomeDefinition extends Definable<Biome> {
             return this;
         }
 
+        public Builder globalOverworldGeneration() {
+            BiomeDefaultFeatures.addDefaultCarversAndLakes(this.genSettings);
+            BiomeDefaultFeatures.addDefaultCrystalFormations(this.genSettings);
+            BiomeDefaultFeatures.addDefaultMonsterRoom(this.genSettings);
+            BiomeDefaultFeatures.addDefaultUndergroundVariety(this.genSettings);
+            BiomeDefaultFeatures.addDefaultSprings(this.genSettings);
+            BiomeDefaultFeatures.addSurfaceFreezing(this.genSettings);
+            return this;
+        }
+
+        public Builder addSulfurCavesFeatures() {
+            globalOverworldGeneration();
+            BiomeDefaultFeatures.addPlainGrass(this.genSettings);
+            BiomeDefaultFeatures.addDefaultOres(this.genSettings);
+            BiomeDefaultFeatures.addDefaultSoftDisks(this.genSettings);
+            BiomeDefaultFeatures.addSulfurCavesFeatures(this.genSettings);
+            return this;
+        }
+
         @SuppressWarnings("unchecked")
         public Builder carvers(@NotNull Object... carvers) {
             for (Object o : carvers) {

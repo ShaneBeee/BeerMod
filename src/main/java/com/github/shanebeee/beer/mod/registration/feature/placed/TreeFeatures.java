@@ -22,11 +22,12 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.CompositeFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.CreakingHeartDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
@@ -163,7 +164,7 @@ public class TreeFeatures {
 
         PlacedFeatureDefinition fallen_warped_stem = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_WARPED_STEM, reg.getContext())
             .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
-                new SimpleRandomFeatureConfiguration(HolderSet.direct(
+                new CompositeFeatureConfiguration(HolderSet.direct(
                     PlacedFeatureDefinition.builder(reg.getContext())
                         .configuredFeature(ConfiguredFeatures.TREE_FALLEN_WARPED_STEM)
                         .build().getHolder(),
@@ -189,7 +190,8 @@ public class TreeFeatures {
                     .setValue(BlockStateProperties.DISTANCE, 7)
                     .setValue(BlockStateProperties.PERSISTENT, false)),
                 new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
-                new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.of(0)))
+                new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.of(0)),
+                BlockStateProvider.simple(Blocks.WARPED_STEM))
                 .decorators(List.of(new TrunkVineDecorator(), new CreakingHeartDecorator(0.1f)))
                 .ignoreVines()
                 .build())

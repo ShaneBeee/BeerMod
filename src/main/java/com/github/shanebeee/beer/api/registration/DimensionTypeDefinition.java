@@ -2,6 +2,7 @@ package com.github.shanebeee.beer.api.registration;
 
 import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -12,7 +13,6 @@ import net.minecraft.world.attribute.EnvironmentAttributeMap;
 import net.minecraft.world.attribute.modifier.AttributeModifier;
 import net.minecraft.world.clock.WorldClock;
 import net.minecraft.world.level.CardinalLighting;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.timeline.Timeline;
@@ -177,9 +177,10 @@ public class DimensionTypeDefinition extends Definable<DimensionType> {
                 clock = Optional.of(orThrow);
             }
 
+            HolderGetter<Block> blockReg = this.context.lookup(Registries.BLOCK);
             DimensionType dimensionType = new DimensionType(this.hasFixedTime, this.hasSkyLight, this.hasCeiling,
                 this.hasEnderDragonFight, this.coordinateScale, this.minY, this.height, this.logicalHeight,
-                this.infiniburn, this.ambientLight, this.monsterSettings, this.skybox, this.cardinalLightType,
+                blockReg.getOrThrow(this.infiniburn), this.ambientLight, this.monsterSettings, this.skybox, this.cardinalLightType,
                 this.attributes.build(), timelines, clock);
 
             Holder.Reference<DimensionType> holder;

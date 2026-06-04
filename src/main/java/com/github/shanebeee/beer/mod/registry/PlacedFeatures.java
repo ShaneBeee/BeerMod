@@ -45,7 +45,6 @@ public class PlacedFeatures {
     public static final ResourceKey<PlacedFeature> DELTA_MUDDY_DELTA = register("delta/muddy_delta");
     public static final ResourceKey<PlacedFeature> DELTA_PLAIN_CAVE_DELTA = register("delta/plain_cave_delta");
     public static final ResourceKey<PlacedFeature> DELTA_STONE_LAVA_DELTA = register("delta/stone_lava_delta");
-    public static final ResourceKey<PlacedFeature> DELTA_SULFUR_POOL = register("delta/sulfur_pool");
     public static final ResourceKey<PlacedFeature> DELTA_SWAMP_DELTA = register("delta/swamp_delta");
 
     // REPLACE

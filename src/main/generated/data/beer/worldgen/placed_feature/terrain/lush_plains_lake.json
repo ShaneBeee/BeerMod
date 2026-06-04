@@ -8,6 +8,15 @@
           "Name": "minecraft:sand"
         }
       },
+      "can_place_feature": {
+        "type": "minecraft:true"
+      },
+      "can_replace_with_air_or_fluid": {
+        "type": "minecraft:true"
+      },
+      "can_replace_with_barrier": {
+        "type": "minecraft:true"
+      },
       "fluid": {
         "type": "minecraft:simple_state_provider",
         "state": {

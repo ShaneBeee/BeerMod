@@ -5,8 +5,8 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.CompositeFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.ReplaceSphereConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
@@ -32,8 +32,8 @@ public class FeatureUtils {
 //                .build().getFeatureHolder());
 //    }
 
-    public static SimpleRandomFeatureConfiguration createBlobReplace(Block toReplace, Block replaceWith, int count, int xzRange, int yRange) {
-        return new SimpleRandomFeatureConfiguration(HolderSet.direct(PlacementUtils.inlinePlaced(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(
+    public static CompositeFeatureConfiguration createBlobReplace(Block toReplace, Block replaceWith, int count, int xzRange, int yRange) {
+        return new CompositeFeatureConfiguration(HolderSet.direct(PlacementUtils.inlinePlaced(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(
                 toReplace.defaultBlockState(),
                 replaceWith.defaultBlockState(),
                 UniformInt.of(1, 2)),

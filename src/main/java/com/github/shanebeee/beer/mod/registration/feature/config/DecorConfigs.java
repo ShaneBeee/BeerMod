@@ -4,15 +4,20 @@ import com.github.shanebeee.beer.api.registration.ConfiguredFeatureDefinition;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CaveVinesBlock;
 import net.minecraft.world.level.block.HangingMossBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
@@ -27,7 +32,10 @@ import java.util.List;
 public class DecorConfigs {
 
     public static void register(ConfiguredFeatureRegistration reg) {
-        ConfiguredFeatureDefinition basalt_pillar = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_BASALT_PILLAR, reg.getContext())
+        BootstrapContext<ConfiguredFeature<?, ?>> context = reg.getContext();
+        HolderGetter<Block> blockReg = context.lookup(Registries.BLOCK);
+
+        ConfiguredFeatureDefinition basalt_pillar = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_BASALT_PILLAR, context)
             .config(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(
                     new BlockColumnConfiguration.Layer(UniformInt.of(4, 11), BlockStateProvider.simple(Blocks.BASALT))
@@ -38,9 +46,9 @@ public class DecorConfigs {
             .build();
         reg.register(basalt_pillar);
 
-        ConfiguredFeatureDefinition muddy_blob = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_MUDDY_BLOB, reg.getContext())
+        ConfiguredFeatureDefinition muddy_blob = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_MUDDY_BLOB, context)
             .config(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.MOSS_REPLACEABLE,
+                blockReg.getOrThrow(BlockTags.MOSS_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MUD.defaultBlockState(), 5)
                     .add(Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState(), 1)

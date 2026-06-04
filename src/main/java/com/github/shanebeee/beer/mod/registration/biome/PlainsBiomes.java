@@ -9,7 +9,7 @@ import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 
 import java.awt.Color;
@@ -48,16 +48,16 @@ public class PlainsBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
 
             .addToTag(BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
@@ -106,16 +106,16 @@ public class PlainsBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
 
             .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
@@ -156,16 +156,16 @@ public class PlainsBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
 
             .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
@@ -207,16 +207,16 @@ public class PlainsBiomes {
 
             .addDefaultOverworldCarvers()
 
-            .addMobSpawn(MobCategory.CREATURE, EntityType.COW, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.SHEEP, 10, 2, 4)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.PIG, 10, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE_VILLAGER, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 100, 2, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SLIME, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ENDERMAN, 10, 1, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.COW, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.SHEEP, 10, 2, 4)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.PIG, 10, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
 
             .addToTag(BiomeTags.HAS_VILLAGE_PLAINS, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_COLD_VARIANT_FARM_ANIMALS,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,

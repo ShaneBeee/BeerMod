@@ -46,7 +46,7 @@ public class TerrainFeatures {
                     BlockStateProvider.simple(Blocks.DEAD_BRAIN_CORAL_BLOCK),
                     List.of(new RuleBasedStateProvider.Rule(
                         BlockPredicate.matchesTag(BlockTags.BASE_STONE_OVERWORLD),
-                        BlockStateProvider.simple(Blocks.BROWN_CONCRETE_POWDER)))),
+                        BlockStateProvider.simple(Blocks.CONCRETE_POWDER.brown())))),
                 BlockPredicate.matchesTag(BlockTags.BASE_STONE_OVERWORLD),
                 UniformInt.of(2, 6),
                 2))
@@ -125,7 +125,10 @@ public class TerrainFeatures {
         PlacedFeatureDefinition lush_plains_lake = PlacedFeatureDefinition.builder(PlacedFeatures.TERRAIN_LUSH_PLAINS_LAKE, reg.getContext())
             .configuredFeature(Feature.LAKE, new LakeFeature.Configuration(
                 BlockStateProvider.simple(Blocks.WATER.defaultBlockState()),
-                BlockStateProvider.simple(Blocks.SAND.defaultBlockState())))
+                BlockStateProvider.simple(Blocks.SAND.defaultBlockState()),
+                BlockPredicate.alwaysTrue(),
+                BlockPredicate.alwaysTrue(),
+                BlockPredicate.alwaysTrue())) // TODO figure this out
             .placementModifiers(RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),

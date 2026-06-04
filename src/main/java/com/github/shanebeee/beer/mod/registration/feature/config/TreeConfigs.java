@@ -89,7 +89,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)),
 
                 new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.ACACIA_LOG))
                 .decorators(List.of(
                     new AlterGroundDecorator(
                         RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
@@ -112,7 +113,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)),
 
                 new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.ACACIA_LOG))
                 .decorators(List.of(
                     new PlaceOnGroundDecorator(150, 3, 3,
                         new WeightedStateProvider(litter_small)),
@@ -243,7 +245,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.DISTANCE, 7)
                     .setValue(BlockStateProperties.PERSISTENT, false)),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1))
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.OAK_LOG))
                 .decorators(List.of(new LeaveVineDecorator(0.25f)))
                 .build())
             .build();
@@ -257,7 +260,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.DISTANCE, 7)
                     .setValue(BlockStateProperties.PERSISTENT, false)),
                 new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1))
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.PALE_OAK_LOG))
                 .decorators(List.of(new LeaveVineDecorator(0.25f)))
                 .build())
             .build();
@@ -332,7 +336,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)),
 
                 new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(1)),
-                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
+                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
+                BlockStateProvider.simple(Blocks.OAK_LOG))
                 .decorators(List.of(
                     new AttachedToLeavesDecorator(
                         0.001f,
@@ -363,7 +368,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)),
 
                 new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(1)),
-                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
+                new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)),
+                BlockStateProvider.simple(Blocks.OAK_LOG))
                 .decorators(List.of(
                     new AttachedToLeavesDecorator(
                         0.001f,
@@ -395,7 +401,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)),
 
                 new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.DARK_OAK_LOG))
                 .decorators(List.of(
                     new AlterGroundDecorator(
                         RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
@@ -438,7 +445,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)
                     .setValue(BlockStateProperties.DISTANCE, 7)),
                 new AcaciaFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.JUNGLE_WOOD))
                 .decorators(List.of(
                     new CocoaDecorator(0.2f),
                     new BeehiveDecorator(0.03f)))
@@ -470,7 +478,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.DISTANCE, 7)
                     .setValue(BlockStateProperties.PERSISTENT, false)),
                 new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.MANGROVE_LOG))
                 .decorators(List.of(
                     new AlterGroundDecorator(
                         RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),
@@ -492,7 +501,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.DISTANCE, 7)
                     .setValue(BlockStateProperties.PERSISTENT, false)),
                 new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.MANGROVE_LOG))
                 .decorators(List.of(
                     new PlaceOnGroundDecorator(150, 3, 3,
                         new WeightedStateProvider(litter_small)),
@@ -522,7 +532,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)),
 
                 new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(1), 2),
-                new TwoLayersFeatureSize(1, 0, 1))
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.MANGROVE_ROOTS))
                 .build())
             .build();
         reg.register(stick_plant);
@@ -570,7 +581,8 @@ public class TreeConfigs {
                     ConstantInt.ZERO,
                     UniformInt.of(4, 7),
                     100),
-                new TwoLayersFeatureSize(1, 0, 1))
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.STRIPPED_PALE_OAK_LOG))
                 .decorators(List.of(
                     new BeehiveDecorator(0.002f),
                     new PlaceOnGroundDecorator(150, 3, 4, new WeightedStateProvider(litter_small.build())),
@@ -651,7 +663,8 @@ public class TreeConfigs {
                     .setValue(BlockStateProperties.PERSISTENT, false)
                     .setValue(BlockStateProperties.DISTANCE, 7)),
                 new AcaciaFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.OAK_WOOD))
                 .decorators(List.of(
                     new AlterGroundDecorator(
                         RuleBasedStateProvider.ifTrueThenProvide(BlockPredicate.matchesTag(BlockTags.BENEATH_TREE_PODZOL_REPLACEABLE),

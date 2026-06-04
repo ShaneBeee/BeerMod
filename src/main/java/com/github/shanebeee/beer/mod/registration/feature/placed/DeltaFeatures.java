@@ -5,6 +5,9 @@ import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
@@ -12,6 +15,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.util.valueproviders.WeightedListInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +42,7 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
 import java.util.List;
@@ -47,21 +52,24 @@ public class DeltaFeatures {
     @SuppressWarnings("deprecation")
     // CountOnEveryLayerPlacement (If Mojang removes this, check "minecraft:delta" feature)
     public static void register(PlacedFeatureRegistration reg) {
-        PlacedFeatureDefinition basalt_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BASALT_DELTA, reg.getContext())
+        BootstrapContext<PlacedFeature> context = reg.getContext();
+        HolderGetter<Block> blockReg = context.lookup(Registries.BLOCK);
+
+        PlacedFeatureDefinition basalt_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BASALT_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_BASALT_DELTA)
             .placementModifiers(CountOnEveryLayerPlacement.of(1),
                 BiomeFilter.biome())
             .build();
         reg.register(basalt_delta);
 
-        PlacedFeatureDefinition basalt_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BASALT_POOL, reg.getContext())
+        PlacedFeatureDefinition basalt_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BASALT_POOL, context)
             .configuredFeature(ConfiguredFeatures.DELTA_BASALT_POOL)
             .placementModifiers(CountOnEveryLayerPlacement.of(2),
                 BiomeFilter.biome())
             .build();
         reg.register(basalt_pool);
 
-        PlacedFeatureDefinition sandstoneWall = PlacedFeatureDefinition.builder(reg.getContext())
+        PlacedFeatureDefinition sandstoneWall = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
                 List.of(BlockColumnConfiguration.layer(
                     new WeightedListInt(WeightedList.<IntProvider>builder()
@@ -76,9 +84,9 @@ public class DeltaFeatures {
             .placementModifiers(CountPlacement.of(1))
             .build();
 
-        PlacedFeatureDefinition vegetationFeature = PlacedFeatureDefinition.builder(reg.getContext())
+        PlacedFeatureDefinition vegetationFeature = PlacedFeatureDefinition.builder(context)
             .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
-                List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(reg.getContext())
+                List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
                         .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                             BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
                                 .setValue(LightBlock.LEVEL, 12))))
@@ -88,7 +96,7 @@ public class DeltaFeatures {
             .placementModifiers(CountPlacement.of(1))
             .build();
 
-        PlacedFeatureDefinition beach_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BEACH_DELTA, reg.getContext())
+        PlacedFeatureDefinition beach_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_BEACH_DELTA, context)
             .configuredFeature(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
                 Blocks.WATER.defaultBlockState(),
                 Blocks.DIORITE.defaultBlockState(),
@@ -102,7 +110,7 @@ public class DeltaFeatures {
             .build();
         reg.register(beach_delta);
 
-        PlacedFeatureDefinition coastal_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_COASTAL_DELTA, reg.getContext())
+        PlacedFeatureDefinition coastal_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_COASTAL_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_MOSS_DELTA)
             .placementModifiers(CountPlacement.of(1),
                 InSquarePlacement.spread(),
@@ -112,7 +120,7 @@ public class DeltaFeatures {
             .build();
         reg.register(coastal_delta);
 
-        PlacedFeatureDefinition forgotten_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_FORGOTTEN_DELTA, reg.getContext())
+        PlacedFeatureDefinition forgotten_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_FORGOTTEN_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_FORGOTTEN_DELTA)
             .placementModifiers(CountPlacement.of(5),
                 InSquarePlacement.spread(),
@@ -123,7 +131,7 @@ public class DeltaFeatures {
             .build();
         reg.register(forgotten_delta);
 
-        PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, reg.getContext())
+        PlacedFeatureDefinition lush_desert_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_LUSH_DESERT_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_LUSH_DESERT_DELTA)
             .placementModifiers(CountPlacement.of(10),
                 InSquarePlacement.spread(),
@@ -136,7 +144,7 @@ public class DeltaFeatures {
             .build();
         reg.register(lush_desert_delta);
 
-        PlacedFeatureDefinition muddy_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_MUDDY_DELTA, reg.getContext())
+        PlacedFeatureDefinition muddy_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_MUDDY_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_MUDDY_DELTA)
             .placementModifiers(CountPlacement.of(55),
                 InSquarePlacement.spread(),
@@ -147,9 +155,9 @@ public class DeltaFeatures {
             .build();
         reg.register(muddy_delta);
 
-        PlacedFeatureDefinition dry_cave_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRY_CAVE_DELTA, reg.getContext())
+        PlacedFeatureDefinition dry_cave_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRY_CAVE_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.LUSH_GROUND_REPLACEABLE,
+                blockReg.getOrThrow(BlockTags.LUSH_GROUND_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.SANDSTONE.defaultBlockState(), 10)
                     .add(Blocks.COARSE_DIRT.defaultBlockState(), 3)
@@ -173,16 +181,16 @@ public class DeltaFeatures {
             .build();
         reg.register(dry_cave_delta);
 
-        PlacedFeatureDefinition dripleaf_swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRIPLEAF_SWAMP_DELTA, reg.getContext())
+        PlacedFeatureDefinition dripleaf_swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_DRIPLEAF_SWAMP_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.DIRT,
+                blockReg.getOrThrow(BlockTags.DIRT),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.GRASS_BLOCK.defaultBlockState(), 10)
                     .add(Blocks.MUD.defaultBlockState(), 3)
                     .add(Blocks.CLAY.defaultBlockState(), 1)
                     .add(Blocks.MOSS_BLOCK.defaultBlockState(), 3)
                     .build()),
-                PlacedFeatureDefinition.builder(reg.getContext()).configuredFeature(CaveFeatures.DRIPLEAF).build().getHolder(),
+                PlacedFeatureDefinition.builder(context).configuredFeature(CaveFeatures.DRIPLEAF).build().getHolder(),
                 CaveSurface.FLOOR,
                 ConstantInt.of(3),
                 0.8f,
@@ -198,16 +206,16 @@ public class DeltaFeatures {
             .build();
         reg.register(dripleaf_swamp_delta);
 
-        PlacedFeatureDefinition plain_cave = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_PLAIN_CAVE_DELTA, reg.getContext())
+        PlacedFeatureDefinition plain_cave = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_PLAIN_CAVE_DELTA, context)
             .configuredFeature(Feature.WATERLOGGED_VEGETATION_PATCH, new VegetationPatchConfiguration(
-                BlockTags.DRIPSTONE_REPLACEABLE,
+                blockReg.getOrThrow(BlockTags.DRIPSTONE_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.STONE_BRICKS.defaultBlockState(), 5)
                     .add(Blocks.MOSSY_STONE_BRICKS.defaultBlockState(), 5)
                     .add(Blocks.COBBLESTONE.defaultBlockState(), 2)
                     .add(Blocks.MOSSY_COBBLESTONE.defaultBlockState(), 2)
                     .build()),
-                PlacedFeatureDefinition.builder(reg.getContext())
+                PlacedFeatureDefinition.builder(context)
                     .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                         BlockStateProvider.simple(Blocks.LIGHT.defaultBlockState()
                             .setValue(LightBlock.LEVEL, 5))))
@@ -227,30 +235,14 @@ public class DeltaFeatures {
             .build();
         reg.register(plain_cave);
 
-        PlacedFeatureDefinition stone_lava = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_STONE_LAVA_DELTA, reg.getContext())
+        PlacedFeatureDefinition stone_lava = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_STONE_LAVA_DELTA, context)
             .configuredFeature(ConfiguredFeatures.DELTA_STONE_LAVA_DELTA)
             .placementModifiers(CountOnEveryLayerPlacement.of(UniformInt.of(10, 20)),
                 BiomeFilter.biome())
             .build();
         reg.register(stone_lava);
 
-        PlacedFeatureDefinition sulfur_pool = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SULFUR_POOL, reg.getContext())
-            .configuredFeature(ConfiguredFeatures.DELTA_SULFUR_POOL)
-            .placementModifiers(CountPlacement.of(256),
-                InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(256)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.solid()),
-                EnvironmentScanPlacement.scanningFor(Direction.UP,
-                    BlockPredicate.matchesTag(BlockTags.AIR),
-                    32),
-                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.YELLOW_TERRACOTTA)),
-                BiomeFilter.biome()
-            )
-            .build();
-        reg.register(sulfur_pool);
-
-        PlacedFeatureDefinition swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SWAMP_DELTA, reg.getContext())
+        PlacedFeatureDefinition swamp_delta = PlacedFeatureDefinition.builder(PlacedFeatures.DELTA_SWAMP_DELTA, context)
             .configuredFeature(Feature.DELTA_FEATURE, new DeltaFeatureConfiguration(
                 Blocks.WATER.defaultBlockState(),
                 Blocks.MUD.defaultBlockState(),

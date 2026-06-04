@@ -18,7 +18,7 @@ import net.minecraft.world.attribute.AmbientMoodSettings;
 import net.minecraft.world.attribute.AmbientSounds;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.Blocks;
 
@@ -69,11 +69,11 @@ public class CaveBiomes {
                 null,
                 null)
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 4, 8)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CAVE_SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 30, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITHER_SKELETON, 20, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.BLAZE, 3, 1, 1)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 4, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CAVE_SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 30, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITHER_SKELETON, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.BLAZE, 3, 1, 1)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -123,13 +123,13 @@ public class CaveBiomes {
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CAVE_SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 30, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 20, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.EVOKER, 100, 1, 2)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.SALMON, 25, 8, 8)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CAVE_SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 30, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.EVOKER, 100, 1, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.SALMON, 25, 8, 8)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -179,13 +179,13 @@ public class CaveBiomes {
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.WITCH, 5, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.BOGGED, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.COD, 25, 8, 8)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.BOGGED, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.COD, 25, 8, 8)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SPRUCE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -221,7 +221,7 @@ public class CaveBiomes {
 
             // Particles
             .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SAND.defaultBlockState()), 0.005f)
-            .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.BROWN_CONCRETE_POWDER.defaultBlockState()), 0.005f)
+            .particle(new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.CONCRETE_POWDER.brown().defaultBlockState()), 0.005f)
 
             // Carvers
             .addDefaultOverworldCarvers()
@@ -245,12 +245,12 @@ public class CaveBiomes {
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
             // Spawners
-            .addMobSpawn(MobCategory.AMBIENT, EntityType.BAT, 10, 8, 8)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SPIDER, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.HUSK, 95, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.PARCHED, 100, 4, 4)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 100, 4, 4)
-            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityType.TROPICAL_FISH, 25, 8, 8)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SPIDER, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.HUSK, 95, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.PARCHED, 100, 4, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 100, 4, 4)
+            .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.TROPICAL_FISH, 25, 8, 8)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BeerBiomeTags.HAS_MINESHAFT_SANDSTONE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
 
@@ -291,11 +291,11 @@ public class CaveBiomes {
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 10, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.POLAR_BEAR, 1, 1, 2)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
-            .addMobSpawn(MobCategory.CREATURE, EntityType.FROG, 10, 1, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 10, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.POLAR_BEAR, 1, 1, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.CREATURE, EntityTypes.FROG, 10, 1, 2)
 
             .addToTag(BiomeTags.SPAWNS_COLD_VARIANT_FROGS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
@@ -333,10 +333,10 @@ public class CaveBiomes {
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.STRAY, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.STRAY, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 3, 1, 1)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
@@ -375,10 +375,10 @@ public class CaveBiomes {
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 10, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.SKELETON, 7, 1, 3)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.VINDICATOR, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 10, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 7, 1, 3)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.VINDICATOR, 3, 1, 1)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
@@ -416,10 +416,10 @@ public class CaveBiomes {
                 null,
                 List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
 
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ILLUSIONER, 1, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.ZOMBIE, 20, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.VEX, 3, 1, 1)
-            .addMobSpawn(MobCategory.MONSTER, EntityType.CREEPER, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ILLUSIONER, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.VEX, 3, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 3, 1, 1)
 
             .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.HAS_MINESHAFT,
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
@@ -440,26 +440,18 @@ public class CaveBiomes {
             .setAttribute(EnvironmentAttributes.BLOCK_LIGHT_TINT, new Color(45, 58, 16).getRGB())
 
             .addDefaultOverworldCarvers()
+            .addSulfurCavesFeatures()
 
-            .addDefaultUndergroundOreFeatures()
-            .addDefaultMonsterRoomFeatures()
-            .features(null,
-                List.of(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND,
-                    MiscOverworldPlacements.LAKE_LAVA_SURFACE),
-                List.of(CavePlacements.AMETHYST_GEODE),
-                null,
-                null,
-                null,
-                null,
-                List.of(PlacedFeatures.BLOB_SULFUR,
-                    PlacedFeatures.DELTA_SULFUR_POOL,
-                    PlacedFeatures.BLOB_SOULSAND),
-                null,
-                null,
-                List.of(MiscOverworldPlacements.FREEZE_TOP_LAYER))
-
-            .addDefaultCaveSpawns()
-            .addDefaultMonsterSpawns(false)
+            .addMobSpawn(MobCategory.AMBIENT, EntityTypes.BAT, 10, 8, 8)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SULFUR_CUBE, 100, 2, 4)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CREEPER, 50, 2, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SKELETON, 50, 2, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.SLIME, 25, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.CAVE_SPIDER, 20, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE, 50, 2, 2)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ENDERMAN, 10, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 1, 1, 1)
+            .addMobSpawn(MobCategory.MONSTER, EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1)
 
             .build();
         reg.register(sulfur_cave);

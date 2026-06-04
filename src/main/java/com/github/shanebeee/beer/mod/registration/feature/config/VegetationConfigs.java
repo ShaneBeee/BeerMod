@@ -52,7 +52,8 @@ public class VegetationConfigs {
                     .add(Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, false), 1)
                     .build()),
                 new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 2),
-                new TwoLayersFeatureSize(0, 0, 0))
+                new TwoLayersFeatureSize(0, 0, 0),
+                BlockStateProvider.simple(Blocks.MANGROVE_ROOTS))
                 .build())
             .build();
         reg.register(flowering_azalea_scrub);
