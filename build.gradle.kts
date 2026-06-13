@@ -4,8 +4,8 @@ plugins {
 
 version = providers.gradleProperty("mod_version").get()
 group = providers.gradleProperty("maven_group").get()
-val minecraftVersion: String? = providers.gradleProperty("minecraft_version").get()
-val serverLocation: String? = providers.gradleProperty("server_location").get()
+val minecraftVersion: String = providers.gradleProperty("minecraft_version").get()
+val serverLocation: String = providers.gradleProperty("server_location").get()
 
 base {
     archivesName = providers.gradleProperty("archives_base_name")
@@ -68,6 +68,8 @@ tasks.jar {
 
 tasks {
     register("datapack", Zip::class) {
+        description = "Build the datapack."
+        group = "Beer"
         dependsOn("runDatagen")
         archiveFileName = "Beer-${version}-${minecraftVersion}.zip"
         from("src/main/generated") {
@@ -79,6 +81,8 @@ tasks {
         destinationDirectory = file("build/libs/")
     }
     register("datapack-server", Zip::class) {
+        description = "Build the datapack to a designated server location."
+        group = "Beer"
         dependsOn("runDatagen")
         archiveFileName = "Beer.zip"
         from("src/main/generated") {
