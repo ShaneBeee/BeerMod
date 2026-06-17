@@ -20,6 +20,7 @@ import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 
 import java.awt.Color;
@@ -427,7 +428,7 @@ public class CaveBiomes {
             .build();
         reg.register(smoky_cave);
 
-        BiomeDefinition sulfur_cave = BiomeDefinition.builder(BeerBiomes.CAVE_SULFUR_CAVE, reg.getContext())
+        BiomeDefinition sulfur_cave = BiomeDefinition.builder(Biomes.SULFUR_CAVES, reg.getContext())
             .temperature(0.8f)
             .downfall(0.4f)
             .waterColor(new Color(52, 191, 137).getRGB())

@@ -27,7 +27,7 @@ public class CaveBiomes {
             return BeerBiomes.CAVE_DIORITE_CAVE;
         } else if (temp.isTemperate()) {
             if (humidity.isArid()) {
-                return BeerBiomes.CAVE_SULFUR_CAVE;
+                return Biomes.SULFUR_CAVES;
             }
             if (humidity.isHumid()) {
                 return BeerBiomes.CAVE_MUDDY_FEN;
@@ -35,7 +35,7 @@ public class CaveBiomes {
             return BeerBiomes.CAVE_PLAIN_CAVE;
         } else if (temp.isWarm()) {
             if (humidity.isArid()) {
-                return BeerBiomes.CAVE_SULFUR_CAVE;
+                return Biomes.SULFUR_CAVES;
             }
             if (humidity.isHumidOrSemiHumid()) {
                 return BeerBiomes.CAVE_FORGOTTEN_CAVE;
