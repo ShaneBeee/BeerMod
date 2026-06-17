@@ -84,7 +84,6 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
 
         public DataRegistration(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
-            DynamicRegistries.register(Registries.LEVEL_STEM, LevelStem.CODEC);
         }
 
         @Override
