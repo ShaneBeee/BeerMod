@@ -25,14 +25,13 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.BlockBlobFeature;
+import net.minecraft.world.level.levelgen.feature.BlockPileFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.RandomSelectorFeature;
+import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
+import net.minecraft.world.level.levelgen.feature.VegetationPatchFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockBlobConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockPileConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
@@ -47,8 +46,8 @@ import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.NoiseBasedCountPlacement;
 import net.minecraft.world.level.levelgen.placement.NoiseThresholdCountPlacement;
+import net.minecraft.world.level.levelgen.placement.OffsetPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
 import net.minecraft.world.level.material.Fluids;
@@ -69,7 +68,7 @@ public class VegetationFeatures {
                 SurfaceWaterDepthFilter.forMaxDepth(0),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
                     BlockPredicate.matchesBlocks(Blocks.AIR),
-                    BlockPredicate.wouldSurvive(Blocks.AZALEA.defaultBlockState(), BlockPos.ZERO)
+                    BlockPredicate.wouldSurvive(Blocks.AZALEA)
                 )),
                 BiomeFilter.biome())
             .build();
@@ -114,7 +113,7 @@ public class VegetationFeatures {
         reg.register(lush_river_plants);
 
         PlacedFeatureDefinition patch = PlacedFeatureDefinition.builder(context)
-            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+            .configuredFeature(new SimpleBlockFeature(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MOSS_CARPET.defaultBlockState(), 25)
                     .add(Blocks.SHORT_GRASS.defaultBlockState(), 25)
@@ -124,7 +123,7 @@ public class VegetationFeatures {
             .build();
 
         PlacedFeatureDefinition moss_patch = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_MOSS_PATCH, context)
-            .configuredFeature(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
+            .configuredFeature(new VegetationPatchFeature(
                 blockReg.getOrThrow(BlockTags.MOSS_REPLACEABLE),
                 BlockStateProvider.simple(Blocks.MOSS_BLOCK),
                 patch.getHolder(),
@@ -148,7 +147,7 @@ public class VegetationFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome(),
-                RandomOffsetPlacement.of(
+                OffsetPlacement.of(
                     TrapezoidInt.of(-6, 6, 0),
                     TrapezoidInt.of(-2, 2, 0)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
@@ -170,7 +169,7 @@ public class VegetationFeatures {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BiomeFilter.biome(),
                 CountPlacement.of(96),
-                RandomOffsetPlacement.of(
+                OffsetPlacement.of(
                     TrapezoidInt.of(-6, 6, 0),
                     TrapezoidInt.of(-2, 2, 0)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockTags.AIR)))
@@ -178,43 +177,42 @@ public class VegetationFeatures {
         reg.register(cherry_petals);
 
         PlacedFeatureDefinition cliff_grass = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_CLIFF_GRASS, context)
-            .configuredFeature(Feature.SIMPLE_BLOCK,
-                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.GRASS_BLOCK)))
+            .configuredFeature(new SimpleBlockFeature(BlockStateProvider.simple(Blocks.GRASS_BLOCK)))
             .placementModifiers(CountPlacement.of(256),
                 InSquarePlacement.spread(),
-                RandomOffsetPlacement.ofTriangle(3, 3),
+                OffsetPlacement.ofTriangle(3, 3),
                 HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.aboveBottom(256))),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
-                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(BlockPos.ZERO, Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, 1, 0), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(BlockPos.ZERO, List.of(Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)),
                         BlockPredicate.not(
                             BlockPredicate.anyOf(
-                                BlockPredicate.matchesBlocks(new BlockPos(1, -1, 0), Blocks.AIR),
-                                BlockPredicate.matchesBlocks(new BlockPos(-1, -1, 0), Blocks.AIR),
-                                BlockPredicate.matchesBlocks(new BlockPos(0, -1, 1), Blocks.AIR),
-                                BlockPredicate.matchesBlocks(new BlockPos(0, -1, -1), Blocks.AIR)
+                                BlockPredicate.matchesBlocks(new BlockPos(1, -1, 0), List.of(Blocks.AIR)),
+                                BlockPredicate.matchesBlocks(new BlockPos(-1, -1, 0), List.of(Blocks.AIR)),
+                                BlockPredicate.matchesBlocks(new BlockPos(0, -1, 1), List.of(Blocks.AIR)),
+                                BlockPredicate.matchesBlocks(new BlockPos(0, -1, -1), List.of(Blocks.AIR))
                             )
                         ),
                         BlockPredicate.anyOf(
                             BlockPredicate.allOf(
-                                BlockPredicate.matchesBlocks(new BlockPos(1, 1, 0), Blocks.AIR),
-                                BlockPredicate.matchesBlocks(new BlockPos(1, 0, 0), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
+                                BlockPredicate.matchesBlocks(new BlockPos(1, 1, 0), List.of(Blocks.AIR)),
+                                BlockPredicate.matchesBlocks(new BlockPos(1, 0, 0), List.of(Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE))
                             ),
                             BlockPredicate.allOf(
-                                BlockPredicate.matchesBlocks(new BlockPos(-1, 1, 0), Blocks.AIR),
-                                BlockPredicate.matchesBlocks(new BlockPos(-1, 0, 0), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
+                                BlockPredicate.matchesBlocks(new BlockPos(-1, 1, 0), List.of(Blocks.AIR)),
+                                BlockPredicate.matchesBlocks(new BlockPos(-1, 0, 0), List.of(Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE))
 
                             ),
                             BlockPredicate.allOf(
-                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 1), Blocks.AIR),
-                                BlockPredicate.matchesBlocks(new BlockPos(0, 0, 1), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
+                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, 1), List.of(Blocks.AIR)),
+                                BlockPredicate.matchesBlocks(new BlockPos(0, 0, 1), List.of(Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE))
                             ),
                             BlockPredicate.allOf(
-                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, -1), Blocks.AIR),
-                                BlockPredicate.matchesBlocks(new BlockPos(0, 0, -1), Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE)
+                                BlockPredicate.matchesBlocks(new BlockPos(0, 1, -1), List.of(Blocks.AIR)),
+                                BlockPredicate.matchesBlocks(new BlockPos(0, 0, -1), List.of(Blocks.STONE, Blocks.GRANITE, Blocks.GRASS_BLOCK, Blocks.DEEPSLATE, Blocks.CALCITE))
                             )
 
                         )
@@ -225,7 +223,7 @@ public class VegetationFeatures {
         reg.register(cliff_grass);
 
         PlacedFeatureDefinition oasis_flowers = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_OASIS_FLOWERS, context)
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(
                     getWeightedFeature(context, net.minecraft.data.worldgen.features.VegetationFeatures.SUNFLOWER, 0.1f),
                     getWeightedFeature(context, net.minecraft.data.worldgen.features.VegetationFeatures.WILDFLOWER, 0.2f),
@@ -236,26 +234,26 @@ public class VegetationFeatures {
             ))
             .placementModifiers(CountPlacement.of(52),
                 InSquarePlacement.spread(),
-                RandomOffsetPlacement.ofTriangle(7, 3),
+                OffsetPlacement.ofTriangle(7, 3),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), Blocks.GRASS_BLOCK)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), List.of(Blocks.GRASS_BLOCK))),
                 BiomeFilter.biome())
             .build();
         reg.register(oasis_flowers);
 
         PlacedFeatureDefinition small_dripleaf = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_SMALL_DRIPLEAF, context)
-            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(SimpleStateProvider.simple(Blocks.SMALL_DRIPLEAF)))
+            .configuredFeature(new SimpleBlockFeature(new SimpleStateProvider(Blocks.SMALL_DRIPLEAF.defaultBlockState())))
             .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)),
                 CountPlacement.of(10),
                 InSquarePlacement.spread(),
-                RandomOffsetPlacement.ofTriangle(7, 3),
+                OffsetPlacement.ofTriangle(7, 3),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome())
             .build();
         reg.register(small_dripleaf);
 
         PlacedFeatureDefinition water_leaves = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PATCH_WATER_LEAVES, context)
-            .configuredFeature(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+            .configuredFeature(new SimpleBlockFeature(
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.AZALEA_LEAVES.defaultBlockState()
                             .setValue(BlockStateProperties.WATERLOGGED, true)
@@ -271,29 +269,28 @@ public class VegetationFeatures {
                     .build())))
             .placementModifiers(
                 CountPlacement.of(64),
-                RandomOffsetPlacement.ofTriangle(5, 0),
+                OffsetPlacement.ofTriangle(5, 0),
                 SurfaceWaterDepthFilter.forMaxDepth(3),
                 HeightRangePlacement.of(ConstantHeight.of(VerticalAnchor.absolute(62))),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(BlockPos.ZERO, Fluids.WATER)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(BlockPos.ZERO, List.of(Fluids.WATER))),
                 BiomeFilter.biome())
             .build();
         reg.register(water_leaves);
 
         PlacedFeatureDefinition pile_azalea = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PILE_AZALEA_LEAVES, context)
-            .configuredFeature(Feature.BLOCK_PILE,
-                new BlockPileConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
-                    .add(Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 1)
-                    .add(Blocks.AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 4))))
+            .configuredFeature(new BlockPileFeature(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 1)
+                .add(Blocks.AZALEA_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true), 4))))
             .placementModifiers(
                 CountPlacement.of(10),
-                RandomOffsetPlacement.ofTriangle(7, 3),
+                OffsetPlacement.ofTriangle(7, 3),
                 RarityFilter.onAverageOnceEvery(50),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
                         BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), List.of(Blocks.GRASS_BLOCK))
                     )),
                 BiomeFilter.biome())
             .build();
@@ -303,64 +300,62 @@ public class VegetationFeatures {
             .configuredFeature(PileFeatures.PILE_HAY)
             .placementModifiers(
                 CountPlacement.of(5),
-                RandomOffsetPlacement.ofTriangle(7, 3),
+                OffsetPlacement.ofTriangle(7, 3),
                 RarityFilter.onAverageOnceEvery(50),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
                         BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), List.of(Blocks.GRASS_BLOCK))
                     )),
                 BiomeFilter.biome())
             .build();
         reg.register(pile_hay);
 
         PlacedFeatureDefinition pile_moss = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PILE_MOSS, context)
-            .configuredFeature(Feature.BLOCK_PILE,
-                new BlockPileConfiguration(BlockStateProvider.simple(Blocks.MOSS_BLOCK)))
+            .configuredFeature(new BlockPileFeature(BlockStateProvider.simple(Blocks.MOSS_BLOCK)))
             .placementModifiers(
                 CountPlacement.of(9),
-                RandomOffsetPlacement.ofTriangle(7, 3),
+                OffsetPlacement.ofTriangle(7, 3),
                 RarityFilter.onAverageOnceEvery(50),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
                         BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), List.of(Blocks.GRASS_BLOCK))
                     )),
                 BiomeFilter.biome())
             .build();
         reg.register(pile_moss);
 
         PlacedFeatureDefinition pile_melon_pumpkin = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_PILE_MELON_PUMPKIN, context)
-            .configuredFeature(Feature.BLOCK_PILE,
-                new BlockPileConfiguration(new WeightedStateProvider(WeightedList.<BlockState>builder()
-                    .add(Blocks.PUMPKIN.defaultBlockState(), 25)
-                    .add(Blocks.MELON.defaultBlockState(), 25))))
+            .configuredFeature(new BlockPileFeature(new WeightedStateProvider(WeightedList.<BlockState>builder()
+                .add(Blocks.PUMPKIN.defaultBlockState(), 25)
+                .add(Blocks.MELON.defaultBlockState(), 25))))
             .placementModifiers(
                 CountPlacement.of(10),
-                RandomOffsetPlacement.ofTriangle(7, 3),
+                OffsetPlacement.ofTriangle(7, 3),
                 RarityFilter.onAverageOnceEvery(50),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
                         BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.GRASS_BLOCK)
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), List.of(Blocks.GRASS_BLOCK))
                     )),
                 BiomeFilter.biome())
             .build();
         reg.register(pile_melon_pumpkin);
 
         PlacedFeatureDefinition rooted_dirt_blob = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_ROOT_DIRT_BLOB, context)
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
-                    .configuredFeature(Feature.BLOCK_BLOB, new BlockBlobConfiguration(Blocks.COARSE_DIRT.defaultBlockState(), BlockPredicate.matchesTag(BlockTags.GRASS_BLOCKS)))
+                    .configuredFeature(new BlockBlobFeature(Blocks.COARSE_DIRT.defaultBlockState(), BlockPredicate.matchesTag(BlockTags.GRASS_BLOCKS)))
                     .build().getHolder(), 0.5f)),
                 PlacedFeatureDefinition.builder(context)
-                    .configuredFeature(Feature.BLOCK_BLOB, new BlockBlobConfiguration(Blocks.ROOTED_DIRT.defaultBlockState(), BlockPredicate.matchesTag(BlockTags.GRASS_BLOCKS)))
+                    .configuredFeature(new BlockBlobFeature(Blocks.ROOTED_DIRT.defaultBlockState(), BlockPredicate.matchesTag(BlockTags.GRASS_BLOCKS)))
                     .build().getHolder()))
             .placementModifiers(CountPlacement.of(UniformInt.of(0, 1)),
                 InSquarePlacement.spread(),
@@ -370,7 +365,7 @@ public class VegetationFeatures {
         reg.register(rooted_dirt_blob);
 
         PlacedFeatureDefinition cactus_fields_cactus = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_CACTUS_FIELDS_CACTUS, context)
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
                     .configuredFeature(ConfiguredFeatures.VEGETATION_DESERT_CACTUS_FLOWER)
                     .build().getHolder(), 0.335f)),
@@ -382,13 +377,13 @@ public class VegetationFeatures {
                 CountPlacement.of(UniformInt.of(3, 7)),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.CACTUS)),
                 BiomeFilter.biome())
             .build();
         reg.register(cactus_fields_cactus);
 
         PlacedFeatureDefinition steppe_cactus = PlacedFeatureDefinition.builder(PlacedFeatures.VEGETATION_STEPPE_DESERT_CACTUS, context)
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(new WeightedPlacedFeature(PlacedFeatureDefinition.builder(context)
                     .configuredFeature(ConfiguredFeatures.VEGETATION_DESERT_CACTUS_FLOWER)
                     .build().getHolder(), 0.2f)),
@@ -400,17 +395,17 @@ public class VegetationFeatures {
                 CountPlacement.of(UniformInt.of(2, 5)),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.CACTUS.defaultBlockState(), BlockPos.ZERO)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.CACTUS)),
                 BiomeFilter.biome())
             .build();
         reg.register(steppe_cactus);
     }
 
-    private static Holder<PlacedFeature> getFeature(BootstrapContext<PlacedFeature> context, ResourceKey<ConfiguredFeature<?, ?>> key) {
+    private static Holder<PlacedFeature> getFeature(BootstrapContext<PlacedFeature> context, ResourceKey<Feature> key) {
         return PlacedFeatureDefinition.builder(context).configuredFeature(key).build().getHolder();
     }
 
-    private static WeightedPlacedFeature getWeightedFeature(BootstrapContext<PlacedFeature> context, ResourceKey<ConfiguredFeature<?, ?>> key, float weight) {
+    private static WeightedPlacedFeature getWeightedFeature(BootstrapContext<PlacedFeature> context, ResourceKey<Feature> key, float weight) {
         return new WeightedPlacedFeature(getFeature(context, key), weight);
     }
 

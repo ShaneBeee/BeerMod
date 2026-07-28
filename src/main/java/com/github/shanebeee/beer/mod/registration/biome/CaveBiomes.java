@@ -102,7 +102,9 @@ public class CaveBiomes {
                 List.of(new AmbientAdditionsSettings(Holder.direct(SoundEvents.FOX_SCREECH), 0.0011f))
             ))
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
-                new Music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY, 12000, 24000, true)))
+                Optional.of(new Music(SoundEvents.MUSIC_BIOME_SOUL_SAND_VALLEY, 12000, 24000, true)),
+                Optional.empty(),
+                Optional.empty()))
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.5f)
 
             .addDefaultOverworldCarvers()
@@ -157,7 +159,9 @@ public class CaveBiomes {
                 List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 0.0011f))
             ))
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
-                new Music(SoundEvents.MUSIC_BIOME_LUSH_CAVES, 12000, 24000, true)))
+                Optional.of(new Music(SoundEvents.MUSIC_BIOME_LUSH_CAVES, 12000, 24000, true)),
+                Optional.empty(),
+                Optional.empty()))
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.5f)
 
             .addDefaultOverworldCarvers()
@@ -217,7 +221,9 @@ public class CaveBiomes {
                 List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 0.0011f))
             ))
             .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(
-                new Music(SoundEvents.MUSIC_BIOME_LUSH_CAVES, 12000, 24000, true)))
+                Optional.of(new Music(SoundEvents.MUSIC_BIOME_LUSH_CAVES, 12000, 24000, true)),
+                Optional.empty(),
+                Optional.empty()))
             .setAttribute(EnvironmentAttributes.MUSIC_VOLUME, 0.5f)
 
             // Particles

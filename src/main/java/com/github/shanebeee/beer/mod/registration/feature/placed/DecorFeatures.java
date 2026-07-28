@@ -4,7 +4,6 @@ import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -15,8 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
+import net.minecraft.world.level.levelgen.feature.BlockColumnFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
@@ -25,7 +23,7 @@ import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.EnvironmentScanPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
+import net.minecraft.world.level.levelgen.placement.OffsetPlacement;
 
 import java.util.List;
 
@@ -47,9 +45,9 @@ public class DecorFeatures {
         reg.register(basalt_pillar);
 
         PlacedFeatureDefinition hanging_chain = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_CHAIN, reg.getContext())
-            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+            .configuredFeature(new BlockColumnFeature(
                 List.of(
-                    new BlockColumnConfiguration.Layer(UniformInt.of(6, 12), BlockStateProvider.simple(Blocks.COPPER_CHAIN.waxed().exposed()))
+                    new BlockColumnFeature.Layer(UniformInt.of(6, 12), BlockStateProvider.simple(Blocks.COPPER_CHAIN.waxed().exposed()))
                 ),
                 Direction.DOWN,
                 BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
@@ -58,21 +56,21 @@ public class DecorFeatures {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(30), VerticalAnchor.absolute(120)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
+                OffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
                 BiomeFilter.biome())
             .build();
         reg.register(hanging_chain);
 
         PlacedFeatureDefinition hanging_fence = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_FENCE, reg.getContext())
-            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
-                List.of(BlockColumnConfiguration.layer(
+            .configuredFeature(new BlockColumnFeature(
+                List.of(BlockColumnFeature.layer(
                         new WeightedListInt(WeightedList.<IntProvider>builder()
                             .add(UniformInt.of(1, 10), 2)
                             .add(UniformInt.of(1, 2), 3)
                             .add(UniformInt.of(1, 6), 10)
                             .build()),
-                        WeightedStateProvider.simple(Blocks.DARK_OAK_FENCE)),
-                    BlockColumnConfiguration.layer(ConstantInt.of(1),
+                        BlockStateProvider.simple(Blocks.DARK_OAK_FENCE)),
+                    BlockColumnFeature.layer(ConstantInt.of(1),
                         new WeightedStateProvider(WeightedList.<BlockState>builder()
                             .add(Blocks.SOUL_LANTERN.defaultBlockState().setValue(BlockStateProperties.HANGING, true), 1)
                             .add(Blocks.LANTERN.defaultBlockState().setValue(BlockStateProperties.HANGING, true), 4)
@@ -84,14 +82,14 @@ public class DecorFeatures {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(256)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
+                OffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
                 BiomeFilter.biome())
             .build();
         reg.register(hanging_fence);
 
         PlacedFeatureDefinition hanging_stone = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_HANGING_STONE, reg.getContext())
-            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
-                List.of(BlockColumnConfiguration.layer(
+            .configuredFeature(new BlockColumnFeature(
+                List.of(BlockColumnFeature.layer(
                     new WeightedListInt(WeightedList.<IntProvider>builder()
                         .add(UniformInt.of(3, 10), 2)
                         .add(UniformInt.of(1, 2), 3)
@@ -108,7 +106,7 @@ public class DecorFeatures {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.absolute(256)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
-                RandomOffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
+                OffsetPlacement.of(ConstantInt.of(0), ConstantInt.of(-1)),
                 BiomeFilter.biome())
             .build();
         reg.register(hanging_stone);
@@ -124,10 +122,10 @@ public class DecorFeatures {
         reg.register(muddy_blob);
 
         PlacedFeatureDefinition smoky_grate = PlacedFeatureDefinition.builder(PlacedFeatures.DECOR_SMOKY_GRATE, reg.getContext())
-            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+            .configuredFeature(new BlockColumnFeature(
                 List.of(
-                    new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.SOUL_CAMPFIRE)),
-                    new BlockColumnConfiguration.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.COPPER_TRAPDOOR.waxed().exposed()))
+                    new BlockColumnFeature.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.SOUL_CAMPFIRE)),
+                    new BlockColumnFeature.Layer(ConstantInt.of(1), BlockStateProvider.simple(Blocks.COPPER_TRAPDOOR.waxed().exposed()))
                 ),
                 Direction.UP,
                 BlockPredicate.alwaysTrue(),
@@ -139,10 +137,10 @@ public class DecorFeatures {
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
-                        BlockPredicate.solid(new Vec3i(0, 0, 1)),
-                        BlockPredicate.solid(new Vec3i(0, 0, -1)),
-                        BlockPredicate.solid(new Vec3i(1, 0, 0)),
-                        BlockPredicate.solid(new Vec3i(-1, 0, 0))
+                        BlockPredicate.solid(Direction.SOUTH),
+                        BlockPredicate.solid(Direction.NORTH),
+                        BlockPredicate.solid(Direction.EAST),
+                        BlockPredicate.solid(Direction.WEST)
                     )))
             .build();
         reg.register(smoky_grate);

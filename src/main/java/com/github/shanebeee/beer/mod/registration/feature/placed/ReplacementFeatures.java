@@ -16,9 +16,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.ReplaceSphereConfiguration;
+import net.minecraft.world.level.levelgen.feature.DiskFeature;
+import net.minecraft.world.level.levelgen.feature.ReplaceBlobsFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
@@ -35,11 +34,11 @@ public class ReplacementFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition grass_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_TO_SAND, reg.getContext())
-            .configuredFeature(Feature.DISK, new DiskConfiguration(
+            .configuredFeature(new DiskFeature(
                 new RuleBasedStateProvider(
                     BlockStateProvider.simple(Blocks.SAND),
                     List.of(new RuleBasedStateProvider.Rule(
-                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), Blocks.DIRT),
+                        BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), List.of(Blocks.DIRT)),
                         BlockStateProvider.simple(Blocks.SAND)))),
                 BlockPredicate.matchesBlocks(Blocks.DIRT, Blocks.GRASS_BLOCK),
                 UniformInt.of(2, 6),
@@ -52,7 +51,7 @@ public class ReplacementFeatures {
         reg.register(grass_to_sand);
 
         PlacedFeatureDefinition grass_water_to_sand = PlacedFeatureDefinition.builder(PlacedFeatures.REPLACE_GRASS_UNDER_WATER_TO_SAND, reg.getContext())
-            .configuredFeature(Feature.DISK, new DiskConfiguration(
+            .configuredFeature(new DiskFeature(
                 new RuleBasedStateProvider(
                     null,
                     List.of(
@@ -60,7 +59,7 @@ public class ReplacementFeatures {
                             BlockPredicate.matchesBlocks(Blocks.DIRT, Blocks.GRASS_BLOCK),
                             BlockStateProvider.simple(Blocks.SAND)))),
                 BlockPredicate.matchesBlocks(new Vec3i(0, 1, 0),
-                    Blocks.WATER, Blocks.SEAGRASS, Blocks.BIG_DRIPLEAF_STEM),
+                    List.of(Blocks.WATER, Blocks.SEAGRASS, Blocks.BIG_DRIPLEAF_STEM)),
                 UniformInt.of(2, 6),
                 2))
             .placementModifiers(CountPlacement.of(30),
@@ -108,7 +107,7 @@ public class ReplacementFeatures {
     private static PlacedFeatureDefinition createUndergroundReplacement(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
                                                                         Block target, Block replace, int minDepth, int maxDepth, int chance, int minRadius, int maxRadius) {
         return PlacedFeatureDefinition.builder(key, context)
-            .configuredFeature(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(
+            .configuredFeature(new ReplaceBlobsFeature(
                 target.defaultBlockState(),
                 replace.defaultBlockState(),
                 UniformInt.of(minRadius, maxRadius)))

@@ -1,5 +1,104 @@
 {
   "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "spawn_costs": {},
+      "spawns_by_category": {
+        "creature": [
+          {
+            "type": "minecraft:cow",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 2
+            },
+            "weight": 10
+          },
+          {
+            "type": "minecraft:sheep",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 2
+            },
+            "weight": 10
+          },
+          {
+            "type": "minecraft:pig",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 2
+            },
+            "weight": 10
+          }
+        ],
+        "monster": [
+          {
+            "type": "minecraft:spider",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 4
+            },
+            "weight": 100
+          },
+          {
+            "type": "minecraft:zombie",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 4
+            },
+            "weight": 95
+          },
+          {
+            "type": "minecraft:zombie_villager",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 1,
+              "min_inclusive": 1
+            },
+            "weight": 5
+          },
+          {
+            "type": "minecraft:skeleton",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 2
+            },
+            "weight": 100
+          },
+          {
+            "type": "minecraft:slime",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 4
+            },
+            "weight": 100
+          },
+          {
+            "type": "minecraft:enderman",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 4,
+              "min_inclusive": 1
+            },
+            "weight": 10
+          },
+          {
+            "type": "minecraft:witch",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 1,
+              "min_inclusive": 1
+            },
+            "weight": 5
+          }
+        ]
+      }
+    },
     "minecraft:visual/fog_color": "#bec3c3",
     "minecraft:visual/sky_color": "#508cdc",
     "minecraft:visual/water_fog_color": "#050533"
@@ -71,78 +170,5 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {},
-  "spawners": {
-    "ambient": [],
-    "axolotls": [],
-    "creature": [
-      {
-        "type": "minecraft:cow",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:sheep",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:pig",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 10
-      }
-    ],
-    "misc": [],
-    "monster": [
-      {
-        "type": "minecraft:spider",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:zombie",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 95
-      },
-      {
-        "type": "minecraft:zombie_villager",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "minecraft:skeleton",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:slime",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:enderman",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:witch",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      }
-    ],
-    "underground_water_creature": [],
-    "water_ambient": [],
-    "water_creature": []
-  },
   "temperature": 0.85
 }

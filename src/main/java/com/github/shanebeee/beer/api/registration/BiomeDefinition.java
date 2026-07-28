@@ -13,6 +13,7 @@ import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.attribute.AmbientParticle;
 import net.minecraft.world.attribute.EnvironmentAttribute;
 import net.minecraft.world.attribute.EnvironmentAttributes;
@@ -24,7 +25,7 @@ import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,7 +62,7 @@ public class BiomeDefinition extends Definable<Biome> {
             this.context = context;
             this.genSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE),
-                context.lookup(Registries.CONFIGURED_CARVER));
+                context.lookup(Registries.CARVER));
         }
 
         /**
@@ -283,12 +284,12 @@ public class BiomeDefinition extends Definable<Biome> {
                                 s, this.resourceKey.identifier().toString());
                             continue;
                         }
-                        ResourceKey<ConfiguredWorldCarver<?>> key = ResourceKey.create(Registries.CONFIGURED_CARVER, identifier);
+                        ResourceKey<WorldCarver> key = ResourceKey.create(Registries.CARVER, identifier);
                         this.genSettings.addCarver(key);
                     }
-                    case Holder.Reference<?> ref when ref.value() instanceof ConfiguredWorldCarver<?> ->
-                        this.genSettings.addCarver((Holder.Reference<ConfiguredWorldCarver<?>>) ref);
-                    case ResourceKey<?> key -> this.genSettings.addCarver((ResourceKey<ConfiguredWorldCarver<?>>) key);
+                    case Holder.Reference<?> ref when ref.value() instanceof WorldCarver ->
+                        this.genSettings.addCarver((Holder.Reference<WorldCarver>) ref);
+                    case ResourceKey<?> key -> this.genSettings.addCarver((ResourceKey<WorldCarver>) key);
                     default -> Utils.log("&eUnknown carver &r'&b%s&r' &efound for biome &r'&a%s&r'",
                         o, this.resourceKey.identifier().toString());
                 }
@@ -330,13 +331,13 @@ public class BiomeDefinition extends Definable<Biome> {
         public Builder addMobSpawn(MobCategory mobCategory, EntityType<?> entityType, int weight, int minCount, int maxCount) {
             minCount = Math.max(minCount, 1);
             maxCount = Math.max(maxCount, minCount);
-            MobSpawnSettings.SpawnerData spawnerData = new MobSpawnSettings.SpawnerData(entityType, minCount, maxCount);
-            this.mobSpawnSettings.addSpawn(mobCategory, weight, spawnerData);
+            MobSpawnSettings.SpawnerData spawnerData = new MobSpawnSettings.SpawnerData(entityType, UniformInt.of(minCount, maxCount));
+            this.mobSpawnSettings.addSpawn(entityType, mobCategory, weight, UniformInt.of(minCount, maxCount));
             return this;
         }
 
         /**
-         * Sets up spawners for sheep, pigs, cows and chickens
+         * Sets up spawners for sheep, pigs, cows, and chickens
          *
          * @return This builder
          */

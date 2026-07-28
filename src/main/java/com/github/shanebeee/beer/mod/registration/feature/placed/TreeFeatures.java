@@ -3,7 +3,6 @@ package com.github.shanebeee.beer.mod.registration.feature.placed;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import com.github.shanebeee.beer.mod.registry.ConfiguredFeatures;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Vec3i;
@@ -20,15 +19,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.blockpredicates.SolidPredicate;
+import net.minecraft.world.level.levelgen.feature.RandomSelectorFeature;
+import net.minecraft.world.level.levelgen.feature.SimpleRandomSelectorFeature;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.CompositeFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.CreakingHeartDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
@@ -45,6 +43,7 @@ import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 public class TreeFeatures {
@@ -80,7 +79,7 @@ public class TreeFeatures {
         reg.register(baobab);
 
         PlacedFeatureDefinition cold_swamp_tree = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_COLD_SWAMP_TREE, reg.getContext())
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(
                     new WeightedPlacedFeature(
                         PlacedFeatureDefinition.builder(reg.getContext()).configuredFeature(ConfiguredFeatures.TREE_COLD_SWAMP_OAK).build().getHolder(),
@@ -96,7 +95,7 @@ public class TreeFeatures {
                 SurfaceWaterDepthFilter.forMaxDepth(2),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                 BiomeFilter.biome(),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING)))
             .build();
         reg.register(cold_swamp_tree);
 
@@ -106,12 +105,12 @@ public class TreeFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome(),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH)))
             .build();
         reg.register(beachy_palm);
 
         PlacedFeatureDefinition cypresses = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_CYPRESSES, reg.getContext())
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(
                     new WeightedPlacedFeature(PlacedFeatureDefinition.builder(reg.getContext())
                         .configuredFeature(ConfiguredFeatures.TREE_BAMBOO_PALM)
@@ -126,7 +125,7 @@ public class TreeFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                 BiomeFilter.biome(),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.MANGROVE_PROPAGULE.defaultBlockState(), BlockPos.ZERO)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.MANGROVE_PROPAGULE)))
             .build();
         reg.register(cypresses);
 
@@ -137,13 +136,13 @@ public class TreeFeatures {
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(63), VerticalAnchor.absolute(63)),
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
-                        BlockPredicate.matchesBlocks(Vec3i.ZERO, Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), Blocks.SAND, Blocks.PODZOL, Blocks.ROOTED_DIRT, Blocks.PACKED_MUD),
+                        BlockPredicate.matchesBlocks(Vec3i.ZERO, List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), List.of(Blocks.SAND, Blocks.PODZOL, Blocks.ROOTED_DIRT, Blocks.PACKED_MUD)),
                         BlockPredicate.anyOf(
-                            BlockPredicate.matchesFluids(new Vec3i(0, -1, 1), Fluids.WATER),
-                            BlockPredicate.matchesFluids(new Vec3i(0, -1, -1), Fluids.WATER),
-                            BlockPredicate.matchesFluids(new Vec3i(1, -1, 0), Fluids.WATER),
-                            BlockPredicate.matchesFluids(new Vec3i(-1, -1, 0), Fluids.WATER)
+                            BlockPredicate.matchesFluids(new Vec3i(0, -1, 1), List.of(Fluids.WATER)),
+                            BlockPredicate.matchesFluids(new Vec3i(0, -1, -1), List.of(Fluids.WATER)),
+                            BlockPredicate.matchesFluids(new Vec3i(1, -1, 0), List.of(Fluids.WATER)),
+                            BlockPredicate.matchesFluids(new Vec3i(-1, -1, 0), List.of(Fluids.WATER))
                         ))),
                 BiomeFilter.biome())
             .build();
@@ -163,8 +162,8 @@ public class TreeFeatures {
         reg.register(fallen_stripped_pale_oak);
 
         PlacedFeatureDefinition fallen_warped_stem = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_FALLEN_WARPED_STEM, reg.getContext())
-            .configuredFeature(Feature.SIMPLE_RANDOM_SELECTOR,
-                new CompositeFeatureConfiguration(HolderSet.direct(
+            .configuredFeature(
+                new SimpleRandomSelectorFeature(HolderSet.direct(
                     PlacedFeatureDefinition.builder(reg.getContext())
                         .configuredFeature(ConfiguredFeatures.TREE_FALLEN_WARPED_STEM)
                         .build().getHolder(),
@@ -183,24 +182,24 @@ public class TreeFeatures {
         reg.register(fallen_warped_stem);
 
         PlacedFeatureDefinition moss_garden = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_MOSS_GARDEN, reg.getContext())
-            .configuredFeature(Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                SimpleStateProvider.simple(Blocks.WARPED_STEM.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y)),
+            .configuredFeature(new TreeFeature(
+                BlockStateProvider.simple(Blocks.WARPED_STEM.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y)),
                 new DarkOakTrunkPlacer(8, 3, 1),
-                SimpleStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState()
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState()
                     .setValue(BlockStateProperties.DISTANCE, 7)
                     .setValue(BlockStateProperties.PERSISTENT, false)),
                 new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                Optional.empty(),
                 new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.of(0)),
-                BlockStateProvider.simple(Blocks.WARPED_STEM))
-                .decorators(List.of(new TrunkVineDecorator(), new CreakingHeartDecorator(0.1f)))
-                .ignoreVines()
-                .build())
+                List.of(new TrunkVineDecorator(), new CreakingHeartDecorator(0.1f)),
+                true,
+                BlockStateProvider.simple(Blocks.WARPED_STEM)))
             .placementModifiers(CountPlacement.of(8),
                 InSquarePlacement.spread(),
                 SurfaceWaterDepthFilter.forMaxDepth(0),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                 BiomeFilter.biome(),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING)))
             .build();
         reg.register(moss_garden);
 
@@ -209,7 +208,7 @@ public class TreeFeatures {
             .placementModifiers(CountPlacement.of(2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH.defaultBlockState(), BlockPos.ZERO)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.DEAD_BUSH)),
                 BiomeFilter.biome())
             .build();
         reg.register(palm_beach_palm);
@@ -220,16 +219,16 @@ public class TreeFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
-                    BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO),
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(0, 0, 1))),
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(0, 0, -1))),
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(1, 0, 0))),
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(-1, 0, 0))),
+                    BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING),
+                    BlockPredicate.not(BlockPredicate.solid(Direction.SOUTH)),
+                    BlockPredicate.not(BlockPredicate.solid(Direction.NORTH)),
+                    BlockPredicate.not(BlockPredicate.solid(Direction.EAST)),
+                    BlockPredicate.not(BlockPredicate.solid(Direction.WEST)),
 
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(1, 0, 1))),
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(1, 0, -1))),
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(-1, 0, 1))),
-                    BlockPredicate.not(BlockPredicate.solid(new Vec3i(-1, 0, -1)))
+                    BlockPredicate.not(new SolidPredicate(new Vec3i(1, 0, 1))),
+                    BlockPredicate.not(new SolidPredicate(new Vec3i(1, 0, -1))),
+                    BlockPredicate.not(new SolidPredicate(new Vec3i(-1, 0, 1))),
+                    BlockPredicate.not(new SolidPredicate(new Vec3i(-1, 0, -1)))
                 )),
                 BiomeFilter.biome())
             .build();
@@ -251,7 +250,7 @@ public class TreeFeatures {
             .placementModifiers(CountPlacement.of(3),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING)),
                 BiomeFilter.biome())
             .build();
         reg.register(lush_desert_palm);
@@ -260,10 +259,10 @@ public class TreeFeatures {
             .configuredFeature(ConfiguredFeatures.TREE_TALL_OAK_WITH_LITTER)
             .placementModifiers(
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
-                    BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO),
+                    BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING),
                     BlockPredicate.matchesTag(new Vec3i(1, 0, 0), BlockTags.AIR),
                     BlockPredicate.matchesTag(new Vec3i(-1, 0, 0), BlockTags.AIR),
-                    BlockPredicate.matchesTag(new Vec3i(0, 0, 1), BlockTags.AIR),
+                    BlockPredicate.matchesTag(Direction.SOUTH, BlockTags.AIR),
                     BlockPredicate.matchesTag(new Vec3i(0, 0, -1), BlockTags.AIR),
 
                     BlockPredicate.matchesTag(new Vec3i(1, 0, 1), BlockTags.AIR),
@@ -284,18 +283,18 @@ public class TreeFeatures {
                 SurfaceWaterDepthFilter.forMaxDepth(2),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
                 BiomeFilter.biome(),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING)))
             .build();
         reg.register(swamp_oak);
 
         PlacedFeatureDefinition fallen_tall_oak = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_FALLEN_TALL_OAK, reg.getContext())
             .configuredFeature(ConfiguredFeatures.TREE_FALLEN_TALL_OAK)
-            .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+            .placementModifiers(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING)))
             .build();
         reg.register(fallen_tall_oak);
 
         PlacedFeatureDefinition tall_oaks = PlacedFeatureDefinition.builder(PlacedFeatures.TREE_TALL_OAK_TREES, reg.getContext())
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(new WeightedPlacedFeature(tall_oak_with_litter.getHolder(), 0.5f),
                     new WeightedPlacedFeature(fallen_tall_oak.getHolder(), 0.0125f)),
                 tall_oak_with_litter.getHolder()))
@@ -339,7 +338,7 @@ public class TreeFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
                 BiomeFilter.biome(),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)))
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING)))
             .build();
         reg.register(windswept_pine);
     }

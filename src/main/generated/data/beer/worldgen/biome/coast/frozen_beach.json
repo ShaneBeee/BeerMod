@@ -9,6 +9,22 @@
       }
     },
     "minecraft:audio/music_volume": 1.0,
+    "minecraft:gameplay/natural_mob_spawns": {
+      "spawn_costs": {},
+      "spawns_by_category": {
+        "creature": [
+          {
+            "type": "minecraft:frog",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 2,
+              "min_inclusive": 2
+            },
+            "weight": 15
+          }
+        ]
+      }
+    },
     "minecraft:visual/ambient_particles": [
       {
         "particle": {
@@ -84,23 +100,5 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {},
-  "spawners": {
-    "ambient": [],
-    "axolotls": [],
-    "creature": [
-      {
-        "type": "minecraft:frog",
-        "maxCount": 2,
-        "minCount": 2,
-        "weight": 15
-      }
-    ],
-    "misc": [],
-    "monster": [],
-    "underground_water_creature": [],
-    "water_ambient": [],
-    "water_creature": []
-  },
   "temperature": 0.1
 }
