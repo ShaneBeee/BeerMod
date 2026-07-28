@@ -65,7 +65,7 @@ public class CarverDefinition extends Definable<WorldCarver> {
         FloatProvider roomVerticalRadiusMultiplier;
         FloatProvider horizontalRadiusMultiplier;
         FloatProvider verticalRadiusMultiplier;
-        FloatProvider startVerticalRadiusMultiplier;
+        FloatProvider startVerticalRadiusMultiplier = UniformFloat.of(0.1f, 0.9f);
         FloatProvider floorLevel;
 
         public CaveBuilder(ResourceKey<WorldCarver> resourceKey, BootstrapContext<WorldCarver> context) {
