@@ -1,34 +1,32 @@
 {
   "feature": {
     "type": "minecraft:block_pile",
-    "config": {
-      "state_provider": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "minecraft:flowering_azalea_leaves",
-              "Properties": {
-                "distance": "7",
-                "persistent": "true",
-                "waterlogged": "false"
-              }
-            },
-            "weight": 1
+    "state_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:flowering_azalea_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "true",
+              "waterlogged": "false"
+            }
           },
-          {
-            "data": {
-              "Name": "minecraft:azalea_leaves",
-              "Properties": {
-                "distance": "7",
-                "persistent": "true",
-                "waterlogged": "false"
-              }
-            },
-            "weight": 4
-          }
-        ]
-      }
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:azalea_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "true",
+              "waterlogged": "false"
+            }
+          },
+          "weight": 4
+        }
+      ]
     }
   },
   "placement": [
@@ -37,17 +35,23 @@
       "count": 10
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:trapezoid",
         "max": 7,
         "min": -7,
         "plateau": 0
       },
-      "y_spread": {
+      "y": {
         "type": "minecraft:trapezoid",
         "max": 3,
         "min": -3,
+        "plateau": 0
+      },
+      "z": {
+        "type": "minecraft:trapezoid",
+        "max": 7,
+        "min": -7,
         "plateau": 0
       }
     },

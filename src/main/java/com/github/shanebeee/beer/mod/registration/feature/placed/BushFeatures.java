@@ -7,9 +7,8 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.RandomSelectorFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
@@ -23,7 +22,7 @@ public class BushFeatures {
 
     public static void register(PlacedFeatureRegistration reg) {
         PlacedFeatureDefinition med_bushes = PlacedFeatureDefinition.builder(PlacedFeatures.BUSH_MEDITERRANEAN_BUSHES, reg.getContext())
-            .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+            .configuredFeature(new RandomSelectorFeature(
                 List.of(
                     new WeightedPlacedFeature(PlacedFeatureDefinition.builder(reg.getContext())
                         .configuredFeature(ConfiguredFeatures.TREE_OLIVE_TREE)
@@ -45,15 +44,15 @@ public class BushFeatures {
                 BlockPredicateFilter.forPredicate(
                     BlockPredicate.allOf(
                         BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(1, 0, 0), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(-1, 0, 0), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, 1), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, -1), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(1, 1, 0), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(-1, 1, 0), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, 1), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, -1), Blocks.AIR),
-                        BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), Blocks.GRASS_BLOCK, Blocks.PACKED_MUD))),
+                        BlockPredicate.matchesBlocks(new Vec3i(1, 0, 0), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(-1, 0, 0), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, 1), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 0, -1), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(1, 1, 0), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(-1, 1, 0), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, 1), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, 1, -1), List.of(Blocks.AIR)),
+                        BlockPredicate.matchesBlocks(new Vec3i(0, -1, 0), List.of(Blocks.GRASS_BLOCK, Blocks.PACKED_MUD)))),
                 BiomeFilter.biome())
             .build();
         reg.register(med_bushes);

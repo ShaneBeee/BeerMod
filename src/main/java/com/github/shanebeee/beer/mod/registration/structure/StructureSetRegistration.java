@@ -9,9 +9,9 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructureSets;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
+import net.minecraft.world.level.levelgen.structure.placement.AbstractSpreadingStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
-import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement;
 
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ public class StructureSetRegistration extends BaseRegistration<StructureSet, Str
         StructureSetDefinition mineshafts = StructureSetDefinition.builder(BuiltinStructureSets.MINESHAFTS, context)
             .placement(new RandomSpreadStructurePlacement(
                 Vec3i.ZERO,
-                StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_3,
+                AbstractSpreadingStructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_3,
                 0.004f,
                 0,
                 Optional.empty(),

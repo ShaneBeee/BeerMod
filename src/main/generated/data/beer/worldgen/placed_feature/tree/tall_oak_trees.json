@@ -1,19 +1,17 @@
 {
   "feature": {
     "type": "minecraft:random_selector",
-    "config": {
-      "default": "beer:tree/tall_oak_with_litter",
-      "features": [
-        {
-          "chance": 0.5,
-          "feature": "beer:tree/tall_oak_with_litter"
-        },
-        {
-          "chance": 0.0125,
-          "feature": "beer:tree/fallen_tall_oak"
-        }
-      ]
-    }
+    "default": "beer:tree/tall_oak_with_litter",
+    "features": [
+      {
+        "chance": 0.5,
+        "feature": "beer:tree/tall_oak_with_litter"
+      },
+      {
+        "chance": 0.0125,
+        "feature": "beer:tree/fallen_tall_oak"
+      }
+    ]
   },
   "placement": [
     {

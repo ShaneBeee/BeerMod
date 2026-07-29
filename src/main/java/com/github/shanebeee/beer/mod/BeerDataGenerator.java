@@ -18,7 +18,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
-import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -68,8 +67,8 @@ public class BeerDataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(RegistrySetBuilder builder) {
-        builder.add(Registries.CONFIGURED_CARVER, CarverRegistration::new);
-        builder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureRegistration::new);
+        builder.add(Registries.CARVER, CarverRegistration::new);
+        builder.add(Registries.FEATURE, ConfiguredFeatureRegistration::new);
         builder.add(Registries.PLACED_FEATURE, PlacedFeatureRegistration::new);
         builder.add(Registries.BIOME, BiomeRegistration::new);
         builder.add(Registries.DIMENSION_TYPE, DimensionTypeRegistration::new);

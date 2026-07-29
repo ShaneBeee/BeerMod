@@ -3,63 +3,55 @@ package com.github.shanebeee.beer.api.registration;
 import com.github.shanebeee.beer.mod.Beer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.TrapezoidFloat;
 import net.minecraft.util.valueproviders.UniformFloat;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
-import net.minecraft.world.level.levelgen.carver.CarverDebugSettings;
-import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
+import net.minecraft.util.valueproviders.VeryBiasedToBottomInt;
 import net.minecraft.world.level.levelgen.carver.CaveWorldCarver;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-import java.util.List;
-
-public class CarverDefinition extends Definable<ConfiguredWorldCarver<?>> {
+public class CarverDefinition extends Definable<WorldCarver> {
 
 
-    public CarverDefinition(ResourceKey<ConfiguredWorldCarver<?>> resourceKey, @NonNull ConfiguredWorldCarver<?> value,
-                            Holder.@Nullable Reference<ConfiguredWorldCarver<?>> holder) {
+    public CarverDefinition(ResourceKey<WorldCarver> resourceKey, @NonNull WorldCarver value,
+                            Holder.@Nullable Reference<WorldCarver> holder) {
         super(resourceKey, value, holder);
     }
 
-    public static CaveBuilder caveBuilder(ResourceKey<ConfiguredWorldCarver<?>> resourceKey,
-                                      BootstrapContext<ConfiguredWorldCarver<?>> context) {
+    public static CaveBuilder caveBuilder(ResourceKey<WorldCarver> resourceKey,
+                                          BootstrapContext<WorldCarver> context) {
         return new CaveBuilder(resourceKey, context);
     }
 
     public static abstract class Builder {
 
-        final ResourceKey<ConfiguredWorldCarver<?>> resourceKey;
-        final BootstrapContext<ConfiguredWorldCarver<?>> context;
+        final ResourceKey<WorldCarver> resourceKey;
+        final BootstrapContext<WorldCarver> context;
 
-        public Builder(ResourceKey<ConfiguredWorldCarver<?>> resourceKey, BootstrapContext<ConfiguredWorldCarver<?>> context) {
+        public Builder(ResourceKey<WorldCarver> resourceKey, BootstrapContext<WorldCarver> context) {
             this.resourceKey = resourceKey;
             this.context = context;
         }
 
         public abstract CarverDefinition build();
 
-        public <WC extends CarverConfiguration> CarverDefinition build(WorldCarver<WC> carver, WC config) {
-            ConfiguredWorldCarver<WC> configuredCarver = new ConfiguredWorldCarver<>(carver, config);
-            Holder.Reference<ConfiguredWorldCarver<?>> holder;
+        public CarverDefinition build(WorldCarver carver) {
+            Holder.Reference<WorldCarver> holder;
             if (!this.resourceKey.identifier().getNamespace().equalsIgnoreCase(Beer.MOD_ID)) {
-                ResourceKey<ConfiguredWorldCarver<?>> key = this.resourceKey;
-                HolderGetter<ConfiguredWorldCarver<?>> lookup = this.context.lookup(Registries.CONFIGURED_CARVER);
+                ResourceKey<WorldCarver> key = this.resourceKey;
+                HolderGetter<WorldCarver> lookup = this.context.lookup(Registries.CARVER);
                 holder = lookup.getOrThrow(this.resourceKey);
             } else {
-                holder = this.context.register(this.resourceKey, configuredCarver);
+                holder = this.context.register(this.resourceKey, carver);
             }
-            return new CarverDefinition(this.resourceKey, configuredCarver, holder);
+            return new CarverDefinition(this.resourceKey, carver, holder);
         }
     }
 
@@ -67,16 +59,16 @@ public class CarverDefinition extends Definable<ConfiguredWorldCarver<?>> {
 
         float probability;
         HeightProvider y;
-        FloatProvider yScale;
-        VerticalAnchor lavaLevel;
-        CarverDebugSettings debugSettings = CarverDebugSettings.DEFAULT;
-        List<Holder<Block>> replaceable;
-        TagKey<Block> replaceableTag;
+        IntProvider count = VeryBiasedToBottomInt.of(0, 14);
+        FloatProvider thickness = TrapezoidFloat.of(0.0F, 3.0F, 1.0F);
+        boolean weirdThicknessBias = true;
+        FloatProvider roomVerticalRadiusMultiplier;
         FloatProvider horizontalRadiusMultiplier;
         FloatProvider verticalRadiusMultiplier;
+        FloatProvider startVerticalRadiusMultiplier = UniformFloat.of(0.1f, 0.9f);
         FloatProvider floorLevel;
 
-        public CaveBuilder(ResourceKey<ConfiguredWorldCarver<?>> resourceKey, BootstrapContext<ConfiguredWorldCarver<?>> context) {
+        public CaveBuilder(ResourceKey<WorldCarver> resourceKey, BootstrapContext<WorldCarver> context) {
             super(resourceKey, context);
         }
 
@@ -90,32 +82,23 @@ public class CarverDefinition extends Definable<ConfiguredWorldCarver<?>> {
             return this;
         }
 
-        public CaveBuilder yScale(UniformFloat yScale) {
-            this.yScale = yScale;
+        public CaveBuilder count(IntProvider count) {
+            this.count = count;
             return this;
         }
 
-        public CaveBuilder lavaLevel(VerticalAnchor lavaLevel) {
-            this.lavaLevel = lavaLevel;
+        public CaveBuilder thickness(FloatProvider thickness) {
+            this.thickness = thickness;
             return this;
         }
 
-        public CaveBuilder addReplaceable(ResourceKey<Block> block) {
-            Holder.Reference<Block> ref = this.context.lookup(Registries.BLOCK).getOrThrow(block);
-            this.replaceable.add(ref);
+        public CaveBuilder weirdThicknessBias(boolean weirdThicknessBias) {
+            this.weirdThicknessBias = weirdThicknessBias;
             return this;
         }
 
-        @SuppressWarnings("deprecation")
-        public CaveBuilder addReplaceable(Block block) {
-            ResourceKey<Block> key = block.builtInRegistryHolder().key();
-            Holder.Reference<Block> ref = this.context.lookup(Registries.BLOCK).getOrThrow(key);
-            this.replaceable.add(ref);
-            return this;
-        }
-
-        public CaveBuilder replaceable(TagKey<Block> tag) {
-            this.replaceableTag = tag;
+        public CaveBuilder roomVerticalRadiusMultiplier(UniformFloat yScale) {
+            this.roomVerticalRadiusMultiplier = yScale;
             return this;
         }
 
@@ -136,16 +119,12 @@ public class CarverDefinition extends Definable<ConfiguredWorldCarver<?>> {
 
         @Override
         public CarverDefinition build() {
-            HolderSet<Block> replaceables = HolderSet.empty();
-            if (this.replaceableTag != null) {
-                replaceables = this.context.lookup(Registries.BLOCK).getOrThrow(this.replaceableTag);
-            } else if (!this.replaceable.isEmpty()) {
-                replaceables = HolderSet.direct(this.replaceable);
-            }
-            CaveCarverConfiguration config = new CaveCarverConfiguration(this.probability, this.y, this.yScale, this.lavaLevel,
-                this.debugSettings, replaceables, this.horizontalRadiusMultiplier, this.verticalRadiusMultiplier, this.floorLevel);
-            WorldCarver<CaveCarverConfiguration> cave = WorldCarver.CAVE;
-            return build(cave, config);
+            CaveWorldCarver carver = new CaveWorldCarver(this.probability, this.y, this.count, this.thickness,
+                this.weirdThicknessBias, this.roomVerticalRadiusMultiplier,
+                this.horizontalRadiusMultiplier,
+                this.verticalRadiusMultiplier,
+                this.startVerticalRadiusMultiplier, this.floorLevel);
+            return build(carver);
         }
 
     }

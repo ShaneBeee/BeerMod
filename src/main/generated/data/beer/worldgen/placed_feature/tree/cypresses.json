@@ -1,57 +1,55 @@
 {
   "feature": {
     "type": "minecraft:random_selector",
-    "config": {
-      "default": {
-        "feature": "beer:tree/cypress_surface_alt",
-        "placement": []
-      },
-      "features": [
-        {
-          "chance": 0.15,
-          "feature": {
-            "feature": "beer:tree/bamboo_palm",
-            "placement": [
-              {
-                "type": "minecraft:block_predicate_filter",
-                "predicate": {
-                  "type": "minecraft:matching_blocks",
-                  "blocks": "minecraft:air"
-                }
+    "default": {
+      "feature": "beer:tree/cypress_surface_alt",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.15,
+        "feature": {
+          "feature": "beer:tree/bamboo_palm",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:air"
               }
-            ]
-          }
-        },
-        {
-          "chance": 0.25,
-          "feature": {
-            "feature": "beer:tree/cypress_shallow",
-            "placement": []
-          }
-        },
-        {
-          "chance": 0.25,
-          "feature": {
-            "feature": "beer:tree/cypress_mid",
-            "placement": []
-          }
-        },
-        {
-          "chance": 0.25,
-          "feature": {
-            "feature": "beer:tree/cypress_deep",
-            "placement": []
-          }
-        },
-        {
-          "chance": 0.15,
-          "feature": {
-            "feature": "beer:tree/cypress_surface_alt",
-            "placement": []
-          }
+            }
+          ]
         }
-      ]
-    }
+      },
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "beer:tree/cypress_shallow",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "beer:tree/cypress_mid",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.25,
+        "feature": {
+          "feature": "beer:tree/cypress_deep",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.15,
+        "feature": {
+          "feature": "beer:tree/cypress_surface_alt",
+          "placement": []
+        }
+      }
+    ]
   },
   "placement": [
     {

@@ -1,42 +1,40 @@
 {
   "feature": {
     "type": "minecraft:random_selector",
-    "config": {
-      "default": {
-        "feature": "minecraft:flower_flower_forest",
-        "placement": []
-      },
-      "features": [
-        {
-          "chance": 0.1,
-          "feature": {
-            "feature": "minecraft:sunflower",
-            "placement": []
-          }
-        },
-        {
-          "chance": 0.2,
-          "feature": {
-            "feature": "minecraft:wildflower",
-            "placement": []
-          }
-        },
-        {
-          "chance": 0.2,
-          "feature": {
-            "feature": "minecraft:firefly_bush",
-            "placement": []
-          }
-        },
-        {
-          "chance": 0.1,
-          "feature": {
-            "feature": "minecraft:flower_cherry",
-            "placement": []
-          }
+    "default": {
+      "feature": "minecraft:flower_flower_forest",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.1,
+        "feature": {
+          "feature": "minecraft:sunflower",
+          "placement": []
         }
-      ]
-    }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": "minecraft:wildflower",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": "minecraft:firefly_bush",
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.1,
+        "feature": {
+          "feature": "minecraft:flower_cherry",
+          "placement": []
+        }
+      }
+    ]
   },
   "placement": [
     {
@@ -47,17 +45,23 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:trapezoid",
         "max": 7,
         "min": -7,
         "plateau": 0
       },
-      "y_spread": {
+      "y": {
         "type": "minecraft:trapezoid",
         "max": 3,
         "min": -3,
+        "plateau": 0
+      },
+      "z": {
+        "type": "minecraft:trapezoid",
+        "max": 7,
+        "min": -7,
         "plateau": 0
       }
     },

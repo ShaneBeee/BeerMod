@@ -5,12 +5,12 @@ import com.github.shanebeee.beer.api.registration.ConfiguredFeatureDefinition;
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 
-public class ConfiguredFeatureRegistration extends BaseRegistration<ConfiguredFeature<?, ?>, ConfiguredFeatureDefinition> {
+public class ConfiguredFeatureRegistration extends BaseRegistration<Feature, ConfiguredFeatureDefinition> {
 
-    public ConfiguredFeatureRegistration(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        super(Registries.CONFIGURED_FEATURE, context);
+    public ConfiguredFeatureRegistration(BootstrapContext<Feature> context) {
+        super(Registries.FEATURE, context);
         PlacedFeatureDefinition.setupConfiguredFeatureContext(context);
         DecorConfigs.register(this);
         DeltaConfigs.register(this);

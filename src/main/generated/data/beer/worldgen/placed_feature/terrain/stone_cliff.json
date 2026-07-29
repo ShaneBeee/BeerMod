@@ -1,42 +1,40 @@
 {
   "feature": {
     "type": "minecraft:simple_block",
-    "config": {
-      "to_place": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "minecraft:cobblestone"
-            },
-            "weight": 7
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:cobblestone"
           },
-          {
-            "data": {
-              "Name": "minecraft:mossy_cobblestone"
-            },
-            "weight": 3
+          "weight": 7
+        },
+        {
+          "data": {
+            "Name": "minecraft:mossy_cobblestone"
           },
-          {
-            "data": {
-              "Name": "minecraft:stone_bricks"
-            },
-            "weight": 2
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "minecraft:stone_bricks"
           },
-          {
-            "data": {
-              "Name": "minecraft:cracked_stone_bricks"
-            },
-            "weight": 1
+          "weight": 2
+        },
+        {
+          "data": {
+            "Name": "minecraft:cracked_stone_bricks"
           },
-          {
-            "data": {
-              "Name": "minecraft:mossy_stone_bricks"
-            },
-            "weight": 1
-          }
-        ]
-      }
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "minecraft:mossy_stone_bricks"
+          },
+          "weight": 1
+        }
+      ]
     }
   },
   "placement": [
@@ -49,17 +47,23 @@
       "heightmap": "OCEAN_FLOOR_WG"
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:trapezoid",
         "max": 5,
         "min": -5,
         "plateau": 0
       },
-      "y_spread": {
+      "y": {
         "type": "minecraft:trapezoid",
         "max": 10,
         "min": -10,
+        "plateau": 0
+      },
+      "z": {
+        "type": "minecraft:trapezoid",
+        "max": 5,
+        "min": -5,
         "plateau": 0
       }
     },

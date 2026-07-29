@@ -1,21 +1,19 @@
 {
   "feature": {
     "type": "minecraft:netherrack_replace_blobs",
-    "config": {
-      "radius": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 4,
-        "min_inclusive": 2
-      },
-      "state": {
-        "Name": "minecraft:grass_block",
-        "Properties": {
-          "snowy": "false"
-        }
-      },
-      "target": {
-        "Name": "minecraft:sand"
+    "radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 4,
+      "min_inclusive": 2
+    },
+    "state": {
+      "Name": "minecraft:grass_block",
+      "Properties": {
+        "snowy": "false"
       }
+    },
+    "target": {
+      "Name": "minecraft:sand"
     }
   },
   "placement": [
@@ -37,13 +35,18 @@
       "count": 32
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:uniform",
         "max_inclusive": 5,
         "min_inclusive": -5
       },
-      "y_spread": 0
+      "y": 0,
+      "z": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 5,
+        "min_inclusive": -5
+      }
     },
     {
       "type": "minecraft:heightmap",

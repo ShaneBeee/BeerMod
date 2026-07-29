@@ -1,28 +1,26 @@
 {
   "feature": {
     "type": "minecraft:random_selector",
-    "config": {
-      "default": {
-        "feature": "beer:tree/cold_swamp_oak",
-        "placement": []
-      },
-      "features": [
-        {
-          "chance": 0.5,
-          "feature": {
-            "feature": "beer:tree/cold_swamp_oak",
-            "placement": []
-          }
-        },
-        {
-          "chance": 0.5,
-          "feature": {
-            "feature": "beer:tree/cold_swamp_pale",
-            "placement": []
-          }
+    "default": {
+      "feature": "beer:tree/cold_swamp_oak",
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.5,
+        "feature": {
+          "feature": "beer:tree/cold_swamp_oak",
+          "placement": []
         }
-      ]
-    }
+      },
+      {
+        "chance": 0.5,
+        "feature": {
+          "feature": "beer:tree/cold_swamp_pale",
+          "placement": []
+        }
+      }
+    ]
   },
   "placement": [
     {

@@ -17,12 +17,11 @@ import net.minecraft.world.level.block.CaveVinesBlock;
 import net.minecraft.world.level.block.HangingMossBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.BlockColumnFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.RandomSelectorFeature;
+import net.minecraft.world.level.levelgen.feature.VegetationPatchFeature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
@@ -32,13 +31,13 @@ import java.util.List;
 public class DecorConfigs {
 
     public static void register(ConfiguredFeatureRegistration reg) {
-        BootstrapContext<ConfiguredFeature<?, ?>> context = reg.getContext();
+        BootstrapContext<Feature> context = reg.getContext();
         HolderGetter<Block> blockReg = context.lookup(Registries.BLOCK);
 
         ConfiguredFeatureDefinition basalt_pillar = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_BASALT_PILLAR, context)
-            .config(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+            .config(new BlockColumnFeature(
                 List.of(
-                    new BlockColumnConfiguration.Layer(UniformInt.of(4, 11), BlockStateProvider.simple(Blocks.BASALT))
+                    new BlockColumnFeature.Layer(UniformInt.of(4, 11), BlockStateProvider.simple(Blocks.BASALT))
                 ),
                 Direction.DOWN,
                 BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
@@ -47,7 +46,7 @@ public class DecorConfigs {
         reg.register(basalt_pillar);
 
         ConfiguredFeatureDefinition muddy_blob = ConfiguredFeatureDefinition.builder(ConfiguredFeatures.DECOR_MUDDY_BLOB, context)
-            .config(Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(
+            .config(new VegetationPatchFeature(
                 blockReg.getOrThrow(BlockTags.MOSS_REPLACEABLE),
                 new WeightedStateProvider(WeightedList.<BlockState>builder()
                     .add(Blocks.MUD.defaultBlockState(), 5)
@@ -55,26 +54,26 @@ public class DecorConfigs {
                     .add(Blocks.MOSS_BLOCK.defaultBlockState(), 1)
                     .build()),
                 PlacedFeatureDefinition.builder()
-                    .configuredFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                    .configuredFeature(new RandomSelectorFeature(
                         List.of(
                             new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
-                                .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                .configuredFeature(new BlockColumnFeature(
                                     List.of(
-                                        new BlockColumnConfiguration.Layer(UniformInt.of(2, 6),
+                                        new BlockColumnFeature.Layer(UniformInt.of(2, 6),
                                             BlockStateProvider.simple(Blocks.PALE_HANGING_MOSS.defaultBlockState()
                                                 .setValue(HangingMossBlock.TIP, false))),
-                                        new BlockColumnConfiguration.Layer(ConstantInt.of(1),
+                                        new BlockColumnFeature.Layer(ConstantInt.of(1),
                                             BlockStateProvider.simple(Blocks.PALE_HANGING_MOSS))),
                                     Direction.DOWN,
                                     BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
                                     false)).build().getHolder(),
                                 0.25f),
                             new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
-                                .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                .configuredFeature(new BlockColumnFeature(
                                     List.of(
-                                        new BlockColumnConfiguration.Layer(UniformInt.of(1, 2),
+                                        new BlockColumnFeature.Layer(UniformInt.of(1, 2),
                                             BlockStateProvider.simple(Blocks.CAVE_VINES_PLANT.defaultBlockState())),
-                                        new BlockColumnConfiguration.Layer(ConstantInt.of(1), new WeightedStateProvider(
+                                        new BlockColumnFeature.Layer(ConstantInt.of(1), new WeightedStateProvider(
                                             WeightedList.<BlockState>builder()
                                                 .add(Blocks.CAVE_VINES.defaultBlockState()
                                                     .setValue(CaveVinesBlock.BERRIES, true), 1)
@@ -87,20 +86,20 @@ public class DecorConfigs {
                                     false)).build().getHolder(),
                                 0.025f),
                             new WeightedPlacedFeature(PlacedFeatureDefinition.builder()
-                                .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                                .configuredFeature(new BlockColumnFeature(
                                     List.of(
-                                        new BlockColumnConfiguration.Layer(ConstantInt.of(1),
+                                        new BlockColumnFeature.Layer(ConstantInt.of(1),
                                             BlockStateProvider.simple(Blocks.HANGING_ROOTS))),
                                     Direction.DOWN,
                                     BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),
                                     false)).build().getHolder(),
                                 0.25f)),
                         PlacedFeatureDefinition.builder()
-                            .configuredFeature(Feature.BLOCK_COLUMN, new BlockColumnConfiguration(
+                            .configuredFeature(new BlockColumnFeature(
                                 List.of(
-                                    new BlockColumnConfiguration.Layer(ConstantInt.of(1),
+                                    new BlockColumnFeature.Layer(ConstantInt.of(1),
                                         BlockStateProvider.simple(Blocks.MUDDY_MANGROVE_ROOTS)),
-                                    new BlockColumnConfiguration.Layer(UniformInt.of(1, 4),
+                                    new BlockColumnFeature.Layer(UniformInt.of(1, 4),
                                         BlockStateProvider.simple(Blocks.MANGROVE_ROOTS))),
                                 Direction.DOWN,
                                 BlockPredicate.matchesBlocks(Blocks.AIR, Blocks.CAVE_AIR),

@@ -6,9 +6,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +18,9 @@ import java.util.List;
 
 public class PlacedFeatureDefinition extends Definable<PlacedFeature> {
 
-    private static BootstrapContext<ConfiguredFeature<?, ?>> CF_CONTEXT;
+    private static BootstrapContext<Feature> CF_CONTEXT;
 
-    public static void setupConfiguredFeatureContext(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+    public static void setupConfiguredFeatureContext(BootstrapContext<Feature> context) {
         CF_CONTEXT = context;
     }
 
@@ -46,7 +44,7 @@ public class PlacedFeatureDefinition extends Definable<PlacedFeature> {
 
         private final ResourceKey<PlacedFeature> resourceKey;
         private final BootstrapContext<PlacedFeature> context;
-        private Holder<ConfiguredFeature<?, ?>> configuredFeature;
+        private Holder<Feature> configuredFeature;
         private final List<PlacementModifier> placementModifiers = new ArrayList<>();
 
         public Builder(ResourceKey<PlacedFeature> resourceKey, BootstrapContext<PlacedFeature> context) {
@@ -54,23 +52,23 @@ public class PlacedFeatureDefinition extends Definable<PlacedFeature> {
             this.context = context;
         }
 
-        public <F extends FeatureConfiguration> Builder configuredFeature(Feature<F> feature, F config) {
-            this.configuredFeature = Holder.direct(new ConfiguredFeature<>(feature, config));
+        public Builder configuredFeature(Feature feature) {
+            this.configuredFeature = Holder.direct(feature);
             return this;
         }
 
-        public Builder configuredFeature(ResourceKey<ConfiguredFeature<?, ?>> key) {
-            HolderGetter<ConfiguredFeature<?, ?>> registry;
+        public Builder configuredFeature(ResourceKey<Feature> key) {
+            HolderGetter<Feature> registry;
             if (this.context != null) {
-                registry = this.context.lookup(Registries.CONFIGURED_FEATURE);
+                registry = this.context.lookup(Registries.FEATURE);
             } else {
-                registry = CF_CONTEXT.lookup(Registries.CONFIGURED_FEATURE);
+                registry = CF_CONTEXT.lookup(Registries.FEATURE);
             }
             this.configuredFeature = registry.getOrThrow(key);
             return this;
         }
 
-        public Builder configuredFeature(Holder<ConfiguredFeature<?, ?>> config) {
+        public Builder configuredFeature(Holder<Feature> config) {
             this.configuredFeature = config;
             return this;
         }

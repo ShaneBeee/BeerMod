@@ -1,18 +1,16 @@
 {
   "feature": {
     "type": "minecraft:netherrack_replace_blobs",
-    "config": {
-      "radius": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 7,
-        "min_inclusive": 2
-      },
-      "state": {
-        "Name": "minecraft:snow_block"
-      },
-      "target": {
-        "Name": "minecraft:stone"
-      }
+    "radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 7,
+      "min_inclusive": 2
+    },
+    "state": {
+      "Name": "minecraft:snow_block"
+    },
+    "target": {
+      "Name": "minecraft:stone"
     }
   },
   "placement": [

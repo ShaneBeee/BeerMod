@@ -84,7 +84,8 @@ public class ForestBiomes {
             .addMobSpawn(MobCategory.MONSTER, EntityTypes.OCELOT, 2, 1, 1)
             .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityTypes.GLOW_SQUID, 10, 4, 6)
 
-            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.IS_JUNGLE, BiomeTags.HAS_JUNGLE_TEMPLE, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO)
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.IS_JUNGLE, BiomeTags.HAS_JUNGLE_TEMPLE, BiomeTags.HAS_TRIAL_CHAMBERS,
+                BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_ABANDONED_CAMP_BAMBOO_JUNGLE)
 
             .build();
         reg.register(bamboo_jungle);
@@ -134,7 +135,7 @@ public class ForestBiomes {
             .addToTag(BiomeTags.HAS_VILLAGE_SAVANNA, BiomeTags.IS_SAVANNA, BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS, BiomeTags.IS_OVERWORLD,
                 BiomeTags.HAS_RUINED_PORTAL_STANDARD, BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_PILLAGER_OUTPOST,
                 BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO,
-                TNTBiomeTags.TNT_HAS_VILLAGE_ORIENTAL, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_ORIENTAL)
+                TNTBiomeTags.TNT_HAS_VILLAGE_ORIENTAL, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_ORIENTAL, BiomeTags.HAS_ABANDONED_CAMP_SAVANNA)
 
             .build();
         reg.register(baobab_savanna);
@@ -174,7 +175,7 @@ public class ForestBiomes {
             .addMobSpawn(MobCategory.CREATURE, EntityTypes.PARROT, 20, 1, 3)
             .addMobSpawn(MobCategory.WATER_AMBIENT, EntityTypes.TROPICAL_FISH, 20, 5, 8)
 
-            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.WATER_ON_MAP_OUTLINES)
+            .addToTag(BiomeTags.IS_OVERWORLD, BiomeTags.WATER_ON_MAP_OUTLINES, BiomeTags.HAS_ABANDONED_CAMP_SWAMP)
 
             .build();
         reg.register(bayou);
@@ -223,7 +224,7 @@ public class ForestBiomes {
             .addDefaultPlainsSpawns()// TODO
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
-                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_TUDOR)
+                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_TUDOR, BiomeTags.HAS_ABANDONED_CAMP_OLD_GROWTH_BIRCH_FOREST)
 
             .build();
         reg.register(dry_forest);
@@ -281,7 +282,7 @@ public class ForestBiomes {
             .addMobSpawn(MobCategory.CREATURE, EntityTypes.WOLF, 10, 2, 5)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
-                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_SWEDISH)
+                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_SWEDISH, BiomeTags.HAS_ABANDONED_CAMP_PALE_GARDEN)
 
             .build();
         reg.register(japanese_garden);
@@ -335,7 +336,7 @@ public class ForestBiomes {
             .addMobSpawn(MobCategory.MONSTER, EntityTypes.WITCH, 5, 1, 1)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
-                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_NILOTIC)
+                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_NILOTIC, BiomeTags.HAS_ABANDONED_CAMP_PALE_GARDEN)
 
             .build();
         reg.register(moss_garden);
@@ -390,7 +391,7 @@ public class ForestBiomes {
             .addMobSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, EntityTypes.GLOW_SQUID, 10, 4, 6)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
-                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_SWEDISH)
+                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_PILLAGER_OUTPOST_SWEDISH, BiomeTags.HAS_ABANDONED_CAMP_FOREST)
 
             .build();
         reg.register(tall_oak);
@@ -451,7 +452,7 @@ public class ForestBiomes {
             .addMobSpawn(MobCategory.CREATURE, EntityTypes.WOLF, 10, 2, 5)
 
             .addToTag(BiomeTags.IS_FOREST, BiomeTags.IS_OVERWORLD, BiomeTags.HAS_TRIAL_CHAMBERS,
-                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_SWEDISH)
+                BiomeTags.STRONGHOLD_BIASED_TO, TNTBiomeTags.TNT_HAS_VILLAGE_SWEDISH, BiomeTags.HAS_ABANDONED_CAMP_FLOWER_FOREST)
 
             .build();
         reg.register(lush_forest);

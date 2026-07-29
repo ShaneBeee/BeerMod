@@ -1,18 +1,16 @@
 {
   "feature": {
     "type": "minecraft:simple_random_selector",
-    "config": {
-      "features": [
-        {
-          "feature": "beer:tree/fallen_warped_stem",
-          "placement": []
-        },
-        {
-          "feature": "beer:tree/fallen_stripped_warped_stem",
-          "placement": []
-        }
-      ]
-    }
+    "features": [
+      {
+        "feature": "beer:tree/fallen_warped_stem",
+        "placement": []
+      },
+      {
+        "feature": "beer:tree/fallen_stripped_warped_stem",
+        "placement": []
+      }
+    ]
   },
   "placement": [
     {

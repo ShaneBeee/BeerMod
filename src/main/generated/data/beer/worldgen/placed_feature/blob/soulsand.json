@@ -1,18 +1,16 @@
 {
   "feature": {
     "type": "minecraft:disk",
-    "config": {
-      "half_height": 0,
-      "radius": 1,
-      "state_provider": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "minecraft:soul_sand"
-        }
-      },
-      "target": {
-        "type": "minecraft:solid"
+    "half_height": 0,
+    "radius": 1,
+    "state_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:soul_sand"
       }
+    },
+    "target": {
+      "type": "minecraft:solid"
     }
   },
   "placement": [

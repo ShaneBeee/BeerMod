@@ -1,24 +1,22 @@
 {
   "feature": {
     "type": "minecraft:block_pile",
-    "config": {
-      "state_provider": {
-        "type": "minecraft:weighted_state_provider",
-        "entries": [
-          {
-            "data": {
-              "Name": "minecraft:pumpkin"
-            },
-            "weight": 25
+    "state_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "minecraft:pumpkin"
           },
-          {
-            "data": {
-              "Name": "minecraft:melon"
-            },
-            "weight": 25
-          }
-        ]
-      }
+          "weight": 25
+        },
+        {
+          "data": {
+            "Name": "minecraft:melon"
+          },
+          "weight": 25
+        }
+      ]
     }
   },
   "placement": [
@@ -27,17 +25,23 @@
       "count": 10
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:trapezoid",
         "max": 7,
         "min": -7,
         "plateau": 0
       },
-      "y_spread": {
+      "y": {
         "type": "minecraft:trapezoid",
         "max": 3,
         "min": -3,
+        "plateau": 0
+      },
+      "z": {
+        "type": "minecraft:trapezoid",
+        "max": 7,
+        "min": -7,
         "plateau": 0
       }
     },

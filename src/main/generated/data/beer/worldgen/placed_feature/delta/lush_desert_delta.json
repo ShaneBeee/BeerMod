@@ -19,9 +19,10 @@
       "count": 75
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": 2,
-      "y_spread": 0
+      "type": "minecraft:offset",
+      "x": 2,
+      "y": 0,
+      "z": 2
     },
     {
       "type": "minecraft:heightmap",

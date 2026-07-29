@@ -1,8 +1,8 @@
 package com.github.shanebeee.beer.mod.registration.feature.placed;
 
 import com.github.shanebeee.beer.api.registration.PlacedFeatureDefinition;
-import com.github.shanebeee.beer.mod.registry.tags.BeerBlockTags;
 import com.github.shanebeee.beer.mod.registry.PlacedFeatures;
+import com.github.shanebeee.beer.mod.registry.tags.BeerBlockTags;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -14,9 +14,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.DiskFeature;
+import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
@@ -26,6 +25,8 @@ import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.material.Fluids;
+
+import java.util.List;
 
 public class BlobFeatures {
 
@@ -100,7 +101,7 @@ public class BlobFeatures {
         reg.register(stone_blobs);
 
         PlacedFeatureDefinition soulsand = PlacedFeatureDefinition.builder(PlacedFeatures.BLOB_SOULSAND, reg.getContext())
-            .configuredFeature(Feature.DISK, new DiskConfiguration(
+            .configuredFeature(new DiskFeature(
                 BlockStateProvider.simple(Blocks.SOUL_SAND),
                 BlockPredicate.solid(),
                 ConstantInt.of(1),
@@ -112,7 +113,7 @@ public class BlobFeatures {
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN,
                     BlockPredicate.allOf(
                         BlockPredicate.solid(),
-                        BlockPredicate.matchesFluids(new Vec3i(0, 1, 0), Fluids.WATER)
+                        BlockPredicate.matchesFluids(new Vec3i(0, 1, 0), List.of(Fluids.WATER))
                     ),
                     12),
                 BiomeFilter.biome())
@@ -144,7 +145,7 @@ public class BlobFeatures {
                                                       TagKey<Block> toReplace, Block replacement, int size, int minHeight,
                                                       int maxHeight, int chance) {
         return PlacedFeatureDefinition.builder(key, context)
-            .configuredFeature(Feature.ORE, new OreConfiguration(
+            .configuredFeature(new OreFeature(
                 new TagMatchTest(toReplace),
                 replacement.defaultBlockState(), size))
             .placementModifiers(CountPlacement.of(chance),

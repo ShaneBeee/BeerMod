@@ -1,20 +1,18 @@
 {
   "feature": {
     "type": "minecraft:netherrack_replace_blobs",
-    "config": {
-      "radius": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 5,
-        "min_inclusive": 2
-      },
-      "state": {
-        "Name": "minecraft:diorite"
-      },
-      "target": {
-        "Name": "minecraft:deepslate",
-        "Properties": {
-          "axis": "y"
-        }
+    "radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 2
+    },
+    "state": {
+      "Name": "minecraft:diorite"
+    },
+    "target": {
+      "Name": "minecraft:deepslate",
+      "Properties": {
+        "axis": "y"
       }
     }
   },

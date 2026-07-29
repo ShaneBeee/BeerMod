@@ -1,6 +1,49 @@
 {
   "attributes": {
     "minecraft:audio/music_volume": 0.0,
+    "minecraft:gameplay/natural_mob_spawns": {
+      "spawn_costs": {},
+      "spawns_by_category": {
+        "monster": [
+          {
+            "type": "minecraft:illusioner",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 1,
+              "min_inclusive": 1
+            },
+            "weight": 1
+          },
+          {
+            "type": "minecraft:zombie",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 1,
+              "min_inclusive": 1
+            },
+            "weight": 3
+          },
+          {
+            "type": "minecraft:stray",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 1,
+              "min_inclusive": 1
+            },
+            "weight": 3
+          },
+          {
+            "type": "minecraft:creeper",
+            "count": {
+              "type": "minecraft:uniform",
+              "max_inclusive": 1,
+              "min_inclusive": 1
+            },
+            "weight": 3
+          }
+        ]
+      }
+    },
     "minecraft:visual/block_light_tint": "#827387",
     "minecraft:visual/fog_color": "#1e1f15",
     "minecraft:visual/fog_end_distance": 50.0,
@@ -68,41 +111,5 @@
     ]
   ],
   "has_precipitation": false,
-  "spawn_costs": {},
-  "spawners": {
-    "ambient": [],
-    "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [
-      {
-        "type": "minecraft:illusioner",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "minecraft:zombie",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "minecraft:stray",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "minecraft:creeper",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      }
-    ],
-    "underground_water_creature": [],
-    "water_ambient": [],
-    "water_creature": []
-  },
   "temperature": 0.8
 }
