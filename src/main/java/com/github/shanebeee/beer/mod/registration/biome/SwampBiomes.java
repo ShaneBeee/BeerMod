@@ -74,7 +74,7 @@ public class SwampBiomes {
 
             .addToTag(BiomeTags.HAS_SWAMP_HUT, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_COLD_VARIANT_FROGS,
                 BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.WATER_ON_MAP_OUTLINES,
-                BiomeTags.HAS_RUINED_PORTAL_SWAMP)
+                BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.HAS_ABANDONED_CAMP_SWAMP)
 
             .build();
         reg.register(cold_swamp);
@@ -127,7 +127,8 @@ public class SwampBiomes {
 
             .addToTag(BiomeTags.HAS_SWAMP_HUT, BiomeTags.IS_OVERWORLD, BiomeTags.SPAWNS_WARM_VARIANT_FROGS,
                 BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.WATER_ON_MAP_OUTLINES,
-                BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS, TNTBiomeTags.TNT_HAS_VILLAGE_SWAMP_BOAT)
+                BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS, TNTBiomeTags.TNT_HAS_VILLAGE_SWAMP_BOAT,
+                BiomeTags.HAS_ABANDONED_CAMP_SWAMP)
 
             .build();
         reg.register(dripleaf_swamp);
