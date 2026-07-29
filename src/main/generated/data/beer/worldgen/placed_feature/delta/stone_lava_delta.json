@@ -1,0 +1,16 @@
+{
+  "feature": "beer:delta/stone_lava_delta",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 20,
+        "min_inclusive": 10
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "feature": "beer:delta/lush_desert_delta",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 10
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 150.0,
+      "noise_offset": -0.75,
+      "noise_to_count_ratio": 1
+    },
+    {
+      "type": "minecraft:count",
+      "count": 75
+    },
+    {
+      "type": "minecraft:offset",
+      "x": 2,
+      "y": 0,
+      "z": 2
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "minecraft:oak_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

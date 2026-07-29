@@ -1,0 +1,94 @@
+{
+  "feature": "beer:tree/tall_oak_with_litter",
+  "placement": [
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:would_survive",
+            "state": {
+              "Name": "minecraft:oak_sapling",
+              "Properties": {
+                "stage": "0"
+              }
+            }
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              1,
+              0,
+              0
+            ],
+            "tag": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              -1,
+              0,
+              0
+            ],
+            "tag": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              0,
+              1
+            ],
+            "tag": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              0,
+              0,
+              -1
+            ],
+            "tag": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              1,
+              0,
+              1
+            ],
+            "tag": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              1,
+              0,
+              -1
+            ],
+            "tag": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              -1,
+              0,
+              1
+            ],
+            "tag": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "offset": [
+              -1,
+              0,
+              -1
+            ],
+            "tag": "minecraft:air"
+          }
+        ]
+      }
+    }
+  ]
+}

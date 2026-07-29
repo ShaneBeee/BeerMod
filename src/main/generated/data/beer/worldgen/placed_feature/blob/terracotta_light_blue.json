@@ -1,0 +1,42 @@
+{
+  "feature": {
+    "type": "minecraft:ore",
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 15,
+    "targets": [
+      {
+        "state": {
+          "Name": "minecraft:light_blue_terracotta"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:base_stone_overworld"
+        }
+      }
+    ]
+  },
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 150
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 120
+        },
+        "min_inclusive": {
+          "absolute": -50
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
